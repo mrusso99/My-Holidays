@@ -40,7 +40,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       style: optionStyle,
     ),
     Text(
-      'Index 2: Settings',
+    'Index 2: Favorite',
+    style: optionStyle,
+    ),
+    Text(
+      'Index 3: Profile',
       style: optionStyle,
     ),
   ];
@@ -71,8 +75,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Explore',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.favorite),
+            label: 'Favorit',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_rounded),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
