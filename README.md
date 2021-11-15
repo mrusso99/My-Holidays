@@ -10,3 +10,4 @@ Progetto EMAD Unisa a.a. 2021-2022 in collaborazione con EMM
 - [ ] Pagina Home
 - [ ] Pagina Esplora
 - [ ] Login
+- [ ] Tema scuro
