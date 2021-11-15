@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       title: _title,
       home: MyStatefulWidget(),
     );
@@ -30,7 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+   List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
       style: optionStyle,
@@ -43,10 +43,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     'Index 2: Favorite',
     style: optionStyle,
     ),
-    Text(
-      'Index 3: Profile',
-      style: optionStyle,
-    ),
+    Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children:[
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Impostazioni App'),
+          ),
+        ),
+        ]
+      ),
+      Text(
+        'Index 3: Wallet',
+        style: optionStyle,
+      ),
+
   ];
 
   void _onItemTapped(int index) {
@@ -60,12 +72,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Holidays'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             backgroundColor:Colors.blue,
             icon: Icon(Icons.home),
@@ -82,10 +97,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Favorite',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.greenAccent,
+            icon: Icon(Icons.account_balance_wallet_rounded),
+            label: 'Wallet',
+          ),
+          BottomNavigationBarItem(
             backgroundColor: Colors.blueGrey,
             icon: Icon(Icons.account_circle_rounded),
             label: 'Profile',
           ),
+
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
