@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,6 +14,46 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       title: _title,
       home: MyStatefulWidget(),
+      theme: ThemeData(
+          colorScheme: ColorScheme(
+            brightness: Brightness.light,
+            primary: Colors.white,
+            onPrimary: Colors.black,
+            // Colors that are not relevant to AppBar in LIGHT mode:
+            primaryVariant: Colors.grey,
+            secondary: Colors.grey,
+            secondaryVariant: Colors.grey,
+            onSecondary: Colors.grey,
+            background: Colors.grey,
+            onBackground: Colors.grey,
+            surface: Colors.grey,
+            onSurface: Colors.grey,
+            error: Colors.grey,
+            onError: Colors.grey,
+          ),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme(
+          brightness: Brightness.dark,
+          surface: Color(0x2E2E2E),
+          onSurface: Colors.white,
+          // Colors that are not relevant to AppBar in DARK mode:
+          primary: Colors.grey,
+          onPrimary: Colors.grey,
+          primaryVariant: Colors.grey,
+          secondary: Colors.grey,
+          secondaryVariant: Colors.grey,
+          onSecondary: Colors.grey,
+          background: Colors.grey,
+          onBackground: Colors.grey,
+          error: Colors.grey,
+          onError: Colors.grey,
+        ),
+      ), // standard dark theme
+      themeMode: ThemeMode.system, // device controls theme
+      debugShowCheckedModeBanner: false,
+      
+      
     );
   }
 }
@@ -72,8 +113,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Holidays'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         elevation: 0,
       ),
       body: Center(
@@ -110,6 +150,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
     );
