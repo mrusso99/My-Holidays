@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_holidays/ui/main_screen.dart';
 import 'package:my_holidays/util/const.dart';
 
