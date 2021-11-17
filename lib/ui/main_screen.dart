@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:my_holidays/util/const.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
+
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -44,6 +47,16 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    Color selectedItemColor;
+    Color unselectedItemColor;
+    if(isDarkMode){
+      selectedItemColor = Colors.lightBlue;
+      unselectedItemColor = Colors.white;
+    }else {
+      selectedItemColor = Colors.lightBlue;
+      unselectedItemColor = Colors.black;
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Holidays'),
@@ -76,7 +89,8 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         showUnselectedLabels: true,
-        selectedItemColor: Colors.blueAccent,
+        selectedItemColor: selectedItemColor,
+        unselectedItemColor: unselectedItemColor,
       ),
     );
   }
