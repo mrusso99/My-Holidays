@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:my_holidays/util/const.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -16,20 +16,20 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  List<Widget> _widgetOptions = <Widget>[
-    Text(
+  final List<Widget> _widgetOptions = <Widget>[
+    const Text(
       'Index 0: Home',
       style: optionStyle,
     ),
-    Text(
+    const Text(
       'Index 1: Explore',
       style: optionStyle,
     ),
-    Text(
+    const Text(
       'Index 3: Wallet',
       style: optionStyle,
     ),
-    Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+    Column(mainAxisAlignment: MainAxisAlignment.start, children: const [
       Card(
         child: ListTile(
           leading: Icon(Icons.settings),
@@ -69,21 +69,21 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
+            icon: const Icon(Icons.explore),
+            label: LanguageLocalizations.of(context).explore,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet_rounded),
-            label: 'Wallet',
+            icon: const Icon(Icons.account_balance_wallet_rounded),
+            label: LanguageLocalizations.of(context).wallet,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: 'Profile',
+            icon: const Icon(Icons.account_circle_rounded),
+            label: LanguageLocalizations.of(context).profile,
           ),
         ],
         currentIndex: _selectedIndex,

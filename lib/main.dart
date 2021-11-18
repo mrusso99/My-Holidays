@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_holidays/ui/main_screen.dart';
 import 'package:my_holidays/util/const.dart';
+
+import 'languages/languageLocalizationsDelegate.dart';
 
 void main() => runApp(const App());
 
@@ -14,7 +17,16 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: MainScreen(),
+      localizationsDelegates: const [
+        DemoLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('it', ''),
+      ],
+      home: const MainScreen(),
       theme: Constants.lightTheme,
       darkTheme: Constants.darkTheme,
       // standard dark theme
