@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'home_screen.dart';
+import 'profile_screen.dart';
+import 'wallet_screen.dart';
+import 'explore_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -14,26 +18,18 @@ class _MainScreenState extends State<MainScreen> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
+    Card(
+      child: HomeScreen(),
     ),
-    Text(
-      'Index 1: Explore',
-      style: optionStyle,
+    Card(
+      child: ExploreScreen(),
     ),
-    Text(
-      'Index 3: Wallet',
-      style: optionStyle,
+    Card(
+      child: WalletScreen(),
     ),
-    Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       Card(
-        child: ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Impostazioni App'),
-        ),
+        child: ProfileScreen()
       ),
-    ]),
   ];
 
   void _onItemTapped(int index) {
