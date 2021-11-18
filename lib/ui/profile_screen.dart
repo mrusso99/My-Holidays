@@ -12,19 +12,24 @@ class ProfileScreen extends StatefulWidget {
 /// This is the private State class that goes with MainScreen.
 class _ProfileScreenState extends State<ProfileScreen> {
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Card(
-              child: ListTile(
+          Card(
+            child: ListTile(
                 leading: Icon(Icons.account_box),
                 title: Text('Profilo'),
-              ),
-            ),
+                onTap: () {
+                  if (true) {
+                    //todo check login
+                    Navigator.pushNamed(context, 'Login');
+                  }
+                }),
+          ),
           Card(
             child: ListTile(
               leading: Icon(Icons.settings),
@@ -34,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
           ),
-       ]),
+        ]),
       ),
     );
   }

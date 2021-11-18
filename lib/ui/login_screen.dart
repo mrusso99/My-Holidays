@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Flexible(
                 child: Center(
                   child: Text(
-                    'MyHoliday',
+                    'MyHolidays',
                     style: GoogleFonts.josefinSans(
                       color: Colors.white,
                       fontSize: 45,
