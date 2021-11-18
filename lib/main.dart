@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_holidays/ui/forgot_password_screen.dart';
+import 'package:my_holidays/ui/login_screen.dart';
 import 'package:my_holidays/ui/main_screen.dart';
+import 'package:my_holidays/ui/registration_screen.dart';
 import 'package:my_holidays/util/const.dart';
 
 import 'languages/languageLocalizationsDelegate.dart';
@@ -26,12 +29,17 @@ class App extends StatelessWidget {
         Locale('en', ''),
         Locale('it', ''),
       ],
-      home: const MainScreen(),
       theme: Constants.lightTheme,
       darkTheme: Constants.darkTheme,
       // standard dark theme
       themeMode: ThemeMode.system, // device controls theme
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginScreen(),
+        'ForgotPassword': (context) => ForgotPassword(),
+        'NewAccount': (context) => RegistrationScreen(),
+      },
     );
   }
 }

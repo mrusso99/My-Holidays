@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'home_screen.dart';
+import 'profile_screen.dart';
+import 'wallet_screen.dart';
+import 'explore_screen.dart';
 
 import 'package:my_holidays/languages/languageLocalizations.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
-
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -16,27 +19,17 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  final List<Widget> _widgetOptions = <Widget>[
-    const Text(
-      'Index 0: Home',
-      style: optionStyle,
+  List<Widget> _widgetOptions = <Widget>[
+    Card(
+      child: HomeScreen(),
     ),
-    const Text(
-      'Index 1: Explore',
-      style: optionStyle,
+    Card(
+      child: ExploreScreen(),
     ),
-    const Text(
-      'Index 3: Wallet',
-      style: optionStyle,
+    Card(
+      child: WalletScreen(),
     ),
-    Column(mainAxisAlignment: MainAxisAlignment.start, children: const [
-      Card(
-        child: ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Impostazioni App'),
-        ),
-      ),
-    ]),
+    Card(child: ProfileScreen()),
   ];
 
   void _onItemTapped(int index) {
@@ -47,13 +40,14 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     Color selectedItemColor;
     Color unselectedItemColor;
-    if(isDarkMode){
+    if (isDarkMode) {
       selectedItemColor = Colors.lightBlue;
       unselectedItemColor = Colors.white;
-    }else {
+    } else {
       selectedItemColor = Colors.lightBlue;
       unselectedItemColor = Colors.black;
     }
