@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:my_holidays/ui/forgot_password_screen.dart';
+import 'package:my_holidays/ui/login_screen.dart';
 import 'package:my_holidays/ui/main_screen.dart';
-import 'package:my_holidays/ui/settings_screen.dart';
+import 'package:my_holidays/ui/registration_screen.dart';
 import 'package:my_holidays/util/const.dart';
 
 void main() => runApp(const App());
@@ -16,16 +17,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      //home: const MainScreen(),
       theme: Constants.lightTheme,
       darkTheme: Constants.darkTheme,
       // standard dark theme
       themeMode: ThemeMode.system, // device controls theme
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
       routes: {
-        '/' : (context) => const MainScreen(),
-        '/settings' : (context) => const SettingsScreen(),
+        '/': (context) => LoginScreen(),
+        'ForgotPassword': (context) => ForgotPassword(),
+        'NewAccount': (context) => RegistrationScreen(),
       },
     );
   }
