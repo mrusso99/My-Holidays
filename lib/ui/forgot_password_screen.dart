@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_holidays/wigets/background_image.dart';
+import 'package:my_holidays/widgets/background_image.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_holidays/wigets/rounded_button.dart';
-import 'package:my_holidays/wigets/text_input_login.dart';
+import 'package:my_holidays/widgets/rounded_button.dart';
+import 'package:my_holidays/widgets/text_input_login.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
