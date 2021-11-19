@@ -29,7 +29,7 @@ class Constants {
       error: Colors.grey,
       onError: Colors.grey,
     ),
-    // standard light thene
+    // standard light theme
   );
 
   static ThemeData darkTheme = ThemeData(

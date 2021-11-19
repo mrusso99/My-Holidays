@@ -35,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               leading: Icon(Icons.settings),
               title: Text('Impostazioni App'),
               onTap: () {
-                Navigator.pushNamed(context, '/settings');
+                Navigator.pushNamed(context, 'Settings');
               },
             ),
           ),
