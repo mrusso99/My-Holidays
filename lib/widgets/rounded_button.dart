@@ -24,7 +24,8 @@ class RoundedButton extends StatelessWidget {
               fontSize: 25,
               height: 1,
             )),
-        onPressed: () {},
+        onPressed: () =>
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false),
       ),
     );
   }
