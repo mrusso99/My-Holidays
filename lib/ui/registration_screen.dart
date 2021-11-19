@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/widgets/background_image.dart';
 import 'package:my_holidays/widgets/rounded_button.dart';
 import 'package:my_holidays/widgets/text_input_login.dart';
@@ -71,7 +72,7 @@ class RegistrationScreen extends StatelessWidget {
                   children: [
                     TextInputField(
                       icon: Icons.person_outline,
-                      hint: 'Username',
+                      hint: LanguageLocalizations.of(context).username,
                       inputType: TextInputType.name,
                       inputAction: TextInputAction.next,
                       visible: false,

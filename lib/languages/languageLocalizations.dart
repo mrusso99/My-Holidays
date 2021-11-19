@@ -14,12 +14,14 @@ class LanguageLocalizations {
     'en': {
       'wallet': 'Wallet',
       'explore': 'Explore',
-      'profile': 'Profilo',
+      'profile': 'Profile',
+      'username': 'Username',
     },
     'it': {
       'wallet': 'Portafoglio',
       'explore': 'Esplora',
       'profile': 'Profilo',
+      'username': 'Utente'
     },
   };
 
@@ -35,6 +37,10 @@ class LanguageLocalizations {
 
   String get profile {
     return _localizedValues[locale.languageCode]!['profile']!;
+  }
+
+  String get username {
+    return _localizedValues[locale.languageCode]!['username']!;
   }
 
 
