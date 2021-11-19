@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_holidays/ui/main_screen.dart';
+import 'package:my_holidays/util/const.dart';
+
+bool _theme = false;
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -14,6 +16,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
+ void _onThemeChanged(bool value) {
+   setState(() {
+     _theme = value;
+   });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,25 +31,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
         SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         elevation: 0,
       ),
-      body: Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Card(
-            child: ListTile(
-              leading: Icon(Icons.account_box),
-              title: Text('Dark Mode'),
+      body: ListView(
+        padding: const EdgeInsets.only(bottom: 88),
+        children: <Widget>[
+          SwitchListTile(
+            title: const Text(
+              'Tema Scuro',
             ),
+            value: _theme,
+            onChanged: _onThemeChanged,
           ),
-          Card(
-            child: ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Lingua'),
-            ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-        ]),
-            ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [],
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            label: 'Explore',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_balance_wallet_rounded),
+            label: 'Wallet',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_rounded),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: 3,
+        showUnselectedLabels: true,
+        selectedItemColor: Colors.blueAccent,
+      ),
     );
   }
 }

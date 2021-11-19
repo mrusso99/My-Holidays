@@ -116,7 +116,7 @@ class RegistrationScreen extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/'),
+                          onTap: () => Navigator.pushNamed(context, 'Login'),
                           child: Text(
                             'Login',
                             style: GoogleFonts.josefinSans(

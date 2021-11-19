@@ -4,6 +4,7 @@ import 'package:my_holidays/ui/forgot_password_screen.dart';
 import 'package:my_holidays/ui/login_screen.dart';
 import 'package:my_holidays/ui/main_screen.dart';
 import 'package:my_holidays/ui/registration_screen.dart';
+import 'package:my_holidays/ui/settings_screen.dart';
 import 'package:my_holidays/util/const.dart';
 
 import 'languages/languageLocalizationsDelegate.dart';
@@ -36,10 +37,11 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => MainScreen(),
-        'Login': (context) => LoginScreen(),
-        'ForgotPassword': (context) => ForgotPassword(),
-        'NewAccount': (context) => RegistrationScreen(),
+        '/': (context) => const MainScreen(),
+        'Login': (context) => const LoginScreen(),
+        'ForgotPassword': (context) => const ForgotPassword(),
+        'NewAccount': (context) => const RegistrationScreen(),
+        'Settings': (context) => const SettingsScreen(),
       },
     );
   }
