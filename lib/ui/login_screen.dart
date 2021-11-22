@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_holidays/widgets/background_image.dart';
-import 'package:my_holidays/widgets/rounded_button.dart';
+
 import 'package:my_holidays/widgets/text_input_login.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
         BackgroundImage(
@@ -70,7 +71,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 15,
                   ),
-                  RoundedButton(buttonName: 'Login'),
+                  Container(
+                    height: size.height * 0.07,
+                    width: size.width * 0.7,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.indigo),
+                    child: TextButton(
+                      child: Text('Login',
+                          style: GoogleFonts.josefinSans(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            height: 1,
+                          )),
+                      onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                          context, '/', (route) => false),
+                    ),
+                  ),
                   SizedBox(
                     height: 15,
                   ),
