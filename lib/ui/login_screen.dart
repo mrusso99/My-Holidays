@@ -5,6 +5,8 @@ import 'package:my_holidays/widgets/background_image.dart';
 import 'package:my_holidays/widgets/rounded_button.dart';
 import 'package:my_holidays/widgets/text_input_login.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -13,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Stack(

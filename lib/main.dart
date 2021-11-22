@@ -9,6 +9,7 @@ import 'package:my_holidays/util/const.dart';
 
 import 'languages/languageLocalizationsDelegate.dart';
 
+
 void main() => runApp(const App());
 
 /// This is the main application widget.
