@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_holidays/widgets/background_image.dart';
 import 'package:my_holidays/widgets/rounded_button.dart';
 import 'package:my_holidays/widgets/text_input_login.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,14 +14,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        BackgroundImage(
-          image: 'https://wallpaperaccess.com/full/185289.jpg',
-        ),
+        BackgroundImage(),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Column(

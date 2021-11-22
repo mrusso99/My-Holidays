@@ -16,7 +16,7 @@ class RegistrationScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        BackgroundImage(image: 'https://wallpaperaccess.com/full/185289.jpg'),
+        BackgroundImage(),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(

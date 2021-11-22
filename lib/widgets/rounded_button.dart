@@ -18,15 +18,15 @@ class RoundedButton extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16), color: Colors.indigo),
       child: TextButton(
-        child: Text(buttonName,
-            style: GoogleFonts.josefinSans(
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-              height: 1,
-            )),
-        onPressed: () =>
-            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false),
-      ),
+          child: Text(buttonName,
+              style: GoogleFonts.josefinSans(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                height: 1,
+              )),
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          }),
     );
   }
 }
