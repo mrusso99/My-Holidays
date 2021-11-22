@@ -32,7 +32,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   firebase_core: 
-  firebase_auth:
+  firebase_auth: 
 
 
 

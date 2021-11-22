@@ -1,11 +1,11 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/widgets/background_image.dart';
 import 'package:my_holidays/widgets/text_input_login.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -113,8 +113,10 @@ class RegistrationScreen extends StatelessWidget {
                               fontSize: 25,
                               height: 1,
                             )),
-                        onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                            context, '/', (route) => false),
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, '/', (route) => false);
+                        },
                       ),
                     ),
                     SizedBox(
