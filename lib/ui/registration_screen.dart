@@ -2,13 +2,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/home_screen.dart';
 import 'package:my_holidays/widgets/background_image.dart';
 import 'package:my_holidays/widgets/text_input_login.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+import '../AuthenticationHelper.dart';
 
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +117,21 @@ class RegistrationScreen extends StatelessWidget {
                               height: 1,
                             )),
                         onPressed: () {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, '/', (route) => false);
+                          AuthenticationHelper()
+                              .signUp(email: 'prova@gmail.com', password: 'password')
+                              .then((result) {
+                            if (result == null) {
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (context) => HomeScreen()));
+                            } else {
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                  result,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ));
+                            }
+                          });
                         },
                       ),
                     ),

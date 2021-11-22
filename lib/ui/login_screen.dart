@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_holidays/widgets/background_image.dart';
 
 import 'package:my_holidays/widgets/text_input_login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -123,8 +122,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
-    return firebaseApp;
-  }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_holidays/ui/forgot_password_screen.dart';
@@ -10,7 +11,11 @@ import 'package:my_holidays/util/const.dart';
 import 'languages/languageLocalizationsDelegate.dart';
 
 
-void main() => runApp(const App());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(App());
+}
 
 /// This is the main application widget.
 class App extends StatelessWidget {
