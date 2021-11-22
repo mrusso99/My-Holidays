@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/widgets/background_image.dart';
-import 'package:my_holidays/widgets/rounded_button.dart';
 import 'package:my_holidays/widgets/text_input_login.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -101,7 +100,23 @@ class RegistrationScreen extends StatelessWidget {
                     SizedBox(
                       height: 15,
                     ),
-                    RoundedButton(buttonName: 'Registra'),
+                    Container(
+                      height: size.height * 0.07,
+                      width: size.width * 0.7,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.indigo),
+                      child: TextButton(
+                        child: Text('Registra',
+                            style: GoogleFonts.josefinSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              height: 1,
+                            )),
+                        onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                            context, '/', (route) => false),
+                      ),
+                    ),
                     SizedBox(
                       height: 15,
                     ),
