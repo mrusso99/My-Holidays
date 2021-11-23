@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         title: const Text('My Holidays'),
         systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         elevation: 0,
       ),
       body: Center(
