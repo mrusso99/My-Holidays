@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-
 import 'languageLocalizations.dart';
 
 class DemoLocalizationsDelegate

@@ -1,21 +1,15 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_holidays/ui/forgot_password_screen.dart';
-import 'package:my_holidays/ui/login_screen.dart';
-import 'package:my_holidays/ui/main_screen.dart';
-import 'package:my_holidays/ui/registration_screen.dart';
-import 'package:my_holidays/ui/settings_screen.dart';
-import 'package:my_holidays/util/const.dart';
-
 import 'languages/languageLocalizationsDelegate.dart';
+import 'ui/main_screen.dart';
+import 'ui/login_screen.dart';
+import 'ui/forgot_password_screen.dart';
+import 'ui/registration_screen.dart';
+import 'ui/settings_screen.dart';
+import 'util/const.dart';
 
 
-Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(App());
-}
+void main() => runApp(const App());
 
 /// This is the main application widget.
 class App extends StatelessWidget {
@@ -44,9 +38,9 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MainScreen(),
-        'Login': (context) => const LoginScreen(),
+        'Login': (context) => LoginScreen(),
         'ForgotPassword': (context) => const ForgotPassword(),
-        'NewAccount': (context) => const RegistrationScreen(),
+        'NewAccount': (context) =>  RegistrationScreen(),
         'Settings': (context) => const SettingsScreen(),
       },
     );
