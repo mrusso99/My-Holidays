@@ -11,9 +11,7 @@ class ForgotPassword extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        BackgroundImage(),
         Scaffold(
-          backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -23,8 +21,7 @@ class ForgotPassword extends StatelessWidget {
             ),
             title: Text(
               'Forgot Password',
-              style: GoogleFonts.josefinSans(
-                color: Colors.white,
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -38,36 +35,49 @@ class ForgotPassword extends StatelessWidget {
                 ),
                 Container(
                   width: size.width * 0.7,
-                  child: Text(
+                  child: const Text(
                     'Inserisci la tua email. Ti invieremo le istruzioni per reimpostare la tua password',
-                    style: GoogleFonts.josefinSans(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
-                TextInputField(
-                  icon: Icons.email_outlined,
-                  hint: 'Email',
-                  inputType: TextInputType.emailAddress,
-                  inputAction: TextInputAction.done,
-                  visible: false,
+                TextFormField(
+                  decoration: InputDecoration(
+                    fillColor: Colors.grey.withOpacity(0.1),
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    hintText: "Email",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      // width: 0.0 produces a thin "hairline" border
+                      borderSide:
+                          BorderSide(color: Colors.blueAccent, width: 0.1),
+                    ),
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.only(top: 0),
+                      child: Icon(
+                        Icons.mail_outline_outlined,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Container(
                   height: size.height * 0.07,
                   width: size.width * 0.7,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.indigo),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.blueAccent),
                   child: TextButton(
                     child: Text('Invia',
-                        style: GoogleFonts.josefinSans(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
                           height: 1,
