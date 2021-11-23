@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_holidays/util/const.dart';
 
 bool _theme = false;
 
@@ -16,10 +15,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
- void _onThemeChanged(bool value) {
-   setState(() {
-     _theme = value;
-   });
+  void _onThemeChanged(bool value) {
+    setState(() {
+      _theme = value;
+    });
   }
 
   @override
@@ -42,29 +41,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onChanged: _onThemeChanged,
           ),
         ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet_rounded),
-            label: 'Wallet',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: 3,
-        showUnselectedLabels: true,
-        selectedItemColor: Colors.blueAccent,
       ),
     );
   }

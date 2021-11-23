@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class WalletScreen extends StatefulWidget {
-  const WalletScreen({Key? key}) : super(key: key);
+class ExploreScreen extends StatefulWidget {
+  const ExploreScreen({Key? key}) : super(key: key);
 
   @override
-  State<WalletScreen> createState() => _WalletScreenState();
+  State<ExploreScreen> createState() => _ExploreScreenState();
 }
 
 /// This is the private State class that goes with MainScreen.
-class _WalletScreenState extends State<WalletScreen> {
+class _ExploreScreenState extends State<ExploreScreen> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -17,7 +17,7 @@ class _WalletScreenState extends State<WalletScreen> {
     return Scaffold(
       body: Center(
         child:  Text(
-          'Index 2: Wallet',
+          'Index 1: Explore',
           style: optionStyle,
         ),
       ),

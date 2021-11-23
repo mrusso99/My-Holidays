@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../languages/languageLocalizations.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 import 'wallet_screen.dart';
 import 'explore_screen.dart';
-
-import 'package:my_holidays/languages/languageLocalizations.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
