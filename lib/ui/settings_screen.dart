@@ -15,10 +15,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
- void _onThemeChanged(bool value) {
-   setState(() {
-     _theme = value;
-   });
+  void _onThemeChanged(bool value) {
+    setState(() {
+      _theme = value;
+    });
   }
 
   @override
