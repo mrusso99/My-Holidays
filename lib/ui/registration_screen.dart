@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../languages/languageLocalizations.dart';
 import '../util/fire_auth.dart';
 import '../util/validator.dart';
-import '../widgets/background_image.dart';
 import 'profile_page.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -51,6 +50,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 40),
+                          child: Text(
+                            'Empeiría',
+                            style: const TextStyle(
+                              fontSize: 45,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                         Form(
                           key: _registerFormKey,
                           child: Column(
@@ -74,9 +83,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   filled: true,
                                   hintText: LanguageLocalizations.of(context)
                                       .username,
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -108,9 +114,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
                                   hintText: "Email",
-                                  hintStyle: const TextStyle(
-                                    color: Colors.white,
-                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -138,15 +141,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.lock_outlined,
-                                      color: Colors.white,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
-                                  fillColor: Colors.grey.withOpacity(0.4),
+                                  fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
                                   hintText: "Password",
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -168,15 +168,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.lock_outlined,
-                                      color: Colors.white,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
                                   fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
                                   hintText: "Conferma Password",
-                                  hintStyle: TextStyle(
-                                    color: Colors.blueAccent,
-                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -195,8 +192,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 CircularProgressIndicator()
                               else
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Expanded(
+                                    Container(
+                                      height: size.height * 0.07,
+                                      width: size.width * 0.7,
                                       child: ElevatedButton(
                                         onPressed: () async {
                                           setState(() {
@@ -229,12 +229,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                             }
                                           }
                                         },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.indigo,
+                                        style: ButtonStyle(
+                                          padding: MaterialStateProperty.all(
+                                              EdgeInsets.fromLTRB(
+                                                  24.0, 0, 24.0, 0)),
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.blueAccent),
+                                          shape: MaterialStateProperty.all<
+                                                  RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          )),
                                         ),
                                         child: Text(
-                                          'Registra',
-                                          style: GoogleFonts.josefinSans(
+                                          'Registrati',
+                                          style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 25,
@@ -251,19 +262,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    'Hai già un account?',
-                                    style: GoogleFonts.josefinSans(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
                                   GestureDetector(
                                     onTap: () =>
                                         Navigator.pushNamed(context, 'Login'),
                                     child: Text(
-                                      'Login',
+                                      'Hai già un account? Accedi',
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,

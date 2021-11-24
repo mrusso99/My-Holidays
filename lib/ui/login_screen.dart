@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 0),
                         child: Text(
-                          'MyHolidays',
+                          'Empeiría',
                           style: const TextStyle(
                             fontSize: 45,
                             fontWeight: FontWeight.bold,
