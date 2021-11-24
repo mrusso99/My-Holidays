@@ -13,7 +13,7 @@ class SettingsScreen extends StatefulWidget {
 /// This is the private State class that goes with MainScreen.
 class _SettingsScreenState extends State<SettingsScreen> {
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   void _onThemeChanged(bool value) {
     setState(() {
@@ -25,9 +25,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Holidays'),
+        title: const Text('Impostazioni'),
         systemOverlayStyle:
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+            SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         elevation: 0,
       ),
       body: ListView(

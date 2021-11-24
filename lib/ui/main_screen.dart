@@ -51,12 +51,6 @@ class _MainScreenState extends State<MainScreen> {
       unselectedItemColor = Colors.black;
     }
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Holidays'),
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-        elevation: 0,
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

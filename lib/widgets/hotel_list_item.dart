@@ -12,7 +12,10 @@ class HotelListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(child: NewHotelListItem());
+    return Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: NewHotelListItem());
   }
 
   Widget NewHotelListItem() {

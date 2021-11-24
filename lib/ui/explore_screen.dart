@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_holidays/widgets/hotel_list_item.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -16,12 +17,20 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: HotelListItem(
-          hotelName: "Test1",
-          description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-        ),
+      appBar: AppBar(
+        title: const Text('Esplora'),
+        systemOverlayStyle:
+            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        elevation: 0,
+      ),
+      body: ListView(
+        children: [
+          HotelListItem(
+            hotelName: "Test1",
+            description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+          ),
+        ],
       ),
     );
   }

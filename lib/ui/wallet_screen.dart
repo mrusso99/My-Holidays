@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class WalletScreen extends StatefulWidget {
   const WalletScreen({Key? key}) : super(key: key);
@@ -10,13 +11,19 @@ class WalletScreen extends StatefulWidget {
 /// This is the private State class that goes with MainScreen.
 class _WalletScreenState extends State<WalletScreen> {
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Portafogli'),
+        systemOverlayStyle:
+            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        elevation: 0,
+      ),
       body: Center(
-        child:  Text(
+        child: Text(
           'Index 2: Wallet',
           style: optionStyle,
         ),
