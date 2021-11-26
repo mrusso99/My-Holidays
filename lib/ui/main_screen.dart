@@ -4,7 +4,6 @@ import '../languages/languageLocalizations.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 import 'wallet_screen.dart';
-import 'explore_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -23,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
       child: HomeScreen(),
     ),
     Card(
-      child: ExploreScreen(),
+      child: HomeScreen(),
     ),
     Card(
       child: WalletScreen(),
