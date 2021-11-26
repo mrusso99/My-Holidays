@@ -10,15 +10,16 @@ class WalletScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _WalletScreenState extends State<WalletScreen> {
+
   Widget _appBar() {
     return Row(
       children: <Widget>[
         CircleAvatar(
-          backgroundImage: NetworkImage(
-              "https://jshopping.in/images/detailed/591/ibboll-Fashion-Mens-Optical-Glasses-Frames-Classic-Square-Wrap-Frame-Luxury-Brand-Men-Clear-Eyeglasses-Frame.jpg"),
+          radius: 40.0,
+          backgroundImage: NetworkImage("https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"),
         ),
         SizedBox(width: 15),
-        Text(' Janth,'),
+        Text(' Janth'),
         const Expanded(
           child: SizedBox(),
         ),
@@ -43,6 +44,14 @@ class _WalletScreenState extends State<WalletScreen> {
   }
 
   Widget _icon(IconData icon, String text) {
+    bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    Color box;
+    if (isDarkMode) {
+      box = Colors.black;
+    } else {
+      box = Colors.white;
+    }
     return Column(
       children: <Widget>[
         GestureDetector(
@@ -54,13 +63,11 @@ class _WalletScreenState extends State<WalletScreen> {
             width: 80,
             margin: EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: box,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                      color: Color(0xfff3f3f3),
-                      offset: Offset(5, 5),
-                      blurRadius: 10)
+                      )
                 ]),
             child: Icon(icon),
           ),
@@ -106,5 +113,29 @@ class _WalletScreenState extends State<WalletScreen> {
                   )),
             )));
   }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Attenzione'),
+          content: const Text('Devi effettuare il login per vedere il tuo wallet'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, 'Login'),
+              child: const Text('Login'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, '/'),
+              child: const Text('Annulla'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }
 
