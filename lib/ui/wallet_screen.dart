@@ -4,8 +4,10 @@ import 'package:my_holidays/util/balanceCard.dart';
 class WalletScreen extends StatefulWidget {
   const WalletScreen({Key? key}) : super(key: key);
 
+
   @override
   State<WalletScreen> createState() => _WalletScreenState();
+
 }
 
 /// This is the private State class that goes with MainScreen.
@@ -112,29 +114,6 @@ class _WalletScreenState extends State<WalletScreen> {
                     ],
                   )),
             )));
-  }
-
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Attenzione'),
-          content: const Text('Devi effettuare il login per vedere il tuo wallet'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pushNamed(context, 'Login'),
-              child: const Text('Login'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pushNamed(context, '/'),
-              child: const Text('Annulla'),
-            ),
-          ],
-        );
-      },
-    );
   }
 
 }
