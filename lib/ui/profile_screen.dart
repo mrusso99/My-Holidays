@@ -45,6 +45,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
           ),
+          Card(
+            child: ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Self Check-in'),
+              onTap: () {
+                Navigator.pushNamed(context, 'Checkin');
+              },
+            ),
+          ),
         ]),
       ),
     );
