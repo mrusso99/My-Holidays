@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:web3dart/credentials.dart';
+import 'package:web3dart/web3dart.dart';
 import '../languages/languageLocalizations.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
@@ -18,6 +20,7 @@ class MainScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _MainScreenState extends State<MainScreen> {
+  
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -35,14 +38,14 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
+    setState((){
       _selectedIndex = index;
       if(_selectedIndex == 2){
         if(FirebaseAuth.instance.currentUser == null){
           _showMaterialDialog();
-        } else {
-
         }
+      }else {
+
       }
     });
   }
@@ -141,4 +144,5 @@ class _MainScreenState extends State<MainScreen> {
 
     }
   }
+
 }
