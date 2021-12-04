@@ -231,7 +231,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         ),
                                         child: Text(
                                           'Registra',
-                                          style: GoogleFonts.josefinSans(
+                                          style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 25,
@@ -258,12 +258,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   GestureDetector(
                                     onTap: () =>
                                         Navigator.pushNamed(context, 'Login'),
+                                    child: Container(
                                     child: Text(
                                       ' Login',
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          width: 1,
+                                        ),
+                                  ),
+                                    ),
                                     ),
                                   ),
                                 ],

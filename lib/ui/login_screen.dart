@@ -55,7 +55,6 @@ class _LoginScreenState extends State<LoginScreen> {
           body: FutureBuilder(
               future: _initializeFirebase(),
               builder: (context, snapshot) {
-                //  if (snapshot.connectionState == ConnectionState.done) {
                 return Padding(
                   padding: EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 0),
                   child: Column(
@@ -74,11 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      //SizedBox(
-                      //height: size.height * 0.05,
-                      //),
-                      const SizedBox(
-                        height: 50,
+                      SizedBox(
+                      height: size.height * 0.05,
                       ),
                       Form(
                         key: _formKey,
@@ -255,7 +251,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               border: Border(
                             bottom: BorderSide(
                               width: 1,
-                              color: Colors.white,
                             ),
                           )),
                         ),
@@ -264,10 +259,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 );
               }
-              /*  return Center(
-              child: CircularProgressIndicator(),
-            );
-                },*/
               ),
         ),
       ]),
