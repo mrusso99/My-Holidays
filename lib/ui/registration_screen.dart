@@ -74,9 +74,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   filled: true,
                                   hintText: LanguageLocalizations.of(context)
                                       .username,
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -84,7 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                     ),
                                   ),
@@ -108,9 +105,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
                                   hintText: "Email",
-                                  hintStyle: const TextStyle(
-                                    color: Colors.white,
-                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -138,15 +132,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.lock_outlined,
-                                      color: Colors.white,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
-                                  fillColor: Colors.grey.withOpacity(0.4),
+                                  fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
                                   hintText: "Password",
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -162,21 +153,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                               SizedBox(height: 15),
                               TextFormField(
+                                controller: _passwordTextController,
+                                focusNode: _focusPassword,
                                 obscureText: true,
+                                validator: (value) =>
+                                    Validator.validatePassword(
+                                      password: value,
+                                    ),
                                 decoration: InputDecoration(
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.lock_outlined,
-                                      color: Colors.white,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
                                   fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
                                   hintText: "Conferma Password",
-                                  hintStyle: TextStyle(
-                                    color: Colors.blueAccent,
-                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -191,18 +185,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                               ),
                               SizedBox(height: 15),
-                              if (_isProcessing)
-                                CircularProgressIndicator()
-                              else
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Expanded(
+                                    Container(
+                                      height: size.height * 0.07,
+                                      width: size.width * 0.7,
                                       child: ElevatedButton(
                                         onPressed: () async {
-                                          setState(() {
-                                            _isProcessing = true;
-                                          });
-
                                           if (_registerFormKey.currentState!
                                               .validate()) {
                                             User? user = await FireAuth
@@ -212,10 +202,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                               password:
                                                   _passwordTextController.text,
                                             );
-
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
 
                                             if (user != null) {
                                               Navigator.of(context)
@@ -229,8 +215,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                             }
                                           }
                                         },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.indigo,
+                                        style: ButtonStyle(
+                                          padding: MaterialStateProperty.all(
+                                              EdgeInsets.fromLTRB(
+                                                  24.0, 0, 24.0, 0)),
+                                          backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.blueAccent),
+                                          shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(20.0),
+                                              )),
                                         ),
                                         child: Text(
                                           'Registra',
@@ -252,9 +249,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Hai già un account?',
-                                    style: GoogleFonts.josefinSans(
-                                      color: Colors.white,
+                                    'Hai già un account? ',
+                                    style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -263,7 +259,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     onTap: () =>
                                         Navigator.pushNamed(context, 'Login'),
                                     child: Text(
-                                      'Login',
+                                      ' Login',
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,

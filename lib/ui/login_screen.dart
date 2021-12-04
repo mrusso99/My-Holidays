@@ -169,9 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            _isProcessing
-                                ? CircularProgressIndicator()
-                                : Row(
+                            Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
