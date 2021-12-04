@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:web3dart/credentials.dart';
+import 'package:web3dart/web3dart.dart';
+import '../languages/languageLocalizations.dart';
 import '../languages/languageLocalizations.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 import 'wallet_screen.dart';
 import 'explore_screen.dart';
+
+import 'package:my_holidays/languages/languageLocalizations.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -32,13 +37,21 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
+    setState((){
       _selectedIndex = index;
+      if(_selectedIndex == 2){
+        if(FirebaseAuth.instance.currentUser == null){
+          _showMaterialDialog();
+        }
+      }else {
+
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    initializeFlutterFire();
     bool isDarkMode =
         MediaQuery.of(context).platformBrightness == Brightness.dark;
     Color selectedItemColor;
@@ -87,4 +100,47 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
+
+  void _showMaterialDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Attenzione'),
+            content: Text('Devi prima accedere'),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    _dismissDialog();
+                    _onItemTapped(0);
+                    //Navigator.pushNamed(context, 'Explore');
+                  },
+                  child: Text('Annulla')),
+              TextButton(
+                onPressed: () {
+                  _dismissDialog();
+                  Navigator.pushNamed(context, 'Login');
+                },
+                child: Text('Accedi'),
+              )
+            ],
+          );
+        });
+  }
+
+  _dismissDialog() {
+    Navigator.pop(context);
+  }
+
+  // Define an async function to initialize FlutterFire
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+    } catch(e) {
+      // Set `_error` state to true if Firebase initialization fails
+
+    }
+  }
+
 }
