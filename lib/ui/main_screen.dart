@@ -1,8 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:web3dart/credentials.dart';
-import 'package:web3dart/web3dart.dart';
-import '../languages/languageLocalizations.dart';
 import '../languages/languageLocalizations.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
@@ -115,13 +114,27 @@ class _MainScreenState extends State<MainScreen> {
                     _onItemTapped(0);
                     //Navigator.pushNamed(context, 'Explore');
                   },
-                  child: Text('Annulla')),
+                  child: Text('Annulla',
+                    style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontSize: 20,
+                      height: 1,
+                    ),
+                  )
+              ),
               TextButton(
                 onPressed: () {
                   _dismissDialog();
                   Navigator.pushNamed(context, 'Login');
                 },
-                child: Text('Accedi'),
+                child: Text(
+                    'Accedi',
+          style: TextStyle(
+          color: Colors.blueAccent,
+          fontSize: 20,
+          height: 1,
+          ),
+                ),
               )
             ],
           );

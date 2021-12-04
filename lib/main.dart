@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_holidays/ui/explore_screen.dart';
-import 'package:my_holidays/ui/wallet_screen.dart';
 import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/main_screen.dart';
 import 'ui/login_screen.dart';
 import 'ui/forgot_password_screen.dart';
 import 'ui/registration_screen.dart';
 import 'ui/settings_screen.dart';
+import 'ui/explore_screen.dart';
+import 'ui/wallet_screen.dart';
 import 'util/const.dart';
 
 
