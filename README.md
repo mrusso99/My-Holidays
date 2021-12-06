@@ -9,6 +9,6 @@ Progetto EMAD Unisa a.a. 2021-2022 in collaborazione con EMM
 - [x] Supporto Multilingua
 - [ ] Pagina Home
 - [ ] Pagina Esplora
-- [ ] Login
+- [x] Login
 - [x] Tema scuro
 - [ ] Dashboard Hotel
