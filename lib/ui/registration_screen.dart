@@ -90,7 +90,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                     ),
                                   ),
@@ -162,7 +162,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                               SizedBox(height: 15),
                               TextFormField(
+                                controller: _passwordTextController,
+                                focusNode: _focusPassword,
                                 obscureText: true,
+                                validator: (value) =>
+                                    Validator.validatePassword(
+                                  password: value,
+                                ),
                                 decoration: InputDecoration(
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(top: 0),
@@ -188,74 +194,63 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                               ),
                               SizedBox(height: 15),
-                              if (_isProcessing)
-                                CircularProgressIndicator()
-                              else
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: size.height * 0.07,
-                                      width: size.width * 0.7,
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          setState(() {
-                                            _isProcessing = true;
-                                          });
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: size.height * 0.07,
+                                    width: size.width * 0.7,
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        if (_registerFormKey.currentState!
+                                            .validate()) {
+                                          User? user = await FireAuth
+                                              .registerUsingEmailPassword(
+                                            name: _nameTextController.text,
+                                            email: _emailTextController.text,
+                                            password:
+                                                _passwordTextController.text,
+                                          );
 
-                                          if (_registerFormKey.currentState!
-                                              .validate()) {
-                                            User? user = await FireAuth
-                                                .registerUsingEmailPassword(
-                                              name: _nameTextController.text,
-                                              email: _emailTextController.text,
-                                              password:
-                                                  _passwordTextController.text,
+                                          if (user != null) {
+                                            Navigator.of(context)
+                                                .pushAndRemoveUntil(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProfilePage(user: user),
+                                              ),
+                                              ModalRoute.withName('/'),
                                             );
-
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
-
-                                            if (user != null) {
-                                              Navigator.of(context)
-                                                  .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProfilePage(user: user),
-                                                ),
-                                                ModalRoute.withName('/'),
-                                              );
-                                            }
                                           }
-                                        },
-                                        style: ButtonStyle(
-                                          padding: MaterialStateProperty.all(
-                                              EdgeInsets.fromLTRB(
-                                                  24.0, 0, 24.0, 0)),
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.blueAccent),
-                                          shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                          )),
-                                        ),
-                                        child: Text(
-                                          'Registrati',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 25,
-                                            height: 1,
-                                          ),
+                                        }
+                                      },
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all(
+                                            EdgeInsets.fromLTRB(
+                                                24.0, 0, 24.0, 0)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.blueAccent),
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        )),
+                                      ),
+                                      child: Text(
+                                        'Registrati',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                          height: 1,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
@@ -265,11 +260,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   GestureDetector(
                                     onTap: () =>
                                         Navigator.pushNamed(context, 'Login'),
-                                    child: Text(
-                                      'Hai già un account? Accedi',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
+                                    child: Container(
+                                      child: Text(
+                                        'Hai già un account? Accedi',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            width: 1,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
