@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_holidays/screens/travels.dart';
 import 'package:my_holidays/widgets/hotel_list_item.dart';
 import 'package:my_holidays/widgets/icon_badge.dart';
-
-class ExploreScreen extends StatefulWidget {
   @override
   _ExploreScreenState createState() => _ExploreScreenState();
 }
@@ -15,20 +14,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Esplora'),
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-        elevation: 0,
-      ),
-      body: ListView(
-        children: [
-          HotelListItem(
-            hotelName: "Test1",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-          ),
-        ],
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _pageController,
+        onPageChanged: onPageChanged,
+        children: List.generate(4, (index) => Travels()),
       ),
     );
   }

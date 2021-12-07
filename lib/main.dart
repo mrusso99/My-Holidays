@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_holidays/ui/self_check_in.dart';
 import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/main_screen.dart';
 import 'ui/login_screen.dart';
@@ -9,7 +10,6 @@ import 'ui/settings_screen.dart';
 import 'ui/explore_screen.dart';
 import 'ui/wallet_screen.dart';
 import 'util/const.dart';
-
 
 void main() => runApp(const App());
 
@@ -42,8 +42,9 @@ class App extends StatelessWidget {
         '/': (context) => const MainScreen(),
         'Login': (context) => LoginScreen(),
         'ForgotPassword': (context) => const ForgotPassword(),
-        'NewAccount': (context) =>  RegistrationScreen(),
+        'NewAccount': (context) => RegistrationScreen(),
         'Settings': (context) => const SettingsScreen(),
+        'Checkin': (context) => SelfCheckIn(),
         'Wallet': (context) => const WalletScreen(),
         'Explore': (context) => ExploreScreen(),
       },

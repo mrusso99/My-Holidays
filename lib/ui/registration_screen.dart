@@ -257,12 +257,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  Text(
+                                    'Hai già un account? ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   GestureDetector(
                                     onTap: () =>
                                         Navigator.pushNamed(context, 'Login'),
                                     child: Container(
                                       child: Text(
-                                        'Hai già un account? Accedi',
+                                        ' Login',
                                         style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,

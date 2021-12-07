@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_holidays/widgets/rounded_button.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -41,6 +42,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: Text('Impostazioni App'),
               onTap: () {
                 Navigator.pushNamed(context, 'Settings');
+              },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Self Check-in'),
+              onTap: () {
+                Navigator.pushNamed(context, 'Checkin');
               },
             ),
           ),
