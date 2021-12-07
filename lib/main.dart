@@ -7,6 +7,8 @@ import 'ui/login_screen.dart';
 import 'ui/forgot_password_screen.dart';
 import 'ui/registration_screen.dart';
 import 'ui/settings_screen.dart';
+import 'ui/explore_screen.dart';
+import 'ui/wallet_screen.dart';
 import 'util/const.dart';
 
 void main() => runApp(const App());
@@ -43,6 +45,8 @@ class App extends StatelessWidget {
         'NewAccount': (context) => RegistrationScreen(),
         'Settings': (context) => const SettingsScreen(),
         'Checkin': (context) => SelfCheckIn(),
+        'Wallet': (context) => const WalletScreen(),
+        'Explore': (context) => ExploreScreen(),
       },
     );
   }

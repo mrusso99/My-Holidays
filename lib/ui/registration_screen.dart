@@ -90,7 +90,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                     ),
                                   ),
@@ -162,7 +162,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                               SizedBox(height: 15),
                               TextFormField(
+                                controller: _passwordTextController,
+                                focusNode: _focusPassword,
                                 obscureText: true,
+                                validator: (value) =>
+                                    Validator.validatePassword(
+                                      password: value,
+                                    ),
                                 decoration: InputDecoration(
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(top: 0),
@@ -188,9 +194,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                               ),
                               SizedBox(height: 15),
-                              if (_isProcessing)
-                                CircularProgressIndicator()
-                              else
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -199,10 +202,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       width: size.width * 0.7,
                                       child: ElevatedButton(
                                         onPressed: () async {
-                                          setState(() {
-                                            _isProcessing = true;
-                                          });
-
                                           if (_registerFormKey.currentState!
                                               .validate()) {
                                             User? user = await FireAuth
@@ -212,10 +211,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                               password:
                                                   _passwordTextController.text,
                                             );
-
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
 
                                             if (user != null) {
                                               Navigator.of(context)
@@ -234,6 +229,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                               EdgeInsets.fromLTRB(
                                                   24.0, 0, 24.0, 0)),
                                           backgroundColor:
+<<<<<<< HEAD
                                               MaterialStateProperty.all(
                                                   Colors.blueAccent),
                                           shape: MaterialStateProperty.all<
@@ -245,6 +241,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         ),
                                         child: Text(
                                           'Registrati',
+=======
+                                          MaterialStateProperty.all(
+                                              Colors.blueAccent),
+                                          shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(20.0),
+                                              )),
+                                        ),
+                                        child: Text(
+                                          'Registra',
+>>>>>>> carmine98
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -262,15 +271,38 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+<<<<<<< HEAD
+=======
+                                  Text(
+                                    'Hai già un account? ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+>>>>>>> carmine98
                                   GestureDetector(
                                     onTap: () =>
                                         Navigator.pushNamed(context, 'Login'),
+                                    child: Container(
                                     child: Text(
+<<<<<<< HEAD
                                       'Hai già un account? Accedi',
+=======
+                                      ' Login',
+>>>>>>> carmine98
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          width: 1,
+                                        ),
+                                  ),
+                                    ),
                                     ),
                                   ),
                                 ],
