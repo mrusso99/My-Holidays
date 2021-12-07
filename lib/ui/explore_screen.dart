@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:my_holidays/screens/travels.dart';
 import 'package:my_holidays/widgets/hotel_list_item.dart';
 import 'package:my_holidays/widgets/icon_badge.dart';
+
+class ExploreScreen extends StatefulWidget {
   @override
   _ExploreScreenState createState() => _ExploreScreenState();
 }
