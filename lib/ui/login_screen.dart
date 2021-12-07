@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                      height: size.height * 0.05,
+                        height: size.height * 0.05,
                       ),
                       Form(
                         key: _formKey,
@@ -166,73 +166,69 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 10),
                             Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        height: size.height * 0.07,
-                                        width: size.width * 0.7,
-                                        child: ElevatedButton(
-                                          onPressed: () async {
-                                            _focusEmail.unfocus();
-                                            _focusPassword.unfocus();
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: size.height * 0.07,
+                                  width: size.width * 0.7,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      _focusEmail.unfocus();
+                                      _focusPassword.unfocus();
 
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              setState(() {
-                                                _isProcessing = true;
-                                              });
+                                      if (_formKey.currentState!.validate()) {
+                                        setState(() {
+                                          _isProcessing = true;
+                                        });
 
-                                              User? user = await FireAuth
-                                                  .signInUsingEmailPassword(
-                                                email:
-                                                    _emailTextController.text,
-                                                password:
-                                                    _passwordTextController
-                                                        .text,
-                                              );
+                                        User? user = await FireAuth
+                                            .signInUsingEmailPassword(
+                                          email: _emailTextController.text,
+                                          password:
+                                              _passwordTextController.text,
+                                        );
 
-                                              setState(() {
-                                                _isProcessing = false;
-                                              });
+                                        setState(() {
+                                          _isProcessing = false;
+                                        });
 
-                                              if (user != null) {
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProfilePage(user: user),
-                                                  ),
-                                                );
-                                              }
-                                            }
-                                          },
-                                          style: ButtonStyle(
-                                            padding: MaterialStateProperty.all(
-                                                EdgeInsets.fromLTRB(
-                                                    24.0, 0, 24.0, 0)),
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.blueAccent),
-                                            shape: MaterialStateProperty.all<
-                                                    RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                            )),
-                                          ),
-                                          child: Text(
-                                            'Login',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 25,
-                                              height: 1,
+                                        if (user != null) {
+                                          Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProfilePage(user: user),
                                             ),
-                                          ),
-                                        ),
+                                          );
+                                        }
+                                      }
+                                    },
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(
+                                          EdgeInsets.fromLTRB(
+                                              24.0, 0, 24.0, 0)),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.blueAccent),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      )),
+                                    ),
+                                    child: Text(
+                                      'Login',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25,
+                                        height: 1,
                                       ),
-                                    ],
-                                  )
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),
@@ -258,8 +254,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 );
-              }
-              ),
+              }),
         ),
       ]),
     );
