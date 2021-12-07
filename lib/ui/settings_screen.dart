@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-bool _theme = false;
+import 'package:my_holidays/theme/theme_model.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -12,36 +12,34 @@ class SettingsScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _SettingsScreenState extends State<SettingsScreen> {
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  void _onThemeChanged(bool value) {
-    setState(() {
-      _theme = value;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Holidays'),
-        systemOverlayStyle:
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-        elevation: 0,
-      ),
-      body: ListView(
-        padding: const EdgeInsets.only(bottom: 88),
-        children: <Widget>[
-          SwitchListTile(
-            title: const Text(
-              'Tema Scuro',
+    return Consumer<ThemeModel>(
+        builder: (context, ThemeModel themeNotifier, child) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('My Holidays'),
+              systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+              elevation: 0,
             ),
-            value: _theme,
-            onChanged: _onThemeChanged,
-          ),
-        ],
-      ),
-    );
+            body: ListView(
+              padding: const EdgeInsets.only(bottom: 88),
+              children: <Widget>[
+                SwitchListTile(
+                    title: const Text(
+                      'Tema Scuro',
+                    ),
+                    value: themeNotifier.isDark,
+                    onChanged: (value) {
+                      themeNotifier.isDark
+                          ? themeNotifier.isDark = false
+                          : themeNotifier.isDark = true;
+                    })
+              ],
+            ),
+          );
+        }
+        );
   }
 }

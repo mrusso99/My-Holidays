@@ -19,12 +19,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _nameTextController = TextEditingController();
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
+  final _password2TextController = TextEditingController();
 
   final _focusName = FocusNode();
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
-
-  bool _isProcessing = false;
+  final _focusPassword2 = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +72,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                   fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
-                                  hintText: LanguageLocalizations.of(context)
-                                      .username,
+                                  hintText: LanguageLocalizations.of(context).username,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
@@ -153,8 +152,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                               SizedBox(height: 15),
                               TextFormField(
-                                controller: _passwordTextController,
-                                focusNode: _focusPassword,
+                                controller: _password2TextController,
+                                focusNode: _focusPassword2,
                                 obscureText: true,
                                 validator: (value) =>
                                     Validator.validatePassword(

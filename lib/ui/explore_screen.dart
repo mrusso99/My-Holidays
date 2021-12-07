@@ -3,6 +3,8 @@ import 'package:my_holidays/screens/travels.dart';
 import 'package:my_holidays/widgets/icon_badge.dart';
 
 class ExploreScreen extends StatefulWidget {
+  const ExploreScreen({Key? key}) : super(key: key);
+
   @override
   _ExploreScreenState createState() => _ExploreScreenState();
 }

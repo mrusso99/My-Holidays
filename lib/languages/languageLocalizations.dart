@@ -20,7 +20,7 @@ class LanguageLocalizations {
       'wallet': 'Portafoglio',
       'explore': 'Esplora',
       'profile': 'Profilo',
-      'username': 'Utente'
+      'username': 'Utente',
     },
   };
 

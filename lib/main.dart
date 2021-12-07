@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'languages/languageLocalizationsDelegate.dart';
-import 'ui/main_screen.dart';
 import 'ui/login_screen.dart';
 import 'ui/forgot_password_screen.dart';
+import 'util/navigation_bar.dart';
 import 'ui/registration_screen.dart';
 import 'ui/settings_screen.dart';
 import 'ui/explore_screen.dart';
 import 'ui/wallet_screen.dart';
-import 'util/const.dart';
+import 'theme/theme_item.dart';
+import 'theme/theme_model.dart';
 
 
 void main() => runApp(const App());
@@ -21,32 +23,36 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      localizationsDelegates: const [
-        DemoLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en', ''),
-        Locale('it', ''),
-      ],
-      theme: Constants.lightTheme,
-      darkTheme: Constants.darkTheme,
-      // standard dark theme
-      themeMode: ThemeMode.system, // device controls theme
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const MainScreen(),
-        'Login': (context) => LoginScreen(),
-        'ForgotPassword': (context) => const ForgotPassword(),
-        'NewAccount': (context) =>  RegistrationScreen(),
-        'Settings': (context) => const SettingsScreen(),
-        'Wallet': (context) => const WalletScreen(),
-        'Explore': (context) => ExploreScreen(),
-      },
+    return ChangeNotifierProvider(
+      create: (_) => ThemeModel(),
+      child: Consumer<ThemeModel>(
+          builder: (context, ThemeModel themeNotifier, child) {
+            return MaterialApp(
+              title: _title,
+              localizationsDelegates: const [
+                DemoLocalizationsDelegate(),
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en', ''),
+                Locale('it', ''),
+              ],
+              theme: themeNotifier.isDark ? ThemeItem.darkTheme : ThemeItem.lightTheme,
+              debugShowCheckedModeBanner: false,
+              initialRoute: '/',
+              routes: {
+                '/': (context) => const NavigationBar(),
+                'Login': (context) => LoginScreen(),
+                'ForgotPassword': (context) => const ForgotPassword(),
+                'NewAccount': (context) => RegistrationScreen(),
+                'Settings': (context) => const SettingsScreen(),
+                'Wallet': (context) => const WalletScreen(),
+                'Explore': (context) => const ExploreScreen(),
+              },
+            );
+          }
+      ),
     );
   }
 }

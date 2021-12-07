@@ -22,8 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
 
-  bool _isProcessing = false;
-
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
@@ -178,9 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                             if (_formKey.currentState!
                                                 .validate()) {
-                                              setState(() {
-                                                _isProcessing = true;
-                                              });
+                                              setState(() {});
 
                                               User? user = await FireAuth
                                                   .signInUsingEmailPassword(
@@ -191,9 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         .text,
                                               );
 
-                                              setState(() {
-                                                _isProcessing = false;
-                                              });
+                                              setState(() {});
 
                                               if (user != null) {
                                                 Navigator.of(context)

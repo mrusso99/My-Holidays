@@ -78,6 +78,7 @@ class ForgotPassword extends StatelessWidget {
                   child: TextButton(
                     child: Text('Invia',
                         style: TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
                           height: 1,
