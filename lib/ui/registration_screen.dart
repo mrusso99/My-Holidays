@@ -167,8 +167,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 obscureText: true,
                                 validator: (value) =>
                                     Validator.validatePassword(
-                                      password: value,
-                                    ),
+                                  password: value,
+                                ),
                                 decoration: InputDecoration(
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(top: 0),
@@ -194,85 +194,69 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                               ),
                               SizedBox(height: 15),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: size.height * 0.07,
-                                      width: size.width * 0.7,
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          if (_registerFormKey.currentState!
-                                              .validate()) {
-                                            User? user = await FireAuth
-                                                .registerUsingEmailPassword(
-                                              name: _nameTextController.text,
-                                              email: _emailTextController.text,
-                                              password:
-                                                  _passwordTextController.text,
-                                            );
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: size.height * 0.07,
+                                    width: size.width * 0.7,
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        if (_registerFormKey.currentState!
+                                            .validate()) {
+                                          User? user = await FireAuth
+                                              .registerUsingEmailPassword(
+                                            name: _nameTextController.text,
+                                            email: _emailTextController.text,
+                                            password:
+                                                _passwordTextController.text,
+                                          );
 
-                                            if (user != null) {
-                                              Navigator.of(context)
-                                                  .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProfilePage(user: user),
-                                                ),
-                                                ModalRoute.withName('/'),
-                                              );
-                                            }
+                                          if (user != null) {
+                                            Navigator.of(context)
+                                                .pushAndRemoveUntil(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProfilePage(user: user),
+                                              ),
+                                              ModalRoute.withName('/'),
+                                            );
                                           }
-                                        },
-                                        style: ButtonStyle(
-                                          padding: MaterialStateProperty.all(
-                                              EdgeInsets.fromLTRB(
-                                                  24.0, 0, 24.0, 0)),
-                                          backgroundColor:
-<<<<<<< HEAD
-                                              MaterialStateProperty.all(
-                                                  Colors.blueAccent),
-                                          shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                          )),
-                                        ),
-                                        child: Text(
-                                          'Registrati',
-=======
-                                          MaterialStateProperty.all(
-                                              Colors.blueAccent),
-                                          shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(20.0),
-                                              )),
-                                        ),
-                                        child: Text(
-                                          'Registra',
->>>>>>> carmine98
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 25,
-                                            height: 1,
-                                          ),
+                                        }
+                                      },
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all(
+                                            EdgeInsets.fromLTRB(
+                                                24.0, 0, 24.0, 0)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.blueAccent),
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        )),
+                                      ),
+                                      child: Text(
+                                        'Registrati',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                          height: 1,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-<<<<<<< HEAD
-=======
                                   Text(
                                     'Hai già un account? ',
                                     style: TextStyle(
@@ -280,29 +264,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
->>>>>>> carmine98
                                   GestureDetector(
                                     onTap: () =>
                                         Navigator.pushNamed(context, 'Login'),
                                     child: Container(
-                                    child: Text(
-<<<<<<< HEAD
-                                      'Hai già un account? Accedi',
-=======
-                                      ' Login',
->>>>>>> carmine98
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                          width: 1,
+                                      child: Text(
+                                        ' Login',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                  ),
-                                    ),
+                                      ),
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-<<<<<<< HEAD
-=======
 import 'package:web3dart/web3dart.dart';
 
 import 'package:http/http.dart';
->>>>>>> carmine98
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,10 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _HomeScreenState extends State<HomeScreen> {
-<<<<<<< HEAD
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-=======
 
   late Client httpClient;
   late Web3Client ethClient;
@@ -37,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
     String abiCode = await rootBundle.loadString("assets/abi.json");
     String contractAddress = "0x8e7104f3c9408E333b9540e53841e78d6859ae40";
 
-    final contract = DeployedContract(ContractAbi.fromJson(abiCode, "FelixCoin"),
+    final contract = DeployedContract(
+        ContractAbi.fromJson(abiCode, "FelixCoin"),
         EthereumAddress.fromHex(contractAddress));
     return contract;
   }
@@ -84,7 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
     List<dynamic> result = await query("getBalance", [address]);
     return result;
   }
->>>>>>> carmine98
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
       ),
       body: Center(
-<<<<<<< HEAD
-        child: Text(
-          'Index 0: Home',
-          style: optionStyle,
-=======
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -108,8 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
               future: getBalance("0x371A7D8eEeCdFB163758CA3a92006154C9424acF"),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(
-                      'You have this many FelixCoin ${snapshot.data}');
+                  return Text('You have this many FelixCoin ${snapshot.data}');
                 } else
                   return Text('Loading...');
               },
@@ -126,7 +115,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text("Last transaction hash: $lastTransactionHash")
           ],
->>>>>>> carmine98
         ),
       ),
     );
