@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_holidays/ui/self_check_in.dart';
+import 'package:my_holidays/ui/smart_room_screen.dart';
+import 'package:my_holidays/widgets/room_devices/air_conditioner.dart';
+import 'package:my_holidays/widgets/room_devices/light.dart';
 import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/main_screen.dart';
 import 'ui/login_screen.dart';
@@ -47,6 +50,9 @@ class App extends StatelessWidget {
         'Checkin': (context) => SelfCheckIn(),
         'Wallet': (context) => const WalletScreen(),
         'Explore': (context) => ExploreScreen(),
+        'SmartRoom': (context) => const SmartRoom(),
+        '/lights': (context) => LightDevice(),
+        '/thermostat': (context) => AirConditioner(),
       },
     );
   }

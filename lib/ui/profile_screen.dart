@@ -54,6 +54,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
           ),
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.room_service),
+              title: const Text('Smart Room'),
+              onTap: () {
+                Navigator.pushNamed(context, 'SmartRoom');
+              },
+            ),
+          ),
         ]),
       ),
     );
