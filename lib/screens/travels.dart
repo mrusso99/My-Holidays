@@ -10,30 +10,20 @@ class Travels extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              "Where are you \ngoing?",
-              style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: SearchBar(),
-          ),
           buildHorizontalList(context),
+          const SizedBox(width: 25),
           buildVerticalList(),
         ],
       ),
+      persistentFooterButtons: [
+        SearchBar(),
+      ],
     );
   }
 
   buildHorizontalList(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 10.0, left: 20.0),
+      padding: const EdgeInsets.only(left: 20.0, top: 5),
       height: 250.0,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(

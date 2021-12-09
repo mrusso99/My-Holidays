@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Card(
             child: ListTile(
                 leading: Icon(Icons.account_box),
-                title: Text('Profilo'),
+                title: Text(LanguageLocalizations.of(context).profile),
                 onTap: () {
                   if (true) {
                     //todo check login
@@ -31,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Card(
             child: ListTile(
               leading: Icon(Icons.settings),
-              title: Text('Impostazioni App'),
+              title: Text(LanguageLocalizations.of(context).settings),
               onTap: () {
                 Navigator.pushNamed(context, 'Settings');
               },

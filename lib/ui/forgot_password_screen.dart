@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../widgets/background_image.dart';
-import '../widgets/text_input_login.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -20,24 +18,26 @@ class ForgotPassword extends StatelessWidget {
               icon: Icon(Icons.arrow_back),
             ),
             title: Text(
-              'Forgot Password',
+                LanguageLocalizations.of(context).forgotpassword,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             centerTitle: true,
           ),
-          body: Center(
-            child: Column(
+          body: Padding(
+          padding: const EdgeInsets.all(24.0),
+            child: Center(
+              child: Column(
               children: [
                 SizedBox(
                   height: size.height * 0.1,
                 ),
                 Container(
                   width: size.width * 0.7,
-                  child: const Text(
-                    'Inserisci la tua email. Ti invieremo le istruzioni per reimpostare la tua password',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  child: Text(
+                    LanguageLocalizations.of(context).emailrecovery,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
                 const SizedBox(
@@ -55,7 +55,7 @@ class ForgotPassword extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.0),
                       // width: 0.0 produces a thin "hairline" border
                       borderSide:
-                          BorderSide(color: Colors.blueAccent, width: 0.1),
+                          BorderSide(color: Colors.blueGrey, width: 1),
                     ),
                     prefixIcon: const Padding(
                       padding: EdgeInsets.only(top: 0),
@@ -67,7 +67,7 @@ class ForgotPassword extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
                 Container(
                   height: size.height * 0.07,
@@ -76,8 +76,9 @@ class ForgotPassword extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.blueAccent),
                   child: TextButton(
-                    child: Text('Invia',
-                        style: TextStyle(
+                    child: Text(
+                    LanguageLocalizations.of(context).send,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
@@ -89,6 +90,7 @@ class ForgotPassword extends StatelessWidget {
                 ),
               ],
             ),
+          ),
           ),
         ),
       ],

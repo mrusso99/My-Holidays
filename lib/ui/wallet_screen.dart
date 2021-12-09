@@ -47,7 +47,7 @@ class _WalletScreenState extends State<WalletScreen> {
 
   Widget _icon(IconData icon, String text) {
     bool isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
+        Theme.of(context).brightness == Brightness.dark;
     Color box;
     if (isDarkMode) {
       box = Colors.black;
@@ -68,8 +68,7 @@ class _WalletScreenState extends State<WalletScreen> {
                 color: box,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      )
+                  BoxShadow()
                 ]),
             child: Icon(icon),
           ),

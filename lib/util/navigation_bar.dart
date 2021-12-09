@@ -20,19 +20,34 @@ class NavigationBar extends StatefulWidget {
 /// This is the private State class that goes with MainScreen.
 class _NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
-  static const List<Widget> _pages = <Widget>[
-    Center(
-      child: HomeScreen()
+  static final List<Widget> _pages = <Widget>[
+    const Scaffold(
+      body: HomeScreen()
     ),
-    Center(
-      child: ExploreScreen()
+    Scaffold(
+      appBar: AppBar(
+        title: Text('My Holidays'),
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        elevation: 0,
+  ),
+      body: ExploreScreen()
     ),
-    Center(
-      child: WalletScreen()
+    Scaffold(
+        appBar: AppBar(
+  title: Text('My Holidays'),
+  systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+  elevation: 0,
+  ),
+      body: WalletScreen()
     ),
-    Center(
-      child: ProfileScreen()
-    )
+    Scaffold(
+        appBar: AppBar(
+          title: Text('My Holidays'),
+          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+          elevation: 0,
+        ),
+        body: ProfileScreen()
+    ),
   ];
 
 
@@ -63,12 +78,6 @@ class _NavigationBarState extends State<NavigationBar> {
       unselectedItemColor = Colors.black;
     }
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Holidays'),
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-        elevation: 0,
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,
@@ -106,8 +115,8 @@ class _NavigationBarState extends State<NavigationBar> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Attenzione'),
-            content: Text('Devi prima accedere'),
+            title: Text(LanguageLocalizations.of(context).attention),
+            content: Text(LanguageLocalizations.of(context).textattention),
             actions: <Widget>[
               TextButton(
                   onPressed: () {
@@ -115,7 +124,7 @@ class _NavigationBarState extends State<NavigationBar> {
                     _onItemTapped(0);
                     //Navigator.pushNamed(context, 'Explore');
                   },
-                  child: Text('Annulla',
+                  child: Text(LanguageLocalizations.of(context).delete,
                     style: TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 20,
@@ -129,7 +138,7 @@ class _NavigationBarState extends State<NavigationBar> {
                   Navigator.pushNamed(context, 'Login');
                 },
                 child: Text(
-                    'Accedi',
+                  LanguageLocalizations.of(context).signin,
           style: TextStyle(
           color: Colors.blueAccent,
           fontSize: 20,

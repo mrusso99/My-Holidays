@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/theme/theme_model.dart';
 import 'package:provider/provider.dart';
 
@@ -27,8 +28,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               padding: const EdgeInsets.only(bottom: 88),
               children: <Widget>[
                 SwitchListTile(
-                    title: const Text(
-                      'Tema Scuro',
+                    title: Text(
+                      LanguageLocalizations.of(context).darktheme,
                     ),
                     value: themeNotifier.isDark,
                     onChanged: (value) {
