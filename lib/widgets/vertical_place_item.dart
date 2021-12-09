@@ -13,15 +13,15 @@ class VerticalPlaceItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 15.0),
       child: InkWell(
         child: Container(
-          height: 70.0,
+          height: 100.0,
           child: Row(
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
                   "${place["img"]}",
-                  height: 70.0,
-                  width: 70.0,
+                  height: 80.0,
+                  width: 80.0,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -40,28 +40,28 @@ class VerticalPlaceItem extends StatelessWidget {
                         "${place["name"]}",
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 14.0,
+                          fontSize: 20.0,
                         ),
                         maxLines: 2,
                         textAlign: TextAlign.left,
                       ),
                     ),
-                    SizedBox(height: 3.0),
+                    SizedBox(height: 5.0),
                     Row(
                       children: <Widget>[
                         Icon(
                           Icons.location_on,
-                          size: 13.0,
+                          size: 15.0,
                           color: Colors.blueGrey[300],
                         ),
-                        SizedBox(width: 3.0),
+                        SizedBox(width: 5.0),
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "${place["location"]}",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 13.0,
+                              fontSize: 15.0,
                               color: Colors.blueGrey[300],
                             ),
                             maxLines: 1,
@@ -77,7 +77,7 @@ class VerticalPlaceItem extends StatelessWidget {
                         "${place["price"]}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
+                          fontSize: 17.5,
                         ),
                         maxLines: 1,
                         textAlign: TextAlign.left,

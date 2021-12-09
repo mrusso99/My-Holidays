@@ -34,9 +34,9 @@ class _NavigationBarState extends State<NavigationBar> {
     ),
     Scaffold(
         appBar: AppBar(
-  title: Text('My Holidays'),
-  systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-  elevation: 0,
+          title: Text('My Holidays'),
+          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+          elevation: 0,
   ),
       body: WalletScreen()
     ),

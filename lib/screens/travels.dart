@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/horizontal_place_item.dart';
 import 'package:my_holidays/widgets/search_bar.dart';
@@ -10,8 +11,29 @@ class Travels extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: <Widget>[
+          SizedBox(height: 50),
+          const Text(
+            'My Holidays',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 50,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+            child: Text(
+            LanguageLocalizations.of(context).texthome,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.blueGrey[300],
+            ),
+            ),
+          ),
+          SizedBox(height: 40),
           buildHorizontalList(context),
-          const SizedBox(width: 25),
           buildVerticalList(),
         ],
       ),
@@ -23,9 +45,9 @@ class Travels extends StatelessWidget {
 
   buildHorizontalList(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 20.0, top: 5),
-      height: 250.0,
-      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(left: 10, top: 10),
+      height: 300,
+      width: 100,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,

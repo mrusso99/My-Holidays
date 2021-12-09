@@ -3,10 +3,16 @@ import 'package:my_holidays/languages/languageLocalizations.dart';
 
 class SearchBar extends StatelessWidget {
   final TextEditingController _searchControl = new TextEditingController();
+  final _focusEmail = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return GestureDetector(
+        onTap: () {
+      _focusEmail.unfocus();
+    },
+    child: TextField(
+      focusNode: _focusEmail,
       style: TextStyle(
         fontSize: 15.0,
       ),
@@ -32,6 +38,7 @@ class SearchBar extends StatelessWidget {
       ),
       maxLines: 1,
       controller: _searchControl,
+    )
     );
   }
 }
