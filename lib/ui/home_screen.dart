@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_holidays/screens/travels.dart';
 import 'package:my_holidays/widgets/icon_badge.dart';
-import 'package:web3dart/web3dart.dart';
 
-import 'package:http/http.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: List.generate(4, (index) => Travels()),
+        children: List.generate(4, (index) => const Travels()),
       ),
     );
   }
@@ -48,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onPageChanged(int page) {
     setState(() {
-      this._page = page;
+      _page = page;
     });
   }
 

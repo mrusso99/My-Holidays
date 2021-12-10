@@ -26,27 +26,27 @@ class _NavigationBarState extends State<NavigationBar> {
     ),
     Scaffold(
       appBar: AppBar(
-        title: Text('My Holidays'),
-        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        title: const Text('GoFelix'),
+        systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         elevation: 0,
   ),
-      body: ExploreScreen()
+      body: const ExploreScreen()
     ),
     Scaffold(
         appBar: AppBar(
-          title: Text('My Holidays'),
-          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+          title: const Text('GoFelix'),
+          systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
           elevation: 0,
   ),
       body: WalletScreen()
     ),
     Scaffold(
         appBar: AppBar(
-          title: Text('My Holidays'),
-          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+          title: const Text('GoFelix'),
+          systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
           elevation: 0,
         ),
-        body: ProfileScreen()
+        body: const ProfileScreen()
     ),
   ];
 
@@ -125,7 +125,7 @@ class _NavigationBarState extends State<NavigationBar> {
                     //Navigator.pushNamed(context, 'Explore');
                   },
                   child: Text(LanguageLocalizations.of(context).delete,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 20,
                       height: 1,
@@ -139,7 +139,7 @@ class _NavigationBarState extends State<NavigationBar> {
                 },
                 child: Text(
                   LanguageLocalizations.of(context).signin,
-          style: TextStyle(
+          style: const TextStyle(
           color: Colors.blueAccent,
           fontSize: 20,
           height: 1,

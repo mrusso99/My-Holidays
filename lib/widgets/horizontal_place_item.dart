@@ -5,7 +5,7 @@ import '../screens/details.dart';
 class HorizontalPlaceItem extends StatelessWidget {
   final Map place;
 
-  HorizontalPlaceItem({required this.place});
+  const HorizontalPlaceItem({Key? key, required this.place}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,31 +14,31 @@ class HorizontalPlaceItem extends StatelessWidget {
       child: InkWell(
         child: Container(
           alignment: Alignment.centerLeft,
-          height: 200.0,
-          width: 150.0,
+          height: 200,
+          width: 150,
           child: Column(
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset("${place["img"]}",
-                  height: 200.0,
-                  width: 150.0,
+                  height: 200,
+                  width: 150,
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${place["name"]}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   ),
                   textAlign: TextAlign.left,
                 ),
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(

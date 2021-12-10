@@ -20,8 +20,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         builder: (context, ThemeModel themeNotifier, child) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('My Holidays'),
-              systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+              title: const Text('GoFelix'),
+              systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
               elevation: 0,
             ),
             body: ListView(

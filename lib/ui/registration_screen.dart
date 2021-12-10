@@ -1,14 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../languages/languageLocalizations.dart';
 import '../util/fire_auth.dart';
 import '../util/validator.dart';
-import '../widgets/background_image.dart';
 import 'profile_page.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
+
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
@@ -70,7 +70,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   name: value,
                                 ),
                                 decoration: InputDecoration(
-                                  prefixIcon: Padding(
+                                  prefixIcon: const Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.person_outline,
@@ -93,7 +93,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               TextFormField(
                                 controller: _emailTextController,
                                 focusNode: _focusEmail,
@@ -101,7 +101,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   email: value,
                                 ),
                                 decoration: InputDecoration(
-                                  prefixIcon: Padding(
+                                  prefixIcon: const Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.email_outlined,
@@ -124,7 +124,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               TextFormField(
                                 controller: _passwordTextController,
                                 focusNode: _focusPassword,
@@ -134,7 +134,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   password: value,
                                 ),
                                 decoration: InputDecoration(
-                                  prefixIcon: Padding(
+                                  prefixIcon: const Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.lock_outlined,
@@ -151,13 +151,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               TextFormField(
                                 controller: _password2TextController,
                                 focusNode: _focusPassword2,
@@ -167,7 +167,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       password: value,
                                     ),
                                 decoration: InputDecoration(
-                                  prefixIcon: Padding(
+                                  prefixIcon: const Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.lock_outlined,
@@ -184,17 +184,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 15),
+                              const SizedBox(height: 15),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: size.height * 0.07,
                                       width: size.width * 0.7,
                                       child: ElevatedButton(
@@ -223,7 +223,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         },
                                         style: ButtonStyle(
                                           padding: MaterialStateProperty.all(
-                                              EdgeInsets.fromLTRB(
+                                              const EdgeInsets.fromLTRB(
                                                   24.0, 0, 24.0, 0)),
                                           backgroundColor:
                                           MaterialStateProperty.all(
@@ -248,7 +248,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     ),
                                   ],
                                 ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
@@ -284,7 +284,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                             ],

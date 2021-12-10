@@ -43,11 +43,11 @@ class App extends StatelessWidget {
               initialRoute: '/',
               routes: {
                 '/': (context) => const NavigationBar(),
-                'Login': (context) => LoginScreen(),
+                'Login': (context) => const LoginScreen(),
                 'ForgotPassword': (context) => const ForgotPassword(),
-                'NewAccount': (context) => RegistrationScreen(),
+                'NewAccount': (context) => const RegistrationScreen(),
                 'Settings': (context) => const SettingsScreen(),
-                'Wallet': (context) => const WalletScreen(),
+                'Wallet': (context) =>  WalletScreen(),
                 'Explore': (context) => const ExploreScreen(),
               },
             );

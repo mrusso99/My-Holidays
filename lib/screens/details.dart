@@ -1,20 +1,23 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:my_holidays/util/places.dart';
-import 'package:my_holidays/widgets/icon_badge.dart';
 
 class Details extends StatelessWidget {
+  const Details({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           buildSlider(),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListView(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             primary: false,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: <Widget>[
               Row(
@@ -24,7 +27,7 @@ class Details extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "${places[0]["name"]}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
                       ),
@@ -33,7 +36,7 @@ class Details extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.bookmark,
                     ),
                     onPressed: () {},
@@ -47,7 +50,7 @@ class Details extends StatelessWidget {
                     size: 14,
                     color: Colors.blueGrey[300],
                   ),
-                  SizedBox(width: 3),
+                  const SizedBox(width: 3),
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -63,12 +66,12 @@ class Details extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${places[0]["price"]}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
                   ),
@@ -76,10 +79,10 @@ class Details extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Container(
                 alignment: Alignment.centerLeft,
-                child: Text(
+                child: const Text(
                   "Details",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -89,19 +92,19 @@ class Details extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${places[0]["details"]}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 15.0,
                   ),
                   textAlign: TextAlign.left,
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
             ],
           ),
         ],
@@ -111,7 +114,7 @@ class Details extends StatelessWidget {
 
   buildSlider() {
     return Container(
-      padding: EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 20),
       height: 250.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -121,7 +124,7 @@ class Details extends StatelessWidget {
           Map place = places[index];
 
           return Padding(
-            padding: EdgeInsets.only(right: 10.0),
+            padding: const EdgeInsets.only(right: 10.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(

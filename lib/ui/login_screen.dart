@@ -7,6 +7,8 @@ import '../util/fire_auth.dart';
 import 'profile_page.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -22,24 +24,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
-
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => ProfilePage(
-            user: user,
-          ),
-        ),
-      );
-    }
-
     return firebaseApp;
   }
 
   @override
   Widget build(BuildContext context) {
+    String image = "imgs/GoFelix.jpg";
     Size size = MediaQuery.of(context).size;
     bool _isDark = Theme.of(context).brightness == Brightness.dark;
     Color box;
@@ -60,17 +50,21 @@ class _LoginScreenState extends State<LoginScreen> {
               builder: (context, snapshot) {
                 return Padding(
                   padding: const EdgeInsets.all(24.0),
-                  child: Center(
-                    child: Column(
+                  child: Column(
+                    children: [
+                    Container(
+                      height: 200,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(image),
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ),
+                    Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                          'MyHolidays',
-                          style: const TextStyle(
-                            fontSize: 45,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                       SizedBox(
                       height: size.height * 0.05,
                       ),
@@ -101,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                   // width: 0.0 produces a thin "hairline" border
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color: Colors.blueGrey, width: 1),
                                 ),
                                 errorBorder: UnderlineInputBorder(
@@ -137,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                   // width: 0.0 produces a thin "hairline" border
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color: Colors.blueGrey, width: 1),
                                 ),
                                 errorBorder: UnderlineInputBorder(
@@ -156,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   context, 'ForgotPassword'),
                               child: Text(
                                 LanguageLocalizations.of(context).forgotpassword + '?',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -166,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: size.height * 0.07,
                                         width: size.width * 0.7,
                                         child: ElevatedButton(
@@ -202,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           },
                                           style: ButtonStyle(
                                             padding: MaterialStateProperty.all(
-                                                EdgeInsets.fromLTRB(
+                                                const EdgeInsets.fromLTRB(
                                                     24.0, 0, 24.0, 0)),
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -230,13 +224,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       GestureDetector(
                         onTap: () => Navigator.pushNamed(context, 'NewAccount'),
                         child: Container(
                           child: Text(
                             LanguageLocalizations.of(context).newaccount,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
@@ -252,6 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   ),
+                  ],
                 )
                 );
               }

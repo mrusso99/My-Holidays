@@ -1,27 +1,38 @@
+// ignore_for_file: use_key_in_widget_constructors
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_holidays/util/balanceCard.dart';
 
 class WalletScreen extends StatefulWidget {
-  const WalletScreen({Key? key}) : super(key: key);
-
 
   @override
-  State<WalletScreen> createState() => _WalletScreenState();
+  _WalletScreenState createState() => _WalletScreenState();
 
 }
 
 /// This is the private State class that goes with MainScreen.
 class _WalletScreenState extends State<WalletScreen> {
 
+  late User _currentUser;
+
+  User? user = FirebaseAuth.instance.currentUser;
+
+  @override
+  void initState() {
+    _currentUser = user!;
+    super.initState();
+  }
+
   Widget _appBar() {
     return Row(
       children: <Widget>[
-        CircleAvatar(
+        const CircleAvatar(
           radius: 40.0,
           backgroundImage: NetworkImage("https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"),
         ),
-        SizedBox(width: 15),
-        Text(' Janth'),
+        const SizedBox(width: 15),
+        Text('${_currentUser.displayName}'),
         const Expanded(
           child: SizedBox(),
         ),
@@ -63,11 +74,11 @@ class _WalletScreenState extends State<WalletScreen> {
           child: Container(
             height: 80,
             width: 80,
-            margin: EdgeInsets.symmetric(vertical: 10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
                 color: box,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                boxShadow: <BoxShadow>[
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                boxShadow: const <BoxShadow>[
                   BoxShadow()
                 ]),
             child: Icon(icon),
@@ -85,29 +96,29 @@ class _WalletScreenState extends State<WalletScreen> {
         body: SafeArea(
             child: SingleChildScrollView(
               child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(height: 35),
+                      const SizedBox(height: 35),
                       _appBar(),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
-                      Text("My wallet"),
-                      SizedBox(
+                      const Text("My wallet"),
+                      const SizedBox(
                         height: 20,
                       ),
-                      BalanceCard(),
-                      SizedBox(
+                      const BalanceCard(),
+                      const SizedBox(
                         height: 50,
                       ),
-                      Text("Operations"),
-                      SizedBox(
+                      const Text("Operations"),
+                      const SizedBox(
                         height: 10,
                       ),
                       _operationsWidget(),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                     ],

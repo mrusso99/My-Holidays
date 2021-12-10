@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/places.dart';
@@ -6,22 +8,33 @@ import 'package:my_holidays/widgets/search_bar.dart';
 import 'package:my_holidays/widgets/vertical_place_item.dart';
 
 class Travels extends StatelessWidget {
+  const Travels({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+   // bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    String image = '';
+    //if (isDarkMode) {
+     // image = "imgs/GoFelixD.jpg";
+    //} else {
+      image = "imgs/GoFelix.jpg";
+   // }
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          SizedBox(height: 50),
-          const Text(
-            'My Holidays',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 50,
+          const SizedBox(height: 10),
+          Container(
+            height: 150,
+            width: 150,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Text(
             LanguageLocalizations.of(context).texthome,
             textAlign: TextAlign.center,
@@ -32,7 +45,7 @@ class Travels extends StatelessWidget {
             ),
             ),
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 10),
           buildHorizontalList(context),
           buildVerticalList(),
         ],
@@ -62,10 +75,10 @@ class Travels extends StatelessWidget {
 
   buildVerticalList() {
     return Padding(
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       child: ListView.builder(
         primary: false,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: places == null ? 0 : places.length,
         itemBuilder: (BuildContext context, int index) {

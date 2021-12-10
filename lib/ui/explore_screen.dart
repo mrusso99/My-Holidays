@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_holidays/screens/travels.dart';
-import 'package:my_holidays/widgets/icon_badge.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
@@ -15,7 +13,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
      /* body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,

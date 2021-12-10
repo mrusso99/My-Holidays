@@ -15,11 +15,11 @@ class ForgotPassword extends StatelessWidget {
             elevation: 0,
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
             ),
             title: Text(
                 LanguageLocalizations.of(context).forgotpassword,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -33,7 +33,7 @@ class ForgotPassword extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.1,
                 ),
-                Container(
+                SizedBox(
                   width: size.width * 0.7,
                   child: Text(
                     LanguageLocalizations.of(context).emailrecovery,
@@ -55,7 +55,7 @@ class ForgotPassword extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.0),
                       // width: 0.0 produces a thin "hairline" border
                       borderSide:
-                          BorderSide(color: Colors.blueGrey, width: 1),
+                          const BorderSide(color: Colors.blueGrey, width: 1),
                     ),
                     prefixIcon: const Padding(
                       padding: EdgeInsets.only(top: 0),

@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/profile_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -10,8 +13,24 @@ class ProfileScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _ProfileScreenState extends State<ProfileScreen> {
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+
+  User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(
+            user: user,
+          ),
+        ),
+      );
+    }
+    else {
+      Navigator.pushNamed(context, 'Login');
+    }
+    return firebaseApp;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +39,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           Card(
             child: ListTile(
-                leading: Icon(Icons.account_box),
+                leading: const Icon(Icons.account_box),
                 title: Text(LanguageLocalizations.of(context).profile),
                 onTap: () {
                   if (true) {
                     //todo check login
-                    Navigator.pushNamed(context, 'Login');
+                    _initializeFirebase();
+                    }
                   }
-                }),
+                ),
           ),
           Card(
             child: ListTile(
-              leading: Icon(Icons.settings),
+              leading: const Icon(Icons.settings),
               title: Text(LanguageLocalizations.of(context).settings),
               onTap: () {
                 Navigator.pushNamed(context, 'Settings');
