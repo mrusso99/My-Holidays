@@ -15,12 +15,18 @@ class LanguageLocalizations {
       'explore': 'Explore',
       'profile': 'Profile',
       'username': 'Username',
+      'date_selector': 'Date Selector',
+      'cancel': 'Cancel',
+      'book': 'Book'
     },
     'it': {
       'wallet': 'Portafoglio',
       'explore': 'Esplora',
       'profile': 'Profilo',
-      'username': 'Utente'
+      'username': 'Utente',
+      'date_selector': 'Seleziona Date',
+      'cancel': 'Cancella',
+      'book': 'Prenota'
     },
   };
 
@@ -40,6 +46,18 @@ class LanguageLocalizations {
 
   String get username {
     return _localizedValues[locale.languageCode]!['username']!;
+  }
+
+  String get date_selector {
+    return _localizedValues[locale.languageCode]!['date_selector']!;
+  }
+
+  String get cancel {
+    return _localizedValues[locale.languageCode]!['cancel']!;
+  }
+
+  String get book {
+    return _localizedValues[locale.languageCode]!['book']!;
   }
 
 
