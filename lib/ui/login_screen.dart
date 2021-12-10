@@ -185,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                               if (user != null) {
                                                 Navigator.of(context)
-                                                    .pushReplacement(
+                                                    .push(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         ProfilePage(user: user),

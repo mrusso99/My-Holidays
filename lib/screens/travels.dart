@@ -25,11 +25,10 @@ class Travels extends StatelessWidget {
           const SizedBox(height: 10),
           Container(
             height: 150,
-            width: 150,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(image),
-                fit: BoxFit.cover,
+                fit: BoxFit.fitHeight,
               ),
             ),
           ),

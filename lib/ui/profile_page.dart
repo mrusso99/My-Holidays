@@ -30,6 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(LanguageLocalizations.of(context).profile),
+        elevation: 0,
       ),
       body: Center(
         child: Column(

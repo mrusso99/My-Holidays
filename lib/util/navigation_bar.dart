@@ -27,7 +27,6 @@ class _NavigationBarState extends State<NavigationBar> {
     Scaffold(
       appBar: AppBar(
         title: const Text('GoFelix'),
-        systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         elevation: 0,
   ),
       body: const ExploreScreen()
@@ -35,7 +34,6 @@ class _NavigationBarState extends State<NavigationBar> {
     Scaffold(
         appBar: AppBar(
           title: const Text('GoFelix'),
-          systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
           elevation: 0,
   ),
       body: WalletScreen()
@@ -43,7 +41,6 @@ class _NavigationBarState extends State<NavigationBar> {
     Scaffold(
         appBar: AppBar(
           title: const Text('GoFelix'),
-          systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
           elevation: 0,
         ),
         body: const ProfileScreen()
@@ -114,7 +111,8 @@ class _NavigationBarState extends State<NavigationBar> {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return Scaffold(
+            body: AlertDialog(
             title: Text(LanguageLocalizations.of(context).attention),
             content: Text(LanguageLocalizations.of(context).textattention),
             actions: <Widget>[
@@ -147,6 +145,7 @@ class _NavigationBarState extends State<NavigationBar> {
                 ),
               )
             ],
+            ),
           );
         });
   }

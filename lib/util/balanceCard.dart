@@ -26,6 +26,7 @@ class BalanceCard extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -37,15 +38,15 @@ class BalanceCard extends StatelessWidget {
                         style: GoogleFonts.mulish(
                             textStyle: Theme.of(context).textTheme.headline4,
                             fontSize: 35,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.bold,
                             color: Colors.yellowAccent),
                       ),
                       const Text(
                         ' MLR',
                         style: TextStyle(
                             fontSize: 35,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.yellow),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.yellowAccent),
                       ),
                     ],
                   ),
@@ -57,8 +58,9 @@ class BalanceCard extends StatelessWidget {
                         style: GoogleFonts.mulish(
                             textStyle: Theme.of(context).textTheme.headline4,
                             fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                        ),
                       ),
                       const Text(
                         ' \$10,000',

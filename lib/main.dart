@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -13,13 +14,17 @@ import 'theme/theme_item.dart';
 import 'theme/theme_model.dart';
 
 
-void main() => runApp(const App());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const App());
+}
 
 /// This is the main application widget.
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
-  static const String _title = 'My Holidays';
+  static const String _title = 'GoFelix';
 
   @override
   Widget build(BuildContext context) {
