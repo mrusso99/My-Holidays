@@ -3,17 +3,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/util/Global.dart';
 import 'package:my_holidays/util/places.dart';
+import 'package:my_holidays/widgets/customStepper.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 class Details extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     DateRangePickerWidget rangePickerWidget = DateRangePickerWidget();
-    int? numberAdult = 0;
+    int? numberAdult = 1;
     int? numberChild = 0;
+    int hotelIndex = GlobalState.instance.get('hotelIndex');
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -32,7 +36,7 @@ class Details extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${places[0]["name"]}",
+                      "${places[hotelIndex]["name"]}",
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
@@ -54,7 +58,7 @@ class Details extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${places[0]["location"]}",
+                      "${places[hotelIndex]["location"]}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
@@ -70,7 +74,7 @@ class Details extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[0]["price"]}",
+                  "${places[hotelIndex]["price"]}",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -96,7 +100,7 @@ class Details extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[0]["details"]}",
+                  "${places[hotelIndex]["details"]}",
                   style: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 15.0,
@@ -118,15 +122,38 @@ class Details extends StatelessWidget {
                     ),
                     SizedBox(width: 20),
                     CustomNumberPicker(
-                      initialValue: 0,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.transparent, width: 1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      initialValue: 1,
                       maxValue: 10,
                       minValue: 0,
                       step: 1,
+                      customMinusButton: FittedBox(
+                          child: Row (
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
+                              SizedBox(width: 8),
+                            ],
+                          )
+                      ),
+                      customAddButton: FittedBox(
+                          child: Row (
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(width: 8),
+                              Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
+                            ],
+                          )
+                      ),
                       onValue: (value) {
                         numberAdult = value as int?;
-                        print(value.toString());
                       },
-                    )
+                    ),
                   ],
                 )
               ),
@@ -142,13 +169,36 @@ class Details extends StatelessWidget {
                       ),
                       SizedBox(width: 20),
                       CustomNumberPicker(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.transparent, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         initialValue: 0,
                         maxValue: 10,
                         minValue: 0,
                         step: 1,
+                        customMinusButton: FittedBox(
+                            child: Row (
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
+                                SizedBox(width: 8),
+                              ],
+                            )
+                        ),
+                        customAddButton: FittedBox(
+                            child: Row (
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(width: 8),
+                                Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
+                              ],
+                            )
+                        ),
                         onValue: (value) {
                           numberChild = value as int?;
-                          print(value.toString());
                         },
                       ),
                     ],
@@ -163,12 +213,16 @@ class Details extends StatelessWidget {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: getThemeButtonColor(context),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
                         onPressed: () {},
                         child: Text(
                             LanguageLocalizations.of(context).cancel,
                             style: TextStyle(
                               color: getThemeTextColor(context),
+
                             )
                           ),
                       ),
@@ -176,19 +230,23 @@ class Details extends StatelessWidget {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: getThemeButtonColor(context),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
                         onPressed: () {
                           if(FirebaseAuth.instance.currentUser == null){
                             _showMaterialDialog(context);
                           } else {
                             FirebaseFirestore.instance.collection('reservation').add({
+                              'hotel_name': '${places[hotelIndex]["name"]}',
                               'full_name': FirebaseAuth.instance.currentUser!.displayName,
                               'email': FirebaseAuth.instance.currentUser!.email,
                               'numberAdult': numberAdult,
                               'numberChild': numberChild,
-                              'from': rangePickerWidget.getFrom(),
-                              'until': ,
-                            }).then((value) => print('Reservation Added'))
+                              'from': GlobalState.instance.get('dateFrom'),
+                              'until': GlobalState.instance.get('dateUntil'),
+                            }).then((value) => _showMaterialDialogReservation(context))
                             .catchError((error) => print("Failed to add reservation: $error"));
                           }
                         },
@@ -284,7 +342,7 @@ class Details extends StatelessWidget {
                   },
                   child: Text('Annulla',
                     style: TextStyle(
-                      color: Colors.blueAccent,
+                      color: getThemeTextColor(context),
                       fontSize: 20,
                       height: 1,
                     ),
@@ -298,7 +356,7 @@ class Details extends StatelessWidget {
                 child: Text(
                   'Accedi',
                   style: TextStyle(
-                    color: Colors.blueAccent,
+                    color: getThemeTextColor(context),
                     fontSize: 20,
                     height: 1,
                   ),
@@ -312,5 +370,33 @@ class Details extends StatelessWidget {
   _dismissDialog(BuildContext context) {
     Navigator.pop(context);
   }
+
+
+  void _showMaterialDialogReservation(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Prenotazione Effettuata'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  _dismissDialog(context);
+                  Navigator.pushNamed(context, 'Explore');
+                },
+                child: Text(
+                  'Ok',
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 20,
+                    height: 1,
+                  ),
+                ),
+              )
+            ],
+          );
+        });
+  }
+  
   
 }

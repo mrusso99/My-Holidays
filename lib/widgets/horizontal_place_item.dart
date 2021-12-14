@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/places.dart';
 
 import '../screens/details.dart';
 
@@ -57,6 +59,8 @@ class HorizontalPlaceItem extends StatelessWidget {
           ),
         ),
         onTap: () {
+          int index = searchIndex("${place["name"]}");
+          GlobalState.instance.set('hotelIndex', index);
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
@@ -68,4 +72,15 @@ class HorizontalPlaceItem extends StatelessWidget {
       ),
     );
   }
+
+  int searchIndex(String hotelName){
+    for (int i = 0; i < places.length; i++){
+      if (places[i]['name'] == hotelName){
+        return i;
+      }
+    }
+    return -1;
+  }
 }
+
+

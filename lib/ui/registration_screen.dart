@@ -9,8 +9,10 @@ import '../widgets/background_image.dart';
 import 'profile_page.dart';
 
 class RegistrationScreen extends StatefulWidget {
+
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
+
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {

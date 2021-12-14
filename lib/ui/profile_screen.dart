@@ -37,6 +37,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
           ),
+          Card(
+            child: ListTile(
+              leading: Icon(Icons.bed_outlined),
+              title: Text('Le mie prenotazioni'),
+              onTap: () {
+                Navigator.pushNamed(context, 'Reservation');
+              },
+            ),
+          ),
         ]),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/util/Global.dart';
 
 import 'button_widget.dart';
 
@@ -10,12 +11,13 @@ class DateRangePickerWidget extends StatefulWidget {
 }
 
 class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
-  DateTimeRange dateRange = DateTimeRange(start: DateTime.now().subtract(Duration(days: 0)), end: DateTime(2100));
+  DateTimeRange dateRange = DateTimeRange(start: DateTime.now().subtract(Duration(days: 0)), end: DateTime.now().add(Duration(hours: 24)));
 
   String getFrom() {
     if (dateRange == null) {
       return 'From';
     } else {
+      GlobalState.instance.set('dateFrom', DateFormat('dd/MM/yyyy').format(dateRange.start));
       return DateFormat('dd/MM/yyyy').format(dateRange.start);
     }
   }
@@ -24,6 +26,7 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
     if (dateRange == null) {
       return 'Until';
     } else {
+      GlobalState.instance.set('dateUntil', DateFormat('dd/MM/yyyy').format(dateRange.end));
       return DateFormat('dd/MM/yyyy').format(dateRange.end);
     }
   }
@@ -57,6 +60,24 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
       firstDate: DateTime.now(),
       lastDate: DateTime(DateTime.now().year + 100),
       initialDateRange: dateRange,
+      locale: Localizations.localeOf(context),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.blue, // header background color
+              onPrimary: getThemeColor(), // header text color
+              onSurface: getThemeColor(), // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: getThemeColor(), // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (newDateRange == null) return;
 
@@ -74,49 +95,19 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
   }
 
   Widget returnRangePickerFrom(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-          primaryColor: Colors.blue,
-          buttonTheme: ButtonThemeData(
-              highlightColor: Colors.green,
-              buttonColor: Colors.green,
-              colorScheme: Theme.of(context).colorScheme.copyWith(
-                  secondary: Colors.greenAccent,
-                  background: Colors.white,
-                  primary: Colors.green,
-                  primaryVariant: Colors.green,
-                  brightness: Brightness.dark,
-                  onBackground: Colors.green),
-              textTheme: ButtonTextTheme.accent), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.green)),
-      child: Builder(
+    return Builder(
         builder: (context) => ButtonWidget(
           text: getFrom(),
           onClicked: () => pickDateRange(context),
         ),
-      ),
-    );
+      );
   }
 
   Widget returnRangePickerUntil(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-          primaryColor: Colors.blue,
-          buttonTheme: ButtonThemeData(
-              highlightColor: Colors.green,
-              buttonColor: Colors.green,
-              colorScheme: Theme.of(context).colorScheme.copyWith(
-                  secondary: Colors.greenAccent,
-                  background: Colors.white,
-                  primary: Colors.green,
-                  primaryVariant: Colors.green,
-                  brightness: Brightness.dark,
-                  onBackground: Colors.green),
-              textTheme: ButtonTextTheme.accent), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.green)),
-      child: Builder(
-        builder: (context) => ButtonWidget(
-          text: getUntil(),
-          onClicked: () => pickDateRange(context),
-        ),
+    return Builder(
+      builder: (context) => ButtonWidget(
+        text: getUntil(),
+        onClicked: () => pickDateRange(context),
       ),
     );
   }

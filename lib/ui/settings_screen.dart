@@ -25,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Holidays'),
+        title: const Text('Impostazioni'),
         systemOverlayStyle:
         SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         elevation: 0,

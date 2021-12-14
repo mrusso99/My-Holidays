@@ -2,9 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_holidays/ui/reservation_screen.dart';
 import '../languages/languageLocalizations.dart';
-import 'home_screen.dart';
-import 'profile_screen.dart';
 import 'wallet_screen.dart';
 import 'explore_screen.dart';
 
@@ -22,23 +21,20 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  List<Widget> _widgetOptions = <Widget>[
-    Card(
-      child: HomeScreen(),
-    ),
+  final List<Widget> _widgetOptions = <Widget>[
     Card(
       child: ExploreScreen(),
     ),
-    Card(
+    const Card(
       child: WalletScreen(),
     ),
-    Card(child: ProfileScreen()),
+    const Card(child: ReservationScreen()),
   ];
 
   void _onItemTapped(int index) {
     setState((){
       _selectedIndex = index;
-      if(_selectedIndex == 2){
+      if(_selectedIndex != 0){
         if(FirebaseAuth.instance.currentUser == null){
           _showMaterialDialog();
         }
@@ -74,10 +70,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.explore),
             label: LanguageLocalizations.of(context).explore,

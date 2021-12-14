@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_holidays/ui/booking_details.dart';
+import 'package:my_holidays/ui/reservation_screen.dart';
 import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/main_screen.dart';
 import 'ui/login_screen.dart';
@@ -46,6 +48,8 @@ class App extends StatelessWidget {
         'Settings': (context) => const SettingsScreen(),
         'Wallet': (context) => const WalletScreen(),
         'Explore': (context) => ExploreScreen(),
+        'Reservation': (context) => ReservationScreen(),
+        'Booking_Details': (context) => BookingDetailsScreen(),
       },
     );
   }
