@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/login_screen.dart';
@@ -32,7 +33,7 @@ class App extends StatelessWidget {
       create: (_) => ThemeModel(),
       child: Consumer<ThemeModel>(
           builder: (context, ThemeModel themeNotifier, child) {
-            return MaterialApp(
+            return GetMaterialApp(
               title: _title,
               localizationsDelegates: const [
                 DemoLocalizationsDelegate(),

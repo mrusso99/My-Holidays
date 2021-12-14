@@ -12,13 +12,7 @@ class Travels extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   // bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    String image = '';
-    //if (isDarkMode) {
-     // image = "imgs/GoFelixD.jpg";
-    //} else {
-      image = "imgs/GoFelix.jpg";
-   // }
+    String image = "imgs/GoFelix.jpg";
     return Scaffold(
       body: ListView(
         children: <Widget>[

@@ -31,7 +31,9 @@ class LanguageLocalizations {
       'textattention' : 'You must log in first',
       'delete' : 'Delete',
       'whereyougo' : 'Where are you going',
-      'texthome' : 'Your personal and smart experience during your stay'
+      'texthome' : 'Your personal and smart experience during your stay',
+      'language' : 'English',
+      'changelanguage' : 'Language'
   },
     'it': {
       'wallet': 'Portafoglio',
@@ -52,7 +54,9 @@ class LanguageLocalizations {
       'textattention': 'Devi prima accedere',
       'delete' : 'Annulla',
       'whereyougo' : 'Dove vuoi andare',
-      'texthome' : 'La tua esperienza personale e intelligente durante il tuo soggiorno'
+      'texthome' : 'La tua esperienza personale e intelligente durante il tuo soggiorno',
+      'language' : 'Italiano',
+      'changelanguage' : 'Lingua'
     },
   };
 
@@ -132,5 +136,13 @@ class LanguageLocalizations {
 
   String get texthome {
     return _localizedValues[locale.languageCode]!['texthome']!;
+  }
+
+  String get language {
+    return _localizedValues[locale.languageCode]!['language']!;
+  }
+
+  String get changelanguage {
+    return _localizedValues[locale.languageCode]!['changelanguage']!;
   }
 }
