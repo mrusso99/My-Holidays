@@ -5,10 +5,8 @@ import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/Global.dart';
 import 'package:my_holidays/util/places.dart';
-import 'package:my_holidays/widgets/customStepper.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 class Details extends StatelessWidget {
 
