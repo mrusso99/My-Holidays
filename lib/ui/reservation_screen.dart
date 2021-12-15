@@ -285,9 +285,9 @@ class _ReservationScreenState extends State<ReservationScreen>{
                                                     height: 70,
                                                     padding: EdgeInsets.symmetric(horizontal: 9.0, vertical: 5.0),
                                                     decoration: BoxDecoration(
-                                                      color: Colors.lightBlue,
+                                                      color: getThemeButtonColor(context),
                                                       borderRadius: BorderRadius.only(
-                                                        topRight: Radius.circular(15),
+                                                        topRight: Radius.circular(0),
                                                       ),
                                                     ),
                                                     child: Column(
@@ -298,7 +298,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
                                                             style: TextStyle(
                                                                 fontSize: 15,
                                                                 fontWeight: FontWeight.bold,
-                                                                color: Colors.white)
+                                                                color: getThemeTextColor(context))
                                                         ),
                                                         Spacer(),
                                                         Text(
@@ -306,7 +306,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
                                                             style: TextStyle(
                                                                 fontSize: 12,
                                                                 fontWeight: FontWeight.bold,
-                                                                color: Colors.white)
+                                                                color: getThemeTextColor(context))
                                                         ),
                                                       ],
                                                     ),
