@@ -282,6 +282,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
                                                   left: 0,
                                                   right: 0,
                                                   child: Container(
+                                                    height: 70,
                                                     padding: EdgeInsets.symmetric(horizontal: 9.0, vertical: 5.0),
                                                     decoration: BoxDecoration(
                                                       color: Colors.lightBlue,
@@ -299,9 +300,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
                                                                 fontWeight: FontWeight.bold,
                                                                 color: Colors.white)
                                                         ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
+                                                        Spacer(),
                                                         Text(
                                                             snapshot.data![i].dateFrom + ' - ' + snapshot.data![i].dateUntil,
                                                             style: TextStyle(
