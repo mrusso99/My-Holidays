@@ -9,6 +9,7 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 10.0),

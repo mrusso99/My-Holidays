@@ -35,10 +35,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: /*Center(
-        child: */Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          /*Card(
-            child:*/ ListTile(
+      body:Column(mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ListTile(
                 leading: const Icon(Icons.account_box),
                 title: Text(LanguageLocalizations.of(context).profile),
                 onTap: () {
@@ -48,18 +47,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     }
                   }
                 ),
-         // ),
-          /*Card(
-            child: */ListTile(
-              leading: const Icon(Icons.settings),
-              title: Text(LanguageLocalizations.of(context).settings),
-              onTap: () {
-                Navigator.pushNamed(context, 'Settings');
-              },
-            ),
-         // ),
-        ]),
-     // ),
+              ListTile(
+                leading: const Icon(Icons.settings),
+                title: Text(LanguageLocalizations.of(context).settings),
+                onTap: () {
+                  Navigator.pushNamed(context, 'Settings');
+                },
+              ),
+              ]
+      ),
     );
   }
 }

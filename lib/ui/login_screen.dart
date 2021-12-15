@@ -49,12 +49,12 @@ class _LoginScreenState extends State<LoginScreen> {
               future: _initializeFirebase(),
               builder: (context, snapshot) {
                 return Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     children: [
                     Container(
                       height: 200,
-                      width: 300,
+                      //width: 250,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(image),
@@ -65,9 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                      height: size.height * 0.05,
-                      ),
                       Form(
                         key: _formKey,
                         child: Column(
@@ -225,6 +222,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(height: 5),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                       GestureDetector(
                         onTap: () => Navigator.pushNamed(context, 'NewAccount'),
                         child: Container(
@@ -243,7 +243,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           )),
                         ),
-                      )
+                      ),
+                ]
+                      ),
                     ],
                   ),
                   ],
