@@ -28,6 +28,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String image = "imgs/GoFelix.jpg";
     bool _isDark = Theme.of(context).brightness == Brightness.dark;
     Color box;
     if (_isDark) {
@@ -42,22 +43,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           _focusEmail.unfocus();
           _focusPassword.unfocus();
         },
-        child: Stack(children: [
+        child: Stack(
+            children: [
           Scaffold(
             body: SingleChildScrollView(
-              child: Column(children: [
-                SizedBox(
-                  height: size.height * 0.1,
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                  children: [
+                Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(image),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: size.height * 0.1,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
                         Form(
                           key: _registerFormKey,
                           child: Column(
@@ -289,14 +290,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                             ],
                           ),
-                        )
-                      ],
                     ),
+              ]
                   ),
                 ),
-              ]),
-            ),
           ),
-        ]));
+            ]
+        ),
+    );
   }
 }

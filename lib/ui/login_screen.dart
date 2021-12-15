@@ -48,13 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
           body: FutureBuilder(
               future: _initializeFirebase(),
               builder: (context, snapshot) {
-                return Padding(
+                return SingleChildScrollView(
                   padding: const EdgeInsets.all(24),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                     Container(
                       height: 200,
-                      //width: 250,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(image),
@@ -62,9 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                      SizedBox(
+                        height: size.height * 0.05,
+                      ),
                       Form(
                         key: _formKey,
                         child: Column(
@@ -248,8 +248,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-                  ],
-                )
                 );
               }
               ),
