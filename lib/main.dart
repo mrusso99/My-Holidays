@@ -1,8 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:my_holidays/ui/self_check_in.dart';
 import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/login_screen.dart';
 import 'ui/forgot_password_screen.dart';
@@ -55,6 +55,7 @@ class App extends StatelessWidget {
                 'Settings': (context) => const SettingsScreen(),
                 'Wallet': (context) =>  WalletScreen(),
                 'Explore': (context) => const ExploreScreen(),
+                'Checkin': (context) => SelfCheckIn(),
               },
             );
           }
