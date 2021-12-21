@@ -36,15 +36,13 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
-    setState((){
+    setState(() {
       _selectedIndex = index;
-      if(_selectedIndex == 2){
-        if(FirebaseAuth.instance.currentUser == null){
+      if (_selectedIndex == 2) {
+        if (FirebaseAuth.instance.currentUser == null) {
           _showMaterialDialog();
         }
-      }else {
-
-      }
+      } else {}
     });
   }
 
@@ -108,26 +106,26 @@ class _MainScreenState extends State<MainScreen> {
                     _onItemTapped(0);
                     //Navigator.pushNamed(context, 'Explore');
                   },
-                  child: Text('Annulla',
+                  child: Text(
+                    'Annulla',
                     style: TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 20,
                       height: 1,
                     ),
-                  )
-              ),
+                  )),
               TextButton(
                 onPressed: () {
                   _dismissDialog();
                   Navigator.pushNamed(context, 'Login');
                 },
                 child: Text(
-                    'Accedi',
-          style: TextStyle(
-          color: Colors.blueAccent,
-          fontSize: 20,
-          height: 1,
-          ),
+                  'Accedi',
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 20,
+                    height: 1,
+                  ),
                 ),
               )
             ],
@@ -144,10 +142,9 @@ class _MainScreenState extends State<MainScreen> {
     try {
       // Wait for Firebase to initialize and set `_initialized` state to true
       await Firebase.initializeApp();
-    } catch(e) {
+    } catch (e) {
       // Set `_error` state to true if Firebase initialization fails
 
     }
   }
-
 }

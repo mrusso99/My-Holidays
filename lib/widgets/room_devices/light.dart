@@ -1,35 +1,57 @@
 import 'package:flutter/material.dart';
 
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:my_holidays/util/mqtt_client.dart';
+
 class LightDevice extends StatefulWidget {
-  const LightDevice({Key? key}) : super(key: key);
+  const LightDevice({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _LightDeviceState createState() => _LightDeviceState();
 }
 
 class _LightDeviceState extends State<LightDevice> {
+  late MqttClient client;
+  var topic = "topic/test";
+
+  void _publish(String message) {
+    final builder = MqttClientPayloadBuilder();
+    builder.addString('Hello from flutterClient');
+    var data = builder.payload;
+    client.subscribe(
+      topic,
+      MqttQos.atLeastOnce,
+    );
+    client.publishMessage(topic, MqttQos.atLeastOnce, data!);
+  }
+
   bool val1 = false;
+  bool val2 = false;
+  bool val3 = false;
 
   onChangeFuntion1(bool newValue) {
     setState(() {
       val1 = newValue;
     });
-  }
+    connect().then((value) => client = value);
 
-  bool val2 = false;
+    _publish(val1.toString());
+  }
 
   onChangeFuntion2(bool newValue) {
     setState(() {
       val2 = newValue;
     });
+    _publish(val2.toString());
   }
-
-  bool val3 = false;
 
   onChangeFuntion3(bool newValue) {
     setState(() {
       val3 = newValue;
     });
+    _publish(val2.toString());
   }
 
   @override
