@@ -36,12 +36,12 @@ class _SliderWidgetState extends State<SliderWidget> {
               width: kDiameter - 30,
               height: kDiameter - 30,
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  //color: Colors.white,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.white,
-                    width: 20,
-                    style: BorderStyle.solid,
+                   // color: Colors.white,
+                   // width: 20,
+                   // style: BorderStyle.solid,
                   ),
                   boxShadow: [
                     BoxShadow(

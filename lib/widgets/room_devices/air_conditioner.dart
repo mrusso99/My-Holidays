@@ -15,8 +15,8 @@ class _AirConditionerState extends State<AirConditioner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kScaffoldBackgroundColor,
-      bottomNavigationBar: BottomNavBarWidget(),
+      //backgroundColor: kScaffoldBackgroundColor,
+      //bottomNavigationBar: BottomNavBarWidget(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
