@@ -23,47 +23,56 @@ class _SmartRoomState extends State<SmartRoom> {
             Icons.device_thermostat_outlined,
             'TEMPERATURA',
             '/thermostat'),
-        buildBasicCard('https://www.flatpanelshd.com/pictures/mitv3-1.jpg',
-            Icons.tv_outlined, 'SMART TV', '/lights'),
+        buildBasicCard(
+            'https://www.spider-mac.com/wp-content/uploads/2020/01/hero-landing.jpeg',
+            Icons.lock_outline,
+            'SMART LOCK',
+            '/lights'),
       ],
     ));
   }
 
   Widget buildBasicCard(String url, IconData icon, String title, String path) =>
-      Card(
-        clipBehavior: Clip.antiAlias,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Ink.image(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.3), BlendMode.color),
-              image: NetworkImage(url),
-              height: 240,
-              fit: BoxFit.cover,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, path);
-                },
-              ),
-            ),
-            Column(
-              children: [
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 70,
+      Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Ink.image(
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.3), BlendMode.color),
+                image: NetworkImage(url),
+                height: 240,
+                fit: BoxFit.cover,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, path);
+                  },
                 ),
-                Text(
-                  title,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
-                )
-              ],
-            )
-          ],
+              ),
+              Column(
+                children: [
+                  Icon(
+                    icon,
+                    color: Colors.white,
+                    size: 70,
+                  ),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       );
 }
