@@ -11,7 +11,7 @@ import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/login_screen.dart';
 import 'ui/forgot_password_screen.dart';
 import 'ui/smart_room_screen.dart';
-import 'util/navigation_bar.dart';
+import 'util/nav_bar.dart';
 import 'ui/registration_screen.dart';
 import 'ui/settings_screen.dart';
 import 'ui/explore_screen.dart';
@@ -55,7 +55,7 @@ class App extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               initialRoute: '/',
               routes: {
-                '/': (context) => const NavigationBar(),
+                '/': (context) => const NavBar(),
                 'Login': (context) => const LoginScreen(),
                 'ForgotPassword': (context) => const ForgotPassword(),
                 'NewAccount': (context) => const RegistrationScreen(),

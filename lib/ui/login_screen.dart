@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
-import 'package:my_holidays/util/navigation_bar.dart';
+import 'package:my_holidays/util/nav_bar.dart';
 import '../util/validator.dart';
 import '../util/fire_auth.dart';
 import 'profile_page.dart';
@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     .push(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const NavigationBar()
+                                                        const NavBar()
                                                   ),
                                                 );
                                               }

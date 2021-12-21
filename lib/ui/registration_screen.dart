@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_holidays/ui/login_screen.dart';
-import 'package:my_holidays/util/navigation_bar.dart';
+import 'package:my_holidays/util/nav_bar.dart';
 import '../languages/languageLocalizations.dart';
 import '../util/fire_auth.dart';
 import '../util/validator.dart';

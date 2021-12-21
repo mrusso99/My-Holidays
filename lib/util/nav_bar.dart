@@ -9,15 +9,15 @@ import '../ui/wallet_screen.dart';
 
 import 'package:my_holidays/languages/languageLocalizations.dart';
 
-class NavigationBar extends StatefulWidget {
-  const NavigationBar({Key? key}) : super(key: key);
+class NavBar extends StatefulWidget {
+  const NavBar({Key? key}) : super(key: key);
 
   @override
-  State<NavigationBar> createState() => _NavigationBarState();
+  State<NavBar> createState() => _NavBarState();
 }
 
 /// This is the private State class that goes with MainScreen.
-class _NavigationBarState extends State<NavigationBar> {
+class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     const Card(
