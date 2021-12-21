@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:my_holidays/ui/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:my_holidays/ui/self_check_in.dart';
 import 'package:my_holidays/ui/booking_details.dart';
@@ -59,8 +60,9 @@ class App extends StatelessWidget {
                 'Wallet': (context) =>  WalletScreen(),
                 'Explore': (context) => const ExploreScreen(),
                 'Checkin': (context) => SelfCheckIn(),
-                'Reservation': (context) => ReservationScreen(),
-                'Booking_Details': (context) => BookingDetailsScreen(),
+                'Reservation': (context) => const ReservationScreen(),
+                'Booking_Details': (context) => const BookingDetailsScreen(),
+                'Profile' : (context) => const ProfileScreen(),
               },
             );
           }

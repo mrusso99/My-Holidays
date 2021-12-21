@@ -33,7 +33,7 @@ class ButtonWidget extends StatelessWidget {
   }) : super(key: key);
 
   Color getThemeColor(BuildContext context){
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode){
       return Colors.white;
@@ -43,7 +43,7 @@ class ButtonWidget extends StatelessWidget {
   }
 
   Color getThemeTextColor(BuildContext context){
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (isDarkMode){
       return Colors.white;
@@ -107,7 +107,7 @@ class HeaderWidget extends StatelessWidget {
   );
 
   Color getThemeColor(BuildContext context){
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode){
       return Colors.white;
@@ -117,7 +117,7 @@ class HeaderWidget extends StatelessWidget {
   }
 
   getThemeTextColor(BuildContext context) {
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (isDarkMode){
       return Colors.white;

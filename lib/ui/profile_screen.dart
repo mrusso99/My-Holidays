@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/reservation_screen.dart';
 
 import 'profile_page.dart';
 
@@ -14,40 +15,18 @@ class ProfileScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _ProfileScreenState extends State<ProfileScreen> {
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
-
-  User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => ProfilePage(
-            user: user,
-          ),
-        ),
-      );
-    }
-    else {
-      Navigator.pushNamed(context, 'Login');
-    }
-    return firebaseApp;
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Impostazioni'
+        ),
+        elevation: 0,
+      ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-           ListTile(
-                leading: Icon(Icons.account_box),
-                title: Text(LanguageLocalizations.of(context).profile),
-                onTap: () {
-                  if (true) {
-                    //todo check login
-                    _initializeFirebase();
-                    }
-                  }
-                ),
                ListTile(
                 leading: const Icon(Icons.settings),
                 title: Text(LanguageLocalizations.of(context).settings),
@@ -56,22 +35,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               ),
           ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Self Check-in'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Self Check-in'),
               onTap: () {
                 Navigator.pushNamed(context, 'Checkin');
               },
             ),
-          ),
-          Card(
-            child: ListTile(
+          ListTile(
               leading: Icon(Icons.bed_outlined),
-              title: Text('Le mie prenotazioni'),
+              title: Text(LanguageLocalizations.of(context).explore),
               onTap: () {
-                Navigator.pushNamed(context, 'Reservation');
+                Navigator.pushNamed(context, 'Explore');
               },
             ),
-          ),
         ]),
       ),
     );

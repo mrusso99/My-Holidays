@@ -5,9 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
 import '../languages/languageLocalizations.dart';
 import '../ui/home_screen.dart';
-import '../ui/profile_screen.dart';
 import '../ui/wallet_screen.dart';
-import '../ui/explore_screen.dart';
 
 import 'package:my_holidays/languages/languageLocalizations.dart';
 
@@ -21,39 +19,16 @@ class NavigationBar extends StatefulWidget {
 /// This is the private State class that goes with MainScreen.
 class _NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final List<Widget> _widgetOptions = <Widget>[
-    Card(
-      child: ExploreScreen(),
-  static final List<Widget> _pages = <Widget>[
-    const Scaffold(
-      body: HomeScreen()
+    const Card(
+      child: HomeScreen(),
     ),
-    Scaffold(
-      appBar: AppBar(
-        title: const Text('GoFelix'),
-        elevation: 0,
-  ),
-      body: const ExploreScreen()
+    Card(
+      child: WalletScreen(),
     ),
     const Card(
-      child: WalletScreen(),
-    Scaffold(
-        appBar: AppBar(
-          title: const Text('GoFelix'),
-          elevation: 0,
-  ),
-      body: WalletScreen()
-    ),
-    const Card(child: ReservationScreen()),
-    Scaffold(
-        appBar: AppBar(
-          title: const Text('GoFelix'),
-          elevation: 0,
-        ),
-        body: const ProfileScreen()
-    ),
+      child: ReservationScreen()
+      ,),
   ];
 
 
@@ -86,7 +61,7 @@ class _NavigationBarState extends State<NavigationBar> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: _pages,
+        children: _widgetOptions,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -94,10 +69,10 @@ class _NavigationBarState extends State<NavigationBar> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          /*BottomNavigationBarItem(
             icon: const Icon(Icons.explore),
             label: LanguageLocalizations.of(context).explore,
-          ),
+          ),*/
           BottomNavigationBarItem(
             icon: const Icon(Icons.account_balance_wallet_rounded),
             label: LanguageLocalizations.of(context).wallet,

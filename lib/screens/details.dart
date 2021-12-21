@@ -307,7 +307,7 @@ class Details extends StatelessWidget {
   }
 
   Color getThemeColor(BuildContext context){
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (isDarkMode){
       return Colors.white;
@@ -317,7 +317,7 @@ class Details extends StatelessWidget {
   }
 
   Color getThemeButtonColor(BuildContext context){
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode){
       return Colors.white;
@@ -327,8 +327,7 @@ class Details extends StatelessWidget {
   }
 
   getThemeTextColor(BuildContext context) {
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
-
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     if (isDarkMode){
       return Colors.white;
     } else {
@@ -341,17 +340,17 @@ class Details extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Attenzione'),
-            content: Text('Devi prima accedere'),
+            title: Text(LanguageLocalizations.of(context).attention),
+            content: Text(LanguageLocalizations.of(context).textattention),
             actions: <Widget>[
               TextButton(
                   onPressed: () {
                     _dismissDialog(context);
                     Navigator.pushNamed(context, 'Explore');
                   },
-                  child: Text('Annulla',
-                    style: TextStyle(
-                      color: getThemeTextColor(context),
+                  child: Text(LanguageLocalizations.of(context).delete,
+                    style: const TextStyle(
+                      color: Colors.blueAccent,
                       fontSize: 20,
                       height: 1,
                     ),
@@ -363,9 +362,9 @@ class Details extends StatelessWidget {
                   Navigator.pushNamed(context, 'Login');
                 },
                 child: Text(
-                  'Accedi',
-                  style: TextStyle(
-                    color: getThemeTextColor(context),
+                  LanguageLocalizations.of(context).signin,
+                  style: const TextStyle(
+                    color: Colors.blueAccent,
                     fontSize: 20,
                     height: 1,
                   ),
@@ -391,7 +390,7 @@ class Details extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   _dismissDialog(context);
-                  Navigator.pushNamed(context, 'Explore');
+                  Navigator.pushNamed(context, '/');
                 },
                 child: Text(
                   'Ok',

@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/reservation_screen.dart';
+import 'package:my_holidays/util/navigation_bar.dart';
 import '../util/validator.dart';
 import '../util/fire_auth.dart';
 import 'profile_page.dart';
@@ -145,14 +147,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             GestureDetector(
                               onTap: () => Navigator.pushNamed(
                                   context, 'ForgotPassword'),
-                              child: Text(
+                              child:Container(
+                                child: Text(
                                 LanguageLocalizations.of(context).forgotpassword + '?',
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      width: 1,
+                                      color: box,
+                                    ),
+                                  )),
+                            ),),
                             const SizedBox(height: 10),
                             Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -185,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     .push(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        ProfilePage(user: user),
+                                                        const NavigationBar()
                                                   ),
                                                 );
                                               }

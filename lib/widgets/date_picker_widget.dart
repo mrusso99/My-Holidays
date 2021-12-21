@@ -85,7 +85,7 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
   }
 
   Color getThemeColor(){
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (isDarkMode){
       return Colors.white;

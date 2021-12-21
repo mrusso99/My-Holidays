@@ -51,9 +51,8 @@ class Travels extends StatelessWidget {
 
   buildHorizontalList(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 10, top: 10),
+      padding: const EdgeInsets.only(left: 5),
       height: 300,
-      width: 100,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
@@ -68,7 +67,7 @@ class Travels extends StatelessWidget {
 
   buildVerticalList() {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.only(left: 5),
       child: ListView.builder(
         primary: false,
         physics: const NeverScrollableScrollPhysics(),

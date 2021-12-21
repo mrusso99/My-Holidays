@@ -33,8 +33,7 @@ class LanguageLocalizations {
       'whereyougo' : 'Where are you going',
       'texthome' : 'Your personal and smart experience during your stay',
       'language' : 'English',
-      'changelanguage' : 'Language'
-  },
+      'changelanguage' : 'Language',
       'date_selector': 'Date Selector',
       'cancel': 'Cancel',
       'book': 'Book'
@@ -60,8 +59,7 @@ class LanguageLocalizations {
       'whereyougo' : 'Dove vuoi andare',
       'texthome' : 'La tua esperienza personale e intelligente durante il tuo soggiorno',
       'language' : 'Italiano',
-      'changelanguage' : 'Lingua'
-      'username': 'Utente',
+      'changelanguage' : 'Lingua',
       'date_selector': 'Seleziona Date',
       'cancel': 'Cancella',
       'book': 'Prenota'

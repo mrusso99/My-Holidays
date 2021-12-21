@@ -14,17 +14,8 @@ class WalletScreen extends StatefulWidget {
 /// This is the private State class that goes with MainScreen.
 class _WalletScreenState extends State<WalletScreen> {
 
-  late User _currentUser;
-
-  User? user = FirebaseAuth.instance.currentUser;
-
-  @override
-  void initState() {
-    _currentUser = user!;
-    super.initState();
-  }
-
   Widget _appBar() {
+    String? userString = userName();
     return Row(
       children: <Widget>[
         const CircleAvatar(
@@ -32,7 +23,8 @@ class _WalletScreenState extends State<WalletScreen> {
           backgroundImage: NetworkImage("https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"),
         ),
         const SizedBox(width: 15),
-        Text('${_currentUser.displayName}'),
+        Text(userString!,
+        ),
         const Expanded(
           child: SizedBox(),
         ),
@@ -123,8 +115,20 @@ class _WalletScreenState extends State<WalletScreen> {
                       ),
                     ],
                   )),
-            )));
+            )
+        )
+    );
   }
+
+  String? userName (){
+
+    if(FirebaseAuth.instance.currentUser == null){
+      return 'null';
+    }else{
+      return FirebaseAuth.instance.currentUser!.displayName;
+    }
+  }
+
 
 }
 

@@ -84,7 +84,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
                             IconButton(
                               icon: Icon(Icons.settings),
                               onPressed: () {
-                                Navigator.pushNamed(context, 'Settings');
+                                Navigator.pushNamed(context, 'Profile');
                               },
                               color: getThemeTextColor(context),
                             ),
@@ -370,7 +370,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
   }
 
   getThemeTextColor(BuildContext context) {
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (isDarkMode){
       return Colors.white;
@@ -380,7 +380,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
   }
 
   Color getThemeButtonColor(BuildContext context){
-    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode){
       return Colors.white;

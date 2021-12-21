@@ -11,9 +11,7 @@ class VerticalPlaceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
-      child: InkWell(
+    return InkWell(
         child: Container(
           alignment: Alignment.centerLeft,
           height: 100,
@@ -104,7 +102,6 @@ class VerticalPlaceItem extends StatelessWidget {
             ),
           );
         },
-      ),
     );
   }
 
