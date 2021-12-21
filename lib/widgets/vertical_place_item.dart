@@ -7,7 +7,7 @@ import '../screens/details.dart';
 class VerticalPlaceItem extends StatelessWidget {
   final Map place;
 
-  VerticalPlaceItem({required this.place});
+  const VerticalPlaceItem({Key? key, required this.place}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,55 +15,57 @@ class VerticalPlaceItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 15.0),
       child: InkWell(
         child: Container(
-          height: 70.0,
+          alignment: Alignment.centerLeft,
+          height: 100,
           child: Row(
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
                   "${place["img"]}",
-                  height: 70.0,
-                  width: 70.0,
+                  height: 80,
+                  width: 80,
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10),
               Container(
-                height: 80.0,
-                width: MediaQuery.of(context).size.width - 130.0,
+                alignment: Alignment.centerLeft,
+                height: 80,
+                width: MediaQuery.of(context).size.width - 130,
                 child: ListView(
                   primary: false,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: <Widget>[
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "${place["name"]}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14.0,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                         maxLines: 2,
                         textAlign: TextAlign.left,
                       ),
                     ),
-                    SizedBox(height: 3.0),
+                    const SizedBox(height: 5.0),
                     Row(
                       children: <Widget>[
                         Icon(
                           Icons.location_on,
-                          size: 13.0,
+                          size: 15,
                           color: Colors.blueGrey[300],
                         ),
-                        SizedBox(width: 3.0),
+                        const SizedBox(width: 5),
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "${place["location"]}",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 13.0,
+                              fontSize: 15,
                               color: Colors.blueGrey[300],
                             ),
                             maxLines: 1,
@@ -72,14 +74,14 @@ class VerticalPlaceItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10),
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "${place["price"]}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
+                          fontSize: 17.5,
                         ),
                         maxLines: 1,
                         textAlign: TextAlign.left,
@@ -97,7 +99,7 @@ class VerticalPlaceItem extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return Details();
+                return const Details();
               },
             ),
           );

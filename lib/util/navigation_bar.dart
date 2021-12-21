@@ -4,32 +4,58 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
 import '../languages/languageLocalizations.dart';
-import 'wallet_screen.dart';
-import 'explore_screen.dart';
+import '../ui/home_screen.dart';
+import '../ui/profile_screen.dart';
+import '../ui/wallet_screen.dart';
+import '../ui/explore_screen.dart';
 
 import 'package:my_holidays/languages/languageLocalizations.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class NavigationBar extends StatefulWidget {
+  const NavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<NavigationBar> createState() => _NavigationBarState();
 }
 
 /// This is the private State class that goes with MainScreen.
-class _MainScreenState extends State<MainScreen> {
+class _NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final List<Widget> _widgetOptions = <Widget>[
     Card(
       child: ExploreScreen(),
+  static final List<Widget> _pages = <Widget>[
+    const Scaffold(
+      body: HomeScreen()
+    ),
+    Scaffold(
+      appBar: AppBar(
+        title: const Text('GoFelix'),
+        elevation: 0,
+  ),
+      body: const ExploreScreen()
     ),
     const Card(
       child: WalletScreen(),
+    Scaffold(
+        appBar: AppBar(
+          title: const Text('GoFelix'),
+          elevation: 0,
+  ),
+      body: WalletScreen()
     ),
     const Card(child: ReservationScreen()),
+    Scaffold(
+        appBar: AppBar(
+          title: const Text('GoFelix'),
+          elevation: 0,
+        ),
+        body: const ProfileScreen()
+    ),
   ];
+
 
   void _onItemTapped(int index) {
     setState((){
@@ -47,8 +73,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     initializeFlutterFire();
-    bool isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     Color selectedItemColor;
     Color unselectedItemColor;
     if (isDarkMode) {
@@ -59,17 +84,16 @@ class _MainScreenState extends State<MainScreen> {
       unselectedItemColor = Colors.black;
     }
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Holidays'),
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-        elevation: 0,
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.explore),
             label: LanguageLocalizations.of(context).explore,
@@ -96,9 +120,10 @@ class _MainScreenState extends State<MainScreen> {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text('Attenzione'),
-            content: Text('Devi prima accedere'),
+          return Scaffold(
+            body: AlertDialog(
+            title: Text(LanguageLocalizations.of(context).attention),
+            content: Text(LanguageLocalizations.of(context).textattention),
             actions: <Widget>[
               TextButton(
                   onPressed: () {
@@ -106,8 +131,8 @@ class _MainScreenState extends State<MainScreen> {
                     _onItemTapped(0);
                     //Navigator.pushNamed(context, 'Explore');
                   },
-                  child: Text('Annulla',
-                    style: TextStyle(
+                  child: Text(LanguageLocalizations.of(context).delete,
+                    style: const TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 20,
                       height: 1,
@@ -120,8 +145,8 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator.pushNamed(context, 'Login');
                 },
                 child: Text(
-                    'Accedi',
-          style: TextStyle(
+                  LanguageLocalizations.of(context).signin,
+          style: const TextStyle(
           color: Colors.blueAccent,
           fontSize: 20,
           height: 1,
@@ -129,6 +154,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               )
             ],
+            ),
           );
         });
   }

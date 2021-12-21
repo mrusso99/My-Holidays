@@ -13,7 +13,7 @@ contract FelixCoin is ERC20, AccessControl {
     }
 
     function mint(address to, uint256 amount) public {
-        require(hasRole(MINTER_ROLE, msg.sender), "ERROREEEEEEEE");
+        require(hasRole(MINTER_ROLE, msg.sender), "Error");
         _mint(to, amount);
     }
     
@@ -21,3 +21,4 @@ contract FelixCoin is ERC20, AccessControl {
         return hasRole(MINTER_ROLE, addr);
     }
 }
+

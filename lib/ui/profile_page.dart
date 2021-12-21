@@ -1,6 +1,8 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 import '../util/fire_auth.dart';
 import 'login_screen.dart';
 
@@ -14,8 +16,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool _isSendingVerification = false;
-  bool _isSigningOut = false;
 
   late User _currentUser;
 
@@ -29,7 +29,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profilo'),
+        title: Text(LanguageLocalizations.of(context).profile),
+        elevation: 0,
       ),
       body: Center(
         child: Column(
@@ -37,31 +38,27 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Text(
               'NOME: ${_currentUser.displayName}',
-              style: GoogleFonts.josefinSans(
-                color: Colors.black,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 height: 1,
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               'EMAIL: ${_currentUser.email}',
-              style: GoogleFonts.josefinSans(
-                color: Colors.black,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 height: 1,
               ),
             ),
-            SizedBox(height: 16.0),
-            _isSendingVerification
-                ? CircularProgressIndicator()
-                : Row(
+            const SizedBox(height: 16.0),
+            Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Icon(Icons.refresh),
+                  icon: const Icon(Icons.refresh),
                   onPressed: () async {
                     User? user = await FireAuth.refreshUser(_currentUser);
 
@@ -74,29 +71,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            SizedBox(height: 16.0),
-            _isSigningOut
-                ? CircularProgressIndicator()
-                : ElevatedButton(
+            const SizedBox(height: 16.0),
+             ElevatedButton(
               onPressed: () async {
                 setState(() {
-                  _isSigningOut = true;
+
                 });
                 await FirebaseAuth.instance.signOut();
                 setState(() {
-                  _isSigningOut = false;
+
                 });
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                    builder: (context) => const LoginScreen(),
                   ),
                 );
               },
-              child: Text('Sign out'),
+              child: const Text('Sign out',
+                style: TextStyle(
+                    color: Colors.white
+                ),
+              ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.red,
+                primary: Colors.blueAccent,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),

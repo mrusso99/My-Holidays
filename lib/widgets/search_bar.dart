@@ -1,49 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 
 class SearchBar extends StatelessWidget {
-  final TextEditingController _searchControl = new TextEditingController();
+  SearchBar({Key? key}) : super(key: key);
+
+  final TextEditingController _searchControl = TextEditingController();
+  final _focusEmail = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.blueGrey[50],
-        borderRadius: BorderRadius.all(
-          Radius.circular(5.0),
-        ),
-      ),
-      child: TextField(
-        style: TextStyle(
+    return GestureDetector(
+        onTap: () {
+          _focusEmail.unfocus();
+        },
+        child: TextField(
+        focusNode: _focusEmail,
+        style: const TextStyle(
           fontSize: 15.0,
-          color: Colors.blueGrey[300],
         ),
+        textAlign: TextAlign.center,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(10.0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.0),
-            borderSide: BorderSide(
-              color: Colors.white,
-            ),
-          ),
+          contentPadding: const EdgeInsets.fromLTRB(20,10,20,10),
+          fillColor: Colors.grey.withOpacity(0.1),
+          filled: true,
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
+            borderSide: const BorderSide(
+              color: Colors.blueGrey, width: 1,
             ),
-            borderRadius: BorderRadius.circular(5.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
-          hintText: "E.g: New York, United States",
-          prefixIcon: Icon(
-            Icons.location_on,
-            color: Colors.blueGrey[300],
+          hintText: (LanguageLocalizations.of(context).whereyougo + '?'),
+          prefixIcon: const Icon(
+            Icons.search,
+            color: Colors.blueAccent,
           ),
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontSize: 15.0,
-            color: Colors.blueGrey[300],
           ),
         ),
         maxLines: 1,
         controller: _searchControl,
-      ),
+      )
     );
   }
 }

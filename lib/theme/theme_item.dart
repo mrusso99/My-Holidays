@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Constants {
+class ThemeItem with ChangeNotifier{
   static String appName = "My Holidays";
 
   //Colors for theme
@@ -15,7 +15,7 @@ class Constants {
   static ThemeData lightTheme = ThemeData(
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
-      primary: Colors.white,
+      primary: Colors.white70,
       onPrimary: Colors.black,
       // Colors that are not relevant to AppBar in LIGHT mode:
       primaryVariant: Colors.grey,
@@ -35,7 +35,7 @@ class Constants {
   static ThemeData darkTheme = ThemeData(
     colorScheme: const ColorScheme(
       brightness: Brightness.dark,
-      surface: Color(0x2E2E2E),
+      surface: Colors.black12,
       onSurface: Colors.white,
       // Colors that are not relevant to AppBar in DARK mode:
       primary: Colors.grey,

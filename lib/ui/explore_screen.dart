@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:my_holidays/screens/travels.dart';
-import 'package:my_holidays/widgets/icon_badge.dart';
 
 class ExploreScreen extends StatefulWidget {
+  const ExploreScreen({Key? key}) : super(key: key);
+
   @override
   _ExploreScreenState createState() => _ExploreScreenState();
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  late PageController _pageController;
-  int _page = 0;
+  /*late PageController _pageController;
+  int _page = 0;*/
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
+    return const Scaffold(
+     /* body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: List.generate(4, (index) => Travels()),
-      ),
+      ),*/
     );
-  }
+  }/*
 
   void navigationTapped(int page) {
     _pageController.jumpToPage(page);
@@ -53,6 +53,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
       _page == page ? Theme.of(context).accentColor : Colors.blueGrey[300],
       onPressed: () => _pageController.jumpToPage(page),
     );
-  }
+  }*/
 }
 
