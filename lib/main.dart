@@ -10,6 +10,7 @@ import 'package:my_holidays/ui/reservation_screen.dart';
 import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/login_screen.dart';
 import 'ui/forgot_password_screen.dart';
+import 'ui/smart_room_screen.dart';
 import 'util/navigation_bar.dart';
 import 'ui/registration_screen.dart';
 import 'ui/settings_screen.dart';
@@ -17,6 +18,8 @@ import 'ui/explore_screen.dart';
 import 'ui/wallet_screen.dart';
 import 'theme/theme_item.dart';
 import 'theme/theme_model.dart';
+import 'widgets/room_devices/air_conditioner.dart';
+import 'widgets/room_devices/light.dart';
 
 
 void main() async {
@@ -63,6 +66,10 @@ class App extends StatelessWidget {
                 'Reservation': (context) => const ReservationScreen(),
                 'Booking_Details': (context) => const BookingDetailsScreen(),
                 'Profile' : (context) => const ProfileScreen(),
+                'SmartRoom': (context) => const SmartRoom(),
+                '/lights': (context) => const LightDevice(),
+                '/thermostat': (context) => const AirConditioner(),
+
               },
             );
           }
