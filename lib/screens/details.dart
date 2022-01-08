@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import 'package:my_holidays/util/Global.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 
 class Details extends StatelessWidget {
   const Details({Key? key}) : super(key: key);
@@ -83,7 +86,7 @@ class Details extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[hotelIndex]["price"]}",
+                  "${places[hotelIndex]["price"]} FELX",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -226,7 +229,9 @@ class Details extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/');
+                        },
                         child: Text(
                             LanguageLocalizations.of(context).cancel,
                             style: TextStyle(
@@ -243,20 +248,13 @@ class Details extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30),
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if(FirebaseAuth.instance.currentUser == null){
                             _showMaterialDialog(context);
                           } else {
-                            FirebaseFirestore.instance.collection('reservation').add({
-                              'hotel_name': '${places[hotelIndex]["name"]}',
-                              'full_name': FirebaseAuth.instance.currentUser!.displayName,
-                              'email': FirebaseAuth.instance.currentUser!.email,
-                              'numberAdult': numberAdult,
-                              'numberChild': numberChild,
-                              'from': GlobalState.instance.get('dateFrom'),
-                              'until': GlobalState.instance.get('dateUntil'),
-                            }).then((value) => _showMaterialDialogReservation(context))
-                            .catchError((error) => print("Failed to add reservation: $error"));
+                            GlobalState.instance.set('numberAdult', numberAdult);
+                            GlobalState.instance.set('numberChild', numberChild);
+                            Navigator.pushNamed(context, 'Pay');
                           }
                         },
                         child: Text(
@@ -380,30 +378,58 @@ class Details extends StatelessWidget {
   }
 
 
-  void _showMaterialDialogReservation(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Prenotazione Effettuata'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  _dismissDialog(context);
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Text(
-                  'Ok',
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontSize: 20,
-                    height: 1,
-                  ),
-                ),
-              )
-            ],
-          );
-        });
+
+  Future<int> getBalance() async {
+
+    List<String> address = [];
+    String base = 'http://10.0.2.2:4455/address/';
+    address.add(base);
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        address.add(doc["address"]);
+      });
+    });
+
+    String toParse = address.join();
+
+
+    final response = await http
+        .get(Uri.parse(toParse));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      final Map parsed = json.decode(response.body);
+      return parsed['data']['balance'];
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load');
+    }
+
+  }
+
+  Future<int> getPoints() async {
+
+    int points = 0;
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .get().then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
+        points = data['points'];
+      });
+    });
+
+    return points;
+
   }
 
 

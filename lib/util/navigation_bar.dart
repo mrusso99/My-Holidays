@@ -45,6 +45,12 @@ class _NavigationBarState extends State<NavigationBar> {
     });
   }
 
+  void setTabIndex(index){
+    setState((){
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     initializeFlutterFire();
@@ -59,9 +65,12 @@ class _NavigationBarState extends State<NavigationBar> {
       unselectedItemColor = Colors.black;
     }
     return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _widgetOptions,
+      body: SafeArea(
+        top: false,
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: _widgetOptions,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[

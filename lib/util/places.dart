@@ -2,7 +2,7 @@ List places = [
   {
     "name": "Hotel Dolah Amet & Suites",
     "img": "assets/1.jpeg",
-    "price": r"$100/night",
+    "price": r"100",
     "location": "London, England",
     "details": "Pellentesque in ipsum id orci porta dapibus. "
         "Nulla porttitor accumsan tincidunt. Donec rutrum "
@@ -17,7 +17,7 @@ List places = [
   {
     "name": "Beach Mauris Blandit",
     "img": "assets/2.jpeg",
-    "price": r"$100/night",
+    "price": r"100",
     "location": "Lisbon, Portugal",
     "details": "Pellentesque in ipsum id orci porta dapibus. "
         "Nulla porttitor accumsan tincidunt. Donec rutrum "
@@ -32,7 +32,7 @@ List places = [
   {
     "name": "Ipsum Restaurant",
     "img": "assets/3.jpeg",
-    "price": r"$100/night",
+    "price": r"100",
     "location": "Paris, France",
     "details": "Pellentesque in ipsum id orci porta dapibus. "
         "Nulla porttitor accumsan tincidunt. Donec rutrum "
@@ -47,7 +47,7 @@ List places = [
   {
     "name": "Curabitur Beach",
     "img": "assets/4.jpeg",
-    "price": r"$100/night",
+    "price": r"100",
     "location": "Rome, Italy",
     "details": "Pellentesque in ipsum id orci porta dapibus. "
         "Nulla porttitor accumsan tincidunt. Donec rutrum "
@@ -62,7 +62,7 @@ List places = [
   {
     "name": "Tincidunt Pool",
     "img": "assets/5.jpeg",
-    "price": r"$100/night",
+    "price": r"100",
     "location": "Madrid, Spain",
     "details": "Pellentesque in ipsum id orci porta dapibus. "
         "Nulla porttitor accumsan tincidunt. Donec rutrum "

@@ -2,11 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:my_holidays/ui/settings_screen.dart';
 import 'package:my_holidays/util/Global.dart';
 
 import 'booking_details.dart';
-import 'login_screen.dart';
 
 
 class ReservationScreen extends StatefulWidget {
@@ -122,28 +120,59 @@ class _ReservationScreenState extends State<ReservationScreen>{
                           children: <Widget>[
                             SizedBox(
                               height: 50.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 100.0),
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "3191\t",
-                                      style: TextStyle(
-                                        color: Colors.yellowAccent,
-                                        fontSize: 30,
+                            ),Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FutureBuilder<String>(
+                                  future: getPoints(),
+                                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                                    List<Widget> children;
+                                    if (snapshot.hasData) {
+                                      String? balance = snapshot.data;
+                                      children = <Widget>[
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            balance!,
+                                            style: TextStyle(
+                                                fontSize: 35,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.yellowAccent),
+                                          ),
+                                        ),
+                                      ];
+                                    } else if (snapshot.hasError) {
+                                      children = <Widget>[
+                                        Text('Error',
+                                          style: TextStyle(
+                                            fontSize: 10.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ];
+                                    } else {
+                                      children = const <Widget>[
+                                        CircularProgressIndicator(
+                                          color: Colors.yellowAccent,
+                                        ),
+                                      ];
+                                    }
+                                    return Center(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: children,
                                       ),
-                                    ),
-                                    TextSpan(
-                                      text: "Felix points",
-                                      style: TextStyle(
-                                          color: Colors.yellowAccent
-                                      ),
-                                    )
-                                  ],
+                                    );
+                                  },
                                 ),
-                              ),
+                                const Text(
+                                  ' FELX',
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.yellowAccent),
+                                ),
+                              ],
                             ),
                             SizedBox(
                               height: 35.0,
@@ -195,12 +224,8 @@ class _ReservationScreenState extends State<ReservationScreen>{
                                       ];
                                     } else {
                                       children = const <Widget>[
-                                        Text('Awaiting result...',
-                                          style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'Montserrat'
-                                          ),
+                                        CircularProgressIndicator(
+                                          color: Colors.yellowAccent,
                                         ),
                                       ];
                                     }
@@ -458,6 +483,25 @@ class _ReservationScreenState extends State<ReservationScreen>{
       return FirebaseAuth.instance.currentUser!.displayName;
     }
   }
+
+  Future<String> getPoints() async {
+
+    String points = '';
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .get().then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
+        points = data['points'].toString();
+      });
+    });
+
+    return points;
+
+  }
+
 
 
 }

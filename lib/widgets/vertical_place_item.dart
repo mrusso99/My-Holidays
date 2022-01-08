@@ -73,17 +73,34 @@ class VerticalPlaceItem extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "${place["price"]}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17.5,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "${place["price"]}",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17.5,
+                              ),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                            ),
+                            Text(
+                              " FELX",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17.5,
+                              ),
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                            ),
+                          ]
                         ),
-                        maxLines: 1,
-                        textAlign: TextAlign.left,
-                      ),
+                      ],
                     ),
                   ],
                 ),

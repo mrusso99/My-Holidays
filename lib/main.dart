@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:my_holidays/ui/payWithFelx.dart';
 import 'package:my_holidays/ui/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:my_holidays/ui/self_check_in.dart';
@@ -14,7 +15,6 @@ import 'ui/smart_room_screen.dart';
 import 'util/navigation_bar.dart';
 import 'ui/registration_screen.dart';
 import 'ui/settings_screen.dart';
-import 'ui/explore_screen.dart';
 import 'ui/wallet_screen.dart';
 import 'theme/theme_item.dart';
 import 'theme/theme_model.dart';
@@ -61,7 +61,6 @@ class App extends StatelessWidget {
                 'NewAccount': (context) => const RegistrationScreen(),
                 'Settings': (context) => const SettingsScreen(),
                 'Wallet': (context) =>  WalletScreen(),
-                'Explore': (context) => const ExploreScreen(),
                 'Checkin': (context) => SelfCheckIn(),
                 'Reservation': (context) => const ReservationScreen(),
                 'Booking_Details': (context) => const BookingDetailsScreen(),
@@ -69,6 +68,7 @@ class App extends StatelessWidget {
                 'SmartRoom': (context) => const SmartRoom(),
                 '/lights': (context) => const LightDevice(),
                 '/thermostat': (context) => const AirConditioner(),
+                'Pay': (context) => Payment(),
 
               },
             );

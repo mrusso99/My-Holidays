@@ -1,12 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_holidays/ui/login_screen.dart';
-import 'package:my_holidays/util/navigation_bar.dart';
+import 'package:my_holidays/util/user_detail.dart';
 import '../languages/languageLocalizations.dart';
 import '../util/fire_auth.dart';
 import '../util/validator.dart';
-import 'profile_page.dart';
+import 'package:http/http.dart' as http;
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -27,6 +29,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
   final _focusPassword2 = FocusNode();
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -202,6 +206,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       width: size.width * 0.7,
                                       child: ElevatedButton(
                                         onPressed: () async {
+                                          String address = await createAccountEthereum();
                                           if (_registerFormKey.currentState!
                                               .validate()) {
                                             User? user = await FireAuth
@@ -211,6 +216,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                               password:
                                                   _passwordTextController.text,
                                             );
+
+                                            addUserDetails(address);
 
                                             if (user != null) {
                                               Navigator.of(context)
@@ -300,5 +307,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ]
         ),
     );
+  }
+
+  Future<String> createAccountEthereum() async {
+    
+    final response = await http
+        .get(Uri.parse('http://10.0.2.2:4455/newAccount'));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      final Map parsed = json.decode(response.body);
+      print(parsed['data']);
+      return parsed['data'];
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
   }
 }

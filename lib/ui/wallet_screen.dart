@@ -1,8 +1,16 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_holidays/ui/home_screen.dart';
 import 'package:my_holidays/util/balanceCard.dart';
+import 'package:flutter_material_pickers/flutter_material_pickers.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:my_holidays/util/navigation_bar.dart';
 
 class WalletScreen extends StatefulWidget {
 
@@ -14,76 +22,10 @@ class WalletScreen extends StatefulWidget {
 /// This is the private State class that goes with MainScreen.
 class _WalletScreenState extends State<WalletScreen> {
 
-  Widget _appBar() {
-    String? userString = userName();
-    return Row(
-      children: <Widget>[
-        const CircleAvatar(
-          radius: 40.0,
-          backgroundImage: NetworkImage("https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"),
-        ),
-        const SizedBox(width: 15),
-        Text(userString!,
-        ),
-        const Expanded(
-          child: SizedBox(),
-        ),
-        Icon(
-          Icons.short_text,
-          color: Theme.of(context).iconTheme.color,
-        )
-      ],
-    );
-  }
-
-  Widget _operationsWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        _icon(Icons.transfer_within_a_station, "Transfer"),
-        _icon(Icons.phone, "Airtime"),
-        _icon(Icons.payment, "Pay Bills"),
-        _icon(Icons.code, "Qr Pay"),
-      ],
-    );
-  }
-
-  Widget _icon(IconData icon, String text) {
-    bool isDarkMode =
-        Theme.of(context).brightness == Brightness.dark;
-    Color box;
-    if (isDarkMode) {
-      box = Colors.black;
-    } else {
-      box = Colors.white;
-    }
-    return Column(
-      children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, '/transfer');
-          },
-          child: Container(
-            height: 80,
-            width: 80,
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-                color: box,
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                boxShadow: const <BoxShadow>[
-                  BoxShadow()
-                ]),
-            child: Icon(icon),
-          ),
-        ),
-        Text(text),
-      ],
-    );
-  }
-
 
   @override
   Widget build(BuildContext context) {
+    StatelessWidget balanceCard = BalanceCard();
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
@@ -92,8 +34,6 @@ class _WalletScreenState extends State<WalletScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      const SizedBox(height: 35),
-                      _appBar(),
                       const SizedBox(
                         height: 40,
                       ),
@@ -101,20 +41,206 @@ class _WalletScreenState extends State<WalletScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const BalanceCard(),
+                      balanceCard,
                       const SizedBox(
-                        height: 50,
+                        height: 30,
                       ),
                       const Text("Operations"),
                       const SizedBox(
                         height: 10,
                       ),
-                      _operationsWidget(),
+                      Row (
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget> [
+                          ElevatedButton(
+                            onPressed: () {
+                              int _currentHorizontalIntValue = 0;
+                              showMaterialNumberPicker(
+                                context: context,
+                                title: 'Quanti Felx vuoi prelevare?',
+                                maxNumber: 1000,
+                                minNumber: 0,
+                                selectedNumber: _currentHorizontalIntValue,
+                                onChanged: (value) => setState(() => _currentHorizontalIntValue = value),
+                                onConfirmed: () {
+                                    mint(_currentHorizontalIntValue);
+                                },
+                              );
+                            },
+                            child: Icon(Icons.add, color: getThemeTextColor(context), size: 30,),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              padding: EdgeInsets.all(25),
+                              primary: getThemeButtonColor(context), // <-- Button color
+                              onPrimary: Colors.black, // <-- Splash color
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 50,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) => super.widget));
+                            },
+                            child: Icon(Icons.refresh, color: getThemeTextColor(context), size: 30,),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              padding: EdgeInsets.all(25),
+                              primary: getThemeButtonColor(context), // <-- Button color
+                              onPrimary: Colors.black, // <-- Splash color
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(
-                        height: 40,
+                        height: 20,
+                      ),
+                      const Text("Transactions"),
+                      const SizedBox(
+                        height: 0,
+                      ),
+                      Container(
+                          height: MediaQuery.of(context).size.height / 4,
+                          child: FutureBuilder<List<Transaction>>(
+                              future: getTransactionList(),
+                              builder: (BuildContext context, AsyncSnapshot<List<Transaction>> snapshot) {
+                                List<Widget> children;
+                                if (snapshot.hasData){
+                                  if(snapshot.data!.isEmpty){
+                                    children = <Widget>[
+                                      const Icon(
+                                        Icons.sentiment_dissatisfied_outlined,
+                                        color: Colors.red,
+                                        size: 60,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 16),
+                                        child: Text('No transaction'),
+                                      )
+                                    ];
+                                  }else {
+                                    children = <Widget>[
+                                      SizedBox(
+                                        height: MediaQuery.of(context).size.height / 4,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: snapshot.data!.length,
+                                          itemBuilder: (ctx, i) {
+                                            return GestureDetector(
+                                              onTap: () => {
+
+                                              },
+                                              child: Container(
+                                                width: 160,
+                                                margin:
+                                                const EdgeInsets.symmetric(horizontal: 11.0),
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(15.0),
+                                                  child: Stack(
+                                                    children: <Widget>[
+                                                      Positioned(
+                                                        bottom: 0,
+                                                        left: 0,
+                                                        right: 0,
+                                                        child: Container(
+                                                          height: 150,
+                                                          padding: EdgeInsets.symmetric(horizontal: 9.0, vertical: 5.0),
+                                                          decoration: BoxDecoration(
+                                                            color: getThemeButtonColor(context),
+                                                            borderRadius: BorderRadius.only(
+                                                              topRight: Radius.circular(20),
+                                                              topLeft: Radius.circular(20),
+                                                              bottomLeft: Radius.circular(20),
+                                                              bottomRight: Radius.circular(20),
+                                                            ),
+                                                          ),
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: <Widget>[
+                                                              Text(
+                                                                  "Address: ${snapshot.data![i].address}",
+                                                                  style: TextStyle(
+                                                                      fontSize: 12,
+                                                                      fontWeight: FontWeight.bold,
+                                                                      color: getThemeTextColor(context))
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                  "Block number: ${snapshot.data![i].block_number}",
+                                                                  style: TextStyle(
+                                                                      fontSize: 12,
+                                                                      fontWeight: FontWeight.bold,
+                                                                      color: getThemeTextColor(context))
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                  "Type: ${snapshot.data![i].type}",
+                                                                  style: TextStyle(
+                                                                      fontSize: 12,
+                                                                      fontWeight: FontWeight.bold,
+                                                                      color: getThemeTextColor(context))
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ];
+                                  }
+                                } else if (snapshot.hasError) {
+                                  print(snapshot.error);
+                                  children = <Widget>[
+                                    const Icon(
+                                      Icons.error_outline,
+                                      color: Colors.red,
+                                      size: 60,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 16),
+                                      child: Text('Non hai fatto la login'),
+                                    )
+                                  ];
+                                } else {
+                                  children = const <Widget>[
+                                    SizedBox(
+                                      width: 30,
+                                      height: 30,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 16),
+                                      child: Text('Awaiting result...'),
+                                    )
+                                  ];
+                                }
+                                return Center(
+                                  child: Column(
+                                    children: children,
+                                  ),
+                                );
+                              }
+                          )
                       ),
                     ],
-                  )),
+                  )
+              ),
             )
         )
     );
@@ -129,6 +255,120 @@ class _WalletScreenState extends State<WalletScreen> {
     }
   }
 
+  getThemeTextColor(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    if (isDarkMode){
+      return Colors.white;
+    } else {
+      return Colors.black;
+    }
+  }
+
+  Color getThemeButtonColor(BuildContext context){
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    if (!isDarkMode){
+      return Colors.white;
+    } else {
+      return Colors.black;
+    }
+  }
+
+  void mint (int number) async {
+
+    List<String> address = [];
+    String base = 'http://10.0.2.2:4455/mint/' + number.toString() + '/';
+    print(base);
+    address.add(base);
+
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        address.add(doc["address"]);
+      });
+    });
+
+    String toParse = address.join();
+
+
+    final response = await http
+        .get(Uri.parse(toParse));
+
+  }
+
+  Future<List<Transaction>> getTransactionList() async {
+
+    List<Transaction> l = [];
+
+    List<String> address = [];
+    String base = 'http://10.0.2.2:4455/address/';
+    address.add(base);
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        address.add(doc["address"]);
+      });
+    });
+
+    String toParse = address.join();
+
+
+    final response = await http
+        .get(Uri.parse(toParse));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      final Map parsed = json.decode(response.body);
+      List<dynamic> transactions = parsed['data']['transactions'];
+      for(int i = 0; i < transactions.length; i++){
+        String type = '';
+        String address = '';
+        if (transactions[i]['to'] != null){
+          type = 'send';
+          address = transactions[i]['to'];
+        } else {
+          type = 'receive';
+          address = transactions[i]['from'];
+        }
+        String number = transactions[i]['block_number'].toString();
+        String gas = transactions[i]['gas'].toString();
+        String gas_price = transactions[i]['gas_price'].toString();
+        String value = transactions[i]['value'].toString();
+        l.add(Transaction(type, number, address, gas, gas_price, value));
+      }
+      return l;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load');
+    }
+
+  }
 
 }
+
+class Transaction {
+  late String type;
+  late String block_number;
+  late String address;
+  late String gas;
+  late String gas_price;
+  late String value;
+
+  Transaction(this.type, this.block_number, this.address, this.gas, this.gas_price,
+      this.value);
+
+}
+
+
 

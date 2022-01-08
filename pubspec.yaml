@@ -47,6 +47,7 @@ dependencies:
     git: https://github.com/phuongtinhbien/flutter_number_picker.git
   intl: ^0.17.0
   numberpicker: ^2.1.1
+  flutter_material_pickers: ^3.1.2
 
 
 
