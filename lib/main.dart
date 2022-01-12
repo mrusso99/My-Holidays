@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:my_holidays/ui/profile_screen.dart';
+import 'package:my_holidays/widgets/room_devices/smart_lock.dart';
 import 'package:provider/provider.dart';
 import 'package:my_holidays/ui/self_check_in.dart';
 import 'package:my_holidays/ui/booking_details.dart';
@@ -20,7 +21,6 @@ import 'theme/theme_item.dart';
 import 'theme/theme_model.dart';
 import 'widgets/room_devices/air_conditioner.dart';
 import 'widgets/room_devices/light.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,40 +40,40 @@ class App extends StatelessWidget {
       create: (_) => ThemeModel(),
       child: Consumer<ThemeModel>(
           builder: (context, ThemeModel themeNotifier, child) {
-            return GetMaterialApp(
-              title: _title,
-              localizationsDelegates: const [
-                DemoLocalizationsDelegate(),
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en', ''),
-                Locale('it', ''),
-              ],
-              theme: themeNotifier.isDark ? ThemeItem.darkTheme : ThemeItem.lightTheme,
-              debugShowCheckedModeBanner: false,
-              initialRoute: '/',
-              routes: {
-                '/': (context) => const NavBar(),
-                'Login': (context) => const LoginScreen(),
-                'ForgotPassword': (context) => const ForgotPassword(),
-                'NewAccount': (context) => const RegistrationScreen(),
-                'Settings': (context) => const SettingsScreen(),
-                'Wallet': (context) =>  WalletScreen(),
-                'Explore': (context) => const ExploreScreen(),
-                'Checkin': (context) => SelfCheckIn(),
-                'Reservation': (context) => const ReservationScreen(),
-                'Booking_Details': (context) => const BookingDetailsScreen(),
-                'Profile' : (context) => const ProfileScreen(),
-                'SmartRoom': (context) => const SmartRoom(),
-                '/lights': (context) => const LightDevice(),
-                '/thermostat': (context) => const AirConditioner(),
-
-              },
-            );
-          }
-      ),
+        return GetMaterialApp(
+          title: _title,
+          localizationsDelegates: const [
+            DemoLocalizationsDelegate(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('it', ''),
+          ],
+          theme:
+              themeNotifier.isDark ? ThemeItem.darkTheme : ThemeItem.lightTheme,
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const NavBar(),
+            'Login': (context) => const LoginScreen(),
+            'ForgotPassword': (context) => const ForgotPassword(),
+            'NewAccount': (context) => const RegistrationScreen(),
+            'Settings': (context) => const SettingsScreen(),
+            'Wallet': (context) => WalletScreen(),
+            'Explore': (context) => const ExploreScreen(),
+            'Checkin': (context) => SelfCheckIn(),
+            'Reservation': (context) => const ReservationScreen(),
+            'Booking_Details': (context) => const BookingDetailsScreen(),
+            'Profile': (context) => const ProfileScreen(),
+            'SmartRoom': (context) => const SmartRoom(),
+            '/lights': (context) => const LightDevice(),
+            '/thermostat': (context) => const AirConditioner(),
+            '/smart_lock': (context) => const SmartLock(),
+          },
+        );
+      }),
     );
   }
 }

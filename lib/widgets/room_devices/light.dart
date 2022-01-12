@@ -44,20 +44,6 @@ class _LightDeviceState extends State<LightDevice> {
     }
   }
 
-  onChangeFuntion2(bool newValue) {
-    setState(() {
-      val2 = newValue;
-    });
-    _publish(val2.toString());
-  }
-
-  onChangeFuntion3(bool newValue) {
-    setState(() {
-      val3 = newValue;
-    });
-    _publish(val2.toString());
-  }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -107,11 +93,11 @@ class _LightDeviceState extends State<LightDevice> {
                     const SizedBox(
                       height: 10,
                     ),
-                    buildList(size, 'LAMPADA A DX', val2, onChangeFuntion2),
+                    /*  buildList(size, 'LAMPADA A DX', val2, onChangeFuntion2),
                     const SizedBox(
                       height: 10,
                     ),
-                    buildList(size, 'LAMPADA A SX', val3, onChangeFuntion3),
+                    buildList(size, 'LAMPADA A SX', val3, onChangeFuntion3),*/
                   ],
                 ),
               )

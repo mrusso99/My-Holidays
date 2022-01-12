@@ -27,7 +27,7 @@ class _SmartRoomState extends State<SmartRoom> {
             'https://www.spider-mac.com/wp-content/uploads/2020/01/hero-landing.jpeg',
             Icons.lock_outline,
             'SMART LOCK',
-            '/lights'),
+            '/smart_lock'),
       ],
     ));
   }
