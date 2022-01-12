@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/balanceCard.dart';
 
 import 'booking_details.dart';
 
@@ -34,6 +35,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
   @override
   Widget build(BuildContext context) {
     String? userString = userName();
+    BalanceCard balanceCard = BalanceCard();
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -86,6 +88,16 @@ class _ReservationScreenState extends State<ReservationScreen>{
                               },
                               color: getThemeTextColor(context),
                             ),
+                            SizedBox(height: 55.0),
+                            IconButton(
+                              icon: Icon(Icons.refresh),
+                              onPressed: () {
+                                setState(() {
+
+                                });
+                              },
+                              color: getThemeTextColor(context),
+                            ),
                             SizedBox(width: 2),
                             IconButton(
                               icon: Icon(Icons.logout),
@@ -109,142 +121,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
                     SizedBox(
                       height: 15,
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(
-                              height: 50.0,
-                            ),Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                FutureBuilder<String>(
-                                  future: getPoints(),
-                                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                                    List<Widget> children;
-                                    if (snapshot.hasData) {
-                                      String? balance = snapshot.data;
-                                      children = <Widget>[
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            balance!,
-                                            style: TextStyle(
-                                                fontSize: 35,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.yellowAccent),
-                                          ),
-                                        ),
-                                      ];
-                                    } else if (snapshot.hasError) {
-                                      children = <Widget>[
-                                        Text('Error',
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ];
-                                    } else {
-                                      children = const <Widget>[
-                                        CircularProgressIndicator(
-                                          color: Colors.yellowAccent,
-                                        ),
-                                      ];
-                                    }
-                                    return Center(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: children,
-                                      ),
-                                    );
-                                  },
-                                ),
-                                const Text(
-                                  ' FELX',
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.yellowAccent),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 35.0,
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(25.0),
-                              color: Colors.yellowAccent,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      "My next trip",
-                                      style: TextStyle(
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                  ),
-                                  Spacer(),
-                              DefaultTextStyle(
-                                style: Theme.of(context).textTheme.headline2!,
-                                textAlign: TextAlign.center,
-                                child: FutureBuilder<String>(
-                                  future: myNextTrip(), // a previously-obtained Future<String> or null
-                                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                                    List<Widget> children;
-                                    if (snapshot.hasData) {
-                                      children = <Widget>[
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            '${snapshot.data}',
-                                            style: TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ),
-                                      ];
-                                    } else if (snapshot.hasError) {
-                                      children = <Widget>[
-                                        Text('Non hai fatto la login',
-                                          style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ];
-                                    } else {
-                                      children = const <Widget>[
-                                        CircularProgressIndicator(
-                                          color: Colors.yellowAccent,
-                                        ),
-                                      ];
-                                    }
-                                    return Center(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: children,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    balanceCard,
                     Spacer(),
                     SizedBox(
                       height: 30,
@@ -435,45 +312,6 @@ class _ReservationScreenState extends State<ReservationScreen>{
 
     }
 
-  Future<String> myNextTrip() async {
-
-    final dateTime = <String>[];
-
-    await FirebaseFirestore.instance
-        .collection('reservation')
-        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-        .get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-        dateTime.add(data['from']);
-      });
-    });
-
-    dateTime.sort((a,b) => a.compareTo(b));
-
-    DateFormat format = DateFormat('dd/MM/yyyy');
-    DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    String formatted = format.format(now);
-
-    var nowFormatted = DateFormat('dd/MM/yyyy').parse(formatted);
-
-    int index = -1;
-
-    for (int i = 0; i < dateTime.length; i++) {
-      var df2 = DateFormat('dd/MM/yyyy').parse(dateTime[i]);
-      if(nowFormatted.isBefore(df2) == true){
-        index = i;
-        break;
-      }
-    }
-
-    if (index < 0){
-      return 'errore';
-    }else{
-      return dateTime[index];
-    }
-
-  }
 
   String? userName (){
 
@@ -482,24 +320,6 @@ class _ReservationScreenState extends State<ReservationScreen>{
     }else{
       return FirebaseAuth.instance.currentUser!.displayName;
     }
-  }
-
-  Future<String> getPoints() async {
-
-    String points = '';
-
-    await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-        .get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-        points = data['points'].toString();
-      });
-    });
-
-    return points;
-
   }
 
 

@@ -86,7 +86,7 @@ class Details extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[hotelIndex]["price"]} FELX",
+                  "${places[hotelIndex]["price"]} €",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -252,8 +252,8 @@ class Details extends StatelessWidget {
                           if(FirebaseAuth.instance.currentUser == null){
                             _showMaterialDialog(context);
                           } else {
-                            GlobalState.instance.set('numberAdult', numberAdult);
-                            GlobalState.instance.set('numberChild', numberChild);
+                            await GlobalState.instance.set('numberChild', numberChild);
+                            await GlobalState.instance.set('numberAdult', numberAdult);
                             Navigator.pushNamed(context, 'Pay');
                           }
                         },
@@ -414,23 +414,6 @@ class Details extends StatelessWidget {
 
   }
 
-  Future<int> getPoints() async {
-
-    int points = 0;
-
-    await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-        .get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-        points = data['points'];
-      });
-    });
-
-    return points;
-
-  }
 
 
 }

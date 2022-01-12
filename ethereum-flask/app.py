@@ -24,7 +24,6 @@ minterAddress = "0xbb052D09319ACCd7C65A8cAae95fCe00d63e7eF5"
 
 #file di configurazione
 
-
 @APP.route("/tx/<transid>", methods=["GET"])
 def get_by_id(transid) -> dict:
     """

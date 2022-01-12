@@ -90,7 +90,7 @@ class VerticalPlaceItem extends StatelessWidget {
                               textAlign: TextAlign.left,
                             ),
                             Text(
-                              " FELX",
+                              " €",
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 17.5,

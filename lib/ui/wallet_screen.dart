@@ -5,12 +5,12 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_holidays/ui/home_screen.dart';
 import 'package:my_holidays/util/balanceCard.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:my_holidays/util/navigation_bar.dart';
+
+import 'package:flutter_braintree/flutter_braintree.dart';
 
 class WalletScreen extends StatefulWidget {
 
@@ -48,6 +48,12 @@ class _WalletScreenState extends State<WalletScreen> {
                       const Text("Operations"),
                       const SizedBox(
                         height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+
+                        },
+                        child: Text('LAUNCH NATIVE DROP-IN'),
                       ),
                       Row (
                         mainAxisAlignment: MainAxisAlignment.center,

@@ -8,7 +8,6 @@ void addUserDetails(publicKey) async {
     'email': userInstance.email,
     'address': publicKey.toString(),
     'wallet_created': true,
-    'points': 0
   }).whenComplete(() => {print("executed")}).catchError((error) {print(error.toString());});
 }
 
