@@ -14,11 +14,11 @@ class LightDevice extends StatefulWidget {
 
 class _LightDeviceState extends State<LightDevice> {
   late MqttClient client;
-  var topic = "topic/test";
+  var topic = "sensors/main-light/control";
 
   void _publish(String message) {
     final builder = MqttClientPayloadBuilder();
-    builder.addString('Hello from flutterClient');
+    builder.addString(message);
     var data = builder.payload;
     client.subscribe(
       topic,
@@ -37,7 +37,11 @@ class _LightDeviceState extends State<LightDevice> {
     });
     connect().then((value) => client = value);
 
-    _publish(val1.toString());
+    if (val1 == true) {
+      _publish('on');
+    } else {
+      _publish('off');
+    }
   }
 
   onChangeFuntion2(bool newValue) {
