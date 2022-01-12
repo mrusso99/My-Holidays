@@ -18,9 +18,10 @@ class HotelListItem extends StatelessWidget {
         child: NewHotelListItem());
   }
 
+  // ignore: non_constant_identifier_names
   Widget NewHotelListItem() {
     return ListTile(
-      leading: FlutterLogo(size: 72.0),
+      leading: const FlutterLogo(size: 72.0),
       title: Text(hotelName),
       subtitle: Text(description),
       isThreeLine: true,

@@ -1,13 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:my_holidays/ui/login_screen.dart';
+import 'package:my_holidays/util/nav_bar.dart';
 import '../languages/languageLocalizations.dart';
 import '../util/fire_auth.dart';
 import '../util/validator.dart';
 import 'profile_page.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
+
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
@@ -18,15 +21,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _nameTextController = TextEditingController();
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
+  final _password2TextController = TextEditingController();
 
   final _focusName = FocusNode();
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
-
-  bool _isProcessing = false;
+  final _focusPassword2 = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    String image = "imgs/GoFelix.jpg";
+    bool _isDark = Theme.of(context).brightness == Brightness.dark;
+    Color box;
+    if (_isDark) {
+      box = Colors.white;
+    } else {
+      box = Colors.black;
+    }
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
         onTap: () {
@@ -34,32 +45,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           _focusEmail.unfocus();
           _focusPassword.unfocus();
         },
-        child: Stack(children: [
+        child: Stack(
+            children: [
           Scaffold(
             body: SingleChildScrollView(
-              child: Column(children: [
-                SizedBox(
-                  height: size.height * 0.1,
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                  children: [
+                Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(image),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: size.height * 0.1,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 40),
-                          child: Text(
-                            'Empeiría',
-                            style: const TextStyle(
-                              fontSize: 45,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
                         Form(
                           key: _registerFormKey,
                           child: Column(
@@ -72,7 +73,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   name: value,
                                 ),
                                 decoration: InputDecoration(
-                                  prefixIcon: Padding(
+                                  prefixIcon: const Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.person_outline,
@@ -81,12 +82,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                   fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
-                                  hintText: LanguageLocalizations.of(context)
-                                      .username,
+                                  hintText: LanguageLocalizations.of(context).username,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
-                                        color: Colors.grey, width: 0.0),
+                                        color: Colors.blueGrey, width: 1),
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
@@ -96,7 +96,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 15),
+                              const SizedBox(height: 10),
                               TextFormField(
                                 controller: _emailTextController,
                                 focusNode: _focusEmail,
@@ -104,7 +104,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   email: value,
                                 ),
                                 decoration: InputDecoration(
-                                  prefixIcon: Padding(
+                                  prefixIcon: const Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.email_outlined,
@@ -117,7 +117,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
-                                        color: Colors.grey, width: 0.0),
+                                        color: Colors.blueGrey, width: 1),
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(6.0),
@@ -127,7 +127,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 15),
+                              const SizedBox(height: 10),
                               TextFormField(
                                 controller: _passwordTextController,
                                 focusNode: _focusPassword,
@@ -137,7 +137,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   password: value,
                                 ),
                                 decoration: InputDecoration(
-                                  prefixIcon: Padding(
+                                  prefixIcon: const Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.lock_outlined,
@@ -150,27 +150,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
-                                        color: Colors.grey, width: 0.0),
+                                        color: Colors.blueGrey, width: 1),
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 15),
+                              const SizedBox(height: 10),
                               TextFormField(
-                                controller: _passwordTextController,
-                                focusNode: _focusPassword,
+                                controller: _password2TextController,
+                                focusNode: _focusPassword2,
                                 obscureText: true,
                                 validator: (value) =>
                                     Validator.validatePassword(
-                                  password: value,
-                                ),
+                                      password: value,
+                                    ),
                                 decoration: InputDecoration(
-                                  prefixIcon: Padding(
+                                  prefixIcon: const Padding(
                                     padding: EdgeInsets.only(top: 0),
                                     child: Icon(
                                       Icons.lock_outlined,
@@ -179,87 +179,87 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   ),
                                   fillColor: Colors.grey.withOpacity(0.1),
                                   filled: true,
-                                  hintText: "Conferma Password",
+                                  hintText: LanguageLocalizations.of(context).confirm + " Password",
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                     borderSide: const BorderSide(
-                                        color: Colors.grey, width: 0.0),
+                                        color: Colors.blueGrey, width: 1),
                                   ),
                                   errorBorder: UnderlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 15),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: size.height * 0.07,
-                                    width: size.width * 0.7,
-                                    child: ElevatedButton(
-                                      onPressed: () async {
-                                        if (_registerFormKey.currentState!
-                                            .validate()) {
-                                          User? user = await FireAuth
-                                              .registerUsingEmailPassword(
-                                            name: _nameTextController.text,
-                                            email: _emailTextController.text,
-                                            password:
-                                                _passwordTextController.text,
-                                          );
-
-                                          if (user != null) {
-                                            Navigator.of(context)
-                                                .pushAndRemoveUntil(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProfilePage(user: user),
-                                              ),
-                                              ModalRoute.withName('/'),
+                              const SizedBox(height: 15),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: size.height * 0.07,
+                                      width: size.width * 0.7,
+                                      child: ElevatedButton(
+                                        onPressed: () async {
+                                          if (_registerFormKey.currentState!
+                                              .validate()) {
+                                            User? user = await FireAuth
+                                                .registerUsingEmailPassword(
+                                              name: _nameTextController.text,
+                                              email: _emailTextController.text,
+                                              password:
+                                                  _passwordTextController.text,
                                             );
+
+                                            if (user != null) {
+                                              Navigator.of(context)
+                                                  .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const LoginScreen()
+                                                ),
+                                                ModalRoute.withName('/'),
+                                              );
+                                            }
                                           }
-                                        }
-                                      },
-                                      style: ButtonStyle(
-                                        padding: MaterialStateProperty.all(
-                                            EdgeInsets.fromLTRB(
-                                                24.0, 0, 24.0, 0)),
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.blueAccent),
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        )),
-                                      ),
-                                      child: Text(
-                                        'Registrati',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                          height: 1,
+                                        },
+                                        style: ButtonStyle(
+                                          padding: MaterialStateProperty.all(
+                                              const EdgeInsets.fromLTRB(
+                                                  24.0, 0, 24.0, 0)),
+                                          backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.blueAccent),
+                                          shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(20.0),
+                                              )),
+                                        ),
+                                        child: Text(
+                                          LanguageLocalizations.of(context).signup,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25,
+                                            height: 1,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
+                                  ],
+                                ),
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Hai già un account? ',
-                                    style: TextStyle(
+                                  LanguageLocalizations.of(context).account +'? ',
+                                    style: const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -268,37 +268,37 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     onTap: () =>
                                         Navigator.pushNamed(context, 'Login'),
                                     child: Container(
-                                      child: Text(
-                                        ' Login',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    child: Text(
+                                      LanguageLocalizations.of(context).signin,
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          bottom: BorderSide(
-                                            width: 1,
-                                          ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: box,
+                                          width: 1,
                                         ),
-                                      ),
+                                  ),
+                                    ),
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                             ],
                           ),
-                        )
-                      ],
                     ),
+              ]
                   ),
                 ),
-              ]),
-            ),
           ),
-        ]));
+            ]
+        ),
+    );
   }
 }

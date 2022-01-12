@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:my_holidays/widgets/rounded_button.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/reservation_screen.dart';
+
+import 'profile_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -11,58 +15,46 @@ class ProfileScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _ProfileScreenState extends State<ProfileScreen> {
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Impostazioni'),
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        title: const Text(
+          'Impostazioni'
+        ),
         elevation: 0,
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Card(
-            child: ListTile(
-                leading: Icon(Icons.account_box),
-                title: Text('Profilo'),
+               ListTile(
+                leading: const Icon(Icons.settings),
+                title: Text(LanguageLocalizations.of(context).settings),
                 onTap: () {
-                  if (true) {
-                    //todo check login
-                    Navigator.pushNamed(context, 'Login');
-                  }
-                }),
-          ),
-          Card(
-            child: ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Impostazioni App'),
-              onTap: () {
-                Navigator.pushNamed(context, 'Settings');
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Self Check-in'),
+                  Navigator.pushNamed(context, 'Settings');
+                },
+              ),
+          ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Self Check-in'),
               onTap: () {
                 Navigator.pushNamed(context, 'Checkin');
               },
             ),
-          ),
-          Card(
-            child: ListTile(
+          ListTile(
+              leading: Icon(Icons.bed_outlined),
+              title: Text(LanguageLocalizations.of(context).explore),
+              onTap: () {
+                Navigator.pushNamed(context, 'Explore');
+              },
+            ),
+          ListTile(
               leading: const Icon(Icons.room_service),
               title: const Text('Smart Room'),
               onTap: () {
                 Navigator.pushNamed(context, 'SmartRoom');
               },
             ),
-          ),
         ]),
       ),
     );

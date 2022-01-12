@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:web3dart/web3dart.dart';
+import 'package:my_holidays/screens/travels.dart';
+import 'package:my_holidays/widgets/icon_badge.dart';
 
-import 'package:http/http.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,9 +12,53 @@ class HomeScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _HomeScreenState extends State<HomeScreen> {
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  late PageController _pageController;
+  int _page = 0;
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _pageController,
+        onPageChanged: onPageChanged,
+        children: List.generate(4, (index) => const Travels()),
+      ),
+    );
+  }
+
+  void navigationTapped(int page) {
+    _pageController.jumpToPage(page);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
+  void onPageChanged(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
+
+  Widget barIcon(
+      {IconData icon = Icons.home, int page = 0, bool badge = false}) {
+    return IconButton(
+      icon: badge ? IconBadge(icon: icon, size: 3.0, color: Colors.blueGrey,) : Icon(icon, size: 3.0),
+      color:
+      _page == page ? Theme.of(context).accentColor : Colors.blueGrey[300],
+      onPressed: () => _pageController.jumpToPage(page),
+    );
+  }
+/*
   late Client httpClient;
   late Web3Client ethClient;
 
@@ -32,8 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String abiCode = await rootBundle.loadString("assets/abi.json");
     String contractAddress = "0x8e7104f3c9408E333b9540e53841e78d6859ae40";
 
-    final contract = DeployedContract(
-        ContractAbi.fromJson(abiCode, "FelixCoin"),
+    final contract = DeployedContract(ContractAbi.fromJson(abiCode, "FelixCoin"),
         EthereumAddress.fromHex(contractAddress));
     return contract;
   }
@@ -84,12 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Holidays'),
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-        elevation: 0,
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +134,8 @@ class _HomeScreenState extends State<HomeScreen> {
               future: getBalance("0x371A7D8eEeCdFB163758CA3a92006154C9424acF"),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text('You have this many FelixCoin ${snapshot.data}');
+                  return Text(
+                      'You have this many FelixCoin ${snapshot.data}');
                 } else
                   return Text('Loading...');
               },
@@ -118,5 +155,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
+  }*/
 }

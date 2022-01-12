@@ -1,14 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../widgets/background_image.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/reservation_screen.dart';
+import 'package:my_holidays/util/nav_bar.dart';
 import '../util/validator.dart';
 import '../util/fire_auth.dart';
 import 'profile_page.dart';
-import 'registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -22,29 +24,22 @@ class _LoginScreenState extends State<LoginScreen> {
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
 
-  bool _isProcessing = false;
-
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
-
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => ProfilePage(
-            user: user,
-          ),
-        ),
-      );
-    }
-
     return firebaseApp;
   }
 
   @override
   Widget build(BuildContext context) {
+    String image = "imgs/GoFelix.jpg";
     Size size = MediaQuery.of(context).size;
+    bool _isDark = Theme.of(context).brightness == Brightness.dark;
+    Color box;
+    if (_isDark) {
+      box = Colors.white;
+    } else {
+      box = Colors.black;
+    }
     return GestureDetector(
       onTap: () {
         _focusEmail.unfocus();
@@ -55,24 +50,20 @@ class _LoginScreenState extends State<LoginScreen> {
           body: FutureBuilder(
               future: _initializeFirebase(),
               builder: (context, snapshot) {
-                return Padding(
-                  padding: EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 0),
+                return SingleChildScrollView(
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 0.1,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 0),
-                        child: Text(
-                          'Empeiría',
-                          style: const TextStyle(
-                            fontSize: 45,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(image),
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
+                    ),
                       SizedBox(
                         height: size.height * 0.05,
                       ),
@@ -103,8 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                   // width: 0.0 produces a thin "hairline" border
-                                  borderSide: BorderSide(
-                                      color: Colors.blueAccent, width: 0.1),
+                                  borderSide: const BorderSide(
+                                      color: Colors.blueGrey, width: 1),
                                 ),
                                 errorBorder: UnderlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
@@ -139,8 +130,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                   // width: 0.0 produces a thin "hairline" border
-                                  borderSide: BorderSide(
-                                      color: Colors.blueAccent, width: 0.1),
+                                  borderSide: const BorderSide(
+                                      color: Colors.blueGrey, width: 1),
                                 ),
                                 errorBorder: UnderlineInputBorder(
                                   borderRadius: BorderRadius.circular(6.0),
@@ -156,89 +147,100 @@ class _LoginScreenState extends State<LoginScreen> {
                             GestureDetector(
                               onTap: () => Navigator.pushNamed(
                                   context, 'ForgotPassword'),
-                              child: const Text(
-                                'Hai dimenticato la password?',
-                                style: TextStyle(
+                              child:Container(
+                                child: Text(
+                                LanguageLocalizations.of(context).forgotpassword + '?',
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      width: 1,
+                                      color: box,
+                                    ),
+                                  )),
+                            ),),
                             const SizedBox(height: 10),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: size.height * 0.07,
-                                  width: size.width * 0.7,
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      _focusEmail.unfocus();
-                                      _focusPassword.unfocus();
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: size.height * 0.07,
+                                        width: size.width * 0.7,
+                                        child: ElevatedButton(
+                                          onPressed: () async {
+                                            _focusEmail.unfocus();
+                                            _focusPassword.unfocus();
 
-                                      if (_formKey.currentState!.validate()) {
-                                        setState(() {
-                                          _isProcessing = true;
-                                        });
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              setState(() {});
 
-                                        User? user = await FireAuth
-                                            .signInUsingEmailPassword(
-                                          email: _emailTextController.text,
-                                          password:
-                                              _passwordTextController.text,
-                                        );
+                                              User? user = await FireAuth
+                                                  .signInUsingEmailPassword(
+                                                email:
+                                                    _emailTextController.text,
+                                                password:
+                                                    _passwordTextController
+                                                        .text,
+                                              );
 
-                                        setState(() {
-                                          _isProcessing = false;
-                                        });
+                                              setState(() {});
 
-                                        if (user != null) {
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfilePage(user: user),
+                                              if (user != null) {
+                                                Navigator.of(context)
+                                                    .push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const NavBar()
+                                                  ),
+                                                );
+                                              }
+                                            }
+                                          },
+                                          style: ButtonStyle(
+                                            padding: MaterialStateProperty.all(
+                                                const EdgeInsets.fromLTRB(
+                                                    24.0, 0, 24.0, 0)),
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.blueAccent),
+                                            shape: MaterialStateProperty.all<
+                                                    RoundedRectangleBorder>(
+                                                RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                            )),
+                                          ),
+                                          child: Text(
+                                            LanguageLocalizations.of(context).signin,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25,
+                                              height: 1,
                                             ),
-                                          );
-                                        }
-                                      }
-                                    },
-                                    style: ButtonStyle(
-                                      padding: MaterialStateProperty.all(
-                                          EdgeInsets.fromLTRB(
-                                              24.0, 0, 24.0, 0)),
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Colors.blueAccent),
-                                      shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      )),
-                                    ),
-                                    child: Text(
-                                      'Login',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 25,
-                                        height: 1,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
+                                    ],
+                                  )
                           ],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                       GestureDetector(
                         onTap: () => Navigator.pushNamed(context, 'NewAccount'),
                         child: Container(
                           child: Text(
-                            'Crea un nuovo account',
-                            style: TextStyle(
+                            LanguageLocalizations.of(context).newaccount,
+                            style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
@@ -247,14 +249,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               border: Border(
                             bottom: BorderSide(
                               width: 1,
+                              color: box,
                             ),
                           )),
                         ),
-                      )
+                      ),
+                ]
+                      ),
                     ],
                   ),
                 );
-              }),
+              }
+              ),
         ),
       ]),
     );

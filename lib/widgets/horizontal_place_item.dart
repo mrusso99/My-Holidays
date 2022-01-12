@@ -1,55 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/places.dart';
 
 import '../screens/details.dart';
 
 class HorizontalPlaceItem extends StatelessWidget {
   final Map place;
 
-  HorizontalPlaceItem({required this.place});
+  const HorizontalPlaceItem({Key? key, required this.place}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20.0),
+      padding: const EdgeInsets.only(right: 15.0),
       child: InkWell(
         child: Container(
-          height: 250.0,
-          width: 140.0,
+          alignment: Alignment.centerLeft,
+          height: 200,
+          width: 150,
           child: Column(
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  "${place["img"]}",
-                  height: 178.0,
-                  width: 140.0,
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset("${place["img"]}",
+                  height: 200,
+                  width: 150,
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 7.0),
+              const SizedBox(height: 10.0),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${place["name"]}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 15.0,
+                    fontSize: 20.0,
                   ),
-                  maxLines: 2,
                   textAlign: TextAlign.left,
                 ),
               ),
-              SizedBox(height: 3.0),
+              const SizedBox(height: 5.0),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${place["location"]}",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 13.0,
+                    fontSize: 15.0,
                     color: Colors.blueGrey[300],
                   ),
-                  maxLines: 1,
+                  //maxLines: 1,
                   textAlign: TextAlign.left,
                 ),
               ),
@@ -57,10 +58,12 @@ class HorizontalPlaceItem extends StatelessWidget {
           ),
         ),
         onTap: () {
+          int index = searchIndex("${place["name"]}");
+          GlobalState.instance.set('hotelIndex', index);
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return Details();
+                return const Details();
               },
             ),
           );
@@ -68,4 +71,15 @@ class HorizontalPlaceItem extends StatelessWidget {
       ),
     );
   }
+
+  int searchIndex(String hotelName){
+    for (int i = 0; i < places.length; i++){
+      if (places[i]['name'] == hotelName){
+        return i;
+      }
+    }
+    return -1;
+  }
 }
+
+
