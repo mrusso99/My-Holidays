@@ -11,18 +11,20 @@ from web3.types import ParityTraceMode
 from utils.block import transform_block
 from utils.transaction import list_transactions, transform_transaction
 
+with open('config.json', 'r') as f:
+    config = json.load(f)
+
 APP = Flask(__name__)
-URL = "http://127.0.0.1:7545" # blockchain server
+URL = config['URL'] 
 W3 = Web3(Web3.HTTPProvider(URL))
 
-contractAddress = "0xDe6198c869210D3C756AdaBE31458f5403Ae8A44"
+contractAddress = config['Contract_Address']
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, 'abi/abiToken.json')
 standard_token_abi = json.load(open(file_path))
 contract = W3.eth.contract(contractAddress, abi=standard_token_abi)
-minterAddress = "0xbb052D09319ACCd7C65A8cAae95fCe00d63e7eF5"
+minterAddress = config['Minter_Address']
 
-#file di configurazione
 
 @APP.route("/tx/<transid>", methods=["GET"])
 def get_by_id(transid) -> dict:
