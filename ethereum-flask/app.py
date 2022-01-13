@@ -4,6 +4,7 @@ Bootstrap flask application
 
 import os
 import json
+from Crypto.Hash import keccak
 from eth_account import account
 from web3 import Web3
 from flask import Flask, jsonify
@@ -19,10 +20,13 @@ URL = config['URL']
 W3 = Web3(Web3.HTTPProvider(URL))
 
 contractAddress = config['Contract_Address']
+selfCheckInAddress= config['Self_Checkin_Address']
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, 'abi/abiToken.json')
 standard_token_abi = json.load(open(file_path))
+selfcheckin_abi = json.load(open(os.path.join(script_dir, 'abi/selfcheckin_abi.json')))
 contract = W3.eth.contract(contractAddress, abi=standard_token_abi)
+selfCheckInContract = W3.eth.contract(selfCheckInAddress, abi=selfcheckin_abi)
 minterAddress = config['Minter_Address']
 
 
@@ -195,6 +199,67 @@ def mint(sendAddress, token) -> dict:
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
+@APP.route("/selfcheckin/authenticate/<user>/<destination>/<assetURI>/<reservationNumber>", methods["GET"])
+def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
+    "TODO SCRIVERE QUALCOSA A RIGUARDO"
+
+    try:
+        hashReservationNumber = keccak.new(digest_bits=512)
+        hashReservationNumber.update(reservationNumber)
+        tx_hash=selfCheckInContract.functions.autheticateUser(user,destination,reservationNumber.hexdigest(),assetURI).transact({'from':minterAddress})
+        tx_receipt = W3.eth.wait_for_transaction_receipt(tx_hash)
+        return jsonify({"data": 'ok'}), 200
+    except ValueError:
+        return jsonify({"message": "Something went wrong. Please try again."}), 400
+
+
+@APP.route("/selfcheckin/checkin/<user>/<destination>/<reservationNumber>", methods["GET"])
+def checkin(user,destination,assetURI,reservationNumber) -> dict:
+    "TODO"
+
+    try:
+        hashReservationNumber = keccak.new(digest_bits=512)
+        hashReservationNumber.update(reservationNumber)
+        tx_hash=selfCheckInContract.functions.checkIn(user,destination,reservationNumber.hexdigest()).transact({'from':minterAddress})
+        tx_receipt = W3.eth.wait_for_transaction_receipt(tx_hash)
+        return jsonify({"data": 'ok'}), 200
+    except ValueError:
+        return jsonify({"message": "Something went wrong. Please try again."}), 400
+
+@APP.route("/selfcheckin/ischeckedin/<user>/<destination>/<reservationNumber>", methods["GET"])
+def ischeckedin(user,destination,reservationNumber) -> dict:
+
+    try:
+        hashReservationNumber = keccak.new(digest_bits=512)
+        hashReservationNumber.update(reservationNumber)
+        result=selfCheckInContract.functions.isCheckedIn(user,destination,reservationNumber.hexdigest()).call()
+        return jsonify({"Checkin status": result }), 200
+    except ValueError:
+        return jsonify({"message": "Something went wrong. Please try again."}), 400
+
+
+@APP.route("/selfcheckin/getdestination/<user>/<destination>/<reservationNumber>", methods["GET"])
+def getdestination(user,destination,reservationNumber) -> dict:
+
+    try:
+        hashReservationNumber = keccak.new(digest_bits=512)
+        hashReservationNumber.update(reservationNumber)
+        result=selfCheckInContract.functions.getDestination(user,destination,reservationNumber.hexdigest()).call()
+        return jsonify({"hotel": result}), 200
+    except ValueError:
+        return jsonify({"message": "Something went wrong. Please try again."}), 400
+
+
+@APP.route("/getAsset/getdestination/<user>/<destination>/<reservationNumber>", methods["GET"])
+def getdestination(user,destination,reservationNumber) -> dict:
+
+    try:
+        hashReservationNumber = keccak.new(digest_bits=512)
+        hashReservationNumber.update(reservationNumber)
+        result=selfCheckInContract.functions.getAsset(user,destination,reservationNumber.hexdigest()).call()
+        return jsonify({"AssetURI": result}), 200
+    except ValueError:
+        return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 if __name__=="__main__":
     APP.run(host='127.0.0.1',port=4455,debug=True) 
