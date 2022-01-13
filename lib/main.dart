@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:my_holidays/ui/profile_screen.dart';
+import 'package:my_holidays/ui/smart_services.dart';
 import 'package:my_holidays/widgets/room_devices/smart_lock.dart';
+import 'package:my_holidays/widgets/smart_services/breakfast.dart';
 import 'package:provider/provider.dart';
 import 'package:my_holidays/ui/self_check_in.dart';
 import 'package:my_holidays/ui/booking_details.dart';
@@ -71,6 +73,8 @@ class App extends StatelessWidget {
             '/lights': (context) => const LightDevice(),
             '/thermostat': (context) => const AirConditioner(),
             '/smart_lock': (context) => const SmartLock(),
+            'SmartServices': (context) => const SmartServices(),
+            '/breakfast': (context) => const BreakFast(),
           },
         );
       }),
