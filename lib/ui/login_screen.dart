@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
-import 'package:my_holidays/util/navigation_bar.dart';
+import 'package:my_holidays/util/navigation.dart';
 import '../util/validator.dart';
 import '../util/fire_auth.dart';
 import 'profile_page.dart';
@@ -55,15 +55,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                    Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(image),
-                          fit: BoxFit.fitWidth,
+                      Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(image),
+                            fit: BoxFit.fitWidth,
+                          ),
                         ),
                       ),
-                    ),
                       SizedBox(
                         height: size.height * 0.05,
                       ),
@@ -147,87 +147,85 @@ class _LoginScreenState extends State<LoginScreen> {
                             GestureDetector(
                               onTap: () => Navigator.pushNamed(
                                   context, 'ForgotPassword'),
-                              child:Container(
+                              child: Container(
                                 child: Text(
-                                LanguageLocalizations.of(context).forgotpassword + '?',
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                                  LanguageLocalizations.of(context)
+                                          .forgotpassword +
+                                      '?',
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                  bottom: BorderSide(
+                                    width: 1,
+                                    color: box,
+                                  ),
+                                )),
                               ),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      width: 1,
-                                      color: box,
-                                    ),
-                                  )),
-                            ),),
+                            ),
                             const SizedBox(height: 10),
                             Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: size.height * 0.07,
-                                        width: size.width * 0.7,
-                                        child: ElevatedButton(
-                                          onPressed: () async {
-                                            _focusEmail.unfocus();
-                                            _focusPassword.unfocus();
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: size.height * 0.07,
+                                  width: size.width * 0.7,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      _focusEmail.unfocus();
+                                      _focusPassword.unfocus();
 
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              setState(() {});
+                                      if (_formKey.currentState!.validate()) {
+                                        setState(() {});
 
-                                              User? user = await FireAuth
-                                                  .signInUsingEmailPassword(
-                                                email:
-                                                    _emailTextController.text,
-                                                password:
-                                                    _passwordTextController
-                                                        .text,
-                                              );
+                                        User? user = await FireAuth
+                                            .signInUsingEmailPassword(
+                                          email: _emailTextController.text,
+                                          password:
+                                              _passwordTextController.text,
+                                        );
 
-                                              setState(() {});
+                                        setState(() {});
 
-                                              if (user != null) {
-                                                Navigator.of(context)
-                                                    .push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const NavigationBar()
-                                                  ),
-                                                );
-                                              }
-                                            }
-                                          },
-                                          style: ButtonStyle(
-                                            padding: MaterialStateProperty.all(
-                                                const EdgeInsets.fromLTRB(
-                                                    24.0, 0, 24.0, 0)),
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.blueAccent),
-                                            shape: MaterialStateProperty.all<
-                                                    RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                            )),
-                                          ),
-                                          child: Text(
-                                            LanguageLocalizations.of(context).signin,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 25,
-                                              height: 1,
-                                            ),
-                                          ),
-                                        ),
+                                        if (user != null) {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Navigation()),
+                                          );
+                                        }
+                                      }
+                                    },
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(
+                                          const EdgeInsets.fromLTRB(
+                                              24.0, 0, 24.0, 0)),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.blueAccent),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      )),
+                                    ),
+                                    child: Text(
+                                      LanguageLocalizations.of(context).signin,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25,
+                                        height: 1,
                                       ),
-                                    ],
-                                  )
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),
@@ -235,32 +233,31 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, 'NewAccount'),
-                        child: Container(
-                          child: Text(
-                            LanguageLocalizations.of(context).newaccount,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                            GestureDetector(
+                              onTap: () =>
+                                  Navigator.pushNamed(context, 'NewAccount'),
+                              child: Container(
+                                child: Text(
+                                  LanguageLocalizations.of(context).newaccount,
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                  bottom: BorderSide(
+                                    width: 1,
+                                    color: box,
+                                  ),
+                                )),
+                              ),
                             ),
-                          ),
-                          decoration: BoxDecoration(
-                              border: Border(
-                            bottom: BorderSide(
-                              width: 1,
-                              color: box,
-                            ),
-                          )),
-                        ),
-                      ),
-                ]
-                      ),
+                          ]),
                     ],
                   ),
                 );
-              }
-              ),
+              }),
         ),
       ]),
     );

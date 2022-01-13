@@ -11,9 +11,15 @@ from flask import Flask, jsonify
 from web3.types import ParityTraceMode
 from utils.block import transform_block
 from utils.transaction import list_transactions, transform_transaction
+import firebase_admin
+from firebase_admin import credentials, firestore, initialize_app
 
 with open('config.json', 'r') as f:
     config = json.load(f)
+
+cred = credentials.Certificate("key.json")
+app =firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 APP = Flask(__name__)
 URL = config['URL'] 

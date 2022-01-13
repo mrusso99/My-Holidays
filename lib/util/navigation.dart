@@ -9,15 +9,15 @@ import '../ui/wallet_screen.dart';
 
 import 'package:my_holidays/languages/languageLocalizations.dart';
 
-class NavigationBar extends StatefulWidget {
-  const NavigationBar({Key? key}) : super(key: key);
+class Navigation extends StatefulWidget {
+  const Navigation({Key? key}) : super(key: key);
 
   @override
-  State<NavigationBar> createState() => _NavigationBarState();
+  State<Navigation> createState() => _NavigationBarState();
 }
 
 /// This is the private State class that goes with MainScreen.
-class _NavigationBarState extends State<NavigationBar> {
+class _NavigationBarState extends State<Navigation> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     const Card(
@@ -27,26 +27,23 @@ class _NavigationBarState extends State<NavigationBar> {
       child: WalletScreen(),
     ),
     const Card(
-      child: ReservationScreen()
-      ,),
+      child: ReservationScreen(),
+    ),
   ];
 
-
   void _onItemTapped(int index) {
-    setState((){
+    setState(() {
       _selectedIndex = index;
-      if(_selectedIndex != 0){
-        if(FirebaseAuth.instance.currentUser == null){
+      if (_selectedIndex != 0) {
+        if (FirebaseAuth.instance.currentUser == null) {
           _showMaterialDialog();
         }
-      }else {
-
-      }
+      } else {}
     });
   }
 
-  void setTabIndex(index){
-    setState((){
+  void setTabIndex(index) {
+    setState(() {
       _selectedIndex = index;
     });
   }
@@ -106,38 +103,38 @@ class _NavigationBarState extends State<NavigationBar> {
         builder: (context) {
           return Scaffold(
             body: AlertDialog(
-            title: Text(LanguageLocalizations.of(context).attention),
-            content: Text(LanguageLocalizations.of(context).textattention),
-            actions: <Widget>[
-              TextButton(
+              title: Text(LanguageLocalizations.of(context).attention),
+              content: Text(LanguageLocalizations.of(context).textattention),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      _dismissDialog();
+                      _onItemTapped(0);
+                      //Navigator.pushNamed(context, 'Explore');
+                    },
+                    child: Text(
+                      LanguageLocalizations.of(context).delete,
+                      style: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontSize: 20,
+                        height: 1,
+                      ),
+                    )),
+                TextButton(
                   onPressed: () {
                     _dismissDialog();
-                    _onItemTapped(0);
-                    //Navigator.pushNamed(context, 'Explore');
+                    Navigator.pushNamed(context, 'Login');
                   },
-                  child: Text(LanguageLocalizations.of(context).delete,
+                  child: Text(
+                    LanguageLocalizations.of(context).signin,
                     style: const TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 20,
                       height: 1,
                     ),
-                  )
-              ),
-              TextButton(
-                onPressed: () {
-                  _dismissDialog();
-                  Navigator.pushNamed(context, 'Login');
-                },
-                child: Text(
-                  LanguageLocalizations.of(context).signin,
-          style: const TextStyle(
-          color: Colors.blueAccent,
-          fontSize: 20,
-          height: 1,
-          ),
-                ),
-              )
-            ],
+                  ),
+                )
+              ],
             ),
           );
         });
@@ -152,10 +149,9 @@ class _NavigationBarState extends State<NavigationBar> {
     try {
       // Wait for Firebase to initialize and set `_initialized` state to true
       await Firebase.initializeApp();
-    } catch(e) {
+    } catch (e) {
       // Set `_error` state to true if Firebase initialization fails
 
     }
   }
-
 }
