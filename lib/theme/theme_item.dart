@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThemeItem with ChangeNotifier{
+class ThemeItem with ChangeNotifier {
   static String appName = "My Holidays";
 
   //Colors for theme
