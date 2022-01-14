@@ -12,34 +12,34 @@ class Travels extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String image = "imgs/GoFelix.jpg";
+    // String image = "imgs/GoFelix.jpg";
     return Scaffold(
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 10),
-          Container(
-            height: 150,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(image),
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
+          //  Container(
+          //    height: 150,
+          //  decoration: BoxDecoration(
+          //  image: DecorationImage(
+          //   image: AssetImage(image),
+          //   fit: BoxFit.fitWidth,
+          // ),
+          //R ),
+          //  ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Text(
-            LanguageLocalizations.of(context).texthome,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.blueGrey[300],
-            ),
+              LanguageLocalizations.of(context).texthome,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.blueGrey[300],
+              ),
             ),
           ),
           const SizedBox(height: 10),
-          buildHorizontalList(context),
+          //  buildHorizontalList(context),
           buildVerticalList(),
         ],
       ),
@@ -49,7 +49,7 @@ class Travels extends StatelessWidget {
     );
   }
 
-  buildHorizontalList(BuildContext context) {
+  /*buildHorizontalList(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 5),
       height: 300,
@@ -63,7 +63,7 @@ class Travels extends StatelessWidget {
         },
       ),
     );
-  }
+  }*/
 
   buildVerticalList() {
     return Padding(
