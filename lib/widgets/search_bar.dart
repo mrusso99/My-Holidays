@@ -25,14 +25,14 @@ class SearchBar extends StatelessWidget {
           filled: true,
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Colors.blueGrey, width: 1,
+              color: Color.fromRGBO(246, 135, 30, 1), width: 1,
             ),
             borderRadius: BorderRadius.circular(20.0),
           ),
           hintText: (LanguageLocalizations.of(context).whereyougo + '?'),
           prefixIcon: const Icon(
             Icons.search,
-            color: Colors.blueAccent,
+            color: Color.fromRGBO(13, 78, 161, 1),
           ),
           hintStyle: const TextStyle(
             fontSize: 15.0,

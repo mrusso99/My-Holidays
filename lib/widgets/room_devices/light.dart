@@ -14,11 +14,11 @@ class LightDevice extends StatefulWidget {
 
 class _LightDeviceState extends State<LightDevice> {
   late MqttClient client;
-  var topic = "topic/test";
+  var topic = "sensors/main-light/control";
 
   void _publish(String message) {
     final builder = MqttClientPayloadBuilder();
-    builder.addString('Hello from flutterClient');
+    builder.addString(message);
     var data = builder.payload;
     client.subscribe(
       topic,
@@ -37,21 +37,11 @@ class _LightDeviceState extends State<LightDevice> {
     });
     connect().then((value) => client = value);
 
-    _publish(val1.toString());
-  }
-
-  onChangeFuntion2(bool newValue) {
-    setState(() {
-      val2 = newValue;
-    });
-    _publish(val2.toString());
-  }
-
-  onChangeFuntion3(bool newValue) {
-    setState(() {
-      val3 = newValue;
-    });
-    _publish(val2.toString());
+    if (val1 == true) {
+      _publish('on');
+    } else {
+      _publish('off');
+    }
   }
 
   @override
@@ -103,11 +93,11 @@ class _LightDeviceState extends State<LightDevice> {
                     const SizedBox(
                       height: 10,
                     ),
-                    buildList(size, 'LAMPADA A DX', val2, onChangeFuntion2),
+                    /*  buildList(size, 'LAMPADA A DX', val2, onChangeFuntion2),
                     const SizedBox(
                       height: 10,
                     ),
-                    buildList(size, 'LAMPADA A SX', val3, onChangeFuntion3),
+                    buildList(size, 'LAMPADA A SX', val3, onChangeFuntion3),*/
                   ],
                 ),
               )

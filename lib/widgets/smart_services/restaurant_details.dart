@@ -1,7 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison
 
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,17 +7,17 @@ import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/Global.dart';
 import 'package:my_holidays/util/places.dart';
+import 'package:my_holidays/widgets/smart_services/ristoranti.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:http/http.dart' as http;
 
-class Details extends StatelessWidget {
-  const Details({Key? key}) : super(key: key);
+class RestaurantDetails extends StatelessWidget {
+  const RestaurantDetails({Key? key}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
-    DateRangePickerWidget rangePickerWidget = DateRangePickerWidget();
+    TimeOfDay _selectedTime = const TimeOfDay(hour: 12, minute: 00);
     int? numberAdult = 1;
     int? numberChild = 0;
     int hotelIndex = GlobalState.instance.get('hotelIndex');
@@ -44,7 +42,7 @@ class Details extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${places[hotelIndex]["name"]}",
+                      "${ristoranti[hotelIndex]["name"]}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
@@ -72,7 +70,7 @@ class Details extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${places[hotelIndex]["location"]}",
+                      "${ristoranti[hotelIndex]["location"]}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
@@ -88,7 +86,7 @@ class Details extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[hotelIndex]["price"]} €",
+                  "${ristoranti[hotelIndex]["price"]}",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -114,7 +112,7 @@ class Details extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[hotelIndex]["details"]}",
+                  "${ristoranti[hotelIndex]["details"]}",
                   style: const TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 15.0,
@@ -123,53 +121,109 @@ class Details extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10.0),
-              rangePickerWidget,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const Text(
+                    'A che ora vuoi \nmangiare? :',
+                    style: TextStyle(
+                        color: Color.fromRGBO(13, 78, 161, 1),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      /*ElevatedButton(
+                        onPressed: () {
+                          _selectTime(context);
+                        },
+                        child: const Text("Seleziona l'orario"),
+                      ),*/
+                      ElevatedButton(
+                          onPressed: ()  {
+                            _selectTime(context);
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.fromLTRB(
+                                    24.0, 0, 24.0, 0)),
+                            backgroundColor:
+                            MaterialStateProperty.all(
+                                Colors.blueAccent),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0),
+                                )),
+                          ),
+                          child: const Text(
+                            "Seleziona l'orario",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      Text(
+                        'Ore: ${_selectedTime.format(context)}',
+                        style: const TextStyle(
+                          color: Color.fromRGBO(246, 135, 30, 75),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
               SizedBox(height: 20.0),
               Container(
-                alignment: Alignment.centerLeft,
-                child: Row (
-                  children: [
-                    Icon(
-                      Icons.emoji_people_outlined,
-                      size: 30,
-                      color: getThemeColor(context),
-                    ),
-                    SizedBox(width: 20),
-                    CustomNumberPicker(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.transparent, width: 1),
-                        borderRadius: BorderRadius.circular(10),
+                  alignment: Alignment.centerLeft,
+                  child: Row (
+                    children: [
+                      Icon(
+                        Icons.emoji_people_outlined,
+                        size: 30,
+                        color: getThemeColor(context),
                       ),
-                      initialValue: 1,
-                      maxValue: 10,
-                      minValue: 0,
-                      step: 1,
-                      customMinusButton: FittedBox(
-                          child: Row (
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
-                              SizedBox(width: 8),
-                            ],
-                          )
+                      SizedBox(width: 20),
+                      CustomNumberPicker(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.transparent, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        initialValue: 1,
+                        maxValue: 10,
+                        minValue: 0,
+                        step: 1,
+                        customMinusButton: FittedBox(
+                            child: Row (
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
+                                SizedBox(width: 8),
+                              ],
+                            )
+                        ),
+                        customAddButton: FittedBox(
+                            child: Row (
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(width: 8),
+                                Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
+                              ],
+                            )
+                        ),
+                        onValue: (value) {
+                          numberAdult = value as int?;
+                        },
                       ),
-                      customAddButton: FittedBox(
-                          child: Row (
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(width: 8),
-                              Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
-                            ],
-                          )
-                      ),
-                      onValue: (value) {
-                        numberAdult = value as int?;
-                      },
-                    ),
-                  ],
-                )
+                    ],
+                  )
               ),
               SizedBox(height: 10.0),
               Container(
@@ -231,16 +285,14 @@ class Details extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/');
-                        },
+                        onPressed: () {},
                         child: Text(
                             LanguageLocalizations.of(context).cancel,
                             style: TextStyle(
                               color: getThemeTextColor(context),
 
                             )
-                          ),
+                        ),
                       ),
                       SizedBox(width: 80),
                       ElevatedButton(
@@ -250,13 +302,20 @@ class Details extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30),
                           ),
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           if(FirebaseAuth.instance.currentUser == null){
                             _showMaterialDialog(context);
                           } else {
-                            await GlobalState.instance.set('numberChild', numberChild);
-                            await GlobalState.instance.set('numberAdult', numberAdult);
-                            Navigator.pushNamed(context, 'Pay');
+                            FirebaseFirestore.instance.collection('reservation').add({
+                              'hotel_name': '${ristoranti[hotelIndex]["name"]}',
+                              'full_name': FirebaseAuth.instance.currentUser!.displayName,
+                              'email': FirebaseAuth.instance.currentUser!.email,
+                              'numberAdult': numberAdult,
+                              'numberChild': numberChild,
+                              'from': GlobalState.instance.get('dateFrom'),
+                              'until': GlobalState.instance.get('dateUntil'),
+                            }).then((value) => _showMaterialDialogReservation(context))
+                                .catchError((error) => print("Failed to add reservation: $error"));
                           }
                         },
                         child: Text(
@@ -272,10 +331,47 @@ class Details extends StatelessWidget {
               ),
               SizedBox(height: 20.0),
             ],
-            ),
+          ),
         ],
       ),
     );
+  }
+
+  _selectTime(BuildContext context) async {
+    bool _isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    if(_isDarkMode) {
+      final TimeOfDay? timeOfDay = await showTimePicker(
+        context: context,
+        initialTime: const TimeOfDay(hour: 12, minute: 00),
+        initialEntryMode: TimePickerEntryMode.input,
+        confirmText: 'Conferma',
+        cancelText: 'Indietro',
+        builder: (context, child) =>
+            Theme(
+                data: ThemeData.dark().copyWith(
+                    colorScheme: const ColorScheme.dark(
+                      primary: Color.fromRGBO(246, 135, 30, 75),
+                      onSurface: Colors.white,
+                    )),
+                child: child!),
+      );
+    } else if(!_isDarkMode) {
+      final TimeOfDay? timeOfDay = await showTimePicker(
+        context: context,
+        initialTime: const TimeOfDay(hour: 12, minute: 00),
+        initialEntryMode: TimePickerEntryMode.input,
+        confirmText: 'Conferma',
+        cancelText: 'Indietro',
+        builder: (context, child) => Theme(
+            data: ThemeData.light().copyWith(
+                colorScheme: const ColorScheme.light(
+                  primary: Color.fromRGBO(246, 135, 30, 75),
+                  onSurface: Colors.black,
+                )),
+            child: child!),
+      );
+    }
+
   }
 
   buildSlider() {
@@ -285,9 +381,9 @@ class Details extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
-        itemCount: places == null ? 0 : places.length,
+        itemCount: ristoranti == null ? 0 : ristoranti.length,
         itemBuilder: (BuildContext context, int index) {
-          Map place = places[index];
+          Map place = ristoranti[index];
 
           return Padding(
             padding: const EdgeInsets.only(right: 10.0),
@@ -380,42 +476,31 @@ class Details extends StatelessWidget {
   }
 
 
-
-  Future<int> getBalance() async {
-
-    List<String> address = [];
-    String base = 'http://10.0.2.2:4455/address/';
-    address.add(base);
-
-    await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        address.add(doc["address"]);
-      });
-    });
-
-    String toParse = address.join();
-
-
-    final response = await http
-        .get(Uri.parse(toParse));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      final Map parsed = json.decode(response.body);
-      return parsed['data']['balance'];
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load');
-    }
-
+  void _showMaterialDialogReservation(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Prenotazione Effettuata'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  _dismissDialog(context);
+                  Navigator.pushNamed(context, '/');
+                },
+                child: Text(
+                  'Ok',
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 20,
+                    height: 1,
+                  ),
+                ),
+              )
+            ],
+          );
+        });
   }
-
 
 
 }

@@ -15,46 +15,50 @@ class ProfileScreen extends StatefulWidget {
 
 /// This is the private State class that goes with MainScreen.
 class _ProfileScreenState extends State<ProfileScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Impostazioni'
-        ),
+        title: const Text('Impostazioni'),
         elevation: 0,
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-               ListTile(
-                leading: const Icon(Icons.settings),
-                title: Text(LanguageLocalizations.of(context).settings),
-                onTap: () {
-                  Navigator.pushNamed(context, 'Settings');
-                },
-              ),
           ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Self Check-in'),
-              onTap: () {
-                Navigator.pushNamed(context, 'Checkin');
-              },
-            ),
+            leading: const Icon(Icons.settings),
+            title: Text(LanguageLocalizations.of(context).settings),
+            onTap: () {
+              Navigator.pushNamed(context, 'Settings');
+            },
+          ),
           ListTile(
-              leading: Icon(Icons.bed_outlined),
-              title: Text(LanguageLocalizations.of(context).explore),
-              onTap: () {
-                Navigator.pushNamed(context, 'Explore');
-              },
-            ),
+            leading: const Icon(Icons.settings),
+            title: const Text('Self Check-in'),
+            onTap: () {
+              Navigator.pushNamed(context, 'Checkin');
+            },
+          ),
           ListTile(
-              leading: const Icon(Icons.room_service),
-              title: const Text('Smart Room'),
-              onTap: () {
-                Navigator.pushNamed(context, 'SmartRoom');
-              },
-            ),
+            leading: Icon(Icons.bed_outlined),
+            title: Text(LanguageLocalizations.of(context).explore),
+            onTap: () {
+              Navigator.pushNamed(context, 'Explore');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.room_service),
+            title: const Text('Smart Room'),
+            onTap: () {
+              Navigator.pushNamed(context, 'SmartRoom');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.room_service),
+            title: const Text('Smart Services'),
+            onTap: () {
+              Navigator.pushNamed(context, 'SmartServices');
+            },
+          ),
         ]),
       ),
     );

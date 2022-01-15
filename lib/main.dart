@@ -5,6 +5,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:my_holidays/ui/payReservation.dart';
 import 'package:my_holidays/ui/profile_screen.dart';
+import 'package:my_holidays/ui/smart_services.dart';
+import 'package:my_holidays/widgets/room_devices/smart_lock.dart';
+import 'package:my_holidays/widgets/smart_services/breakfast.dart';
+import 'package:my_holidays/widgets/smart_services/restaurant.dart';
+import 'package:my_holidays/widgets/smart_services/taxi.dart';
 import 'package:provider/provider.dart';
 import 'package:my_holidays/ui/self_check_in.dart';
 import 'package:my_holidays/ui/booking_details.dart';
@@ -13,7 +18,7 @@ import 'languages/languageLocalizationsDelegate.dart';
 import 'ui/login_screen.dart';
 import 'ui/forgot_password_screen.dart';
 import 'ui/smart_room_screen.dart';
-import 'util/navigation.dart';
+import 'util/nav_bar.dart';
 import 'ui/registration_screen.dart';
 import 'ui/settings_screen.dart';
 import 'ui/wallet_screen.dart';
@@ -60,7 +65,7 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
-            '/': (context) => const Navigation(),
+            '/': (context) => const NavBar(),
             'Login': (context) => const LoginScreen(),
             'ForgotPassword': (context) => const ForgotPassword(),
             'NewAccount': (context) => const RegistrationScreen(),
@@ -73,7 +78,11 @@ class App extends StatelessWidget {
             'SmartRoom': (context) => const SmartRoom(),
             '/lights': (context) => const LightDevice(),
             '/thermostat': (context) => const AirConditioner(),
-            'Pay': (context) => Payment(),
+            '/smart_lock': (context) => const SmartLock(),
+            'SmartServices': (context) => const SmartServices(),
+            '/breakfast': (context) => const BreakFast(),
+            '/restaurant': (context) => const Restaurant(),
+            '/taxi': (context) => const TaxiService(),
           },
         );
       }),
