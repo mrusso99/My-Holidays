@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/util/colors.dart';
 import 'package:my_holidays/util/places.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
-
   const BookingDetailsScreen({Key? key}) : super(key: key);
 
   @override
@@ -25,7 +25,6 @@ class BookingDetailsScreen extends StatelessWidget {
                           child: IconButton(
                             icon: Icon(
                               Icons.arrow_back,
-                              color: Colors.white,
                             ),
                             onPressed: () => Navigator.pop(context),
                           ),
@@ -47,7 +46,8 @@ class BookingDetailsScreen extends StatelessWidget {
                                   child: Image.asset(
                                     "${place["img"]}",
                                     height: 250.0,
-                                    width: MediaQuery.of(context).size.width - 40.0,
+                                    width: MediaQuery.of(context).size.width -
+                                        40.0,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -68,15 +68,12 @@ class BookingDetailsScreen extends StatelessWidget {
                           Text(
                             "${places[id]['name']}",
                             style: TextStyle(
-                              color: Colors.white,
                               fontSize: 25,
                             ),
                           ),
                           Text(
                             "28/12/2021 - 30/12/2021",
-                            style: TextStyle(
-                              color: Colors.white70, fontSize: 20
-                            ),
+                            style: TextStyle(fontSize: 20),
                           ),
                           Spacer(),
                           Row(
@@ -88,14 +85,12 @@ class BookingDetailsScreen extends StatelessWidget {
                                   Text(
                                     "351€",
                                     style: TextStyle(
-                                      color: Colors.white,
                                       fontSize: 25,
                                     ),
                                   ),
                                   Text(
                                     "2 notti",
                                     style: TextStyle(
-                                      color: Colors.white70,
                                       fontSize: 20,
                                     ),
                                   )
@@ -110,15 +105,12 @@ class BookingDetailsScreen extends StatelessWidget {
                                       child: CircularProgressIndicator(
                                         value: .25,
                                         backgroundColor: Colors.lightBlue,
-                                        valueColor: AlwaysStoppedAnimation(
-                                            Colors.white),
                                       ),
                                     ),
                                     Align(
                                       alignment: Alignment.center,
                                       child: Icon(
                                         Icons.brightness_3,
-                                        color: Colors.white,
                                       ),
                                     )
                                   ],
@@ -127,25 +119,59 @@ class BookingDetailsScreen extends StatelessWidget {
                             ],
                           ),
                           Spacer(),
-                          Row (
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: getThemeButtonColor(context),
+                                  primary: primaryColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  // todo cancel reservation
+                                },
                                 child: Text(
                                     LanguageLocalizations.of(context).cancel,
                                     style: TextStyle(
                                       color: getThemeTextColor(context),
-
-                                    )
+                                    )),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                 ),
+                                onPressed: () =>
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, 'SmartRoom', (route) => false),
+                                child: Text(
+                                    LanguageLocalizations.of(context)
+                                        .roomControl,
+                                    style: TextStyle(
+                                      color: getThemeTextColor(context),
+                                    )),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                ),
+                                onPressed: () =>
+                                    Navigator.pushNamedAndRemoveUntil(context,
+                                        'SmartServices', (route) => false),
+                                child: Text(
+                                    LanguageLocalizations.of(context)
+                                        .SmartServices,
+                                    style: TextStyle(
+                                      color: getThemeTextColor(context),
+                                    )),
                               ),
                             ],
                           ),
@@ -164,10 +190,11 @@ class BookingDetailsScreen extends StatelessWidget {
   }
 }
 
-Color getThemeButtonColor(BuildContext context){
-  bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+Color getThemeButtonColor(BuildContext context) {
+  bool isDarkMode =
+      MediaQuery.of(context).platformBrightness == Brightness.dark;
 
-  if (!isDarkMode){
+  if (!isDarkMode) {
     return Colors.white;
   } else {
     return Colors.black;
@@ -175,9 +202,10 @@ Color getThemeButtonColor(BuildContext context){
 }
 
 getThemeTextColor(BuildContext context) {
-  bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+  bool isDarkMode =
+      MediaQuery.of(context).platformBrightness == Brightness.dark;
 
-  if (isDarkMode){
+  if (!isDarkMode) {
     return Colors.white;
   } else {
     return Colors.black;

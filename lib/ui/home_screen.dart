@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_holidays/screens/travels.dart';
 import 'package:my_holidays/widgets/icon_badge.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -18,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: PageView(
+      body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: onPageChanged,
@@ -52,11 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget barIcon(
       {IconData icon = Icons.home, int page = 0, bool badge = false}) {
     return IconButton(
-      icon: badge ? IconBadge(icon: icon, size: 3.0, color: Colors.blueGrey,) : Icon(icon, size: 3.0),
+      icon: badge
+          ? IconBadge(
+              icon: icon,
+              size: 3.0,
+              color: Colors.blueGrey,
+            )
+          : Icon(icon, size: 3.0),
       color:
-      _page == page ? Theme.of(context).accentColor : Colors.blueGrey[300],
+          _page == page ? Theme.of(context).accentColor : Colors.blueGrey[300],
       onPressed: () => _pageController.jumpToPage(page),
     );
   }
-
 }
