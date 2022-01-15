@@ -64,15 +64,36 @@ class _BreakFastState extends State<BreakFast> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: ()  {
                         _selectTime(context);
                       },
-                      child: const Text("Seleziona l'orario"),
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.fromLTRB(
+                                24.0, 0, 24.0, 0)),
+                        backgroundColor:
+                        MaterialStateProperty.all(
+                            Colors.blueAccent),
+                        shape: MaterialStateProperty.all<
+                            RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(20.0),
+                            )),
+                      ),
+                      child: const Text(
+                        "Seleziona l'orario",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                     Text(
                       'Ore: ${_selectedTime.format(context)}',
                       style: const TextStyle(
-                        color: Color.fromRGBO(246, 135, 30, 75),
+                        color: Color.fromRGBO(246, 135, 30, 1),
                         fontWeight: FontWeight.bold,
                       ),
                     )
@@ -84,13 +105,11 @@ class _BreakFastState extends State<BreakFast> {
             const SizedBox(
               height: 20,
             ),
-            Card(
-              child: Text(
+          const Text(
                 'Bevande',
                 style: TextStyle(
-                    color: Color.fromRGBO(13, 78, 161, 1), fontSize: 20),
+                    color: Color.fromRGBO(13, 78, 161, 1), fontSize: 20, fontWeight: FontWeight.bold),
               ),
-            ),
             Column(
               children: [
                 SizedBox(
@@ -155,13 +174,12 @@ class _BreakFastState extends State<BreakFast> {
                 ),
               ],
             ),
-            Card(
-              child: Text(
+            const SizedBox(height: 10,),
+            const Text(
                 'Food',
                 style: TextStyle(
-                    color: Color.fromRGBO(13, 78, 161, 1), fontSize: 20),
+                    color: Color.fromRGBO(13, 78, 161, 1), fontSize: 20, fontWeight: FontWeight.bold),
               ),
-            ),
             Column(
               children: [
                 SizedBox(
@@ -225,8 +243,15 @@ class _BreakFastState extends State<BreakFast> {
                 ),
               ],
             ),
+            const SizedBox(height: 10,),
+            const Text(
+              'Richieste speciali',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  color: Color.fromRGBO(13, 78, 161, 1), fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             TextField(
               decoration: InputDecoration(
@@ -236,7 +261,7 @@ class _BreakFastState extends State<BreakFast> {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 hintText:
-                    'Richieste speciali: es. senza glutine, vegetariano, vegano',
+                    'Es. senza glutine, vegetariano, vegano',
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                   // width: 0.0 produces a thin "hairline" border
@@ -266,10 +291,32 @@ class _BreakFastState extends State<BreakFast> {
                     style: const TextStyle(fontSize: 20),
                   ),
                   ElevatedButton(
-                      onPressed: () {
-                        _showMaterialDialog();
-                      },
-                      child: Text('Ordina'))
+                    onPressed: ()  {
+                      _selectTime(context);
+                    },
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.fromLTRB(
+                              24.0, 0, 24.0, 0)),
+                      backgroundColor:
+                      MaterialStateProperty.all(
+                          Colors.blueAccent),
+                      shape: MaterialStateProperty.all<
+                          RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius:
+                            BorderRadius.circular(20.0),
+                          )),
+                    ),
+                    child: const Text(
+                      "Ordina",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
