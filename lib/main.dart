@@ -7,6 +7,7 @@ import 'package:my_holidays/ui/smart_services.dart';
 import 'package:my_holidays/widgets/room_devices/smart_lock.dart';
 import 'package:my_holidays/widgets/smart_services/breakfast.dart';
 import 'package:my_holidays/widgets/smart_services/restaurant.dart';
+import 'package:my_holidays/widgets/smart_services/taxi.dart';
 import 'package:provider/provider.dart';
 import 'package:my_holidays/ui/self_check_in.dart';
 import 'package:my_holidays/ui/booking_details.dart';
@@ -77,6 +78,7 @@ class App extends StatelessWidget {
             'SmartServices': (context) => const SmartServices(),
             '/breakfast': (context) => const BreakFast(),
             '/restaurant': (context) => const Restaurant(),
+            '/taxi': (context) => const TaxiService(),
           },
         );
       }),

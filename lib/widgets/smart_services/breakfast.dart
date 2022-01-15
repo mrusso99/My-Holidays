@@ -10,7 +10,7 @@ class BreakFast extends StatefulWidget {
 }
 
 class _BreakFastState extends State<BreakFast> {
-  TimeOfDay _selectedTime = TimeOfDay(hour: 7, minute: 00);
+  TimeOfDay _selectedTime = const TimeOfDay(hour: 7, minute: 00);
   bool _selected = false;
   bool _selected1 = false;
   bool _selected2 = false;
@@ -64,22 +64,19 @@ class _BreakFastState extends State<BreakFast> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ElevatedButton(
-                      onPressed: ()  {
+                      onPressed: () {
                         _selectTime(context);
                       },
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(
-                            const EdgeInsets.fromLTRB(
-                                24.0, 0, 24.0, 0)),
+                            const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
                         backgroundColor:
-                        MaterialStateProperty.all(
-                            Colors.blueAccent),
-                        shape: MaterialStateProperty.all<
-                            RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(20.0),
-                            )),
+                            MaterialStateProperty.all(Colors.blueAccent),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        )),
                       ),
                       child: const Text(
                         "Seleziona l'orario",
@@ -105,11 +102,13 @@ class _BreakFastState extends State<BreakFast> {
             const SizedBox(
               height: 20,
             ),
-          const Text(
-                'Bevande',
-                style: TextStyle(
-                    color: Color.fromRGBO(13, 78, 161, 1), fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+            const Text(
+              'Bevande',
+              style: TextStyle(
+                  color: Color.fromRGBO(13, 78, 161, 1),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
             Column(
               children: [
                 SizedBox(
@@ -174,12 +173,16 @@ class _BreakFastState extends State<BreakFast> {
                 ),
               ],
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             const Text(
-                'Food',
-                style: TextStyle(
-                    color: Color.fromRGBO(13, 78, 161, 1), fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+              'Food',
+              style: TextStyle(
+                  color: Color.fromRGBO(13, 78, 161, 1),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
             Column(
               children: [
                 SizedBox(
@@ -243,12 +246,16 @@ class _BreakFastState extends State<BreakFast> {
                 ),
               ],
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             const Text(
               'Richieste speciali',
               textAlign: TextAlign.left,
               style: TextStyle(
-                  color: Color.fromRGBO(13, 78, 161, 1), fontSize: 20, fontWeight: FontWeight.bold),
+                  color: Color.fromRGBO(13, 78, 161, 1),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 10,
@@ -260,8 +267,7 @@ class _BreakFastState extends State<BreakFast> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                hintText:
-                    'Es. senza glutine, vegetariano, vegano',
+                hintText: 'Es. senza glutine, vegetariano, vegano',
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                   // width: 0.0 produces a thin "hairline" border
@@ -291,22 +297,18 @@ class _BreakFastState extends State<BreakFast> {
                     style: const TextStyle(fontSize: 20),
                   ),
                   ElevatedButton(
-                    onPressed: ()  {
+                    onPressed: () {
                       _selectTime(context);
                     },
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
-                          const EdgeInsets.fromLTRB(
-                              24.0, 0, 24.0, 0)),
+                          const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
                       backgroundColor:
-                      MaterialStateProperty.all(
-                          Colors.blueAccent),
-                      shape: MaterialStateProperty.all<
-                          RoundedRectangleBorder>(
+                          MaterialStateProperty.all(Colors.blueAccent),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(20.0),
-                          )),
+                        borderRadius: BorderRadius.circular(20.0),
+                      )),
                     ),
                     child: const Text(
                       "Ordina",
