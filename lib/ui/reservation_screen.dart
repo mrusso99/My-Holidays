@@ -7,13 +7,11 @@ import 'package:my_holidays/util/balanceCard.dart';
 
 import 'booking_details.dart';
 
-
 class ReservationScreen extends StatefulWidget {
   const ReservationScreen({Key? key}) : super(key: key);
 
   @override
   _ReservationScreenState createState() => _ReservationScreenState();
-
 }
 
 class Reservation {
@@ -27,15 +25,12 @@ class Reservation {
 
   Reservation(this.email, this.username, this.dateFrom, this.dateUntil,
       this.hotel_name, this.numberAdult, this.numberChild);
-
 }
 
-class _ReservationScreenState extends State<ReservationScreen>{
-
+class _ReservationScreenState extends State<ReservationScreen> {
   @override
   Widget build(BuildContext context) {
     String? userString = userName();
-    BalanceCard balanceCard = BalanceCard();
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -50,7 +45,6 @@ class _ReservationScreenState extends State<ReservationScreen>{
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Spacer(),
                     Row(
                       children: <Widget>[
                         Container(
@@ -76,10 +70,10 @@ class _ReservationScreenState extends State<ReservationScreen>{
                               fontFamily: 'Montserrat'),
                         ),
                         Spacer(),
-                        Row (
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget> [
+                          children: <Widget>[
                             SizedBox(height: 55.0),
                             IconButton(
                               icon: Icon(Icons.settings),
@@ -92,9 +86,7 @@ class _ReservationScreenState extends State<ReservationScreen>{
                             IconButton(
                               icon: Icon(Icons.refresh),
                               onPressed: () {
-                                setState(() {
-
-                                });
+                                setState(() {});
                               },
                               color: getThemeTextColor(context),
                             ),
@@ -109,20 +101,14 @@ class _ReservationScreenState extends State<ReservationScreen>{
                             ),
                           ],
                         ),
-                        ],
+                      ],
                     ),
-                    Spacer(),
                     SizedBox(
                       height: 30,
-                    ),
-                    Text(
-                      "Loyalty Card",
                     ),
                     SizedBox(
                       height: 15,
                     ),
-                    balanceCard,
-                    Spacer(),
                     SizedBox(
                       height: 30,
                     ),
@@ -133,133 +119,176 @@ class _ReservationScreenState extends State<ReservationScreen>{
                       height: 15,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height / 4,
-                      child: FutureBuilder<List<Reservation>>(
-                        future: getReservationList(),
-                        builder: (BuildContext context, AsyncSnapshot<List<Reservation>> snapshot) {
-                          List<Widget> children;
-                          if (snapshot.hasData){
-                            if(snapshot.data!.isEmpty){
+                        height: MediaQuery.of(context).size.height / 4,
+                        child: FutureBuilder<List<Reservation>>(
+                            future: getReservationList(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<Reservation>> snapshot) {
+                              List<Widget> children;
+                              if (snapshot.hasData) {
+                                if (snapshot.data!.isEmpty) {
+                                  children = <Widget>[
+                                    const Icon(
+                                      Icons.sentiment_dissatisfied_outlined,
+                                      color: Colors.red,
+                                      size: 60,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 16),
+                                      child: Text('No reservation'),
+                                    )
+                                  ];
+                                } else {
+                                  children = <Widget>[
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              4,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: snapshot.data!.length,
+                                        itemBuilder: (ctx, i) {
+                                          return GestureDetector(
+                                            onTap: () => {
+                                              GlobalState.instance.set(
+                                                  'reservationHotelName',
+                                                  snapshot.data![i].hotel_name),
+                                              GlobalState.instance.set(
+                                                  'reservationHotelDate',
+                                                  snapshot.data![i].dateFrom +
+                                                      ' - ' +
+                                                      snapshot
+                                                          .data![i].dateUntil),
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (ctx) =>
+                                                      BookingDetailsScreen(),
+                                                ),
+                                              ),
+                                            },
+                                            child: Container(
+                                              width: 160,
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 11.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                                child: Stack(
+                                                  children: <Widget>[
+                                                    Positioned.fill(
+                                                      child: Image.network(
+                                                        "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg",
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                    Positioned(
+                                                      bottom: 0,
+                                                      left: 0,
+                                                      right: 0,
+                                                      child: Container(
+                                                        height: 70,
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 9.0,
+                                                                vertical: 5.0),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              getThemeButtonColor(
+                                                                  context),
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    0),
+                                                          ),
+                                                        ),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: <Widget>[
+                                                            Text(
+                                                                snapshot
+                                                                    .data![i]
+                                                                    .hotel_name,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        15,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: getThemeTextColor(
+                                                                        context))),
+                                                            Spacer(),
+                                                            Text(
+                                                                snapshot
+                                                                        .data![
+                                                                            i]
+                                                                        .dateFrom +
+                                                                    ' - ' +
+                                                                    snapshot
+                                                                        .data![
+                                                                            i]
+                                                                        .dateUntil,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: getThemeTextColor(
+                                                                        context))),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ];
+                                }
+                              } else if (snapshot.hasError) {
+                                print(snapshot.error);
                                 children = <Widget>[
                                   const Icon(
-                                    Icons.sentiment_dissatisfied_outlined,
+                                    Icons.error_outline,
                                     color: Colors.red,
                                     size: 60,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 16),
-                                    child: Text('No reservation'),
+                                    child: Text('Non hai fatto la login'),
                                   )
                                 ];
-                            }else {
-                              children = <Widget>[
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height / 4,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: snapshot.data!.length,
-                                    itemBuilder: (ctx, i) {
-                                      return GestureDetector(
-                                        onTap: () => {
-                                          GlobalState.instance.set('reservationHotelName', snapshot.data![i].hotel_name),
-                                          GlobalState.instance.set('reservationHotelDate', snapshot.data![i].dateFrom + ' - ' + snapshot.data![i].dateUntil),
-                                          Navigator.push(context, MaterialPageRoute(builder: (ctx) => BookingDetailsScreen(),),),
-                                        },
-                                        child: Container(
-                                          width: 160,
-                                          margin:
-                                          const EdgeInsets.symmetric(horizontal: 11.0),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(15.0),
-                                            child: Stack(
-                                              children: <Widget>[
-                                                Positioned.fill(
-                                                  child: Image.network(
-                                                    "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg",
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                Positioned(
-                                                  bottom: 0,
-                                                  left: 0,
-                                                  right: 0,
-                                                  child: Container(
-                                                    height: 70,
-                                                    padding: EdgeInsets.symmetric(horizontal: 9.0, vertical: 5.0),
-                                                    decoration: BoxDecoration(
-                                                      color: getThemeButtonColor(context),
-                                                      borderRadius: BorderRadius.only(
-                                                        topRight: Radius.circular(0),
-                                                      ),
-                                                    ),
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: <Widget>[
-                                                        Text(
-                                                            snapshot.data![i].hotel_name,
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight: FontWeight.bold,
-                                                                color: getThemeTextColor(context))
-                                                        ),
-                                                        Spacer(),
-                                                        Text(
-                                                            snapshot.data![i].dateFrom + ' - ' + snapshot.data![i].dateUntil,
-                                                            style: TextStyle(
-                                                                fontSize: 12,
-                                                                fontWeight: FontWeight.bold,
-                                                                color: getThemeTextColor(context))
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
+                              } else {
+                                children = const <Widget>[
+                                  SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.blue,
+                                    ),
                                   ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 16),
+                                    child: Text('Awaiting result...'),
+                                  )
+                                ];
+                              }
+                              return Center(
+                                child: Column(
+                                  children: children,
                                 ),
-                              ];
-                            }
-                          } else if (snapshot.hasError) {
-                            print(snapshot.error);
-                            children = <Widget>[
-                              const Icon(
-                                Icons.error_outline,
-                                color: Colors.red,
-                                size: 60,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 16),
-                                child: Text('Non hai fatto la login'),
-                              )
-                            ];
-                          } else {
-                            children = const <Widget>[
-                              SizedBox(
-                                width: 30,
-                                height: 30,
-                                child: CircularProgressIndicator(
-                                  color: Colors.blue,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 16),
-                                child: Text('Awaiting result...'),
-                              )
-                            ];
-                          }
-                          return Center(
-                            child: Column(
-                              children: children,
-                            ),
-                          );
-                        }
-                      )
-                    ),
+                              );
+                            })),
                     Spacer(),
                   ],
                 ),
@@ -274,54 +303,54 @@ class _ReservationScreenState extends State<ReservationScreen>{
   getThemeTextColor(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    if (isDarkMode){
+    if (isDarkMode) {
       return Colors.white;
     } else {
       return Colors.black;
     }
   }
 
-  Color getThemeButtonColor(BuildContext context){
+  Color getThemeButtonColor(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    if (!isDarkMode){
+    if (!isDarkMode) {
       return Colors.white;
     } else {
       return Colors.black;
     }
   }
 
-    Future<List<Reservation>> getReservationList() async {
+  Future<List<Reservation>> getReservationList() async {
+    List<Reservation> l = [];
 
-      List<Reservation> l = [];
+    await FirebaseFirestore.instance
+        .collection('reservation')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
 
-      await FirebaseFirestore.instance
-          .collection('reservation')
-          .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-          .get().then((QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
-          Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-
-          Reservation addToList = Reservation(data['email'], data['full_name'], data['from'],
-              data['until'], data['hotel_name'], data['numberAdult'].toString(), data['numberChild'].toString());
-          l.add(addToList);
-        });
+        Reservation addToList = Reservation(
+            data['email'],
+            data['full_name'],
+            data['from'],
+            data['until'],
+            data['hotel_name'],
+            data['numberAdult'].toString(),
+            data['numberChild'].toString());
+        l.add(addToList);
       });
+    });
 
-      return l;
+    return l;
+  }
 
-    }
-
-
-  String? userName (){
-
-    if(FirebaseAuth.instance.currentUser == null){
+  String? userName() {
+    if (FirebaseAuth.instance.currentUser == null) {
       return 'null';
-    }else{
+    } else {
       return FirebaseAuth.instance.currentUser!.displayName;
     }
   }
-
-
-
 }

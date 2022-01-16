@@ -147,8 +147,7 @@ class BookingDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: () =>
-                                    Navigator.pushNamedAndRemoveUntil(
-                                        context, 'SmartRoom', (route) => false),
+                                    Navigator.pushNamed(context, 'SmartRoom'),
                                 child: Text(
                                     LanguageLocalizations.of(context)
                                         .roomControl,
@@ -163,9 +162,8 @@ class BookingDetailsScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                 ),
-                                onPressed: () =>
-                                    Navigator.pushNamedAndRemoveUntil(context,
-                                        'SmartServices', (route) => false),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, 'SmartServices'),
                                 child: Text(
                                     LanguageLocalizations.of(context)
                                         .SmartServices,
