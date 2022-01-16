@@ -14,9 +14,14 @@ class Travels extends StatelessWidget {
   Widget build(BuildContext context) {
     // String image = "imgs/GoFelix.jpg";
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Gofelix"),
+        centerTitle: true,
+      ),
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 10),
+          SearchBar(),
           //  Container(
           //    height: 150,
           //  decoration: BoxDecoration(
@@ -43,9 +48,6 @@ class Travels extends StatelessWidget {
           buildVerticalList(),
         ],
       ),
-      persistentFooterButtons: [
-        SearchBar(),
-      ],
     );
   }
 
