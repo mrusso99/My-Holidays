@@ -14,7 +14,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class RestaurantDetails extends StatelessWidget {
   const RestaurantDetails({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     TimeOfDay _selectedTime = const TimeOfDay(hour: 12, minute: 00);
@@ -141,32 +140,29 @@ class RestaurantDetails extends StatelessWidget {
                         child: const Text("Seleziona l'orario"),
                       ),*/
                       ElevatedButton(
-                          onPressed: ()  {
-                            _selectTime(context);
-                          },
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.fromLTRB(
-                                    24.0, 0, 24.0, 0)),
-                            backgroundColor:
-                            MaterialStateProperty.all(
-                                Colors.blueAccent),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(20.0),
-                                )),
-                          ),
-                          child: const Text(
-                            "Seleziona l'orario",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
+                        onPressed: () {
+                          _selectTime(context);
+                        },
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blueAccent),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          )),
+                        ),
+                        child: const Text(
+                          "Seleziona l'orario",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
                         ),
+                      ),
                       Text(
                         'Ore: ${_selectedTime.format(context)}',
                         style: const TextStyle(
@@ -181,7 +177,7 @@ class RestaurantDetails extends StatelessWidget {
               SizedBox(height: 20.0),
               Container(
                   alignment: Alignment.centerLeft,
-                  child: Row (
+                  child: Row(
                     children: [
                       Icon(
                         Icons.emoji_people_outlined,
@@ -199,36 +195,41 @@ class RestaurantDetails extends StatelessWidget {
                         minValue: 0,
                         step: 1,
                         customMinusButton: FittedBox(
-                            child: Row (
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
-                                SizedBox(width: 8),
-                              ],
-                            )
-                        ),
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.remove,
+                              color: getThemeTextColor(context),
+                              size: 15,
+                            ),
+                            SizedBox(width: 8),
+                          ],
+                        )),
                         customAddButton: FittedBox(
-                            child: Row (
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(width: 8),
-                                Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
-                              ],
-                            )
-                        ),
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.add,
+                              color: getThemeTextColor(context),
+                              size: 15,
+                            ),
+                          ],
+                        )),
                         onValue: (value) {
                           numberAdult = value as int?;
                         },
                       ),
                     ],
-                  )
-              ),
+                  )),
               SizedBox(height: 10.0),
               Container(
                   alignment: Alignment.centerLeft,
-                  child: Row (
+                  child: Row(
                     children: [
                       Icon(
                         Icons.child_care_outlined,
@@ -246,89 +247,93 @@ class RestaurantDetails extends StatelessWidget {
                         minValue: 0,
                         step: 1,
                         customMinusButton: FittedBox(
-                            child: Row (
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
-                                SizedBox(width: 8),
-                              ],
-                            )
-                        ),
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.remove,
+                              color: getThemeTextColor(context),
+                              size: 15,
+                            ),
+                            SizedBox(width: 8),
+                          ],
+                        )),
                         customAddButton: FittedBox(
-                            child: Row (
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(width: 8),
-                                Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
-                              ],
-                            )
-                        ),
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.add,
+                              color: getThemeTextColor(context),
+                              size: 15,
+                            ),
+                          ],
+                        )),
                         onValue: (value) {
                           numberChild = value as int?;
                         },
                       ),
                     ],
-                  )
-              ),
+                  )),
               SizedBox(height: 20.0),
               Container(
-                  child: Row (
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: getThemeButtonColor(context),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                            LanguageLocalizations.of(context).cancel,
-                            style: TextStyle(
-                              color: getThemeTextColor(context),
-
-                            )
-                        ),
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: getThemeButtonColor(context),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      SizedBox(width: 80),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: getThemeButtonColor(context),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                        onPressed: () {
-                          if(FirebaseAuth.instance.currentUser == null){
-                            _showMaterialDialog(context);
-                          } else {
-                            FirebaseFirestore.instance.collection('reservation').add({
-                              'hotel_name': '${ristoranti[hotelIndex]["name"]}',
-                              'full_name': FirebaseAuth.instance.currentUser!.displayName,
+                    ),
+                    onPressed: () {},
+                    child: Text(LanguageLocalizations.of(context).cancel,
+                        style: TextStyle(
+                          color: getThemeTextColor(context),
+                        )),
+                  ),
+                  SizedBox(width: 80),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: getThemeButtonColor(context),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    onPressed: () {
+                      if (FirebaseAuth.instance.currentUser == null) {
+                        _showMaterialDialog(context);
+                      } else {
+                        FirebaseFirestore.instance
+                            .collection('restaurant')
+                            .add({
+                              'restaurant_name':
+                                  '${ristoranti[hotelIndex]["name"]}',
+                              'full_name': FirebaseAuth
+                                  .instance.currentUser!.displayName,
                               'email': FirebaseAuth.instance.currentUser!.email,
                               'numberAdult': numberAdult,
                               'numberChild': numberChild,
-                              'from': GlobalState.instance.get('dateFrom'),
-                              'until': GlobalState.instance.get('dateUntil'),
-                            }).then((value) => _showMaterialDialogReservation(context))
-                                .catchError((error) => print("Failed to add reservation: $error"));
-                          }
-                        },
-                        child: Text(
-                            LanguageLocalizations.of(context).book,
-                            style: TextStyle(
-                              color: getThemeTextColor(context),
-                            )
-                        ),
-                      ),
-
-                    ],
-                  )
-              ),
+                              'time': _selectedTime.format(context),
+                            })
+                            .then((value) =>
+                                _showMaterialDialogReservation(context))
+                            .catchError((error) =>
+                                print("Failed to add reservation: $error"));
+                      }
+                    },
+                    child: Text(LanguageLocalizations.of(context).book,
+                        style: TextStyle(
+                          color: getThemeTextColor(context),
+                        )),
+                  ),
+                ],
+              )),
               SizedBox(height: 20.0),
             ],
           ),
@@ -339,23 +344,22 @@ class RestaurantDetails extends StatelessWidget {
 
   _selectTime(BuildContext context) async {
     bool _isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    if(_isDarkMode) {
+    if (_isDarkMode) {
       final TimeOfDay? timeOfDay = await showTimePicker(
         context: context,
         initialTime: const TimeOfDay(hour: 12, minute: 00),
         initialEntryMode: TimePickerEntryMode.input,
         confirmText: 'Conferma',
         cancelText: 'Indietro',
-        builder: (context, child) =>
-            Theme(
-                data: ThemeData.dark().copyWith(
-                    colorScheme: const ColorScheme.dark(
-                      primary: Color.fromRGBO(246, 135, 30, 75),
-                      onSurface: Colors.white,
-                    )),
-                child: child!),
+        builder: (context, child) => Theme(
+            data: ThemeData.dark().copyWith(
+                colorScheme: const ColorScheme.dark(
+              primary: Color.fromRGBO(246, 135, 30, 75),
+              onSurface: Colors.white,
+            )),
+            child: child!),
       );
-    } else if(!_isDarkMode) {
+    } else if (!_isDarkMode) {
       final TimeOfDay? timeOfDay = await showTimePicker(
         context: context,
         initialTime: const TimeOfDay(hour: 12, minute: 00),
@@ -365,13 +369,12 @@ class RestaurantDetails extends StatelessWidget {
         builder: (context, child) => Theme(
             data: ThemeData.light().copyWith(
                 colorScheme: const ColorScheme.light(
-                  primary: Color.fromRGBO(246, 135, 30, 75),
-                  onSurface: Colors.black,
-                )),
+              primary: Color.fromRGBO(246, 135, 30, 75),
+              onSurface: Colors.black,
+            )),
             child: child!),
       );
     }
-
   }
 
   buildSlider() {
@@ -402,20 +405,20 @@ class RestaurantDetails extends StatelessWidget {
     );
   }
 
-  Color getThemeColor(BuildContext context){
+  Color getThemeColor(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    if (isDarkMode){
+    if (isDarkMode) {
       return Colors.white;
     } else {
       return Colors.black;
     }
   }
 
-  Color getThemeButtonColor(BuildContext context){
+  Color getThemeButtonColor(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    if (!isDarkMode){
+    if (!isDarkMode) {
       return Colors.white;
     } else {
       return Colors.black;
@@ -424,7 +427,7 @@ class RestaurantDetails extends StatelessWidget {
 
   getThemeTextColor(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    if (isDarkMode){
+    if (isDarkMode) {
       return Colors.white;
     } else {
       return Colors.black;
@@ -444,14 +447,14 @@ class RestaurantDetails extends StatelessWidget {
                     _dismissDialog(context);
                     Navigator.pushNamed(context, 'Explore');
                   },
-                  child: Text(LanguageLocalizations.of(context).delete,
+                  child: Text(
+                    LanguageLocalizations.of(context).delete,
                     style: const TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 20,
                       height: 1,
                     ),
-                  )
-              ),
+                  )),
               TextButton(
                 onPressed: () {
                   _dismissDialog(context);
@@ -474,7 +477,6 @@ class RestaurantDetails extends StatelessWidget {
   _dismissDialog(BuildContext context) {
     Navigator.pop(context);
   }
-
 
   void _showMaterialDialogReservation(BuildContext context) {
     showDialog(
@@ -501,6 +503,4 @@ class RestaurantDetails extends StatelessWidget {
           );
         });
   }
-
-
 }

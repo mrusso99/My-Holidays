@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_holidays/util/Global.dart';
 
 class BreakFast extends StatefulWidget {
   const BreakFast({Key? key}) : super(key: key);
@@ -20,8 +23,11 @@ class _BreakFastState extends State<BreakFast> {
 
   double _totalPrice = 0.00;
 
+  List ordine = [];
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -114,7 +120,7 @@ class _BreakFastState extends State<BreakFast> {
                 SizedBox(
                   height: 50,
                   child: CheckboxListTile(
-                    title: const Text('Caffe espresso'),
+                    title: const Text('Caffè espresso'),
                     subtitle: const Text('€1,00'),
                     value: _selected,
                     onChanged: (value) {
@@ -124,8 +130,11 @@ class _BreakFastState extends State<BreakFast> {
 
                       if (_selected == true) {
                         _totalPrice += 1;
+                        ordine.add('Caffè espresso    €1,00');
                       } else if (_selected == false && _totalPrice != 0.00) {
                         _totalPrice -= 1;
+                        ordine.removeWhere(
+                            (element) => element == 'Caffè espresso    €1,00');
                       }
                     },
                     controlAffinity: ListTileControlAffinity.trailing,
@@ -145,8 +154,11 @@ class _BreakFastState extends State<BreakFast> {
                       });
                       if (_selected1 == true) {
                         _totalPrice += 1.10;
+                        ordine.add('Caffè macchiato €1,10');
                       } else if (_selected1 == false && _totalPrice != 0.00) {
                         _totalPrice -= 1.10;
+                        ordine.removeWhere(
+                            (element) => element == 'Caffè macchiato €1,10');
                       }
                     },
                     controlAffinity: ListTileControlAffinity.trailing,
@@ -164,8 +176,11 @@ class _BreakFastState extends State<BreakFast> {
                       });
                       if (_selected2 == true) {
                         _totalPrice += 1.00;
+                        ordine.add('Cappuccino €1,00');
                       } else if (_selected2 == false && _totalPrice != 0.00) {
                         _totalPrice -= 1.00;
+                        ordine.removeWhere(
+                            (element) => element == 'Cappuccino €1,00');
                       }
                     },
                     controlAffinity: ListTileControlAffinity.trailing,
@@ -197,8 +212,11 @@ class _BreakFastState extends State<BreakFast> {
                       });
                       if (_selected3 == true) {
                         _totalPrice += 0.88;
+                        ordine.add('Cornetto €0,80');
                       } else if (_selected3 == false && _totalPrice != 0.00) {
                         _totalPrice -= 0.88;
+                        ordine.removeWhere(
+                            (element) => element == 'Cornetto €0,80');
                       }
                     },
                     controlAffinity: ListTileControlAffinity.trailing,
@@ -218,8 +236,11 @@ class _BreakFastState extends State<BreakFast> {
                       });
                       if (_selected4 == true) {
                         _totalPrice += 1.00;
+                        ordine.add('Brioche €1,00');
                       } else if (_selected4 == false && _totalPrice != 0.00) {
                         _totalPrice -= 1.00;
+                        ordine.removeWhere(
+                            (element) => element == 'Brioche €1,00');
                       }
                     },
                     controlAffinity: ListTileControlAffinity.trailing,
@@ -228,7 +249,7 @@ class _BreakFastState extends State<BreakFast> {
                 SizedBox(
                   height: 50,
                   child: CheckboxListTile(
-                    title: const Text('Uova e bacon'),
+                    title: const Text('Uova e Bacon'),
                     subtitle: const Text('€2,00'),
                     value: _selected5,
                     onChanged: (value) {
@@ -237,8 +258,11 @@ class _BreakFastState extends State<BreakFast> {
                       });
                       if (_selected5 == true) {
                         _totalPrice += 2.00;
+                        ordine.add('Uova e Bacon €2,00');
                       } else if (_selected5 == false && _totalPrice != 0.00) {
                         _totalPrice -= 2.00;
+                        ordine.removeWhere(
+                            (element) => element == 'Uova e Bacon €2,00');
                       }
                     },
                     controlAffinity: ListTileControlAffinity.trailing,
@@ -298,7 +322,7 @@ class _BreakFastState extends State<BreakFast> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      _selectTime(context);
+                      _showMaterialDialog(size);
                     },
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
@@ -326,24 +350,76 @@ class _BreakFastState extends State<BreakFast> {
     );
   }
 
-  void _showMaterialDialog() {
+  void _showMaterialDialog(Size size) {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: const Text('Ordine confermato'),
-            content: Text(''),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'Conferma',
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  const Text(
+                    'Riepilogo',
                     style: TextStyle(
-                        color: Color.fromRGBO(13, 78, 161, 1), fontSize: 18),
-                  ))
-            ],
+                        color: Color.fromRGBO(13, 78, 161, 1),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    height: size.height - size.height / 2,
+                    width: size.width,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(ordine[index]),
+                      ),
+                      itemCount: ordine.length,
+                    ),
+                  ),
+                  Text(
+                    'Totale: €${_totalPrice.toStringAsFixed(2)}',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      FirebaseFirestore.instance.collection('breakfast').add({
+                        'full_name':
+                            FirebaseAuth.instance.currentUser!.displayName,
+                        'email': FirebaseAuth.instance.currentUser!.email,
+                        'time': _selectedTime.format(context),
+                        'ordini': ordine.toString()
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Conferma',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.blueAccent),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      )),
+                    ),
+                  )
+                ],
+              ),
+            ),
           );
         });
   }

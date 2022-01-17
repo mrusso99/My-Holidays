@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -14,6 +16,8 @@ class _TaxiServiceState extends State<TaxiService> {
   DateTime pickedTime = DateTime.now();
 
   TimeOfDay _selectedTime = TimeOfDay(hour: 7, minute: 00);
+  TextEditingController partenza = TextEditingController();
+  TextEditingController arrivo = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +74,7 @@ class _TaxiServiceState extends State<TaxiService> {
                   SizedBox(
                     width: size.width * 0.7,
                     child: TextField(
+                      controller: partenza,
                       decoration: InputDecoration(
                         fillColor: Colors.grey.withOpacity(0.1),
                         filled: true,
@@ -105,6 +110,7 @@ class _TaxiServiceState extends State<TaxiService> {
                   SizedBox(
                     width: size.width * 0.7,
                     child: TextField(
+                      controller: arrivo,
                       decoration: InputDecoration(
                         fillColor: Colors.grey.withOpacity(0.1),
                         filled: true,
@@ -273,6 +279,15 @@ class _TaxiServiceState extends State<TaxiService> {
             ),
             TextButton.icon(
               onPressed: () {
+                FirebaseFirestore.instance.collection('taxi').add({
+                  'taxi_driver_name': '$name $surname',
+                  'full_name': FirebaseAuth.instance.currentUser!.displayName,
+                  'email': FirebaseAuth.instance.currentUser!.email,
+                  'time': _selectedTime.format(context),
+                  'date': pickedTime,
+                  'partenza': partenza.text,
+                  'arrivo': arrivo.text
+                });
                 _showMaterialDialog();
               },
               icon: Icon(
