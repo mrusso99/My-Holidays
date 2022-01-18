@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:my_holidays/ui/payReservation.dart';
+import 'package:my_holidays/ui/pick_image.dart';
 import 'package:my_holidays/ui/profile_screen.dart';
 import 'package:my_holidays/ui/smart_services.dart';
 import 'package:my_holidays/widgets/room_devices/smart_lock.dart';
@@ -82,6 +83,7 @@ class App extends StatelessWidget {
             '/breakfast': (context) => const BreakFast(),
             '/restaurant': (context) => const Restaurant(),
             '/taxi': (context) => const TaxiService(),
+            'PickImage': (context) => PickImage(),
           },
         );
       }),

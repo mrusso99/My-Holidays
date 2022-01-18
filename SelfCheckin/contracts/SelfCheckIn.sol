@@ -37,13 +37,13 @@ contract SelfCheckIn is Ownable {
 
        }
 
-   function getDestination(address user, address hotel, string memory reservationNumber,) public view returns (address)
+   function getDestination(address user, address hotel, string memory reservationNumber) public view returns (address)
       {
           require(customer[reservationNumber] == user && destination[reservationNumber] == hotel , "Uncorrect destination or reservationNumber");
           return destination[reservationNumber];
    }
 
-   function getAsset(address user, address hotel, string memory reservationNumber, ) public view returns (string memory){
+   function getAsset(address user, address hotel, string memory reservationNumber) public view returns (string memory){
       
      require(customer[reservationNumber] == user && destination[reservationNumber] == hotel , "Uncorrect destination or reservationNumber");
      return asset[reservationNumber];
