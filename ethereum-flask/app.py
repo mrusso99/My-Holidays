@@ -205,7 +205,7 @@ def mint(sendAddress, token) -> dict:
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
-@APP.route("/selfcheckin/authenticate/<user>/<destination>/<assetURI>/<reservationNumber>", methods["GET"])
+@APP.route("/selfcheckin/authenticate/<user>/<destination>/<assetURI>/<reservationNumber>", methods=["GET"])
 def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
     "TODO SCRIVERE QUALCOSA A RIGUARDO"
 
@@ -219,7 +219,7 @@ def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 
-@APP.route("/selfcheckin/checkin/<user>/<destination>/<reservationNumber>", methods["GET"])
+@APP.route("/selfcheckin/checkin/<user>/<destination>/<reservationNumber>", methods=["GET"])
 def checkin(user,destination,assetURI,reservationNumber) -> dict:
     "TODO"
 
@@ -232,7 +232,7 @@ def checkin(user,destination,assetURI,reservationNumber) -> dict:
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
-@APP.route("/selfcheckin/ischeckedin/<user>/<destination>/<reservationNumber>", methods["GET"])
+@APP.route("/selfcheckin/ischeckedin/<user>/<destination>/<reservationNumber>", methods=["GET"])
 def ischeckedin(user,destination,reservationNumber) -> dict:
 
     try:
@@ -244,7 +244,7 @@ def ischeckedin(user,destination,reservationNumber) -> dict:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 
-@APP.route("/selfcheckin/getdestination/<user>/<destination>/<reservationNumber>", methods["GET"])
+@APP.route("/selfcheckin/getdestination/<user>/<destination>/<reservationNumber>", methods=["GET"])
 def getdestination(user,destination,reservationNumber) -> dict:
 
     try:
@@ -256,7 +256,7 @@ def getdestination(user,destination,reservationNumber) -> dict:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 
-@APP.route("/getAsset/getdestination/<user>/<destination>/<reservationNumber>", methods["GET"])
+@APP.route("/getAsset/getdestination/<user>/<destination>/<reservationNumber>", methods=["GET"])
 def getdestination(user,destination,reservationNumber) -> dict:
 
     try:
