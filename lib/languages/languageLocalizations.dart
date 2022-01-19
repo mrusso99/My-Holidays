@@ -41,7 +41,9 @@ class LanguageLocalizations {
       'cancel': 'Cancel',
       'book': 'Book',
       'roomControl': 'Room Control',
-      'smartServices': "Smart Services"
+      'smartServices': "Smart Services",
+      'name': "Name",
+      'surname': "Surname"
     },
     'it': {
       'wallet': 'Portafoglio',
@@ -71,7 +73,9 @@ class LanguageLocalizations {
       'cancel': 'Cancella',
       'book': 'Prenota',
       'roomControl': 'Gestione camera',
-      'smartServices': 'Servizi Smart'
+      'smartServices': 'Servizi Smart',
+      'name': "Nome",
+      'surname': "Cognome"
     },
   };
 
@@ -179,5 +183,13 @@ class LanguageLocalizations {
 
   String get SmartServices {
     return _localizedValues[locale.languageCode]!['smartServices']!;
+  }
+
+  String get name {
+    return _localizedValues[locale.languageCode]!['name']!;
+  }
+
+  String get surname {
+    return _localizedValues[locale.languageCode]!['surname']!;
   }
 }

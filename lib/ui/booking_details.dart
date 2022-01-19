@@ -17,191 +17,169 @@ class BookingDetailsScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as Reservation;
     int id = 0;
     return Scaffold(
-      body: SafeArea(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned(
-                          left: 5,
-                          top: 5,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.arrow_back,
+        body: SafeArea(
+      child: Row(children: <Widget>[
+        Expanded(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      left: 5,
+                      top: 5,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.arrow_back,
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 20, top: 80),
+                      height: 400.0,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        primary: false,
+                        itemCount: 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          Map place = places[index];
+
+                          return Padding(
+                            padding: EdgeInsets.only(right: 10.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image.asset(
+                                "${place["img"]}",
+                                height: 250.0,
+                                width: MediaQuery.of(context).size.width - 40.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            onPressed: () => Navigator.pop(context),
-                          ),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 30),
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "${places[id]['name']}",
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                    Text(
+                      reservation.dateFrom.toString() +
+                          " - " +
+                          reservation.dateUntil.toString(),
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "351€",
+                              style: TextStyle(
+                                fontSize: 25,
+                              ),
+                            ),
+                            Text(
+                              "2 notti",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            )
+                          ],
                         ),
                         Container(
-                          padding: EdgeInsets.only(left: 20, top: 80),
-                          height: 400.0,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            primary: false,
-                            itemCount: 1,
-                            itemBuilder: (BuildContext context, int index) {
-                              Map place = places[index];
-
-                              return Padding(
-                                padding: EdgeInsets.only(right: 10.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  child: Image.asset(
-                                    "${place["img"]}",
-                                    height: 250.0,
-                                    width: MediaQuery.of(context).size.width -
-                                        40.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "${places[id]['name']}",
-                            style: TextStyle(
-                              fontSize: 25,
-                            ),
-                          ),
-                          Text(
-                            reservation.dateFrom.toString() +
-                                " - " +
-                                reservation.dateUntil.toString(),
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Spacer(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          height: 50,
+                          width: 50,
+                          child: Stack(
                             children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "351€",
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                    ),
-                                  ),
-                                  Text(
-                                    "2 notti",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                child: Stack(
-                                  children: <Widget>[
-                                    Positioned.fill(
-                                      child: CircularProgressIndicator(
-                                        value: .25,
-                                        backgroundColor: Colors.lightBlue,
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Icon(
-                                        Icons.brightness_3,
-                                      ),
-                                    )
-                                  ],
+                              Positioned.fill(
+                                child: CircularProgressIndicator(
+                                  value: .25,
+                                  backgroundColor: Colors.lightBlue,
                                 ),
                               ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  Icons.brightness_3,
+                                ),
+                              )
                             ],
                           ),
-                          Spacer(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  // todo cancel reservation
-                                },
-                                child: Text(
-                                    LanguageLocalizations.of(context).cancel,
-                                    style: TextStyle(
-                                      color: getThemeTextColor(context),
-                                    )),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                ),
-                                onPressed: () =>
-                                    Navigator.pushNamed(context, 'SmartRoom'),
-                                child: Text(
-                                    LanguageLocalizations.of(context)
-                                        .roomControl,
-                                    style: TextStyle(
-                                      color: getThemeTextColor(context),
-                                    )),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                ),
-                                onPressed: () => Navigator.pushNamed(
-                                    context, 'SmartServices'),
-                                child: Text(
-                                    LanguageLocalizations.of(context)
-                                        .SmartServices,
-                                    style: TextStyle(
-                                      color: getThemeTextColor(context),
-                                    )),
-                              ),
-                              RoundedButton(
-                                text: "Self Check In",
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            width: 150,
+                            child: RoundedButton(
+                                text: LanguageLocalizations.of(context)
+                                    .roomControl,
+                                color: Colors.blueAccent,
+                                customOnPressed: () =>
+                                    Navigator.pushNamed(context, 'SmartRoom'))),
+                        Padding(padding: EdgeInsets.all(15)),
+                        SizedBox(
+                            width: 150,
+                            child: RoundedButton(
+                                text: LanguageLocalizations.of(context)
+                                    .SmartServices,
+                                color: Colors.blueAccent,
+                                customOnPressed: () => Navigator.pushNamed(
+                                    context, 'SmartServices'))),
+                      ],
+                    ),
+                    Padding(padding: EdgeInsets.all(15)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            width: 150,
+                            child: RoundedButton(
+                                text: "Check In",
                                 color: Colors.blueAccent,
                                 customOnPressed: () => Navigator.pushNamed(
                                     context, SelfCheckInSummary.routeName,
                                     arguments: ReservationNumber(
-                                        reservation.reservationNumber)),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 50),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                                        reservation.reservationNumber)))),
+                        Padding(padding: EdgeInsets.all(15)),
+                        SizedBox(
+                            width: 150,
+                            child: RoundedButton(
+                                text: LanguageLocalizations.of(context).cancel,
+                                color: Colors.blueAccent,
+                                customOnPressed: () => {})),
+                      ],
+                    )
+                  ],
+                ),
+              )),
+            ],
+          ),
+        )
+      ]),
+    ));
   }
 }
 
