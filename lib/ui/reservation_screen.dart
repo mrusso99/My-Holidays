@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_holidays/util/Global.dart';
 import 'package:my_holidays/util/balanceCard.dart';
+import 'package:my_holidays/util/reservationNumber.dart';
 
 import 'booking_details.dart';
 
@@ -15,16 +16,23 @@ class ReservationScreen extends StatefulWidget {
 }
 
 class Reservation {
-  late String email;
-  late String username;
-  late String dateFrom;
-  late String dateUntil;
-  late String hotel_name;
-  late String numberAdult;
-  late String numberChild;
-
-  Reservation(this.email, this.username, this.dateFrom, this.dateUntil,
-      this.hotel_name, this.numberAdult, this.numberChild);
+  final String email;
+  final String username;
+  final String dateFrom;
+  final String dateUntil;
+  final String hotel_name;
+  final String numberAdult;
+  final String numberChild;
+  final String reservationNumber;
+  Reservation(
+      this.email,
+      this.username,
+      this.dateFrom,
+      this.dateUntil,
+      this.hotel_name,
+      this.numberAdult,
+      this.numberChild,
+      this.reservationNumber);
 }
 
 class _ReservationScreenState extends State<ReservationScreen> {
@@ -159,13 +167,11 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                                       ' - ' +
                                                       snapshot
                                                           .data![i].dateUntil),
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (ctx) =>
-                                                      BookingDetailsScreen(),
-                                                ),
-                                              ),
+                                              Navigator.pushNamed(
+                                                  context,
+                                                  BookingDetailsScreen
+                                                      .routeName,
+                                                  arguments: snapshot.data![i]),
                                             },
                                             child: Container(
                                               width: 160,
@@ -338,7 +344,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
             data['until'],
             data['hotel_name'],
             data['numberAdult'].toString(),
-            data['numberChild'].toString());
+            data['numberChild'].toString(),
+            doc.id);
         l.add(addToList);
       });
     });

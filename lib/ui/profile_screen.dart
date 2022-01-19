@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
-import 'package:my_holidays/ui/reservation_screen.dart';
+import 'package:my_holidays/ui/self_check_in_summary.dart';
+import 'package:my_holidays/util/reservationNumber.dart';
 
 import 'profile_page.dart';
 
@@ -57,6 +58,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             title: const Text('Smart Services'),
             onTap: () {
               Navigator.pushNamed(context, 'SmartServices');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.room_service),
+            title: const Text('Summary'),
+            onTap: () {
+              Navigator.pushNamed(context, SelfCheckInSummary.routeName,
+                  arguments: ReservationNumber("ok"));
             },
           ),
         ]),

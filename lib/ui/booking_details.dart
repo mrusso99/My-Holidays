@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/reservation_screen.dart';
+import 'package:my_holidays/ui/self_check_in_summary.dart';
 import 'package:my_holidays/util/colors.dart';
 import 'package:my_holidays/util/places.dart';
+import 'package:my_holidays/util/reservationNumber.dart';
+import 'package:my_holidays/widgets/rounded_button.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   const BookingDetailsScreen({Key? key}) : super(key: key);
+  static const routeName = '/bookingDetails';
 
   @override
   Widget build(BuildContext context) {
+    final reservation =
+        ModalRoute.of(context)!.settings.arguments as Reservation;
     int id = 0;
     return Scaffold(
       body: SafeArea(
@@ -72,7 +79,9 @@ class BookingDetailsScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "28/12/2021 - 30/12/2021",
+                            reservation.dateFrom.toString() +
+                                " - " +
+                                reservation.dateUntil.toString(),
                             style: TextStyle(fontSize: 20),
                           ),
                           Spacer(),
@@ -171,6 +180,14 @@ class BookingDetailsScreen extends StatelessWidget {
                                       color: getThemeTextColor(context),
                                     )),
                               ),
+                              RoundedButton(
+                                text: "Self Check In",
+                                color: Colors.blueAccent,
+                                customOnPressed: () => Navigator.pushNamed(
+                                    context, SelfCheckInSummary.routeName,
+                                    arguments: ReservationNumber(
+                                        reservation.reservationNumber)),
+                              )
                             ],
                           ),
                           SizedBox(height: 50),

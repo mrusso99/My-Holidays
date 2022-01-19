@@ -4,8 +4,8 @@ import 'package:my_holidays/main.dart';
 import 'package:my_holidays/widgets/rounded_button.dart';
 
 class SelfCheckIn extends StatelessWidget {
-  var frontImage;
-  var backImage;
+  late XFile frontImage;
+  late XFile backImage;
   bool _frontImageSent = false;
   bool _backImageSent = false;
 
@@ -35,7 +35,8 @@ class SelfCheckIn extends StatelessWidget {
                     var result =
                         await Navigator.pushNamed(context, 'PickImage');
                     if (result != null) {
-                      frontImage = result;
+                      print(result);
+                      frontImage = result as XFile;
                       _frontImageSent = true;
                     }
                   },
@@ -50,7 +51,7 @@ class SelfCheckIn extends StatelessWidget {
                       var result =
                           await Navigator.pushNamed(context, 'PickImage');
                       if (result != null) {
-                        backImage = result;
+                        backImage = result as XFile;
                         _backImageSent = true;
                       }
                     },
@@ -64,11 +65,9 @@ class SelfCheckIn extends StatelessWidget {
               text: "Invia",
               customOnPressed: () {
                 if (_backImageSent && _frontImageSent) {
-                  String images = '{ front: "' +
-                      frontImage.toString() +
-                      '", \n back: "' +
-                      backImage.toString() +
-                      '"';
+                  List<XFile> images = [];
+                  images.add(frontImage);
+                  images.add(backImage);
                   Navigator.pop(context, images);
                 }
               },
