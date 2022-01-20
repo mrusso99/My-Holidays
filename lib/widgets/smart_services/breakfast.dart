@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_holidays/util/Global.dart';
 
 class BreakFast extends StatefulWidget {
   const BreakFast({Key? key}) : super(key: key);
@@ -76,8 +75,8 @@ class _BreakFastState extends State<BreakFast> {
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(
                             const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.blueAccent),
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromRGBO(13, 78, 161, 1)),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
@@ -322,13 +321,18 @@ class _BreakFastState extends State<BreakFast> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      _showMaterialDialog(size);
+                      _totalPrice != 0
+                          ? _showMaterialDialog(size)
+                          : const AlertDialog(
+                              title: Text('Attenzione: '),
+                              content: Text('Aggiungi qualcosa all\'ordine'),
+                            );
                     },
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
                           const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.blueAccent),
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(13, 78, 161, 1)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -369,7 +373,7 @@ class _BreakFastState extends State<BreakFast> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
+                  SizedBox(
                     height: size.height - size.height / 2,
                     width: size.width,
                     child: ListView.builder(
@@ -409,8 +413,8 @@ class _BreakFastState extends State<BreakFast> {
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
                           const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.blueAccent),
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(13, 78, 161, 1)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -433,7 +437,7 @@ class _BreakFastState extends State<BreakFast> {
       cancelText: 'Indietro',
       builder: (context, child) => Theme(
           data: ThemeData.light().copyWith(
-              colorScheme: ColorScheme.light(
+              colorScheme: const ColorScheme.light(
             primary: Color.fromRGBO(246, 135, 30, 75),
             onSurface: Colors.black,
           )),

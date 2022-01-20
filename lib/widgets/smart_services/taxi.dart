@@ -74,6 +74,7 @@ class _TaxiServiceState extends State<TaxiService> {
                   SizedBox(
                     width: size.width * 0.7,
                     child: TextField(
+                      autofocus: true,
                       controller: partenza,
                       decoration: InputDecoration(
                         fillColor: Colors.grey.withOpacity(0.1),
@@ -110,6 +111,7 @@ class _TaxiServiceState extends State<TaxiService> {
                   SizedBox(
                     width: size.width * 0.7,
                     child: TextField(
+                      autofocus: true,
                       controller: arrivo,
                       decoration: InputDecoration(
                         fillColor: Colors.grey.withOpacity(0.1),
@@ -172,10 +174,34 @@ class _TaxiServiceState extends State<TaxiService> {
               const SizedBox(
                 height: 25,
               ),
-              RiderTaxi('Mario', 'Rossi', 'Taxi&Co.', '€0,10/100metri'),
-              RiderTaxi('Giuseppe', 'Verdi', 'GoWithUs', '€0,25/100metri'),
-              RiderTaxi('Lucia', 'Bianchi', 'YellowTaxi', '€0,15/100metri'),
-              RiderTaxi('Marco', 'Ferrari', 'TempestTaxi', '€0,18/100metri'),
+              RiderTaxi('Mario', 'Rossi', 'Taxi&Co.', '€0,10/100metri', size),
+              Divider(
+                height: 10,
+                thickness: 1,
+                color: Color.fromRGBO(246, 135, 30, 75),
+              ),
+              RiderTaxi(
+                  'Giuseppe', 'Verdi', 'GoWithUs', '€0,25/100metri', size),
+              Divider(
+                height: 10,
+                thickness: 1,
+                color: Color.fromRGBO(246, 135, 30, 75),
+              ),
+              RiderTaxi(
+                  'Lucia', 'Bianchi', 'YellowTaxi', '€0,15/100metri', size),
+              Divider(
+                height: 10,
+                thickness: 1,
+                color: Color.fromRGBO(246, 135, 30, 75),
+              ),
+              RiderTaxi(
+                  'Marco', 'Ferrari', 'TempestTaxi', '€0,18/100metri', size),
+              Divider(
+                height: 10,
+                thickness: 1,
+                color: Color.fromRGBO(246, 135, 30, 75),
+              ),
+              RiderTaxi('Claudio', 'Gallo', 'GoTaxi', '€0,22/100metri', size),
             ],
           )),
     ));
@@ -226,14 +252,16 @@ class _TaxiServiceState extends State<TaxiService> {
     }
   }
 
+  // ignore: non_constant_identifier_names
   Row RiderTaxi(
     String name,
     String surname,
     String company,
     String price,
+    Size size,
   ) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
@@ -279,16 +307,15 @@ class _TaxiServiceState extends State<TaxiService> {
             ),
             TextButton.icon(
               onPressed: () {
-                FirebaseFirestore.instance.collection('taxi').add({
-                  'taxi_driver_name': '$name $surname',
-                  'full_name': FirebaseAuth.instance.currentUser!.displayName,
-                  'email': FirebaseAuth.instance.currentUser!.email,
-                  'time': _selectedTime.format(context),
-                  'date': pickedTime,
-                  'partenza': partenza.text,
-                  'arrivo': arrivo.text
-                });
-                _showMaterialDialog();
+                partenza.text != '' && arrivo.text != ''
+                    ? _showMaterialDialog(
+                        size, company, partenza, arrivo, name, surname)
+                    : const AlertDialog(
+                        title: Text('Attenzione: '),
+                        content:
+                            Text('Devi aggiungere una partenza e un arrivo'),
+                      );
+                ;
               },
               icon: Icon(
                 Icons.book_outlined,
@@ -308,24 +335,103 @@ class _TaxiServiceState extends State<TaxiService> {
     );
   }
 
-  void _showMaterialDialog() {
+  void _showMaterialDialog(
+      Size size,
+      String company,
+      TextEditingController partenza,
+      TextEditingController arrivo,
+      String name,
+      String surname) {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            content: const Text('Prenotazione effettuata'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'Conferma',
-                    style: TextStyle(
-                        color: Color.fromRGBO(13, 78, 161, 1), fontSize: 18),
-                  ))
-            ],
-          );
+          return Scaffold(
+              body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(children: [
+              const Text(
+                'Riepilogo',
+                style: TextStyle(
+                    color: Color.fromRGBO(13, 78, 161, 1),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Partenza da: ${partenza.text}'),
+                  Text('Arrivo a: ${arrivo.text}'),
+                  Text('Data e ora: $pickedTime\n$_selectedTime'),
+                  Text('Compagnia: $company'),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text(
+                      'Indietro',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.blueAccent),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      )),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      FirebaseFirestore.instance.collection('taxi').add({
+                        'taxi_driver_name': '$name $surname',
+                        'full_name':
+                            FirebaseAuth.instance.currentUser!.displayName,
+                        'email': FirebaseAuth.instance.currentUser!.email,
+                        'time': _selectedTime.format(context),
+                        'date': pickedTime,
+                        'partenza': partenza.text,
+                        'arrivo': arrivo.text
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Conferma',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.blueAccent),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      )),
+                    ),
+                  ),
+                ],
+              )
+            ]),
+          ));
         });
   }
 }
