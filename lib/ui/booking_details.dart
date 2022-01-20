@@ -159,10 +159,12 @@ class BookingDetailsScreen extends StatelessWidget {
                             child: RoundedButton(
                                 text: "Check In",
                                 color: Colors.blueAccent,
-                                customOnPressed: () => Navigator.pushNamed(
-                                    context, SelfCheckInSummary.routeName,
-                                    arguments: ReservationNumber(
-                                        reservation.reservationNumber)))),
+                                customOnPressed: () => {
+                                      Navigator.pushNamed(
+                                          context, SelfCheckInSummary.routeName,
+                                          arguments: ReservationNumber(
+                                              reservation.reservationNumber))
+                                    })),
                         Padding(padding: EdgeInsets.all(15)),
                         SizedBox(
                             width: 150,

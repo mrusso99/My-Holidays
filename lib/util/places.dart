@@ -1,77 +1,125 @@
 List places = [
   {
+    "id": "hot1",
     "name": "Hotel Dolah Amet & Suites",
     "img": "assets/1.jpeg",
-    "price": r"100",
     "location": "London, England",
-    "details": "Pellentesque in ipsum id orci porta dapibus. "
-        "Nulla porttitor accumsan tincidunt. Donec rutrum "
-        "congue leo eget malesuada. "
-        "\n\nPraesent sapien massa, convallis a pellentesque "
-        "nec, egestas non nisi. Donec rutrum congue leo eget malesuada. "
-        "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. "
-        "Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada. "
-        "\nCurabitur arcu erat, accumsan id imperdiet et, porttitor at sem. "
-        "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
+    "details": "Hotel bellissimo ",
+    "rooms": [
+      {
+        "id": "cam1",
+        "name": "camera marilena",
+        "img": "assets/marilena.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 3
+      },
+      {
+        "id": "cam2",
+        "name": "camera isabella",
+        "img": "assets/isabella.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 2
+      },
+      {
+        "id": "cam3",
+        "name": "camera luisa",
+        "img": "assets/luisa.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 1
+      }
+    ]
   },
   {
-    "name": "Beach Mauris Blandit",
-    "img": "assets/2.jpeg",
-    "price": r"100",
-    "location": "Lisbon, Portugal",
-    "details": "Pellentesque in ipsum id orci porta dapibus. "
-        "Nulla porttitor accumsan tincidunt. Donec rutrum "
-        "congue leo eget malesuada. "
-        "\nPraesent sapien massa, convallis a pellentesque "
-        "nec, egestas non nisi. Donec rutrum congue leo eget malesuada. "
-        "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. "
-        "Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada. "
-        "\nCurabitur arcu erat, accumsan id imperdiet et, porttitor at sem. "
-        "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
+    "id": "hot2",
+    "name": "Hotel roma",
+    "img": "assets/1.jpeg",
+    "location": "London, England",
+    "details": "Hotel bellissimo ",
+    "rooms": [
+      {
+        "id": "cam1",
+        "name": "camera marilena",
+        "img": "assets/marilena.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 3
+      },
+      {
+        "id": "cam2",
+        "name": "camera isabella",
+        "img": "assets/isabella.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 2
+      },
+      {
+        "id": "cam3",
+        "name": "camera luisa",
+        "img": "assets/luisa.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 1
+      },
+      {
+        "id": "cam4",
+        "name": "camera marilena",
+        "img": "assets/marilena.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 3
+      },
+      {
+        "id": "cam5",
+        "name": "camera isabella",
+        "img": "assets/isabella.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 2
+      }
+    ]
   },
   {
-    "name": "Ipsum Restaurant",
+    "id": "hot3",
+    "name": "Hotel Napoli",
     "img": "assets/3.jpeg",
-    "price": r"100",
-    "location": "Paris, France",
-    "details": "Pellentesque in ipsum id orci porta dapibus. "
-        "Nulla porttitor accumsan tincidunt. Donec rutrum "
-        "congue leo eget malesuada. "
-        "\n\nPraesent sapien massa, convallis a pellentesque "
-        "nec, egestas non nisi. Donec rutrum congue leo eget malesuada. "
-        "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. "
-        "Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada. "
-        "\nCurabitur arcu erat, accumsan id imperdiet et, porttitor at sem. "
-        "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
-  },
-  {
-    "name": "Curabitur Beach",
-    "img": "assets/4.jpeg",
-    "price": r"100",
-    "location": "Rome, Italy",
-    "details": "Pellentesque in ipsum id orci porta dapibus. "
-        "Nulla porttitor accumsan tincidunt. Donec rutrum "
-        "congue leo eget malesuada. "
-        "\nPraesent sapien massa, convallis a pellentesque "
-        "nec, egestas non nisi. Donec rutrum congue leo eget malesuada. "
-        "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. "
-        "Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada. "
-        "\nCurabitur arcu erat, accumsan id imperdiet et, porttitor at sem. "
-        "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
-  },
-  {
-    "name": "Tincidunt Pool",
-    "img": "assets/5.jpeg",
-    "price": r"100",
-    "location": "Madrid, Spain",
-    "details": "Pellentesque in ipsum id orci porta dapibus. "
-        "Nulla porttitor accumsan tincidunt. Donec rutrum "
-        "congue leo eget malesuada. "
-        "\nPraesent sapien massa, convallis a pellentesque "
-        "nec, egestas non nisi. Donec rutrum congue leo eget malesuada. "
-        "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. "
-        "Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada. "
-        "\nCurabitur arcu erat, accumsan id imperdiet et, porttitor at sem. "
-        "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
-  },
+    "location": "London, England",
+    "details": "Hotel bellissimo ",
+    "rooms": [
+      {
+        "id": "cam1",
+        "name": "camera marilena",
+        "img": "assets/marilena.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 3
+      },
+      {
+        "id": "cam2",
+        "name": "camera isabella",
+        "img": "assets/isabella.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 2
+      },
+      {
+        "id": "cam3",
+        "name": "camera luisa",
+        "img": "assets/luisa.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 1
+      },
+      {
+        "id": "cam4",
+        "name": "camera marilena",
+        "img": "assets/marilena.jpg",
+        "price": "120",
+        "details": "camera bellissima con letto matrimoniale",
+        "quantità": 3
+      }
+    ]
+  }
 ];

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:my_holidays/screens/hotel_details.dart';
 import 'package:my_holidays/util/Global.dart';
 import 'package:my_holidays/util/places.dart';
 
-import '../screens/rooms.dart';
+import '../screens/details.dart';
 
-class VerticalPlaceItem extends StatelessWidget {
+class VerticalRoomsItem extends StatelessWidget {
   final Map place;
 
-  const VerticalPlaceItem({Key? key, required this.place}) : super(key: key);
+  const VerticalRoomsItem({Key? key, required this.place}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,30 +48,6 @@ class VerticalPlaceItem extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  const SizedBox(height: 5.0),
-                  Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.location_on,
-                        size: 15,
-                        color: Colors.blueGrey[300],
-                      ),
-                      const SizedBox(width: 5),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "${place["location"]}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Colors.blueGrey[300],
-                          ),
-                          maxLines: 1,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    ],
-                  ),
                   /*const SizedBox(height: 10),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -111,12 +86,13 @@ class VerticalPlaceItem extends StatelessWidget {
       ),
       onTap: () {
         int index = searchIndex("${place["id"]}");
-        GlobalState.instance.set('hotelIndex', index);
+        GlobalState.instance
+            .set('hotelIndex', GlobalState.instance.get('hotelIndex'));
+        GlobalState.instance.set('roomIndex', index);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              //return const Rooms();
-              return const HotelDetails();
+              return const Details();
             },
           ),
         );
@@ -124,9 +100,10 @@ class VerticalPlaceItem extends StatelessWidget {
     );
   }
 
-  int searchIndex(String hotelName) {
+  int searchIndex(String roomName) {
     for (int i = 0; i < places.length; i++) {
-      if (places[i]['id'] == hotelName) {
+      if (places[GlobalState.instance.get('hotelIndex')]["rooms"][i]['id'] ==
+          roomName) {
         return i;
       }
     }

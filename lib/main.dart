@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:my_holidays/screens/rooms.dart';
 import 'package:my_holidays/ui/payReservation.dart';
 import 'package:my_holidays/ui/pick_image.dart';
 import 'package:my_holidays/ui/profile_screen.dart';
@@ -88,7 +89,8 @@ class App extends StatelessWidget {
             SelfCheckInSummary.routeName: (context) =>
                 const SelfCheckInSummary(),
             BookingDetailsScreen.routeName: (context) =>
-                const BookingDetailsScreen()
+                const BookingDetailsScreen(),
+            'Rooms': (context) => const Rooms()
           },
         );
       }),

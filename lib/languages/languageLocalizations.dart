@@ -43,7 +43,9 @@ class LanguageLocalizations {
       'roomControl': 'Room Control',
       'smartServices': "Smart Services",
       'name': "Name",
-      'surname': "Surname"
+      'surname': "Surname",
+      'textSelected': "Text Selected",
+      'showRooms': "Show Rooms"
     },
     'it': {
       'wallet': 'Portafoglio',
@@ -75,7 +77,9 @@ class LanguageLocalizations {
       'roomControl': 'Gestione camera',
       'smartServices': 'Servizi Smart',
       'name': "Nome",
-      'surname': "Cognome"
+      'surname': "Cognome",
+      'textSelected': "Testo selezionato",
+      'showRooms': "Seleziona Camere"
     },
   };
 
@@ -191,5 +195,13 @@ class LanguageLocalizations {
 
   String get surname {
     return _localizedValues[locale.languageCode]!['surname']!;
+  }
+
+  String get textSelected {
+    return _localizedValues[locale.languageCode]!['textSelected']!;
+  }
+
+  String get showRooms {
+    return _localizedValues[locale.languageCode]!['showRooms']!;
   }
 }
