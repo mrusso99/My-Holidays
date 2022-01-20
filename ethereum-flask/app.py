@@ -256,16 +256,6 @@ def getdestination(user,destination,reservationNumber) -> dict:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 
-@APP.route("/getAsset/getdestination/<user>/<destination>/<reservationNumber>", methods=["GET"])
-def getdestination(user,destination,reservationNumber) -> dict:
-
-    try:
-        hashReservationNumber = keccak.new(digest_bits=512)
-        hashReservationNumber.update(reservationNumber)
-        result=selfCheckInContract.functions.getAsset(user,destination,reservationNumber.hexdigest()).call()
-        return jsonify({"AssetURI": result}), 200
-    except ValueError:
-        return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 if __name__=="__main__":
     APP.run(host='127.0.0.1',port=4455,debug=True) 

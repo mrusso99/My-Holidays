@@ -17,22 +17,28 @@ class ReservationScreen extends StatefulWidget {
 
 class Reservation {
   final String email;
-  final String username;
   final String dateFrom;
   final String dateUntil;
-  final String hotel_name;
-  final String numberAdult;
-  final String numberChild;
+  final String hotelName;
+  final int numberAdult;
+  final int numberChild;
   final String reservationNumber;
+  final String roomName;
+  final String hotelId;
+  final String roomId;
+  final int price;
   Reservation(
       this.email,
-      this.username,
+      this.hotelName,
+      this.roomName,
+      this.hotelId,
+      this.roomId,
       this.dateFrom,
       this.dateUntil,
-      this.hotel_name,
       this.numberAdult,
       this.numberChild,
-      this.reservationNumber);
+      this.reservationNumber,
+      this.price);
 }
 
 class _ReservationScreenState extends State<ReservationScreen> {
@@ -160,7 +166,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                             onTap: () => {
                                               GlobalState.instance.set(
                                                   'reservationHotelName',
-                                                  snapshot.data![i].hotel_name),
+                                                  snapshot.data![i].hotelName),
                                               GlobalState.instance.set(
                                                   'reservationHotelDate',
                                                   snapshot.data![i].dateFrom +
@@ -219,7 +225,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                                             Text(
                                                                 snapshot
                                                                     .data![i]
-                                                                    .hotel_name,
+                                                                    .hotelName,
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         15,
@@ -339,13 +345,16 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
         Reservation addToList = Reservation(
             data['email'],
-            data['full_name'],
+            data['hotel_name'],
+            data['room_name'],
+            data['hotel_id'],
+            data['room_id'],
             data['from'],
             data['until'],
-            data['hotel_name'],
-            data['numberAdult'].toString(),
-            data['numberChild'].toString(),
-            doc.id);
+            data['numberAdult'],
+            data['numberChild'],
+            doc.id,
+            data['price']);
         l.add(addToList);
       });
     });

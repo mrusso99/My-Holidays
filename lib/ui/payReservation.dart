@@ -28,6 +28,7 @@ class _PaymentScreenState extends State<Payment> {
   String until = GlobalState.instance.get('dateUntil');
   int numberAdult = GlobalState.instance.get('numberAdult');
   int numberChild = GlobalState.instance.get('numberChild');
+  int roomIndex = GlobalState.instance.get('roomIndex');
   @override
   Widget build(BuildContext context) {
     int hotelIndex = GlobalState.instance.get('hotelIndex');
@@ -77,7 +78,8 @@ class _PaymentScreenState extends State<Payment> {
                   ),
                   child: Container(
                     alignment: Alignment.center,
-                    padding: EdgeInsets.only(left: 25, right: 30, top: 10, bottom: 10),
+                    padding: EdgeInsets.only(
+                        left: 25, right: 30, top: 10, bottom: 10),
                     child: Column(
                       children: <Widget>[
                         Row(
@@ -91,19 +93,17 @@ class _PaymentScreenState extends State<Payment> {
                                   fontWeight: FontWeight.w400),
                               textAlign: TextAlign.left,
                             ),
-                            Row(
-                                children: <Widget>[
-                                  Text(
-                                    "${places[hotelIndex]["name"]}",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ]
-                            ),
+                            Row(children: <Widget>[
+                              Text(
+                                "${places[hotelIndex]["name"]}",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                            ]),
                           ],
                         ),
                         SizedBox(
@@ -167,47 +167,45 @@ class _PaymentScreenState extends State<Payment> {
                                   fontWeight: FontWeight.w400),
                               textAlign: TextAlign.left,
                             ),
-                            Row(
-                                children: <Widget>[
-                                  Text(
-                                    numberAdult.toString(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Icon(
-                                    Icons.emoji_people_outlined,
-                                    size: 18,
-                                    color: getThemeColor(context),
-                                  ),
-                                  Text(
-                                    " +  ",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    numberChild.toString(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Icon(
-                                    Icons.child_care_outlined,
-                                    size: 18,
-                                    color: getThemeColor(context),
-                                  ),
-                                ]
-                            ),
+                            Row(children: <Widget>[
+                              Text(
+                                numberAdult.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                              Icon(
+                                Icons.emoji_people_outlined,
+                                size: 18,
+                                color: getThemeColor(context),
+                              ),
+                              Text(
+                                " +  ",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                numberChild.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                              Icon(
+                                Icons.child_care_outlined,
+                                size: 18,
+                                color: getThemeColor(context),
+                              ),
+                            ]),
                           ],
                         ),
                         SizedBox(
@@ -224,28 +222,26 @@ class _PaymentScreenState extends State<Payment> {
                                   fontWeight: FontWeight.w400),
                               textAlign: TextAlign.left,
                             ),
-                            Row(
-                                children: <Widget>[
-                                  Text(
-                                    price,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    "€",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ]
-                            ),
+                            Row(children: <Widget>[
+                              Text(
+                                price,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "€",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                            ]),
                           ],
                         ),
                         SizedBox(
@@ -262,56 +258,57 @@ class _PaymentScreenState extends State<Payment> {
                                   fontWeight: FontWeight.w400),
                               textAlign: TextAlign.left,
                             ),
-                            Row(
-                                children: <Widget>[
-                                  FutureBuilder<String>(
-                                    future: getBalance(),
-                                    builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                                      List<Widget> children;
-                                      if (snapshot.hasData) {
-                                        String? balance = snapshot.data;
-                                        children = <Widget>[
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              balance!,
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Color(0xFF3a3a3b),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                        ];
-                                      } else if (snapshot.hasError) {
-                                        children = <Widget>[
-                                          Text('Error',
-                                            style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ];
-                                      } else {
-                                        children = <Widget>[
-                                          SizedBox(
-                                            child: CircularProgressIndicator(
-                                              color: getThemeTextColor(context),
-                                            ),
-                                            height: 25.0,
-                                            width: 25.0,
-                                          ),
-                                        ];
-                                      }
-                                      return Center(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: children,
+                            Row(children: <Widget>[
+                              FutureBuilder<String>(
+                                future: getBalance(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<String> snapshot) {
+                                  List<Widget> children;
+                                  if (snapshot.hasData) {
+                                    String? balance = snapshot.data;
+                                    children = <Widget>[
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          balance!,
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xFF3a3a3b),
+                                              fontWeight: FontWeight.w400),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ]
-                            ),
+                                      ),
+                                    ];
+                                  } else if (snapshot.hasError) {
+                                    children = <Widget>[
+                                      Text(
+                                        'Error',
+                                        style: TextStyle(
+                                          fontSize: 10.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ];
+                                  } else {
+                                    children = <Widget>[
+                                      SizedBox(
+                                        child: CircularProgressIndicator(
+                                          color: getThemeTextColor(context),
+                                        ),
+                                        height: 25.0,
+                                        width: 25.0,
+                                      ),
+                                    ];
+                                  }
+                                  return Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: children,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ]),
                           ],
                         ),
                         SizedBox(
@@ -336,44 +333,60 @@ class _PaymentScreenState extends State<Payment> {
                                 if (snapshot.hasData) {
                                   String? balance = snapshot.data;
                                   int balanceConverted = int.parse(balance!);
-                                  if (balanceConverted >= 12 && balanceConverted <= (12 * int.parse(price))){
+                                  if (balanceConverted >= 12 &&
+                                      balanceConverted <=
+                                          (12 * int.parse(price))) {
                                     children = <Widget>[
                                       Align(
                                         alignment: Alignment.center,
                                         child: CustomNumberPicker(
                                           shape: RoundedRectangleBorder(
-                                            side: BorderSide(color: Colors.transparent, width: 1),
-                                            borderRadius: BorderRadius.circular(10),
+                                            side: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                           valueTextStyle: TextStyle(
                                               fontSize: 18,
                                               color: Color(0xFF3a3a3b),
-                                              fontWeight: FontWeight.w400
-                                          ),
+                                              fontWeight: FontWeight.w400),
                                           initialValue: 0,
                                           maxValue: balanceConverted,
                                           minValue: 0,
                                           step: 12,
                                           customMinusButton: FittedBox(
-                                              child: Row (
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
-                                                  SizedBox(width: 8),
-                                                ],
-                                              )
-                                          ),
+                                              child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.remove,
+                                                color:
+                                                    getThemeTextColor(context),
+                                                size: 15,
+                                              ),
+                                              SizedBox(width: 8),
+                                            ],
+                                          )),
                                           customAddButton: FittedBox(
-                                              child: Row (
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  SizedBox(width: 8),
-                                                  Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
-                                                ],
-                                              )
-                                          ),
+                                              child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              SizedBox(width: 8),
+                                              Icon(
+                                                Icons.add,
+                                                color:
+                                                    getThemeTextColor(context),
+                                                size: 15,
+                                              ),
+                                            ],
+                                          )),
                                           onValue: (value) {
                                             usedFelix = (value as int?)!;
                                             print(usedFelix);
@@ -382,9 +395,10 @@ class _PaymentScreenState extends State<Payment> {
                                         ),
                                       ),
                                     ];
-                                  } else if(balanceConverted < 12){
+                                  } else if (balanceConverted < 12) {
                                     children = <Widget>[
-                                      Text('Non hai abbastanza felix da convertire',
+                                      Text(
+                                        'Non hai abbastanza felix da convertire',
                                         style: TextStyle(
                                           fontSize: 10.0,
                                           fontWeight: FontWeight.bold,
@@ -397,8 +411,11 @@ class _PaymentScreenState extends State<Payment> {
                                         alignment: Alignment.center,
                                         child: CustomNumberPicker(
                                           shape: RoundedRectangleBorder(
-                                            side: BorderSide(color: Colors.transparent, width: 1),
-                                            borderRadius: BorderRadius.circular(10),
+                                            side: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                           valueTextStyle: TextStyle(
                                             fontSize: 20.0,
@@ -409,25 +426,37 @@ class _PaymentScreenState extends State<Payment> {
                                           minValue: 0,
                                           step: 12,
                                           customMinusButton: FittedBox(
-                                              child: Row (
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
-                                                  SizedBox(width: 8),
-                                                ],
-                                              )
-                                          ),
+                                              child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.remove,
+                                                color:
+                                                    getThemeTextColor(context),
+                                                size: 15,
+                                              ),
+                                              SizedBox(width: 8),
+                                            ],
+                                          )),
                                           customAddButton: FittedBox(
-                                              child: Row (
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  SizedBox(width: 8),
-                                                  Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
-                                                ],
-                                              )
-                                          ),
+                                              child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              SizedBox(width: 8),
+                                              Icon(
+                                                Icons.add,
+                                                color:
+                                                    getThemeTextColor(context),
+                                                size: 15,
+                                              ),
+                                            ],
+                                          )),
                                           onValue: (value) {
                                             usedFelix = (value as int?)!;
                                             updatePrice(usedFelix);
@@ -438,7 +467,8 @@ class _PaymentScreenState extends State<Payment> {
                                   }
                                 } else if (snapshot.hasError) {
                                   children = <Widget>[
-                                    Text('Error',
+                                    Text(
+                                      'Error',
                                       style: TextStyle(
                                         fontSize: 10.0,
                                         fontWeight: FontWeight.bold,
@@ -480,55 +510,53 @@ class _PaymentScreenState extends State<Payment> {
                                   fontWeight: FontWeight.w600),
                               textAlign: TextAlign.left,
                             ),
-                            Row(
-                                children: <Widget>[
-                                  Text(
-                                    price,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    "€",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    " +  ",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    usedFelix.toString(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    "FELX",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ]
-                            ),
+                            Row(children: <Widget>[
+                              Text(
+                                price,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "€",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                " +  ",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                usedFelix.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "FELX",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                              ),
+                            ]),
                           ],
                         ),
                       ],
@@ -539,36 +567,31 @@ class _PaymentScreenState extends State<Payment> {
               SizedBox(height: 5.0),
               Container(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(340, 40),
-                          primary: getThemeButtonColor(context),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (FirebaseAuth.instance.currentUser == null) {
-                            _showMaterialDialog(context);
-                          } else {
-                            _showMaterialDialogPayment(context);
-                          }
-                        },
-                        child: Text(
-                            LanguageLocalizations
-                                .of(context)
-                                .book,
-                            style: TextStyle(
-                              color: getThemeTextColor(context),
-                            )
-                        ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(340, 40),
+                      primary: getThemeButtonColor(context),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                    ],
-                  )
-              ),
+                    ),
+                    onPressed: () async {
+                      if (FirebaseAuth.instance.currentUser == null) {
+                        _showMaterialDialog(context);
+                      } else {
+                        _showMaterialDialogPayOk(context);
+                      }
+                    },
+                    child: Text(LanguageLocalizations.of(context).book,
+                        style: TextStyle(
+                          color: getThemeTextColor(context),
+                        )),
+                  ),
+                ],
+              )),
             ],
           ),
         ],
@@ -594,10 +617,7 @@ class _PaymentScreenState extends State<Payment> {
               child: Image.asset(
                 "${place["img"]}",
                 height: 250.0,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width - 40.0,
+                width: MediaQuery.of(context).size.width - 40.0,
                 fit: BoxFit.cover,
               ),
             ),
@@ -608,9 +628,7 @@ class _PaymentScreenState extends State<Payment> {
   }
 
   Color getThemeColor(BuildContext context) {
-    bool isDarkMode = Theme
-        .of(context)
-        .brightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (isDarkMode) {
       return Colors.white;
@@ -620,9 +638,7 @@ class _PaymentScreenState extends State<Payment> {
   }
 
   Color getThemeButtonColor(BuildContext context) {
-    bool isDarkMode = Theme
-        .of(context)
-        .brightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode) {
       return Colors.white;
@@ -632,9 +648,7 @@ class _PaymentScreenState extends State<Payment> {
   }
 
   getThemeTextColor(BuildContext context) {
-    bool isDarkMode = Theme
-        .of(context)
-        .brightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     if (isDarkMode) {
       return Colors.white;
     } else {
@@ -647,37 +661,29 @@ class _PaymentScreenState extends State<Payment> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text(LanguageLocalizations
-                .of(context)
-                .attention),
-            content: Text(LanguageLocalizations
-                .of(context)
-                .textattention),
+            title: Text(LanguageLocalizations.of(context).attention),
+            content: Text(LanguageLocalizations.of(context).textattention),
             actions: <Widget>[
               TextButton(
                   onPressed: () {
                     _dismissDialog(context);
                     Navigator.pushNamed(context, 'Explore');
                   },
-                  child: Text(LanguageLocalizations
-                      .of(context)
-                      .delete,
+                  child: Text(
+                    LanguageLocalizations.of(context).delete,
                     style: const TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 20,
                       height: 1,
                     ),
-                  )
-              ),
+                  )),
               TextButton(
                 onPressed: () {
                   _dismissDialog(context);
                   Navigator.pushNamed(context, 'Login');
                 },
                 child: Text(
-                  LanguageLocalizations
-                      .of(context)
-                      .signin,
+                  LanguageLocalizations.of(context).signin,
                   style: const TextStyle(
                     color: Colors.blueAccent,
                     fontSize: 20,
@@ -693,7 +699,6 @@ class _PaymentScreenState extends State<Payment> {
   _dismissDialog(BuildContext context) {
     Navigator.pop(context);
   }
-
 
   void _showMaterialDialogPayment(BuildContext context) {
     String first = 'Il costo della transazione è di \n';
@@ -726,13 +731,13 @@ class _PaymentScreenState extends State<Payment> {
               TextButton(
                 onPressed: () async {
                   String result = await payable(usedFelix, price);
-                  if (result == 'error'){
+                  if (result == 'error') {
                     _dismissDialog(context);
                     _showMaterialDialogPaymentError(context);
                     //_dismissDialog(context);
                   } else {
                     String transaction = await sendFELX(usedFelix);
-                    if (transaction == 'ok'){
+                    if (transaction == 'ok') {
                       _showMaterialDialogPayOk(context);
                     } else {
                       _dismissDialog(context);
@@ -754,7 +759,6 @@ class _PaymentScreenState extends State<Payment> {
         });
   }
 
-
   Future<String> getBalance() async {
     List<String> address = [];
     String base = 'http://10.0.2.2:4455/address/';
@@ -772,9 +776,7 @@ class _PaymentScreenState extends State<Payment> {
 
     String toParse = address.join();
 
-
-    final response = await http
-        .get(Uri.parse(toParse));
+    final response = await http.get(Uri.parse(toParse));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -788,8 +790,7 @@ class _PaymentScreenState extends State<Payment> {
     }
   }
 
-
-  Future<String> payable (int usedFelix, String price) async {
+  Future<String> payable(int usedFelix, String price) async {
     String balance = '';
 
     List<String> address = [];
@@ -808,9 +809,7 @@ class _PaymentScreenState extends State<Payment> {
 
     String toParse = address.join();
 
-
-    final response = await http
-        .get(Uri.parse(toParse));
+    final response = await http.get(Uri.parse(toParse));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -822,7 +821,6 @@ class _PaymentScreenState extends State<Payment> {
       // then throw an exception.
       throw Exception('Failed to load');
     }
-
 
     int difference = int.parse(balance) - usedFelix;
 
@@ -848,7 +846,6 @@ class _PaymentScreenState extends State<Payment> {
         return 'error';
       }
     }
-
   }
 
   void _showMaterialDialogPaymentError(BuildContext context) {
@@ -857,7 +854,11 @@ class _PaymentScreenState extends State<Payment> {
         builder: (context) {
           return AlertDialog(
             title: Text('Transazione non effettuata'),
-            content: Icon(Icons.sentiment_dissatisfied_outlined, size: 80, color: getThemeTextColor(context),),
+            content: Icon(
+              Icons.sentiment_dissatisfied_outlined,
+              size: 80,
+              color: getThemeTextColor(context),
+            ),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -890,28 +891,40 @@ class _PaymentScreenState extends State<Payment> {
                 children: <Widget>[
                   Text('Prenotazione effettuata con successo \n'),
                   Icon(
-                    Icons.check, size: 50, color: getThemeTextColor(context),
+                    Icons.check,
+                    size: 50,
+                    color: getThemeTextColor(context),
                   ),
                 ],
               ),
-            ) ,
+            ),
             actions: <Widget>[
               TextButton(
                 onPressed: () async {
                   _dismissDialog(context);
                   int hotelIndex = GlobalState.instance.get('hotelIndex');
-                  double tokenToMint = (int.parse(price)*20)/100;
+                  double tokenToMint = (int.parse(price) * 20) / 100;
                   int finalToken = tokenToMint.toInt() * 12;
                   mint(finalToken);
-                  FirebaseFirestore.instance.collection('reservation').add({
-                    'hotel_name': '${places[hotelIndex]["name"]}',
-                    'full_name': FirebaseAuth.instance.currentUser!.displayName,
-                    'email': FirebaseAuth.instance.currentUser!.email,
-                    'numberAdult': GlobalState.instance.get('numberAdult'),
-                    'numberChild': GlobalState.instance.get('numberChild'),
-                    'from': GlobalState.instance.get('dateFrom'),
-                    'until': GlobalState.instance.get('dateUntil'),
-                  }).then((value) => _showMaterialDialogEarnedFELX(context, finalToken))
+                  FirebaseFirestore.instance
+                      .collection('reservation')
+                      .add({
+                        'hotel_id': '${places[hotelIndex]["id"]}',
+                        'room_id':
+                            '${places[hotelIndex]["rooms"][roomIndex]["id"]}',
+                        'hotel_name': '${places[hotelIndex]["name"]}',
+                        'room_name':
+                            '${places[hotelIndex]["rooms"][roomIndex]["name"]}',
+                        'email': FirebaseAuth.instance.currentUser!.email,
+                        'numberAdult': GlobalState.instance.get('numberAdult'),
+                        'numberChild': GlobalState.instance.get('numberChild'),
+                        'from': GlobalState.instance.get('dateFrom'),
+                        'until': GlobalState.instance.get('dateUntil'),
+                        'price': int.parse(
+                            '${places[hotelIndex]["rooms"][roomIndex]["price"]}'),
+                      })
+                      .then((value) =>
+                          _showMaterialDialogEarnedFELX(context, finalToken))
                       .catchError((error) => print(error));
                   Navigator.pushNamed(context, '/');
                 },
@@ -966,8 +979,7 @@ class _PaymentScreenState extends State<Payment> {
 
     print(toParse);
 
-    final response = await http
-        .get(Uri.parse(toParse));
+    final response = await http.get(Uri.parse(toParse));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -978,25 +990,21 @@ class _PaymentScreenState extends State<Payment> {
       // then throw an exception.
       throw Exception('Failed to load');
     }
-
   }
-  
 
-  void updatePrice(int used){
+  void updatePrice(int used) {
     setState(() {
-      double convertedPrice = int.parse(originalPrice) - (used/12);
+      double convertedPrice = int.parse(originalPrice) - (used / 12);
       String updatedPrice = convertedPrice.toInt().toString();
       price = updatedPrice;
     });
   }
 
-  void mint (int number) async {
-
+  void mint(int number) async {
     List<String> address = [];
     String base = 'http://10.0.2.2:4455/mint/' + number.toString() + '/';
     print(base);
     address.add(base);
-
 
     await FirebaseFirestore.instance
         .collection('users')
@@ -1010,10 +1018,7 @@ class _PaymentScreenState extends State<Payment> {
 
     String toParse = address.join();
 
-
-    final response = await http
-        .get(Uri.parse(toParse));
-
+    final response = await http.get(Uri.parse(toParse));
   }
 
   void _showMaterialDialogEarnedFELX(BuildContext context, int earned) {
@@ -1025,7 +1030,11 @@ class _PaymentScreenState extends State<Payment> {
         builder: (context) {
           return AlertDialog(
             title: Text((first + second + third)),
-            content: Icon(Icons.sentiment_satisfied_outlined, size: 80, color: getThemeTextColor(context),),
+            content: Icon(
+              Icons.sentiment_satisfied_outlined,
+              size: 80,
+              color: getThemeTextColor(context),
+            ),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -1045,7 +1054,4 @@ class _PaymentScreenState extends State<Payment> {
           );
         });
   }
-
 }
-
-

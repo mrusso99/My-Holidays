@@ -191,19 +191,22 @@ class SelfCheckInSummary extends StatelessWidget {
 
         Reservation addToList = Reservation(
             data['email'],
-            data['full_name'],
+            data['hotel_name'],
+            data['room_name'],
+            data['hotel_id'],
+            data['room_id'],
             data['from'],
             data['until'],
-            data['hotel_name'],
-            data['numberAdult'].toString(),
-            data['numberChild'].toString(),
-            doc.id);
+            data['numberAdult'],
+            data['numberChild'],
+            doc.id,
+            data['price']);
         l.add(addToList);
       });
     });
 
-    String nAdult = (l.elementAt(0).numberAdult);
-    String nChild = l.elementAt(0).numberChild;
+    String nAdult = l.elementAt(0).numberAdult.toString();
+    String nChild = l.elementAt(0).numberChild.toString();
     print(nAdult);
     print(nChild);
     int value = (int.parse(nAdult)) + (int.parse(nChild));

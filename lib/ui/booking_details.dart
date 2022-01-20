@@ -71,7 +71,7 @@ class BookingDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "${places[id]['name']}",
+                      reservation.hotelName,
                       style: TextStyle(
                         fontSize: 25,
                       ),
@@ -90,17 +90,24 @@ class BookingDetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "351€",
+                              reservation.roomName,
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            Text(
+                              reservation.price.toString() + "€",
                               style: TextStyle(
                                 fontSize: 25,
                               ),
                             ),
                             Text(
-                              "2 notti",
+                              getNumberOfnights(reservation.dateFrom,
+                                      reservation.dateUntil) +
+                                  " " +
+                                  LanguageLocalizations.of(context).nights,
                               style: TextStyle(
                                 fontSize: 20,
                               ),
-                            )
+                            ),
                           ],
                         ),
                         Container(
@@ -182,6 +189,13 @@ class BookingDetailsScreen extends StatelessWidget {
         )
       ]),
     ));
+  }
+
+  String getNumberOfnights(String dateFrom, String dateUntil) {
+    DateTime from = DateTime.parse(dateFrom);
+    DateTime until = DateTime.parse(dateUntil);
+
+    return ((until.difference(from).inDays - 1).toString());
   }
 }
 

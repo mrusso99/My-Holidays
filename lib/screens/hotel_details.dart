@@ -8,8 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/app_colors.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/colors.dart';
 import 'package:my_holidays/util/places.dart';
+import 'package:my_holidays/util/size_config.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
@@ -44,28 +47,22 @@ class HotelDetails extends StatelessWidget {
                     child: Text(
                       "${places[hotelIndex]["name"]}",
                       style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                      ),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                          color: AppColors.primaryColor),
                       maxLines: 2,
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.bookmark,
-                    ),
-                    onPressed: () {},
-                  ),
                 ],
+              ),
+              SizedBox(
+                height: getProportionateScreenHeight(5),
               ),
               Row(
                 children: <Widget>[
-                  Icon(
-                    Icons.location_on,
-                    size: 14,
-                    color: Colors.blueGrey[300],
-                  ),
+                  Icon(Icons.location_on,
+                      size: 14, color: AppColors.secondaryColor),
                   const SizedBox(width: 3),
                   Container(
                     alignment: Alignment.centerLeft,
@@ -74,7 +71,7 @@ class HotelDetails extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
-                        color: Colors.blueGrey[300],
+                        color: AppColors.secondaryColor,
                       ),
                       maxLines: 1,
                       textAlign: TextAlign.left,
@@ -82,20 +79,7 @@ class HotelDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: const Text(
-                  "Details",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  maxLines: 1,
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              const SizedBox(height: 10.0),
+              const SizedBox(height: 30),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -107,14 +91,14 @@ class HotelDetails extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
-              const SizedBox(height: 10.0),
+              SizedBox(height: getProportionateScreenHeight(130)),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
                         child: RoundedButton(
-                      color: primaryColor,
+                      color: AppColors.primaryColor,
                       text: LanguageLocalizations.of(context).showRooms,
                       customOnPressed: () =>
                           {Navigator.pushNamed(context, 'Rooms')},
@@ -134,7 +118,7 @@ class HotelDetails extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
-        itemCount: places == null ? 0 : places.length,
+        itemCount: places == null ? 0 : 1, //places.length,
         itemBuilder: (BuildContext context, int index) {
           Map place = places[index];
 

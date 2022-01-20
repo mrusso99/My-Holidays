@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/body_rooms.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/places.dart';
 //import 'package:my_holidays/widgets/horizontal_rooms_item.dart';
 import 'package:my_holidays/widgets/search_bar.dart';
@@ -14,9 +16,9 @@ class Rooms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // String image = "imgs/GoFelix.jpg";
-    int hotelIndex = GlobalState.instance.get('hotelIndex');
     var _title =
         Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+    var hotelIndex = GlobalState.instance.get('hotelIndex');
     return Scaffold(
       appBar: AppBar(
         title: _title,
@@ -34,6 +36,39 @@ class Rooms extends StatelessWidget {
           // ),
           //R ),
           //  ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, top: 10),
+            child: Text(
+              '${places[hotelIndex]["name"]}',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: AppColors.primaryColor,
+              ),
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 10, top: 5),
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.location_on,
+                      size: 14, color: AppColors.secondaryColor),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "${places[hotelIndex]["location"]}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: AppColors.secondaryColor,
+                      ),
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                ],
+              )),
           const SizedBox(height: 10),
           //  buildHorizontalList(context),
 
@@ -71,7 +106,8 @@ class Rooms extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           Map place =
               places[GlobalState.instance.get('hotelIndex')]["rooms"][index];
-          return VerticalRoomsItem(place: place);
+          //return VerticalRoomsItem(place: place);
+          return BodyRooms(place: place, index: index);
         },
       ),
     );

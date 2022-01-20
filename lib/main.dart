@@ -90,7 +90,8 @@ class App extends StatelessWidget {
                 const SelfCheckInSummary(),
             BookingDetailsScreen.routeName: (context) =>
                 const BookingDetailsScreen(),
-            'Rooms': (context) => const Rooms()
+            'Rooms': (context) => const Rooms(),
+            'Pay': (context) => const Payment()
           },
         );
       }),

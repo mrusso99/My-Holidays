@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/body.dart';
 import 'package:my_holidays/util/colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/horizontal_place_item.dart';
@@ -34,22 +35,21 @@ class Travels extends StatelessWidget {
           //R ),
           //  ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(10.0),
             child: Text(
               LanguageLocalizations.of(context).textSelected,
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 24,
                 color: primaryColor,
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 5),
           //  buildHorizontalList(context),
           buildVerticalList(),
-          const SizedBox(height: 20),
-          SearchBar(),
+          const SizedBox(height: 50),
         ],
       ),
     );
@@ -81,7 +81,7 @@ class Travels extends StatelessWidget {
         itemCount: places == null ? 0 : places.length,
         itemBuilder: (BuildContext context, int index) {
           Map place = places[index];
-          return VerticalPlaceItem(place: place);
+          return Body(place: place);
         },
       ),
     );

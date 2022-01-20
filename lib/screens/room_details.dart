@@ -13,8 +13,8 @@ import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
-class Details extends StatelessWidget {
-  const Details({Key? key}) : super(key: key);
+class RoomDetails extends StatelessWidget {
+  const RoomDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
