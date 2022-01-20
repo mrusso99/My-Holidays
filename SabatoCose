@@ -1,9 +1,0 @@
-Quando utente != exists \exists errore non si può  andare avanti, su un controllo, riga 320 file wallet_screen
-
-Reservation:
-
-idutente = email ?
-full_name = non serve
-hotel_id
-tipo di camera
-prezzo
