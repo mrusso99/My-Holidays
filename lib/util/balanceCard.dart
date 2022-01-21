@@ -9,9 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class BalanceCard extends StatelessWidget {
-
   const BalanceCard({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +31,9 @@ class BalanceCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       FutureBuilder<String>(
-                          future: getBalance(),
-                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                        future: getBalance(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<String> snapshot) {
                           List<Widget> children;
                           if (snapshot.hasData) {
                             String? balance = snapshot.data;
@@ -52,7 +51,8 @@ class BalanceCard extends StatelessWidget {
                             ];
                           } else if (snapshot.hasError) {
                             children = <Widget>[
-                              Text('Error',
+                              Text(
+                                'Error',
                                 style: TextStyle(
                                   fontSize: 10.0,
                                   fontWeight: FontWeight.bold,
@@ -133,42 +133,40 @@ class BalanceCard extends StatelessWidget {
         ));
   }
 
-
-
   Future<String> getBalance() async {
-
     List<String> address = [];
     String base = 'http://10.0.2.2:4455/address/';
     address.add(base);
+    var userEmail;
+    if (FirebaseAuth.instance.currentUser != null) {
+      userEmail = FirebaseAuth.instance.currentUser!.email;
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-        .get()
-            .then((QuerySnapshot querySnapshot) {
-          querySnapshot.docs.forEach((doc) {
-            address.add(doc["address"]);
-          });
+      await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: userEmail)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          address.add(doc["address"]);
         });
+      });
 
-    String toParse = address.join();
+      String toParse = address.join();
 
+      final response = await http.get(Uri.parse(toParse));
 
-    final response = await http
-        .get(Uri.parse(toParse));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      final Map parsed = json.decode(response.body);
-      return parsed['data']['balance'].toString();
+      if (response.statusCode == 200) {
+        // If the server did return a 200 OK response,
+        // then parse the JSON.
+        final Map parsed = json.decode(response.body);
+        return parsed['data']['balance'].toString();
+      } else {
+        // If the server did not return a 200 OK response,
+        // then throw an exception.
+        throw Exception('Failed to load');
+      }
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load');
+      throw Exception('user not connected');
     }
-
   }
-
-
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
 import 'package:my_holidays/ui/self_check_in_summary.dart';
@@ -192,10 +193,12 @@ class BookingDetailsScreen extends StatelessWidget {
   }
 
   String getNumberOfnights(String dateFrom, String dateUntil) {
-    DateTime from = DateTime.parse(dateFrom);
-    DateTime until = DateTime.parse(dateUntil);
+    DateFormat format = DateFormat("dd/MM/yyyy");
 
-    return ((until.difference(from).inDays - 1).toString());
+    DateTime from = format.parse(dateFrom);
+    DateTime until = format.parse(dateUntil);
+
+    return ((until.difference(from).inDays).toString());
   }
 }
 

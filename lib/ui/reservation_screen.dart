@@ -334,32 +334,37 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
   Future<List<Reservation>> getReservationList() async {
     List<Reservation> l = [];
+    var userEmail;
+    if (FirebaseAuth.instance.currentUser != null) {
+      userEmail = FirebaseAuth.instance.currentUser!.email;
+      await FirebaseFirestore.instance
+          .collection('reservation')
+          .where('email', isEqualTo: userEmail)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
 
-    await FirebaseFirestore.instance
-        .collection('reservation')
-        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-
-        Reservation addToList = Reservation(
-            data['email'],
-            data['hotel_name'],
-            data['room_name'],
-            data['hotel_id'],
-            data['room_id'],
-            data['from'],
-            data['until'],
-            data['numberAdult'],
-            data['numberChild'],
-            doc.id,
-            data['price']);
-        l.add(addToList);
+          Reservation addToList = Reservation(
+              data['email'],
+              data['hotel_name'],
+              data['room_name'],
+              data['hotel_id'],
+              data['room_id'],
+              data['from'],
+              data['until'],
+              data['numberAdult'],
+              data['numberChild'],
+              doc.id,
+              data['price']);
+          l.add(addToList);
+        });
       });
-    });
 
-    return l;
+      return l;
+    } else {
+      throw Exception('user not connected');
+    }
   }
 
   String? userName() {
