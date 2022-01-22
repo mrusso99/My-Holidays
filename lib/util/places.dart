@@ -38,7 +38,7 @@ List places = [
   },
   {
     "id": "hot2",
-    "name": "Hotel roma",
+    "name": "Hotel Roma",
     "img": "assets/2.jpeg",
     "location": "London, England",
     "details": "Hotel bellissimo ",

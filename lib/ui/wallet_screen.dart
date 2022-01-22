@@ -45,10 +45,6 @@ class _WalletScreenState extends State<WalletScreen> {
               const SizedBox(
                 height: 10,
               ),
-              ElevatedButton(
-                onPressed: () async {},
-                child: Text('LAUNCH NATIVE DROP-IN'),
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,9 +109,6 @@ class _WalletScreenState extends State<WalletScreen> {
                 height: 20,
               ),
               const Text("Transactions"),
-              const SizedBox(
-                height: 0,
-              ),
               Container(
                   height: MediaQuery.of(context).size.height / 4,
                   child: FutureBuilder<List<Transaction>>(

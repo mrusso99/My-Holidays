@@ -14,20 +14,31 @@ from utils.transaction import list_transactions, transform_transaction
 import firebase_admin
 from firebase_admin import credentials, firestore, initialize_app
 
-with open('config.json', 'r') as f:
+from flask_cors import CORS, cross_origin
+
+script_dir = os.path.dirname(__file__)
+file_path_config = os.path.join(script_dir, 'config.json')
+file_key_config = os.path.join(script_dir, 'key.json')
+
+with open(file_path_config, 'r') as f:
     config = json.load(f)
 
-cred = credentials.Certificate("key.json")
+with open(file_key_config, 'r') as f:
+    keyConfig = json.load(f)
+
+cred = credentials.Certificate(keyConfig)
 app =firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 APP = Flask(__name__)
 URL = config['URL'] 
-W3 = Web3(Web3.HTTPProvider(URL))
+W3 = Web3(Web3.HTTPProvider(URL)) 
+
+APP.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(APP, resources={r"/*": {"origins": "http://localhost:4200"}})
 
 contractAddress = config['Contract_Address']
 selfCheckInAddress= config['Self_Checkin_Address']
-script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, 'abi/abiToken.json')
 standard_token_abi = json.load(open(file_path))
 selfcheckin_abi = json.load(open(os.path.join(script_dir, 'abi/selfcheckin_abi.json')))
@@ -37,6 +48,7 @@ minterAddress = config['Minter_Address']
 
 
 @APP.route("/tx/<transid>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def get_by_id(transid) -> dict:
     """
     Searches for a transaction by ID and returns the
@@ -57,6 +69,7 @@ def get_by_id(transid) -> dict:
 
 
 @APP.route("/newAccount", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def get_account() -> dict:
     """
     Searches for a transaction by ID and returns the
@@ -77,6 +90,7 @@ def get_account() -> dict:
 
 
 @APP.route("/address/<address1>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def get_by_address(address1) -> dict:
     """
     Returns transactions and balance of an address
@@ -100,6 +114,7 @@ def get_by_address(address1) -> dict:
 
 
 @APP.route("/address/<address>/outgoing", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def get_outgoing(address) -> dict:
     """
     Returns outgoing transactions of an address
@@ -124,6 +139,7 @@ def get_outgoing(address) -> dict:
 
 
 @APP.route("/address/<address>/incoming", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def get_incoming(address) -> dict:
     """
     Returns incoming transactions of an address
@@ -148,6 +164,7 @@ def get_incoming(address) -> dict:
 
 
 @APP.route("/block/<int:height>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def get_block(height) -> dict:
     """
     Returns details on a requested block
@@ -167,6 +184,7 @@ def get_block(height) -> dict:
 
 
 @APP.route("/send/<sendAddress>/<int:token>/<toAddress>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def send(token, sendAddress, toAddress) -> dict:
     """
     Returns details on a requested block
@@ -186,6 +204,7 @@ def send(token, sendAddress, toAddress) -> dict:
         
 
 @APP.route("/mint/<int:token>/<sendAddress>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def mint(sendAddress, token) -> dict:
     """
     Returns details on a requested block
@@ -206,6 +225,7 @@ def mint(sendAddress, token) -> dict:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 @APP.route("/selfcheckin/authenticate/<user>/<destination>/<assetURI>/<reservationNumber>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
     "TODO SCRIVERE QUALCOSA A RIGUARDO"
 
@@ -220,6 +240,7 @@ def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
 
 
 @APP.route("/selfcheckin/checkin/<user>/<destination>/<reservationNumber>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def checkin(user,destination,assetURI,reservationNumber) -> dict:
     "TODO"
 
@@ -233,6 +254,7 @@ def checkin(user,destination,assetURI,reservationNumber) -> dict:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 @APP.route("/selfcheckin/ischeckedin/<user>/<destination>/<reservationNumber>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def ischeckedin(user,destination,reservationNumber) -> dict:
 
     try:
@@ -245,6 +267,7 @@ def ischeckedin(user,destination,reservationNumber) -> dict:
 
 
 @APP.route("/selfcheckin/getdestination/<user>/<destination>/<reservationNumber>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def getdestination(user,destination,reservationNumber) -> dict:
 
     try:

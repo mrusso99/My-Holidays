@@ -13,8 +13,10 @@ import 'package:my_holidays/util/places.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
+
 class Payment extends StatefulWidget {
   const Payment({Key? key}) : super(key: key);
+
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
@@ -29,9 +31,9 @@ class _PaymentScreenState extends State<Payment> {
   int numberAdult = GlobalState.instance.get('numberAdult');
   int numberChild = GlobalState.instance.get('numberChild');
   int roomIndex = GlobalState.instance.get('roomIndex');
+  int hotelIndex = GlobalState.instance.get('hotelIndex');
   @override
   Widget build(BuildContext context) {
-    int hotelIndex = GlobalState.instance.get('hotelIndex');
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
@@ -582,7 +584,7 @@ class _PaymentScreenState extends State<Payment> {
                       if (FirebaseAuth.instance.currentUser == null) {
                         _showMaterialDialog(context);
                       } else {
-                        _showMaterialDialogPayOk(context);
+                        _showMaterialDialogPayment(context);
                       }
                     },
                     child: Text(LanguageLocalizations.of(context).book,
@@ -734,16 +736,18 @@ class _PaymentScreenState extends State<Payment> {
                   if (result == 'error') {
                     _dismissDialog(context);
                     _showMaterialDialogPaymentError(context);
-                    //_dismissDialog(context);
                   } else {
-                    String transaction = await sendFELX(usedFelix);
-                    if (transaction == 'ok') {
-                      _showMaterialDialogPayOk(context);
-                    } else {
-                      _dismissDialog(context);
-                      _showMaterialDialogPaymentError(context);
+                      // int hotelIndex = GlobalState.instance.get('hotelIndex');
+                      String transaction = await sendFELX(usedFelix, hotelIndex);
+                      if (transaction == 'ok') {
+                        _dismissDialog(context);
+                        _showMaterialDialogPayOk(context);
+                      } else {
+                        _dismissDialog(context);
+                        _showMaterialDialogPaymentError(context);
+                      }
                     }
-                  }
+
                 },
                 child: Text(
                   'Ok',
@@ -902,7 +906,7 @@ class _PaymentScreenState extends State<Payment> {
               TextButton(
                 onPressed: () async {
                   _dismissDialog(context);
-                  int hotelIndex = GlobalState.instance.get('hotelIndex');
+                  //int hotelIndex = GlobalState.instance.get('hotelIndex');
                   double tokenToMint = (int.parse(price) * 20) / 100;
                   int finalToken = tokenToMint.toInt() * 12;
                   mint(finalToken);
@@ -920,8 +924,8 @@ class _PaymentScreenState extends State<Payment> {
                         'numberChild': GlobalState.instance.get('numberChild'),
                         'from': GlobalState.instance.get('dateFrom'),
                         'until': GlobalState.instance.get('dateUntil'),
-                        'price': int.parse(
-                            '${places[hotelIndex]["rooms"][roomIndex]["price"]}'),
+                        'price': price,
+                        'felix_used': usedFelix.toString()
                       })
                       .then((value) =>
                           _showMaterialDialogEarnedFELX(context, finalToken))
@@ -942,14 +946,14 @@ class _PaymentScreenState extends State<Payment> {
         });
   }
 
-  Future<String> sendFELX(int price) async {
+  Future<String> sendFELX(int price, int hotelIndex) async {
     List<String> address = [];
     String base = 'http://10.0.2.2:4455/send/';
     address.add(base);
 
     await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .collection('hotel')
+        .where('user_name', isEqualTo: places[hotelIndex]["name"])
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
@@ -961,8 +965,6 @@ class _PaymentScreenState extends State<Payment> {
     address.add('/');
     address.add(price.toString());
     address.add('/');
-
-    int hotelIndex = GlobalState.instance.get('hotelIndex');
 
     await FirebaseFirestore.instance
         .collection('users')
@@ -979,7 +981,9 @@ class _PaymentScreenState extends State<Payment> {
 
     print(toParse);
 
-    final response = await http.get(Uri.parse(toParse));
+    String test = 'http://10.0.2.2:4455/send/0x8133dcEb920Bd178F7653e58eeebEC4E0816B916/12/0x3670F953f25028711E0C26a071F5c49CD65eE1AF';
+
+    final response = await http.get(Uri.parse(test));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
