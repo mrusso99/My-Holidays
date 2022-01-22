@@ -24,6 +24,7 @@ class RoomDetails extends StatelessWidget {
     int? numberChild = 0;
     int hotelIndex = GlobalState.instance.get('hotelIndex');
     int roomIndex = GlobalState.instance.get('roomIndex');
+    GlobalState.instance.set('roomPrice', places[hotelIndex]["rooms"][roomIndex]["price"]);
     var _title =
     Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(

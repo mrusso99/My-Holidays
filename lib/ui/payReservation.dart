@@ -24,8 +24,8 @@ class Payment extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<Payment> {
-  String originalPrice = '100';
-  String price = '100';
+  String originalPrice = '';
+  String price = '';
   int usedFelix = 0;
   String from = GlobalState.instance.get('dateFrom');
   String until = GlobalState.instance.get('dateUntil');
@@ -33,8 +33,10 @@ class _PaymentScreenState extends State<Payment> {
   int numberChild = GlobalState.instance.get('numberChild');
   int roomIndex = GlobalState.instance.get('roomIndex');
   int hotelIndex = GlobalState.instance.get('hotelIndex');
+
   @override
   Widget build(BuildContext context) {
+    updateAllPrice();
     var _title =
     Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
@@ -236,7 +238,7 @@ class _PaymentScreenState extends State<Payment> {
                             ),
                             Row(children: <Widget>[
                               Text(
-                                price,
+                                originalPrice,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 18,
@@ -925,6 +927,7 @@ class _PaymentScreenState extends State<Payment> {
                   double tokenToMint = (int.parse(price) * 20) / 100;
                   int finalToken = tokenToMint.toInt() * 12;
                   mint(finalToken);
+                  _showMaterialDialogEarnedFELX(context, finalToken);
                   FirebaseFirestore.instance
                       .collection('reservation')
                       .add({
@@ -942,10 +945,8 @@ class _PaymentScreenState extends State<Payment> {
                         'price': price,
                         'felix_used': usedFelix.toString()
                       })
-                      .then((value) =>
-                          _showMaterialDialogEarnedFELX(context, finalToken))
+                      .then((value) => print(value))
                       .catchError((error) => print(error));
-                  Navigator.pushNamed(context, '/');
                 },
                 child: Text(
                   'Ok',
@@ -967,6 +968,22 @@ class _PaymentScreenState extends State<Payment> {
     address.add(base);
 
     await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        print(doc["address"]);
+        address.add(doc["address"]);
+      });
+    });
+
+
+    address.add('/');
+    address.add(price.toString());
+    address.add('/');
+
+    await FirebaseFirestore.instance
         .collection('hotel')
         .where('user_name', isEqualTo: places[hotelIndex]["name"])
         .get()
@@ -977,28 +994,13 @@ class _PaymentScreenState extends State<Payment> {
       });
     });
 
-    address.add('/');
-    address.add(price.toString());
-    address.add('/');
-
-    await FirebaseFirestore.instance
-        .collection('users')
-        .where('user_name', isEqualTo: places[hotelIndex]["name"])
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc["address"]);
-        address.add(doc["address"]);
-      });
-    });
 
     String toParse = address.join();
 
     print(toParse);
 
-    String test = 'http://10.0.2.2:4455/send/0x8133dcEb920Bd178F7653e58eeebEC4E0816B916/12/0x3670F953f25028711E0C26a071F5c49CD65eE1AF';
 
-    final response = await http.get(Uri.parse(test));
+    final response = await http.get(Uri.parse(toParse));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -1022,7 +1024,6 @@ class _PaymentScreenState extends State<Payment> {
   void mint(int number) async {
     List<String> address = [];
     String base = 'http://10.0.2.2:4455/mint/' + number.toString() + '/';
-    print(base);
     address.add(base);
 
     await FirebaseFirestore.instance
@@ -1036,6 +1037,7 @@ class _PaymentScreenState extends State<Payment> {
     });
 
     String toParse = address.join();
+    print(toParse);
 
     final response = await http.get(Uri.parse(toParse));
   }
@@ -1072,5 +1074,11 @@ class _PaymentScreenState extends State<Payment> {
             ],
           );
         });
+  }
+
+  updateAllPrice(){
+    String z = places[hotelIndex]["rooms"][roomIndex]["price"];
+    originalPrice = z;
+    price = z;
   }
 }

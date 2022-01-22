@@ -109,156 +109,163 @@ class _WalletScreenState extends State<WalletScreen> {
                 height: 20,
               ),
               const Text("Transactions"),
-              Container(
-                  height: MediaQuery.of(context).size.height / 4,
-                  child: FutureBuilder<List<Transaction>>(
-                      future: getTransactionList(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<Transaction>> snapshot) {
-                        List<Widget> children;
-                        if (snapshot.hasData) {
-                          if (snapshot.data!.isEmpty) {
-                            children = <Widget>[
-                              const Icon(
-                                Icons.sentiment_dissatisfied_outlined,
-                                color: Colors.red,
-                                size: 60,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 16),
-                                child: Text('No transaction'),
-                              )
-                            ];
-                          } else {
-                            children = <Widget>[
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height / 4,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: snapshot.data!.length,
-                                  itemBuilder: (ctx, i) {
-                                    return GestureDetector(
-                                      onTap: () => {},
-                                      child: Container(
-                                        width: 160,
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 11.0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          child: Stack(
-                                            children: <Widget>[
-                                              Positioned(
-                                                bottom: 0,
-                                                left: 0,
-                                                right: 0,
-                                                child: Container(
-                                                  height: 150,
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 9.0,
-                                                      vertical: 5.0),
-                                                  decoration: BoxDecoration(
-                                                    color: getThemeButtonColor(
-                                                        context),
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(20),
-                                                      topLeft:
-                                                          Radius.circular(20),
-                                                      bottomLeft:
-                                                          Radius.circular(20),
-                                                      bottomRight:
-                                                          Radius.circular(20),
-                                                    ),
-                                                  ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                          height: MediaQuery.of(context).size.height / 4,
+                          child: FutureBuilder<List<Transaction>>(
+                              future: getTransactionList(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<List<Transaction>> snapshot) {
+                                List<Widget> children;
+                                if (snapshot.hasData) {
+                                  if (snapshot.data!.isEmpty) {
+                                    children = <Widget>[
+                                      const Icon(
+                                        Icons.sentiment_dissatisfied_outlined,
+                                        color: Colors.red,
+                                        size: 60,
+                                      ),
+                                      Text('No transaction')
+                                    ];
+                                  } else {
+                                    children = <Widget>[
+                                      SizedBox(
+                                        width: 340,
+                                        height: 165,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: snapshot.data!.length,
+                                          itemBuilder: (ctx, i) {
+                                            return GestureDetector(
+                                              onTap: () => {},
+                                              child: Container(
+                                                width: 160,
+                                                margin: const EdgeInsets.symmetric(
+                                                    horizontal: 5.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius.circular(15.0),
+                                                  child: Stack(
                                                     children: <Widget>[
-                                                      Text(
-                                                          "Address: ${snapshot.data![i].address}",
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  getThemeTextColor(
-                                                                      context))),
-                                                      Spacer(),
-                                                      Text(
-                                                          "Block number: ${snapshot.data![i].block_number}",
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  getThemeTextColor(
-                                                                      context))),
-                                                      Spacer(),
-                                                      Text(
-                                                          "Type: ${snapshot.data![i].type}",
-                                                          style: TextStyle(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  getThemeTextColor(
-                                                                      context))),
+                                                      Positioned(
+                                                        bottom: 0,
+                                                        left: 0,
+                                                        right: 0,
+                                                        child: Container(
+                                                          height: 150,
+                                                          padding: EdgeInsets.symmetric(
+                                                              horizontal: 9.0,
+                                                              vertical: 5.0),
+                                                          decoration: BoxDecoration(
+                                                            color: getThemeButtonColor(
+                                                                context),
+                                                            borderRadius:
+                                                            BorderRadius.only(
+                                                              topRight:
+                                                              Radius.circular(20),
+                                                              topLeft:
+                                                              Radius.circular(20),
+                                                              bottomLeft:
+                                                              Radius.circular(20),
+                                                              bottomRight:
+                                                              Radius.circular(20),
+                                                            ),
+                                                          ),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                            children: <Widget>[
+                                                              Text(
+                                                                  "Address: ${snapshot.data![i].address}",
+                                                                  style: TextStyle(
+                                                                      fontSize: 12,
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                      color:
+                                                                      getThemeTextColor(
+                                                                          context))),
+                                                              Spacer(),
+                                                              Text(
+                                                                  "Block number: ${snapshot.data![i].block_number}",
+                                                                  style: TextStyle(
+                                                                      fontSize: 12,
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                      color:
+                                                                      getThemeTextColor(
+                                                                          context))),
+                                                              Spacer(),
+                                                              Text(
+                                                                  "Type: ${snapshot.data![i].type}",
+                                                                  style: TextStyle(
+                                                                      fontSize: 12,
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                      color:
+                                                                      getThemeTextColor(
+                                                                          context))),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ];
-                          }
-                        } else if (snapshot.hasError) {
-                          print(snapshot.error);
-                          children = <Widget>[
-                            const Icon(
-                              Icons.error_outline,
-                              color: Colors.red,
-                              size: 60,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 16),
-                              child: Text('Non hai fatto la login'),
-                            )
-                          ];
-                        } else {
-                          children = const <Widget>[
-                            SizedBox(
-                              width: 30,
-                              height: 30,
-                              child: CircularProgressIndicator(
-                                color: Colors.blue,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 16),
-                              child: Text('Awaiting result...'),
-                            )
-                          ];
-                        }
-                        return Center(
-                          child: Column(
-                            children: children,
-                          ),
-                        );
-                      })),
+                                    ];
+                                  }
+                                } else if (snapshot.hasError) {
+                                  print(snapshot.error);
+                                  children = <Widget>[
+                                    const Icon(
+                                      Icons.error_outline,
+                                      color: Colors.red,
+                                      size: 60,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 16),
+                                      child: Text('Non hai fatto la login'),
+                                    )
+                                  ];
+                                } else {
+                                  children = const <Widget>[
+                                    SizedBox(
+                                      width: 30,
+                                      height: 30,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 16),
+                                      child: Text('Awaiting result...'),
+                                    )
+                                  ];
+                                }
+                                return Center(
+                                  child: Column(
+                                    children: children,
+                                  ),
+                                );
+                              })),
+                    ]
+                  ),
+                ],
+              ),
             ],
-          )),
+          )
+      ),
     )));
   }
 

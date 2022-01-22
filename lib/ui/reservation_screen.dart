@@ -27,6 +27,7 @@ class Reservation {
   final String hotelId;
   final String roomId;
   final int price;
+
   Reservation(
       this.email,
       this.hotelName,
