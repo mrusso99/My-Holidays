@@ -21,8 +21,11 @@ class Rooms extends StatelessWidget {
     var hotelIndex = GlobalState.instance.get('hotelIndex');
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: _title,
         centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
       ),
       body: ListView(
         children: <Widget>[

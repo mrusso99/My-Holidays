@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/ui/body.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/horizontal_place_item.dart';
@@ -19,8 +20,10 @@ class Travels extends StatelessWidget {
         Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: _title,
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         children: <Widget>[

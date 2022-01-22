@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_holidays/util/app_colors.dart';
 
 class ButtonHeaderWidget extends StatelessWidget {
   final String title;
@@ -36,7 +37,7 @@ class ButtonWidget extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode){
-      return Colors.white;
+      return AppColors.secondaryColor;
     } else {
       return Colors.black;
     }
@@ -48,7 +49,7 @@ class ButtonWidget extends StatelessWidget {
     if (isDarkMode){
       return Colors.white;
     } else {
-      return Colors.black;
+      return AppColors.white;
     }
   }
 

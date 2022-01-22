@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,13 +24,19 @@ class RoomDetails extends StatelessWidget {
     int? numberChild = 0;
     int hotelIndex = GlobalState.instance.get('hotelIndex');
     int roomIndex = GlobalState.instance.get('roomIndex');
+    var _title =
+    Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
       ),
       body: ListView(
         children: <Widget>[
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 20.0),
           buildSlider(),
           const SizedBox(height: 20),
           ListView(
@@ -48,35 +55,31 @@ class RoomDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
+                        color: AppColors.primaryColor,
                       ),
                       maxLines: 2,
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.bookmark,
-                    ),
-                    onPressed: () {},
-                  ),
                 ],
               ),
+              const SizedBox(height: 5),
               Row(
                 children: <Widget>[
                   Icon(
                     Icons.location_on,
                     size: 14,
-                    color: Colors.blueGrey[300],
+                    color: AppColors.secondaryColor,
                   ),
                   const SizedBox(width: 3),
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${places[hotelIndex]["rooms"][roomIndex]["location"]}",
+                      "${places[hotelIndex]["location"]}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
-                        color: Colors.blueGrey[300],
+                        color: AppColors.secondaryColor,
                       ),
                       maxLines: 1,
                       textAlign: TextAlign.left,
@@ -88,7 +91,7 @@ class RoomDetails extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[hotelIndex]["rooms"][roomIndex]["price"]} €",
+                  "${places[hotelIndex]["rooms"][roomIndex]["price"]} € - night",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -97,7 +100,7 @@ class RoomDetails extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               Container(
                 alignment: Alignment.centerLeft,
                 child: const Text(
@@ -236,7 +239,7 @@ class RoomDetails extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: getThemeButtonColor(context),
+                      primary: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -246,7 +249,7 @@ class RoomDetails extends StatelessWidget {
                     },
                     child: Text(LanguageLocalizations.of(context).cancel,
                         style: TextStyle(
-                          color: getThemeTextColor(context),
+                          color: AppColors.white,
                         )),
                   ),
                   SizedBox(width: 80),
@@ -271,7 +274,7 @@ class RoomDetails extends StatelessWidget {
                     },
                     child: Text(LanguageLocalizations.of(context).book,
                         style: TextStyle(
-                          color: getThemeTextColor(context),
+                          color: AppColors.white,
                         )),
                   ),
                 ],
@@ -293,7 +296,9 @@ class RoomDetails extends StatelessWidget {
         primary: false,
         itemCount: places == null ? 0 : 1, //places.lenght
         itemBuilder: (BuildContext context, int index) {
-          Map place = places[index];
+          int hotelIndex = GlobalState.instance.get('hotelIndex');
+          int roomIndex = GlobalState.instance.get('roomIndex');
+          Map place = places[hotelIndex]["rooms"][roomIndex];
 
           return Padding(
             padding: const EdgeInsets.only(right: 10.0),
@@ -326,7 +331,7 @@ class RoomDetails extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode) {
-      return Colors.white;
+      return AppColors.primaryColor;
     } else {
       return Colors.black;
     }

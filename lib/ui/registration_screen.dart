@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_holidays/ui/login_screen.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/user_detail.dart';
 import 'package:my_holidays/util/nav_bar.dart';
 import '../languages/languageLocalizations.dart';
@@ -33,7 +34,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String image = "imgs/GoFelix.jpg";
+    String image = 'assets/includes_logo.png';
     bool _isDark = Theme.of(context).brightness == Brightness.dark;
     Color box;
     if (_isDark) {
@@ -78,7 +79,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           padding: EdgeInsets.only(top: 0),
                           child: Icon(
                             Icons.person_outline,
-                            color: Colors.blueAccent,
+                            color: AppColors.primaryColor,
                           ),
                         ),
                         fillColor: Colors.grey.withOpacity(0.1),
@@ -109,7 +110,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           padding: EdgeInsets.only(top: 0),
                           child: Icon(
                             Icons.email_outlined,
-                            color: Colors.blueAccent,
+                            color: AppColors.primaryColor,
                           ),
                         ),
                         fillColor: Colors.grey.withOpacity(0.1),
@@ -141,7 +142,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           padding: EdgeInsets.only(top: 0),
                           child: Icon(
                             Icons.lock_outlined,
-                            color: Colors.blueAccent,
+                            color: AppColors.primaryColor,
                           ),
                         ),
                         fillColor: Colors.grey.withOpacity(0.1),
@@ -173,7 +174,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           padding: EdgeInsets.only(top: 0),
                           child: Icon(
                             Icons.lock_outlined,
-                            color: Colors.blueAccent,
+                            color: AppColors.primaryColor,
                           ),
                         ),
                         fillColor: Colors.grey.withOpacity(0.1),
@@ -227,7 +228,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               padding: MaterialStateProperty.all(
                                   const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.blueAccent),
+                                  MaterialStateProperty.all(AppColors.primaryColor),
                               shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
                                   RoundedRectangleBorder(

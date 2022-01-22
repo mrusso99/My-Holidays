@@ -46,7 +46,8 @@ class LanguageLocalizations {
       'surname': "Surname",
       'textSelected': "Chosen for you",
       'showRooms': "Show Rooms",
-      'nights': "Nights"
+      'nights': "Nights",
+      'yourStay': "Your Stay",
     },
     'it': {
       'wallet': 'Portafoglio',
@@ -81,7 +82,8 @@ class LanguageLocalizations {
       'surname': "Cognome",
       'textSelected': "Selezionati per te",
       'showRooms': "Seleziona Camere",
-      'nights': "Notti"
+      'nights': "Notti",
+      'yourStay': "Il tuo soggiorno",
     },
   };
 
@@ -209,5 +211,9 @@ class LanguageLocalizations {
 
   String get nights {
     return _localizedValues[locale.languageCode]!['nights']!;
+  }
+
+  String get yourStay {
+    return _localizedValues[locale.languageCode]!['yourStay']!;
   }
 }

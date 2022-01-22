@@ -9,6 +9,7 @@ import 'package:flutter_braintree/flutter_braintree.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
@@ -34,11 +35,19 @@ class _PaymentScreenState extends State<Payment> {
   int hotelIndex = GlobalState.instance.get('hotelIndex');
   @override
   Widget build(BuildContext context) {
+    var _title =
+    Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
+      ),
       body: ListView(
         children: <Widget>[
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 20.0),
           buildSlider(),
           const SizedBox(height: 20),
           ListView(
@@ -49,10 +58,11 @@ class _PaymentScreenState extends State<Payment> {
             children: <Widget>[
               const SizedBox(height: 6),
               Text(
-                "Il tuo soggiorno",
+                LanguageLocalizations.of(context).yourStay,
                 style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
+                  color: AppColors.primaryColor,
                 ),
                 maxLines: 2,
                 textAlign: TextAlign.left,
@@ -508,7 +518,7 @@ class _PaymentScreenState extends State<Payment> {
                               "Total",
                               style: TextStyle(
                                   fontSize: 18,
-                                  color: Color(0xFF3a3a3b),
+                                  color: AppColors.secondaryColor,
                                   fontWeight: FontWeight.w600),
                               textAlign: TextAlign.left,
                             ),
@@ -518,6 +528,7 @@ class _PaymentScreenState extends State<Payment> {
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
+                                  color: AppColors.secondaryColor,
                                 ),
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
@@ -526,6 +537,7 @@ class _PaymentScreenState extends State<Payment> {
                                 "€",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
+                                  color: AppColors.secondaryColor,
                                   fontSize: 18,
                                 ),
                                 maxLines: 1,
@@ -536,6 +548,7 @@ class _PaymentScreenState extends State<Payment> {
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
+                                  color: AppColors.secondaryColor,
                                 ),
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
@@ -545,6 +558,7 @@ class _PaymentScreenState extends State<Payment> {
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
+                                  color: AppColors.secondaryColor,
                                 ),
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
@@ -554,6 +568,7 @@ class _PaymentScreenState extends State<Payment> {
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
+                                  color: AppColors.secondaryColor,
                                 ),
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
@@ -589,7 +604,7 @@ class _PaymentScreenState extends State<Payment> {
                     },
                     child: Text(LanguageLocalizations.of(context).book,
                         style: TextStyle(
-                          color: getThemeTextColor(context),
+                          color: AppColors.white,
                         )),
                   ),
                 ],
@@ -608,7 +623,7 @@ class _PaymentScreenState extends State<Payment> {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
-        itemCount: places == null ? 0 : places.length,
+        itemCount: places == null ? 0 : 1,//places.length,
         itemBuilder: (BuildContext context, int index) {
           Map place = places[index];
 
@@ -643,7 +658,7 @@ class _PaymentScreenState extends State<Payment> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode) {
-      return Colors.white;
+      return AppColors.primaryColor;
     } else {
       return Colors.black;
     }

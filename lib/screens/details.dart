@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -326,7 +327,7 @@ class Details extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode) {
-      return Colors.white;
+      return AppColors.primaryColor;
     } else {
       return Colors.black;
     }

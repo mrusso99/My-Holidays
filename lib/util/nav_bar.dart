@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_holidays/main.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import '../languages/languageLocalizations.dart';
 import '../ui/home_screen.dart';
 import '../ui/wallet_screen.dart';
@@ -55,10 +57,10 @@ class _NavBarState extends State<NavBar> {
     Color selectedItemColor;
     Color unselectedItemColor;
     if (isDarkMode) {
-      selectedItemColor = Colors.lightBlue;
+      selectedItemColor = AppColors.primaryColor;
       unselectedItemColor = Colors.white;
     } else {
-      selectedItemColor = Colors.lightBlue;
+      selectedItemColor = AppColors.primaryColor;
       unselectedItemColor = Colors.black;
     }
     return Scaffold(
@@ -115,7 +117,7 @@ class _NavBarState extends State<NavBar> {
                     child: Text(
                       LanguageLocalizations.of(context).delete,
                       style: const TextStyle(
-                        color: Colors.blueAccent,
+                        color: AppColors.primaryColor,
                         fontSize: 20,
                         height: 1,
                       ),
@@ -128,7 +130,7 @@ class _NavBarState extends State<NavBar> {
                   child: Text(
                     LanguageLocalizations.of(context).signin,
                     style: const TextStyle(
-                      color: Colors.blueAccent,
+                      color: AppColors.primaryColor,
                       fontSize: 20,
                       height: 1,
                     ),

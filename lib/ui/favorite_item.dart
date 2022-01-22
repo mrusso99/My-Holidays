@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_holidays/screens/hotel_details.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/places.dart';
 import '../util/app_colors.dart';
 import 'package:my_holidays/util/size_config.dart';
 import 'package:my_holidays/util/text_styles.dart';
@@ -121,8 +122,8 @@ class FavoriteItem extends StatelessWidget {
   }
 
   int searchIndex(String hotelName) {
-    for (int i = 0; i < place.length; i++) {
-      if (place['id'] == hotelName) {
+    for (int i = 0; i < places.length; i++) {
+      if (places[i]['id'] == hotelName) {
         return i;
       }
     }

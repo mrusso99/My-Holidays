@@ -4,6 +4,7 @@ import 'package:my_holidays/screens/details.dart';
 import 'package:my_holidays/screens/hotel_details.dart';
 import 'package:my_holidays/screens/room_details.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/places.dart';
 import '../util/app_colors.dart';
 import 'package:my_holidays/util/size_config.dart';
 import 'package:my_holidays/util/text_styles.dart';
@@ -109,8 +110,8 @@ class RoomsItem extends StatelessWidget {
           ),
           onTap: () {
             //int index = searchIndex("${place["id"]}");
-            int index = searchIndex("${place["id"]}");
-            GlobalState.instance.set('hotelIndex', index);
+            int hotelIndex = GlobalState.instance.get('hotelIndex');
+            int index = searchRoomIndex(hotelIndex, "${place["id"]}");
             GlobalState.instance.set('roomIndex', index);
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -124,9 +125,9 @@ class RoomsItem extends StatelessWidget {
         ));
   }
 
-  int searchIndex(String hotelName) {
-    for (int i = 0; i < place.length; i++) {
-      if (place['id'] == hotelName) {
+  int searchRoomIndex(int hotelIndex, String roomName) {
+    for (int i = 0; i < places[hotelIndex]['rooms'].length; i++) {
+      if (places[hotelIndex]['rooms'][i]['id'] == roomName) {
         return i;
       }
     }

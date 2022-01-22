@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/nav_bar.dart';
 import '../util/validator.dart';
 import '../util/fire_auth.dart';
@@ -31,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String image = "imgs/GoFelix.jpg";
+    String image = 'assets/includes_logo.png';
     Size size = MediaQuery.of(context).size;
     bool _isDark = Theme.of(context).brightness == Brightness.dark;
     Color box;
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   padding: EdgeInsets.only(top: 0),
                                   child: Icon(
                                     Icons.email_outlined,
-                                    color: Colors.blueAccent,
+                                    color: AppColors.primaryColor,
                                   ),
                                 ),
                                 hintText: "Email",
@@ -123,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   padding: EdgeInsets.only(top: 0),
                                   child: Icon(
                                     Icons.lock_outlined,
-                                    color: Colors.blueAccent,
+                                    color: AppColors.primaryColor,
                                   ),
                                 ),
                                 hintText: "Password",
@@ -191,11 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         setState(() {});
 
                                         if (user != null) {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const NavBar()),
-                                          );
+                                          Navigator.pushReplacementNamed(context, '/');
                                         }
                                       }
                                     },
@@ -205,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               24.0, 0, 24.0, 0)),
                                       backgroundColor:
                                           MaterialStateProperty.all(
-                                              Colors.blueAccent),
+                                              AppColors.primaryColor),
                                       shape: MaterialStateProperty.all<
                                               RoundedRectangleBorder>(
                                           RoundedRectangleBorder(

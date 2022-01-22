@@ -24,13 +24,19 @@ class HotelDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int hotelIndex = GlobalState.instance.get('hotelIndex');
+    var _title =
+    Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
       ),
       body: ListView(
         children: <Widget>[
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 20.0),
           buildSlider(),
           const SizedBox(height: 20),
           ListView(
