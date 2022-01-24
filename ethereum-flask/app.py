@@ -227,12 +227,9 @@ def mint(sendAddress, token) -> dict:
 @APP.route("/selfcheckin/authenticate/<user>/<destination>/<assetURI>/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
-    "TODO SCRIVERE QUALCOSA A RIGUARDO"
 
     try:
-        hashReservationNumber = keccak.new(digest_bits=512)
-        hashReservationNumber.update(reservationNumber)
-        tx_hash=selfCheckInContract.functions.autheticateUser(user,destination,reservationNumber.hexdigest(),assetURI).transact({'from':minterAddress})
+        tx_hash=selfCheckInContract.functions.autheticateUser(user,destination,assetURI,reservationNumber).transact({'from':minterAddress})
         tx_receipt = W3.eth.wait_for_transaction_receipt(tx_hash)
         return jsonify({"data": 'ok'}), 200
     except ValueError:
@@ -241,13 +238,11 @@ def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
 
 @APP.route("/selfcheckin/checkin/<user>/<destination>/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-def checkin(user,destination,assetURI,reservationNumber) -> dict:
+def checkin(user,destination,reservationNumber) -> dict:
     "TODO"
 
     try:
-        hashReservationNumber = keccak.new(digest_bits=512)
-        hashReservationNumber.update(reservationNumber)
-        tx_hash=selfCheckInContract.functions.checkIn(user,destination,reservationNumber.hexdigest()).transact({'from':minterAddress})
+        tx_hash=selfCheckInContract.functions.checkIn(user,destination,reservationNumber).transact({'from':minterAddress})
         tx_receipt = W3.eth.wait_for_transaction_receipt(tx_hash)
         return jsonify({"data": 'ok'}), 200
     except ValueError:
@@ -256,11 +251,9 @@ def checkin(user,destination,assetURI,reservationNumber) -> dict:
 @APP.route("/selfcheckin/ischeckedin/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def ischeckedin(reservationNumber) -> dict:
-
+ 
     try:
-        hashReservationNumber = keccak.new(digest_bits=512)
-        hashReservationNumber.update(reservationNumber)
-        result=selfCheckInContract.functions.isCheckedIn(reservationNumber.hexdigest()).call()
+        result=selfCheckInContract.functions.isCheckedIn(reservationNumber).call()
         return jsonify({"Checkin status": result }), 200
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
@@ -271,14 +264,21 @@ def ischeckedin(reservationNumber) -> dict:
 def getdestination(user,destination,reservationNumber) -> dict:
 
     try:
-        hashReservationNumber = keccak.new(digest_bits=512)
-        hashReservationNumber.update(reservationNumber)
-        result=selfCheckInContract.functions.getDestination(user,destination,reservationNumber.hexdigest()).call()
+        result=selfCheckInContract.functions.getDestination(user,destination).call()
         return jsonify({"hotel": result}), 200
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 
+@APP.route("/selfcheckin/getasset/<reservationNumber>", methods=["GET"])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def getasset(reservationNumber) -> dict:
+
+    try:
+        result=selfCheckInContract.functions.getAsset(destination).call()
+        return jsonify({"hotel": result}), 200
+    except ValueError:
+        return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 if __name__=="__main__":
     APP.run(host='127.0.0.1',port=4455,debug=True) 

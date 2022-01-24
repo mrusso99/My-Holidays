@@ -77,16 +77,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "hotel",
-				"type": "address"
-			},
-			{
 				"internalType": "string",
 				"name": "reservationNumber",
 				"type": "string"
@@ -111,11 +101,6 @@
 				"type": "address"
 			},
 			{
-				"internalType": "address",
-				"name": "hotel",
-				"type": "address"
-			},
-			{
 				"internalType": "string",
 				"name": "reservationNumber",
 				"type": "string"
@@ -134,16 +119,6 @@
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "hotel",
-				"type": "address"
-			},
 			{
 				"internalType": "string",
 				"name": "reservationNumber",
@@ -179,6 +154,25 @@
 		"name": "renounceOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "reservationNumber",
+				"type": "string"
+			}
+		],
+		"name": "reservationExists",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{

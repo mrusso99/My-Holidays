@@ -16,6 +16,7 @@ contract SelfCheckIn is Ownable {
     function authenticateUsers(address user, address hotel, string memory  assetUri, string  memory reservationNumber) public onlyOwner 
     {
         require(user != hotel, "User address is the same as hotel");
+        require(reservationExists(reservationNumber) == false, "Reservation Already Exists");
         destination[reservationNumber] = hotel;
         customer[reservationNumber]=user;
         asset[reservationNumber]=assetUri;
@@ -47,6 +48,12 @@ contract SelfCheckIn is Ownable {
 
      return asset[reservationNumber];
      
+   }
+
+   function reservationExists(string memory reservationNumber) public view returns (bool){
+       if(customer[reservationNumber] != address(0))
+            return true; 
+            else return false;
    }
 
 }
