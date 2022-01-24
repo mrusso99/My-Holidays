@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class RoundedButton extends StatelessWidget {
   final String text;
   final Color color;
+  final VoidCallback customOnPressed;
 
   const RoundedButton({
     Key? key,
     required this.text,
     required this.color,
+    required this.customOnPressed,
   }) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class RoundedButton extends StatelessWidget {
 
   Widget NewRoundedButton() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: customOnPressed,
       style: ButtonStyle(
         padding: MaterialStateProperty.all(
             const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),

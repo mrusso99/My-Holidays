@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_holidays/main.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import '../languages/languageLocalizations.dart';
 import '../ui/home_screen.dart';
 import '../ui/wallet_screen.dart';
@@ -27,21 +29,24 @@ class _NavBarState extends State<NavBar> {
       child: WalletScreen(),
     ),
     const Card(
-      child: ReservationScreen()
-      ,),
+      child: ReservationScreen(),
+    ),
   ];
 
-
   void _onItemTapped(int index) {
-    setState((){
+    setState(() {
       _selectedIndex = index;
-      if(_selectedIndex != 0){
-        if(FirebaseAuth.instance.currentUser == null){
+      if (_selectedIndex != 0) {
+        if (FirebaseAuth.instance.currentUser == null) {
           _showMaterialDialog();
         }
-      }else {
+      } else {}
+    });
+  }
 
-      }
+  void setTabIndex(index) {
+    setState(() {
+      _selectedIndex = index;
     });
   }
 
@@ -52,16 +57,19 @@ class _NavBarState extends State<NavBar> {
     Color selectedItemColor;
     Color unselectedItemColor;
     if (isDarkMode) {
-      selectedItemColor = Colors.lightBlue;
+      selectedItemColor = AppColors.primaryColor;
       unselectedItemColor = Colors.white;
     } else {
-      selectedItemColor = Colors.lightBlue;
+      selectedItemColor = AppColors.primaryColor;
       unselectedItemColor = Colors.black;
     }
     return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _widgetOptions,
+      body: SafeArea(
+        top: false,
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: _widgetOptions,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -97,38 +105,38 @@ class _NavBarState extends State<NavBar> {
         builder: (context) {
           return Scaffold(
             body: AlertDialog(
-            title: Text(LanguageLocalizations.of(context).attention),
-            content: Text(LanguageLocalizations.of(context).textattention),
-            actions: <Widget>[
-              TextButton(
+              title: Text(LanguageLocalizations.of(context).attention),
+              content: Text(LanguageLocalizations.of(context).textattention),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      _dismissDialog();
+                      _onItemTapped(0);
+                      //Navigator.pushNamed(context, 'Explore');
+                    },
+                    child: Text(
+                      LanguageLocalizations.of(context).delete,
+                      style: const TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 20,
+                        height: 1,
+                      ),
+                    )),
+                TextButton(
                   onPressed: () {
                     _dismissDialog();
-                    _onItemTapped(0);
-                    //Navigator.pushNamed(context, 'Explore');
+                    Navigator.pushNamed(context, 'Login');
                   },
-                  child: Text(LanguageLocalizations.of(context).delete,
+                  child: Text(
+                    LanguageLocalizations.of(context).signin,
                     style: const TextStyle(
-                      color: Colors.blueAccent,
+                      color: AppColors.primaryColor,
                       fontSize: 20,
                       height: 1,
                     ),
-                  )
-              ),
-              TextButton(
-                onPressed: () {
-                  _dismissDialog();
-                  Navigator.pushNamed(context, 'Login');
-                },
-                child: Text(
-                  LanguageLocalizations.of(context).signin,
-          style: const TextStyle(
-          color: Colors.blueAccent,
-          fontSize: 20,
-          height: 1,
-          ),
-                ),
-              )
-            ],
+                  ),
+                )
+              ],
             ),
           );
         });
@@ -143,10 +151,9 @@ class _NavBarState extends State<NavBar> {
     try {
       // Wait for Firebase to initialize and set `_initialized` state to true
       await Firebase.initializeApp();
-    } catch(e) {
+    } catch (e) {
       // Set `_error` state to true if Firebase initialization fails
 
     }
   }
-
 }

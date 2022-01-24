@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:my_holidays/ui/smart_services.dart';
 
 class LanguageLocalizations {
   LanguageLocalizations(this.locale);
@@ -8,7 +9,8 @@ class LanguageLocalizations {
   final Locale locale;
 
   static LanguageLocalizations of(BuildContext context) {
-    return Localizations.of<LanguageLocalizations>(context, LanguageLocalizations)!;
+    return Localizations.of<LanguageLocalizations>(
+        context, LanguageLocalizations)!;
   }
 
   static const _localizedValues = <String, Map<String, String>>{
@@ -17,56 +19,75 @@ class LanguageLocalizations {
       'explore': 'Explore',
       'profile': 'Profile',
       'username': 'Username',
-      'forgotpassword' : 'Forgot password',
-      'emailrecovery' : 'Insert your email. We will send you instructions to reset your password',
-      'send' : 'Send',
-      'confirm' : 'Confirm',
-      'signup' : 'Sign Up',
-      'account' : 'Do you already have an account',
-      'signin' : 'Sign In',
-      'newaccount' : 'Create a new account',
-      'settings' : 'Settings',
-      'darktheme' : 'Dark Theme',
-      'attention' : 'Attention',
-      'textattention' : 'You must log in first',
-      'delete' : 'Delete',
-      'whereyougo' : 'Where are you going',
-      'texthome' : 'Your personal and smart experience during your stay',
-      'language' : 'English',
-      'changelanguage' : 'Language',
+      'forgotpassword': 'Forgot password',
+      'emailrecovery':
+          'Insert your email. We will send you instructions to reset your password',
+      'send': 'Send',
+      'confirm': 'Confirm',
+      'signup': 'Sign Up',
+      'account': 'Do you already have an account',
+      'signin': 'Sign In',
+      'newaccount': 'Create a new account',
+      'settings': 'Settings',
+      'darktheme': 'Dark Theme',
+      'attention': 'Attention',
+      'textattention': 'You must log in first',
+      'delete': 'Delete',
+      'whereyougo': 'Where are you going',
+      'texthome': 'Your personal and smart experience during your stay',
+      'language': 'English',
+      'changelanguage': 'Language',
       'date_selector': 'Date Selector',
       'cancel': 'Cancel',
-      'book': 'Book'
+      'book': 'Book',
+      'roomControl': 'Room Control',
+      'smartServices': "Smart Services",
+      'name': "Name",
+      'surname': "Surname",
+      'textSelected': "Chosen for you",
+      'showRooms': "Show Rooms",
+      'nights': "Nights",
+      'yourStay': "Your Stay",
     },
     'it': {
       'wallet': 'Portafoglio',
       'explore': 'Esplora',
       'profile': 'Profilo',
       'username': 'Utente',
-      'forgotpassword' : 'Hai dimenticato la password',
-      'emailrecovery' : 'Inserisci la tua email. Ti invieremo le istruzioni per reimpostare la tua password',
-      'send' : 'Invia',
-      'confirm' : 'Conferma',
-      'signup' : 'Registra',
-      'account' : 'Hai già un account',
-      'signin' : 'Login',
-      'newaccount' : 'Crea un nuovo account',
-      'settings' : 'Impostazioni',
-      'darktheme' : 'Tema Scuro',
-      'attention' : 'Attenzione',
+      'forgotpassword': 'Hai dimenticato la password',
+      'emailrecovery':
+          'Inserisci la tua email. Ti invieremo le istruzioni per reimpostare la tua password',
+      'send': 'Invia',
+      'confirm': 'Conferma',
+      'signup': 'Registra',
+      'account': 'Hai già un account',
+      'signin': 'Login',
+      'newaccount': 'Crea un nuovo account',
+      'settings': 'Impostazioni',
+      'darktheme': 'Tema Scuro',
+      'attention': 'Attenzione',
       'textattention': 'Devi prima accedere',
-      'delete' : 'Annulla',
-      'whereyougo' : 'Dove vuoi andare',
-      'texthome' : 'La tua esperienza personale e intelligente durante il tuo soggiorno',
-      'language' : 'Italiano',
-      'changelanguage' : 'Lingua',
+      'delete': 'Annulla',
+      'whereyougo': 'Dove vuoi andare',
+      'texthome':
+          'La tua esperienza personale e intelligente durante il tuo soggiorno',
+      'language': 'Italiano',
+      'changelanguage': 'Lingua',
       'date_selector': 'Seleziona Date',
       'cancel': 'Cancella',
-      'book': 'Prenota'
+      'book': 'Prenota',
+      'roomControl': 'Gestione camera',
+      'smartServices': 'Servizi Smart',
+      'name': "Nome",
+      'surname': "Cognome",
+      'textSelected': "Selezionati per te",
+      'showRooms': "Seleziona Camere",
+      'nights': "Notti",
+      'yourStay': "Il tuo soggiorno",
     },
   };
 
-  static List<String> languages ()=> _localizedValues.keys.toList();
+  static List<String> languages() => _localizedValues.keys.toList();
 
   String get wallet {
     return _localizedValues[locale.languageCode]!['wallet']!;
@@ -115,6 +136,7 @@ class LanguageLocalizations {
   String get newaccount {
     return _localizedValues[locale.languageCode]!['newaccount']!;
   }
+
   String get date_selector {
     return _localizedValues[locale.languageCode]!['date_selector']!;
   }
@@ -126,7 +148,6 @@ class LanguageLocalizations {
   String get book {
     return _localizedValues[locale.languageCode]!['book']!;
   }
-
 
   String get settings {
     return _localizedValues[locale.languageCode]!['settings']!;
@@ -162,5 +183,37 @@ class LanguageLocalizations {
 
   String get changelanguage {
     return _localizedValues[locale.languageCode]!['changelanguage']!;
+  }
+
+  String get roomControl {
+    return _localizedValues[locale.languageCode]!['roomControl']!;
+  }
+
+  String get SmartServices {
+    return _localizedValues[locale.languageCode]!['smartServices']!;
+  }
+
+  String get name {
+    return _localizedValues[locale.languageCode]!['name']!;
+  }
+
+  String get surname {
+    return _localizedValues[locale.languageCode]!['surname']!;
+  }
+
+  String get textSelected {
+    return _localizedValues[locale.languageCode]!['textSelected']!;
+  }
+
+  String get showRooms {
+    return _localizedValues[locale.languageCode]!['showRooms']!;
+  }
+
+  String get nights {
+    return _localizedValues[locale.languageCode]!['nights']!;
+  }
+
+  String get yourStay {
+    return _localizedValues[locale.languageCode]!['yourStay']!;
   }
 }

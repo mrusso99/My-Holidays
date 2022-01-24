@@ -9,7 +9,7 @@ Future<MqttClient> connect() async {
   client.logging(on: true);
   client.onConnected = onConnected;
   client.onDisconnected = onDisconnected;
-  client.onUnsubscribed = onUnsubscribed as UnsubscribeCallback?;
+  // client.onUnsubscribed = onUnsubscribed as UnsubscribeCallback?;
   client.onSubscribed = onSubscribed;
   client.onSubscribeFail = onSubscribeFail;
   client.pongCallback = pong;

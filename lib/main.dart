@@ -1,8 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:my_holidays/screens/rooms.dart';
+import 'package:my_holidays/ui/payReservation.dart';
+import 'package:my_holidays/ui/pick_image.dart';
 import 'package:my_holidays/ui/profile_screen.dart';
+import 'package:my_holidays/ui/self_check_in_summary.dart';
 import 'package:my_holidays/ui/smart_services.dart';
 import 'package:my_holidays/widgets/room_devices/smart_lock.dart';
 import 'package:my_holidays/widgets/smart_services/breakfast.dart';
@@ -19,7 +24,6 @@ import 'ui/smart_room_screen.dart';
 import 'util/nav_bar.dart';
 import 'ui/registration_screen.dart';
 import 'ui/settings_screen.dart';
-import 'ui/explore_screen.dart';
 import 'ui/wallet_screen.dart';
 import 'theme/theme_item.dart';
 import 'theme/theme_model.dart';
@@ -40,6 +44,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
     return ChangeNotifierProvider(
       create: (_) => ThemeModel(),
       child: Consumer<ThemeModel>(
@@ -66,7 +73,6 @@ class App extends StatelessWidget {
             'NewAccount': (context) => const RegistrationScreen(),
             'Settings': (context) => const SettingsScreen(),
             'Wallet': (context) => WalletScreen(),
-            'Explore': (context) => const ExploreScreen(),
             'Checkin': (context) => SelfCheckIn(),
             'Reservation': (context) => const ReservationScreen(),
             'Booking_Details': (context) => const BookingDetailsScreen(),
@@ -79,6 +85,13 @@ class App extends StatelessWidget {
             '/breakfast': (context) => const BreakFast(),
             '/restaurant': (context) => const Restaurant(),
             '/taxi': (context) => const TaxiService(),
+            'PickImage': (context) => PickImage(),
+            SelfCheckInSummary.routeName: (context) =>
+                const SelfCheckInSummary(),
+            BookingDetailsScreen.routeName: (context) =>
+                const BookingDetailsScreen(),
+            'Rooms': (context) => const Rooms(),
+            'Pay': (context) => const Payment()
           },
         );
       }),

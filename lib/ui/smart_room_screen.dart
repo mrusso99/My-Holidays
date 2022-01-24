@@ -11,25 +11,26 @@ class _SmartRoomState extends State<SmartRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         body: ListView(
-      children: [
-        buildBasicCard(
-            'https://images.unsplash.com/photo-1552862750-746b8f6f7f25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bGlnaHRidWxifGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-            Icons.lightbulb_outline,
-            'LUCI',
-            '/lights'),
-        buildBasicCard(
-            'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c21hcnQlMjB0ZWNofGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-            Icons.device_thermostat_outlined,
-            'TEMPERATURA',
-            '/thermostat'),
-        buildBasicCard(
-            'https://www.spider-mac.com/wp-content/uploads/2020/01/hero-landing.jpeg',
-            Icons.lock_outline,
-            'SMART LOCK',
-            '/smart_lock'),
-      ],
-    ));
+          children: [
+            buildBasicCard(
+                'https://images.unsplash.com/photo-1552862750-746b8f6f7f25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bGlnaHRidWxifGVufDB8fDB8fA%3D%3D&w=1000&q=80',
+                Icons.lightbulb_outline,
+                'LUCI',
+                '/lights'),
+            buildBasicCard(
+                'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c21hcnQlMjB0ZWNofGVufDB8fDB8fA%3D%3D&w=1000&q=80',
+                Icons.device_thermostat_outlined,
+                'TEMPERATURA',
+                '/thermostat'),
+            buildBasicCard(
+                'https://www.spider-mac.com/wp-content/uploads/2020/01/hero-landing.jpeg',
+                Icons.lock_outline,
+                'SMART LOCK',
+                '/smart_lock'),
+          ],
+        ));
   }
 
   Widget buildBasicCard(String url, IconData icon, String title, String path) =>

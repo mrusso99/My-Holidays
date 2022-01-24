@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/ui/body.dart';
+import 'package:my_holidays/util/app_colors.dart';
+import 'package:my_holidays/util/colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/horizontal_place_item.dart';
 import 'package:my_holidays/widgets/search_bar.dart';
@@ -12,44 +15,50 @@ class Travels extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String image = "imgs/GoFelix.jpg";
+    // String image = "imgs/GoFelix.jpg";
+    var _title =
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
       body: ListView(
         children: <Widget>[
-          const SizedBox(height: 10),
-          Container(
-            height: 150,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(image),
-                fit: BoxFit.fitWidth,
+          const SizedBox(height: 20),
+          //  Container(
+          //    height: 150,
+          //  decoration: BoxDecoration(
+          //  image: DecorationImage(
+          //   image: AssetImage(image),
+          //   fit: BoxFit.fitWidth,
+          // ),
+          //R ),
+          //  ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              LanguageLocalizations.of(context).textSelected,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: primaryColor,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Text(
-            LanguageLocalizations.of(context).texthome,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.blueGrey[300],
-            ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          buildHorizontalList(context),
+          const SizedBox(height: 5),
+          //  buildHorizontalList(context),
           buildVerticalList(),
+          const SizedBox(height: 50),
         ],
       ),
-      persistentFooterButtons: [
-        SearchBar(),
-      ],
     );
   }
 
-  buildHorizontalList(BuildContext context) {
+  /*buildHorizontalList(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 5),
       height: 300,
@@ -63,7 +72,7 @@ class Travels extends StatelessWidget {
         },
       ),
     );
-  }
+  }*/
 
   buildVerticalList() {
     return Padding(
@@ -75,7 +84,7 @@ class Travels extends StatelessWidget {
         itemCount: places == null ? 0 : places.length,
         itemBuilder: (BuildContext context, int index) {
           Map place = places[index];
-          return VerticalPlaceItem(place: place);
+          return Body(place: place);
         },
       ),
     );

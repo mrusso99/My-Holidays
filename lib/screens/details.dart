@@ -1,18 +1,21 @@
 // ignore_for_file: unnecessary_null_comparison
 
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 
 class Details extends StatelessWidget {
   const Details({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +23,7 @@ class Details extends StatelessWidget {
     int? numberAdult = 1;
     int? numberChild = 0;
     int hotelIndex = GlobalState.instance.get('hotelIndex');
+    int roomIndex = GlobalState.instance.get('roomIndex');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -41,7 +45,7 @@ class Details extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${places[hotelIndex]["name"]}",
+                      "${places[hotelIndex]["rooms"][roomIndex]["name"]}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
@@ -69,7 +73,7 @@ class Details extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${places[hotelIndex]["location"]}",
+                      "${places[hotelIndex]["rooms"][roomIndex]["location"]}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
@@ -85,7 +89,7 @@ class Details extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[hotelIndex]["price"]}",
+                  "${places[hotelIndex]["rooms"][roomIndex]["price"]} €",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -111,7 +115,7 @@ class Details extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "${places[hotelIndex]["details"]}",
+                  "${places[hotelIndex]["rooms"][roomIndex]["details"]}",
                   style: const TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 15.0,
@@ -123,55 +127,60 @@ class Details extends StatelessWidget {
               rangePickerWidget,
               SizedBox(height: 20.0),
               Container(
-                alignment: Alignment.centerLeft,
-                child: Row (
-                  children: [
-                    Icon(
-                      Icons.emoji_people_outlined,
-                      size: 30,
-                      color: getThemeColor(context),
-                    ),
-                    SizedBox(width: 20),
-                    CustomNumberPicker(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.transparent, width: 1),
-                        borderRadius: BorderRadius.circular(10),
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.emoji_people_outlined,
+                        size: 30,
+                        color: getThemeColor(context),
                       ),
-                      initialValue: 1,
-                      maxValue: 10,
-                      minValue: 0,
-                      step: 1,
-                      customMinusButton: FittedBox(
-                          child: Row (
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
-                              SizedBox(width: 8),
-                            ],
-                          )
+                      SizedBox(width: 20),
+                      CustomNumberPicker(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.transparent, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        initialValue: 1,
+                        maxValue: 10,
+                        minValue: 0,
+                        step: 1,
+                        customMinusButton: FittedBox(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.remove,
+                              color: getThemeTextColor(context),
+                              size: 15,
+                            ),
+                            SizedBox(width: 8),
+                          ],
+                        )),
+                        customAddButton: FittedBox(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.add,
+                              color: getThemeTextColor(context),
+                              size: 15,
+                            ),
+                          ],
+                        )),
+                        onValue: (value) {
+                          numberAdult = value as int?;
+                        },
                       ),
-                      customAddButton: FittedBox(
-                          child: Row (
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(width: 8),
-                              Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
-                            ],
-                          )
-                      ),
-                      onValue: (value) {
-                        numberAdult = value as int?;
-                      },
-                    ),
-                  ],
-                )
-              ),
+                    ],
+                  )),
               SizedBox(height: 10.0),
               Container(
                   alignment: Alignment.centerLeft,
-                  child: Row (
+                  child: Row(
                     children: [
                       Icon(
                         Icons.child_care_outlined,
@@ -189,92 +198,88 @@ class Details extends StatelessWidget {
                         minValue: 0,
                         step: 1,
                         customMinusButton: FittedBox(
-                            child: Row (
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(Icons.remove, color: getThemeTextColor(context), size: 15,),
-                                SizedBox(width: 8),
-                              ],
-                            )
-                        ),
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.remove,
+                              color: getThemeTextColor(context),
+                              size: 15,
+                            ),
+                            SizedBox(width: 8),
+                          ],
+                        )),
                         customAddButton: FittedBox(
-                            child: Row (
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(width: 8),
-                                Icon(Icons.add, color: getThemeTextColor(context), size: 15,),
-                              ],
-                            )
-                        ),
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.add,
+                              color: getThemeTextColor(context),
+                              size: 15,
+                            ),
+                          ],
+                        )),
                         onValue: (value) {
                           numberChild = value as int?;
                         },
                       ),
                     ],
-                  )
-              ),
+                  )),
               SizedBox(height: 20.0),
               Container(
-                  child: Row (
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: getThemeButtonColor(context),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                            LanguageLocalizations.of(context).cancel,
-                            style: TextStyle(
-                              color: getThemeTextColor(context),
-
-                            )
-                          ),
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: getThemeButtonColor(context),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      SizedBox(width: 80),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: getThemeButtonColor(context),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                        onPressed: () {
-                          if(FirebaseAuth.instance.currentUser == null){
-                            _showMaterialDialog(context);
-                          } else {
-                            FirebaseFirestore.instance.collection('reservation').add({
-                              'hotel_name': '${places[hotelIndex]["name"]}',
-                              'full_name': FirebaseAuth.instance.currentUser!.displayName,
-                              'email': FirebaseAuth.instance.currentUser!.email,
-                              'numberAdult': numberAdult,
-                              'numberChild': numberChild,
-                              'from': GlobalState.instance.get('dateFrom'),
-                              'until': GlobalState.instance.get('dateUntil'),
-                            }).then((value) => _showMaterialDialogReservation(context))
-                            .catchError((error) => print("Failed to add reservation: $error"));
-                          }
-                        },
-                        child: Text(
-                            LanguageLocalizations.of(context).book,
-                            style: TextStyle(
-                              color: getThemeTextColor(context),
-                            )
-                        ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/');
+                    },
+                    child: Text(LanguageLocalizations.of(context).cancel,
+                        style: TextStyle(
+                          color: getThemeTextColor(context),
+                        )),
+                  ),
+                  SizedBox(width: 80),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: getThemeButtonColor(context),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-
-                    ],
-                  )
-              ),
+                    ),
+                    onPressed: () async {
+                      if (FirebaseAuth.instance.currentUser == null) {
+                        _showMaterialDialog(context);
+                      } else {
+                        await GlobalState.instance
+                            .set('numberChild', numberChild);
+                        await GlobalState.instance
+                            .set('numberAdult', numberAdult);
+                        await GlobalState.instance.set('roomIndex', roomIndex);
+                        Navigator.pushNamed(context, 'Pay');
+                      }
+                    },
+                    child: Text(LanguageLocalizations.of(context).book,
+                        style: TextStyle(
+                          color: getThemeTextColor(context),
+                        )),
+                  ),
+                ],
+              )),
               SizedBox(height: 20.0),
             ],
-            ),
+          ),
         ],
       ),
     );
@@ -287,7 +292,7 @@ class Details extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
-        itemCount: places == null ? 0 : places.length,
+        itemCount: places == null ? 0 : 1, //places.lenght
         itemBuilder: (BuildContext context, int index) {
           Map place = places[index];
 
@@ -308,21 +313,21 @@ class Details extends StatelessWidget {
     );
   }
 
-  Color getThemeColor(BuildContext context){
+  Color getThemeColor(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    if (isDarkMode){
+    if (isDarkMode) {
       return Colors.white;
     } else {
       return Colors.black;
     }
   }
 
-  Color getThemeButtonColor(BuildContext context){
+  Color getThemeButtonColor(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    if (!isDarkMode){
-      return Colors.white;
+    if (!isDarkMode) {
+      return AppColors.primaryColor;
     } else {
       return Colors.black;
     }
@@ -330,7 +335,7 @@ class Details extends StatelessWidget {
 
   getThemeTextColor(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    if (isDarkMode){
+    if (isDarkMode) {
       return Colors.white;
     } else {
       return Colors.black;
@@ -350,14 +355,14 @@ class Details extends StatelessWidget {
                     _dismissDialog(context);
                     Navigator.pushNamed(context, 'Explore');
                   },
-                  child: Text(LanguageLocalizations.of(context).delete,
+                  child: Text(
+                    LanguageLocalizations.of(context).delete,
                     style: const TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 20,
                       height: 1,
                     ),
-                  )
-              ),
+                  )),
               TextButton(
                 onPressed: () {
                   _dismissDialog(context);
@@ -381,32 +386,34 @@ class Details extends StatelessWidget {
     Navigator.pop(context);
   }
 
+  Future<int> getBalance() async {
+    List<String> address = [];
+    String base = 'http://10.0.2.2:4455/address/';
+    address.add(base);
 
-  void _showMaterialDialogReservation(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Prenotazione Effettuata'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  _dismissDialog(context);
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Text(
-                  'Ok',
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontSize: 20,
-                    height: 1,
-                  ),
-                ),
-              )
-            ],
-          );
-        });
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        address.add(doc["address"]);
+      });
+    });
+
+    String toParse = address.join();
+
+    final response = await http.get(Uri.parse(toParse));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      final Map parsed = json.decode(response.body);
+      return parsed['data']['balance'];
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load');
+    }
   }
-
-
 }
