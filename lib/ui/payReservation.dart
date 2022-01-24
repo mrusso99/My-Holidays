@@ -526,7 +526,7 @@ class _PaymentScreenState extends State<Payment> {
                             ),
                             Row(children: <Widget>[
                               Text(
-                                price,
+                                newPrice(usedFelix),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
@@ -1011,6 +1011,13 @@ class _PaymentScreenState extends State<Payment> {
       // then throw an exception.
       throw Exception('Failed to load');
     }
+  }
+
+  String newPrice(int used) {
+      double convertedPrice = int.parse(originalPrice) - (used / 12);
+      String updatedPrice = convertedPrice.toInt().toString();
+      price = updatedPrice.toString();
+      return price;
   }
 
   void updatePrice(int used) {
