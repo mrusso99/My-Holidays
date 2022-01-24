@@ -6,6 +6,7 @@ import os
 import json
 from Crypto.Hash import keccak
 from eth_account import account
+from markupsafe import re
 from web3 import Web3
 from flask import Flask, jsonify
 from web3.types import ParityTraceMode
@@ -197,10 +198,11 @@ def send(token, sendAddress, toAddress) -> dict:
     """
     try:
         token_to_send = int(token)
-        contract.functions.transfer(toAddress, W3.toWei(token_to_send, 'ether')).transact({'from': sendAddress})
+        contract.functions.transfer(toAddress, W3.toWei(token, 'ether')).transact({'from': sendAddress})
         return jsonify({"data": 'ok'}), 200
-    except ValueError:
-        return jsonify({"message": "Something went wrong. Please try again."}), 400
+    except Exception as e: 
+        return str(e) 
+
         
 
 @APP.route("/mint/<int:token>/<sendAddress>", methods=["GET"])
@@ -226,10 +228,11 @@ def mint(sendAddress, token) -> dict:
 
 @APP.route("/selfcheckin/authenticate/<user>/<destination>/<assetURI>/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
+def autheticateUsers(user, destination, assetURI, reservationNumber) -> dict:
+    "TODO SCRIVERE QUALCOSA A RIGUARDO"
 
     try:
-        tx_hash=selfCheckInContract.functions.autheticateUser(user,destination,assetURI,reservationNumber).transact({'from':minterAddress})
+        tx_hash=selfCheckInContract.functions.authenticateUsers(user,destination,assetURI,reservationNumber).transact({'from':minterAddress})
         tx_receipt = W3.eth.wait_for_transaction_receipt(tx_hash)
         return jsonify({"data": 'ok'}), 200
     except ValueError:
@@ -238,7 +241,7 @@ def autheticateUser(user, destination, assetURI, reservationNumber) -> dict:
 
 @APP.route("/selfcheckin/checkin/<user>/<destination>/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-def checkin(user,destination,reservationNumber) -> dict:
+def checkIn(user,destination,reservationNumber) -> dict:
     "TODO"
 
     try:
@@ -251,8 +254,9 @@ def checkin(user,destination,reservationNumber) -> dict:
 @APP.route("/selfcheckin/ischeckedin/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def ischeckedin(reservationNumber) -> dict:
- 
+
     try:
+
         result=selfCheckInContract.functions.isCheckedIn(reservationNumber).call()
         return jsonify({"Checkin status": result }), 200
     except ValueError:
@@ -261,22 +265,23 @@ def ischeckedin(reservationNumber) -> dict:
 
 @APP.route("/selfcheckin/getdestination/<user>/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-def getdestination(user,destination,reservationNumber) -> dict:
+def getdestination(user,reservationNumber) -> dict:
 
     try:
-        result=selfCheckInContract.functions.getDestination(user,destination).call()
+
+        result=selfCheckInContract.functions.getDestination(user,reservationNumber).call()
         return jsonify({"hotel": result}), 200
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
-
 
 @APP.route("/selfcheckin/getasset/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def getasset(reservationNumber) -> dict:
 
     try:
-        result=selfCheckInContract.functions.getAsset(destination).call()
-        return jsonify({"hotel": result}), 200
+
+        result=selfCheckInContract.functions.getAsset(reservationNumber).call()
+        return jsonify({"Asset URI": result}), 200
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
