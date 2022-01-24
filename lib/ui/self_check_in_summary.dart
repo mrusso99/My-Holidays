@@ -18,14 +18,14 @@ class SelfCheckInSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reservationNumber =
-        ModalRoute.of(context)!.settings.arguments as ReservationNumber;
+    final reservation =
+        ModalRoute.of(context)!.settings.arguments as Reservation;
 
     return Scaffold(
       appBar: AppBar(),
       body: Container(
           child: FutureBuilder<String>(
-              future: getGuestNumber(),
+              future: getGuestNumber(reservation),
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                 List<Widget> children;
                 if (snapshot.hasData) {
@@ -123,14 +123,14 @@ class SelfCheckInSummary extends StatelessWidget {
                                   uploadImageToFirebase(
                                       context,
                                       documents.elementAt(i - 1).front.path,
-                                      reservationNumber.reservationNumber,
+                                      reservation.reservationNumber,
                                       documents.elementAt(i - 1).name,
                                       documents.elementAt(i - 1).surname,
                                       "front");
                                   uploadImageToFirebase(
                                       context,
                                       documents.elementAt(i - 1).back.path,
-                                      reservationNumber.reservationNumber,
+                                      reservation.reservationNumber,
                                       documents.elementAt(i - 1).name,
                                       documents.elementAt(i - 1).surname,
                                       "back");
@@ -178,35 +178,9 @@ class SelfCheckInSummary extends StatelessWidget {
     );
   }
 
-  Future<String> getGuestNumber() async {
-    List<Reservation> l = [];
-
-    await FirebaseFirestore.instance
-        .collection('reservation')
-        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) async {
-        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-
-        Reservation addToList = Reservation(
-            data['email'],
-            data['hotel_name'],
-            data['room_name'],
-            data['hotel_id'],
-            data['room_id'],
-            data['from'],
-            data['until'],
-            data['numberAdult'],
-            data['numberChild'],
-            doc.id,
-            data['price']);
-        l.add(addToList);
-      });
-    });
-
-    String nAdult = l.elementAt(0).numberAdult.toString();
-    String nChild = l.elementAt(0).numberChild.toString();
+  Future<String> getGuestNumber(Reservation reservation) async {
+    String nAdult = reservation.numberAdult;
+    String nChild = reservation.numberChild;
     print(nAdult);
     print(nChild);
     int value = (int.parse(nAdult)) + (int.parse(nChild));

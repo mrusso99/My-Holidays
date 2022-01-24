@@ -1,6 +1,6 @@
 {
         "URL" : "http://127.0.0.1:7545",
-        "Contract_Address" : "0xbc54d094F41eeab615fAc42651776Db4c831cF40",
-        "Minter_Address" : "0xbb052D09319ACCd7C65A8cAae95fCe00d63e7eF5",
-        "Self_Checkin_Address": "0x302f5EfE87af8552539cF352fA681CeF0f2ccEAC"
+        "Contract_Address" : "0x42f56C4803EccE2477E0286BEe4b284B8B55eD1D",
+        "Minter_Address" : "0x5e2160E27916321F966795EfF63cE80be34894ba",
+        "Self_Checkin_Address": "0xc688F1963dc348F4D4c65EEb0498eB220DbE59eF"
 }

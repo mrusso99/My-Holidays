@@ -170,8 +170,7 @@ class BookingDetailsScreen extends StatelessWidget {
                                 customOnPressed: () => {
                                       Navigator.pushNamed(
                                           context, SelfCheckInSummary.routeName,
-                                          arguments: ReservationNumber(
-                                              reservation.reservationNumber))
+                                          arguments: reservation)
                                     })),
                         Padding(padding: EdgeInsets.all(15)),
                         SizedBox(
