@@ -257,16 +257,62 @@ class SelfCheckInSummary extends StatelessWidget {
           final response = await http.get(Uri.parse(toParse));
 
           if (response.statusCode == 200) {
-            // If the server did return a 200 OK response,
+            // If the server did return a 200 OK response, selfcheckin/checkin/<user>/<destination>/<reservationNumber>
             // then parse the JSON.
-            print('check-in done');
+            List<String> address2 = [];
+            String base2 = 'http://10.0.2.2:4455/selfcheckin/checkin/';
+            address2.add(base2);
+
+            var userEmail;
+            if (FirebaseAuth.instance.currentUser != null) {
+              userEmail = FirebaseAuth.instance.currentUser!.email;
+              await FirebaseFirestore.instance
+                  .collection('users')
+                  .where('email', isEqualTo: userEmail)
+                  .get()
+                  .then((QuerySnapshot querySnapshot) {
+                querySnapshot.docs.forEach((doc) {
+                  address2.add(doc["address"]);
+                  address2.add('/');
+                });
+              });
+
+              if (FirebaseAuth.instance.currentUser != null) {
+                userEmail = FirebaseAuth.instance.currentUser!.email;
+                await FirebaseFirestore.instance
+                    .collection('hotel')
+                    .where('user_name', isEqualTo: reservation.hotelName)
+                    .get()
+                    .then((QuerySnapshot querySnapshot) {
+                  querySnapshot.docs.forEach((doc) {
+                    address2.add(doc["address"]);
+                    address2.add('/');
+                  });
+                });
+              }
+
+              address2.add(reservation.reservationNumber);
+
+              String toParse2 = address2.join();
+              print(toParse2);
+
+              final response = await http.get(Uri.parse(toParse2));
+
+              if (response.statusCode == 200) {
+                print('check-in done');
+              } else {
+                // If the server did not return a 200 OK response,
+                // then throw an exception.
+                print('error');
+              }
+            } else {
+              // If the server did not return a 200 OK response,
+              // then throw an exception.
+              print('error');
+            }
           } else {
-            // If the server did not return a 200 OK response,
-            // then throw an exception.
-            print('error');
+            throw Exception('user not connected');
           }
-        } else {
-          throw Exception('user not connected');
         }
       }
         } on FirebaseException catch (e) {
