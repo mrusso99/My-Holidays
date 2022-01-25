@@ -10,6 +10,7 @@ import 'package:my_holidays/ui/reservation_screen.dart';
 import 'package:my_holidays/util/documents.dart';
 import 'package:my_holidays/util/reservationNumber.dart';
 import 'package:my_holidays/widgets/rounded_button.dart';
+import 'package:http/http.dart' as http;
 
 class SelfCheckInSummary extends StatelessWidget {
   const SelfCheckInSummary({Key? key}) : super(key: key);
@@ -123,14 +124,14 @@ class SelfCheckInSummary extends StatelessWidget {
                                   uploadImageToFirebase(
                                       context,
                                       documents.elementAt(i - 1).front.path,
-                                      reservation.reservationNumber,
+                                      reservation,
                                       documents.elementAt(i - 1).name,
                                       documents.elementAt(i - 1).surname,
                                       "front");
                                   uploadImageToFirebase(
                                       context,
                                       documents.elementAt(i - 1).back.path,
-                                      reservation.reservationNumber,
+                                      reservation,
                                       documents.elementAt(i - 1).name,
                                       documents.elementAt(i - 1).surname,
                                       "back");
@@ -192,7 +193,7 @@ class SelfCheckInSummary extends StatelessWidget {
   Future<void> uploadImageToFirebase(
       BuildContext context,
       String imagePath,
-      String reservationNumber,
+      Reservation reservation,
       String name,
       String surname,
       String frontOrBack) async {
@@ -201,7 +202,7 @@ class SelfCheckInSummary extends StatelessWidget {
 
     try {
       await FirebaseStorage.instance
-          .ref(reservationNumber +
+          .ref(reservation.reservationNumber +
               '/' +
               name +
               '-' +
@@ -213,5 +214,64 @@ class SelfCheckInSummary extends StatelessWidget {
     } on FirebaseException catch (e) {
       print("Error");
     }
+
+    try {
+      List<String> address = [];
+      String base = 'http://10.0.2.2:4455/selfcheckin/authenticate/';
+      address.add(base);
+
+      var userEmail;
+      if (FirebaseAuth.instance.currentUser != null) {
+        userEmail = FirebaseAuth.instance.currentUser!.email;
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: userEmail)
+            .get()
+            .then((QuerySnapshot querySnapshot) {
+          querySnapshot.docs.forEach((doc) {
+            address.add(doc["address"]);
+            address.add('/');
+          });
+        });
+
+        if (FirebaseAuth.instance.currentUser != null) {
+          userEmail = FirebaseAuth.instance.currentUser!.email;
+          await FirebaseFirestore.instance
+              .collection('hotel')
+              .where('user_name', isEqualTo: reservation.hotelName)
+              .get()
+              .then((QuerySnapshot querySnapshot) {
+            querySnapshot.docs.forEach((doc) {
+              address.add(doc["address"]);
+              address.add('/');
+            });
+          });
+
+          address.add(reservation.reservationNumber);
+          address.add('/');
+          address.add(reservation.reservationNumber);
+
+          String toParse = address.join();
+          print(toParse);
+
+          final response = await http.get(Uri.parse(toParse));
+
+          if (response.statusCode == 200) {
+            // If the server did return a 200 OK response,
+            // then parse the JSON.
+            print('check-in done');
+          } else {
+            // If the server did not return a 200 OK response,
+            // then throw an exception.
+            print('error');
+          }
+        } else {
+          throw Exception('user not connected');
+        }
+      }
+        } on FirebaseException catch (e) {
+          print("Error");
+    }
+
   }
 }
