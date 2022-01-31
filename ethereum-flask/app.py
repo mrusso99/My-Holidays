@@ -286,4 +286,4 @@ def getasset(reservationNumber) -> dict:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
 
 if __name__=="__main__":
-    APP.run(host='127.0.0.1',port=4455,debug=True) 
+    APP.run(host='127.0.0.1', port=4455, debug=True, ssl_context='adhoc') 

@@ -217,7 +217,7 @@ class SelfCheckInSummary extends StatelessWidget {
 
     try {
       List<String> address = [];
-      String base = 'http://10.0.2.2:4455/selfcheckin/authenticate/';
+      String base = 'https://10.0.2.2:4455/selfcheckin/authenticate/';
       address.add(base);
 
       var userEmail;
@@ -260,7 +260,7 @@ class SelfCheckInSummary extends StatelessWidget {
             // If the server did return a 200 OK response, selfcheckin/checkin/<user>/<destination>/<reservationNumber>
             // then parse the JSON.
             List<String> address2 = [];
-            String base2 = 'http://10.0.2.2:4455/selfcheckin/checkin/';
+            String base2 = 'https://10.0.2.2:4455/selfcheckin/checkin/';
             address2.add(base2);
 
             var userEmail;

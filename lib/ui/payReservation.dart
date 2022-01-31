@@ -782,7 +782,7 @@ class _PaymentScreenState extends State<Payment> {
 
   Future<String> getBalance() async {
     List<String> address = [];
-    String base = 'http://10.0.2.2:4455/address/';
+    String base = 'https://10.0.2.2:4455/address/';
     address.add(base);
 
     await FirebaseFirestore.instance
@@ -815,7 +815,7 @@ class _PaymentScreenState extends State<Payment> {
     String balance = '';
 
     List<String> address = [];
-    String base = 'http://10.0.2.2:4455/address/';
+    String base = 'https://10.0.2.2:4455/address/';
     address.add(base);
 
     await FirebaseFirestore.instance
@@ -964,7 +964,7 @@ class _PaymentScreenState extends State<Payment> {
 
   Future<String> sendFELX(int price, int hotelIndex) async {
     List<String> address = [];
-    String base = 'http://10.0.2.2:4455/send/';
+    String base = 'https://10.0.2.2:4455/send/';
     address.add(base);
 
     await FirebaseFirestore.instance
@@ -1030,7 +1030,7 @@ class _PaymentScreenState extends State<Payment> {
 
   void mint(int number) async {
     List<String> address = [];
-    String base = 'http://10.0.2.2:4455/mint/' + number.toString() + '/';
+    String base = 'https://10.0.2.2:4455/mint/' + number.toString() + '/';
     address.add(base);
 
     await FirebaseFirestore.instance

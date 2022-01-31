@@ -393,7 +393,7 @@ class RoomDetails extends StatelessWidget {
 
   Future<int> getBalance() async {
     List<String> address = [];
-    String base = 'http://10.0.2.2:4455/address/';
+    String base = 'https://10.0.2.2:4455/address/';
     address.add(base);
 
     await FirebaseFirestore.instance
