@@ -36,7 +36,7 @@ URL = config['URL']
 W3 = Web3(Web3.HTTPProvider(URL)) 
 
 APP.config['CORS_HEADERS'] = 'Content-Type'
-cors = CORS(APP, resources={r"/*": {"origins": "http://localhost:4200"}})
+cors = CORS(APP, resources={r"/*": {"origins": "https://localhost:4200"}})
 
 contractAddress = config['Contract_Address']
 selfCheckInAddress= config['Self_Checkin_Address']
@@ -232,7 +232,9 @@ def autheticateUsers(user, destination, assetURI, reservationNumber) -> dict:
     "TODO SCRIVERE QUALCOSA A RIGUARDO"
 
     try:
-        tx_hash=selfCheckInContract.functions.authenticateUsers(user,destination,assetURI,reservationNumber).transact({'from':minterAddress})
+        resHash=keccak.new(digest_bits=512)
+        resHash.update(reservationNumber.encode('Utf8'))
+        tx_hash=selfCheckInContract.functions.authenticateUsers(user,destination,assetURI,resHash.hexdigest()).transact({'from':minterAddress})
         tx_receipt = W3.eth.wait_for_transaction_receipt(tx_hash)
         return jsonify({"data": 'ok'}), 200
     except ValueError:
@@ -245,7 +247,9 @@ def checkIn(user,destination,reservationNumber) -> dict:
     "TODO"
 
     try:
-        tx_hash=selfCheckInContract.functions.checkIn(user,destination,reservationNumber).transact({'from':minterAddress})
+        resHash=keccak.new(digest_bits=512)
+        resHash.update(reservationNumber.encode('Utf8'))
+        tx_hash=selfCheckInContract.functions.checkIn(user,destination,resHash.hexdigest()).transact({'from':minterAddress})
         tx_receipt = W3.eth.wait_for_transaction_receipt(tx_hash)
         return jsonify({"data": 'ok'}), 200
     except ValueError:
@@ -256,8 +260,9 @@ def checkIn(user,destination,reservationNumber) -> dict:
 def ischeckedin(reservationNumber) -> dict:
 
     try:
-
-        result=selfCheckInContract.functions.isCheckedIn(reservationNumber).call()
+        resHash=keccak.new(digest_bits=512)
+        resHash.update(reservationNumber.encode('Utf8'))
+        result=selfCheckInContract.functions.isCheckedIn(resHash.hexdigest()).call()
         return jsonify({"Checkin status": result }), 200
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
@@ -268,8 +273,9 @@ def ischeckedin(reservationNumber) -> dict:
 def getdestination(user,reservationNumber) -> dict:
 
     try:
-
-        result=selfCheckInContract.functions.getDestination(user,reservationNumber).call()
+        resHash=keccak.new(digest_bits=512)
+        resHash.update(reservationNumber.encode('Utf8'))
+        result=selfCheckInContract.functions.getDestination(user,resHash.hexdigest()).call()
         return jsonify({"hotel": result}), 200
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
@@ -279,8 +285,9 @@ def getdestination(user,reservationNumber) -> dict:
 def getasset(reservationNumber) -> dict:
 
     try:
-
-        result=selfCheckInContract.functions.getAsset(reservationNumber).call()
+        resHash=keccak.new(digest_bits=512)
+        resHash.update(reservationNumber.encode('Utf8'))
+        result=selfCheckInContract.functions.getAsset(resHash.hexdigest()).call()
         return jsonify({"Asset URI": result}), 200
     except ValueError:
         return jsonify({"message": "Something went wrong. Please try again."}), 400
