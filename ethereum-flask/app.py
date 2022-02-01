@@ -229,8 +229,6 @@ def mint(sendAddress, token) -> dict:
 @APP.route("/selfcheckin/authenticate/<user>/<destination>/<assetURI>/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def autheticateUsers(user, destination, assetURI, reservationNumber) -> dict:
-    "TODO SCRIVERE QUALCOSA A RIGUARDO"
-
     try:
         resHash=keccak.new(digest_bits=512)
         resHash.update(reservationNumber.encode('Utf8'))
