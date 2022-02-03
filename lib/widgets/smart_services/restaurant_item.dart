@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_holidays/screens/details.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/smart_services/ristoranti.dart';
 import 'package:my_holidays/widgets/smart_services/restaurant.dart';
@@ -11,7 +12,7 @@ class RestaurantItem extends StatelessWidget {
 
   const RestaurantItem({Key? key, required this.place}) : super(key: key);
 
- /* @override
+  /* @override
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
@@ -119,18 +120,19 @@ class RestaurantItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 15.0),
+      padding: const EdgeInsets.only(right: 15.0, left: 15.0),
       child: InkWell(
         child: Container(
           alignment: Alignment.centerLeft,
           height: 250,
-         // width: 150,
+          // width: 150,
           child: Column(
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset("${place["img"]}",
-                 height: 150,
+                child: Image.asset(
+                  "${place["img"][0]}",
+                  height: 150,
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -142,6 +144,7 @@ class RestaurantItem extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
+                    color: AppColors.primaryColor,
                   ),
                   textAlign: TextAlign.left,
                 ),
@@ -151,10 +154,10 @@ class RestaurantItem extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${place["location"]}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15.0,
-                    color: Colors.blueGrey[300],
+                    color: AppColors.secondaryColor,
                   ),
                   //maxLines: 1,
                   textAlign: TextAlign.left,
@@ -178,9 +181,9 @@ class RestaurantItem extends StatelessWidget {
     );
   }
 
-  int searchIndex(String hotelName){
-    for (int i = 0; i < ristoranti.length; i++){
-      if (ristoranti[i]['name'] == hotelName){
+  int searchIndex(String hotelName) {
+    for (int i = 0; i < ristoranti.length; i++) {
+      if (ristoranti[i]['name'] == hotelName) {
         return i;
       }
     }

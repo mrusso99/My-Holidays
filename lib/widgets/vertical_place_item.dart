@@ -23,7 +23,7 @@ class VerticalPlaceItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.asset(
-                "${place["img"]}",
+                "${place["img"][0]}",
                 height: 180,
                 width: 180,
                 fit: BoxFit.cover,

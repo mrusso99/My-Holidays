@@ -24,9 +24,10 @@ class RoomDetails extends StatelessWidget {
     int? numberChild = 0;
     int hotelIndex = GlobalState.instance.get('hotelIndex');
     int roomIndex = GlobalState.instance.get('roomIndex');
-    GlobalState.instance.set('roomPrice', places[hotelIndex]["rooms"][roomIndex]["price"]);
+    GlobalState.instance
+        .set('roomPrice', places[hotelIndex]["rooms"][roomIndex]["price"]);
     var _title =
-    Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -306,7 +307,7 @@ class RoomDetails extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(
-                "${place["img"]}",
+                "${place["img"][0]}",
                 height: 250.0,
                 width: MediaQuery.of(context).size.width - 40.0,
                 fit: BoxFit.cover,

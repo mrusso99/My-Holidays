@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/widgets/room_devices/custom_draw.dart';
 import 'package:my_holidays/widgets/room_devices/utils.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
@@ -39,17 +40,17 @@ class _SliderWidgetState extends State<SliderWidget> {
                   //color: Colors.white,
                   shape: BoxShape.circle,
                   border: Border.all(
-                   // color: Colors.white,
-                   // width: 20,
-                   // style: BorderStyle.solid,
-                  ),
+                      // color: Colors.white,
+                      // width: 20,
+                      // style: BorderStyle.solid,
+                      ),
                   boxShadow: [
                     BoxShadow(
                         blurRadius: 30,
                         spreadRadius: 10,
                         color: Colors.blue.withAlpha(
                             normalize(progressVal * 20000, 100, 255).toInt()),
-                        offset: Offset(1, 3))
+                        offset: const Offset(1, 3))
                   ]),
               child: SleekCircularSlider(
                 min: kMinDegree,
@@ -69,7 +70,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                     hideShadow: true,
                     progressBarColor: Colors.transparent,
                     trackColor: Colors.transparent,
-                    dotColor: Colors.blue,
+                    dotColor: AppColors.primaryColor,
                   ),
                 ),
                 onChange: (value) {
@@ -82,9 +83,10 @@ class _SliderWidgetState extends State<SliderWidget> {
                   return Center(
                     child: Text(
                       '${percentage.toInt()}°c',
-                      style: TextStyle(
-                        fontSize: 50,
-                      ),
+                      style: const TextStyle(
+                          fontSize: 50,
+                          color: AppColors.secondaryColor,
+                          fontWeight: FontWeight.bold),
                     ),
                   );
                 },

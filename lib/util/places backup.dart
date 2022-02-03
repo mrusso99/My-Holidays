@@ -2,11 +2,7 @@ List places = [
   {
     "id": "hot1",
     "name": "Hotel Castello di Limatola",
-    "img": [
-      "assets/limatola.jpg",
-      "assets/limatola2.jpg",
-      "assets/limatola3.jpg",
-    ],
+    "img": "assets/limatola.jpg",
     "location": "Limatola, Campania",
     "category": 5,
     "details":
@@ -15,10 +11,7 @@ List places = [
       {
         "id": "cam1",
         "name": "Junior suite (colazione inclusa)",
-        "img": [
-          "assets/lima-room1.jpg",
-          "assets/lima-room1.jpg",
-        ],
+        "img": "assets/lima-room1.jpg",
         "price": "120",
         "details":
             "Le Junior Suites alloggiate sul corridoio che affaccia sulla corte interna, e la camera che si trova sulla Torre alta, riprendono i nomi delle antiche casate che hanno vissuto nel castello di Limatola: Angioini, Templari, Carafa e Normanni.",
@@ -27,9 +20,7 @@ List places = [
       {
         "id": "cam2",
         "name": "Suite Royal",
-        "img": [
-          "assets/lima-room2.jpg",
-        ],
+        "img": "assets/lima-room2.jpg",
         "price": "150",
         "details":
             "Le Royal Suites si ispirano alle donne che durante la storia di questo Castello vi hanno dimorato contribuendo alla sua popolarità, quali: Margherita de Tucziaco, Virginia Gambacorta, Anna Gambacorta, Aurelia D’Este e Caterina Della Ratta.",
@@ -38,9 +29,7 @@ List places = [
       {
         "id": "cam3",
         "name": "Suite con jacuzzi",
-        "img": [
-          "assets/lima-room3.jpg",
-        ],
+        "img": "assets/lima-room3.jpg",
         "price": "500",
         "details":
             "Le Royal Suites si ispirano alle donne che durante la storia di questo Castello vi hanno dimorato contribuendo alla sua popolarità, quali: Margherita de Tucziaco, Virginia Gambacorta, Anna Gambacorta, Aurelia D’Este e Caterina Della Ratta.",
@@ -51,11 +40,7 @@ List places = [
   {
     "id": "hot2",
     "name": "Hotel Ercole di Amalfi",
-    "img": [
-      "assets/ercole_di_amalfi.jpg",
-      "assets/ercole_di_amalfi.jpg",
-      "assets/ercole_di_amalfi.jpg",
-    ],
+    "img": "assets/ercole_di_amalfi.jpg",
     "location": "Amalfi, Campania",
     "category": 3,
     "details":
@@ -106,11 +91,7 @@ List places = [
   {
     "id": "hot3",
     "name": "Icaro Sailing Charter",
-    "img": [
-      "assets/icaro.jpg",
-      "assets/icaro.jpg",
-      "assets/icaro.jpg",
-    ],
+    "img": "assets/icaro.jpg",
     "location": "Castellammare di Stabia, campania",
     "details": "Lagoon 40 year 2019 available per noleggio a Salerno",
     "category": 4,

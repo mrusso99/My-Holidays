@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
+import 'app_colors.dart';
+
 class BalanceCard extends StatelessWidget {
   const BalanceCard({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class BalanceCard extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * .27,
-          color: Colors.blue,
+          color: AppColors.primaryColor,
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
@@ -42,16 +44,17 @@ class BalanceCard extends StatelessWidget {
                                 alignment: Alignment.center,
                                 child: Text(
                                   balance!,
-                                  style: TextStyle(
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.yellowAccent),
+                                  style: const TextStyle(
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.secondaryColor,
+                                  ),
                                 ),
                               ),
                             ];
                           } else if (snapshot.hasError) {
                             children = <Widget>[
-                              Text(
+                              const Text(
                                 'Error',
                                 style: TextStyle(
                                   fontSize: 10.0,
@@ -62,7 +65,7 @@ class BalanceCard extends StatelessWidget {
                           } else {
                             children = const <Widget>[
                               CircularProgressIndicator(
-                                color: Colors.yellowAccent,
+                                color: AppColors.primaryColor,
                               ),
                             ];
                           }
@@ -77,9 +80,10 @@ class BalanceCard extends StatelessWidget {
                       const Text(
                         ' FELX',
                         style: TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.yellowAccent),
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.secondaryColor,
+                        ),
                       ),
                     ],
                   ),
@@ -93,7 +97,7 @@ class BalanceCard extends StatelessWidget {
                 top: -170,
                 child: CircleAvatar(
                   radius: 130,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.secondaryColor,
                 ),
               ),
               const Positioned(
@@ -101,7 +105,7 @@ class BalanceCard extends StatelessWidget {
                 top: -190,
                 child: CircleAvatar(
                   radius: 130,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.primaryColor,
                 ),
               ),
               const Positioned(
@@ -109,7 +113,7 @@ class BalanceCard extends StatelessWidget {
                 bottom: -170,
                 child: CircleAvatar(
                   radius: 130,
-                  backgroundColor: Colors.yellow,
+                  backgroundColor: AppColors.secondaryColor,
                 ),
               ),
               const Positioned(
@@ -117,7 +121,7 @@ class BalanceCard extends StatelessWidget {
                 bottom: -190,
                 child: CircleAvatar(
                   radius: 130,
-                  backgroundColor: Colors.yellow,
+                  backgroundColor: AppColors.secondaryColor,
                 ),
               ),
               const Positioned(
@@ -125,7 +129,7 @@ class BalanceCard extends StatelessWidget {
                 bottom: -190,
                 child: CircleAvatar(
                   radius: 130,
-                  backgroundColor: Colors.yellow,
+                  backgroundColor: AppColors.secondaryColor,
                 ),
               ),
             ],
@@ -166,7 +170,7 @@ class BalanceCard extends StatelessWidget {
         throw Exception('Failed to load');
       }
     } else {
-      throw Exception('user not connected');
+      return ('user not connected');
     }
   }
 }

@@ -37,9 +37,9 @@ class SelfCheckInSummary extends StatelessWidget {
                         color: Colors.red,
                         size: 60,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Text('No reservation'),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 16),
+                        child: const Text('No reservation'),
                       )
                     ];
                   } else {
@@ -52,7 +52,7 @@ class SelfCheckInSummary extends StatelessWidget {
                       surnameController.add(TextEditingController());
                     }
                     children = <Widget>[
-                      Padding(padding: EdgeInsets.only(top: 10)),
+                      const Padding(padding: EdgeInsets.only(top: 10)),
                       for (int i = 1; i <= guestNumber; i++)
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -65,16 +65,16 @@ class SelfCheckInSummary extends StatelessWidget {
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
                                       borderSide:
-                                          BorderSide(color: Colors.grey)),
+                                          const BorderSide(color: Colors.grey)),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                          BorderSide(color: Colors.blueAccent)),
+                                      borderSide: const BorderSide(
+                                          color: Colors.blueAccent)),
                                   labelText:
                                       LanguageLocalizations.of(context).name),
                               controller: nameController.elementAt(i - 1),
                             )),
-                            Padding(padding: EdgeInsets.all(15)),
+                            const Padding(padding: EdgeInsets.all(15)),
                             Flexible(
                                 child: TextField(
                               decoration: InputDecoration(
@@ -86,7 +86,7 @@ class SelfCheckInSummary extends StatelessWidget {
                                       .surname),
                               controller: surnameController.elementAt(i - 1),
                             )),
-                            Padding(padding: EdgeInsets.all(15)),
+                            const Padding(padding: EdgeInsets.all(15)),
                             RoundedButton(
                                 color: Colors.blueAccent,
                                 text: "Carica",
@@ -108,10 +108,10 @@ class SelfCheckInSummary extends StatelessWidget {
                                             .text));
                                   }
                                 }),
-                            Padding(padding: EdgeInsets.only(top: 10)),
+                            const Padding(padding: EdgeInsets.only(top: 10)),
                           ],
                         ),
-                      Padding(padding: EdgeInsets.only(top: 10)),
+                      const Padding(padding: EdgeInsets.only(top: 10)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -150,9 +150,9 @@ class SelfCheckInSummary extends StatelessWidget {
                       color: Colors.red,
                       size: 60,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Text('Non hai fatto la login'),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16),
+                      child: const Text('Non hai fatto la login'),
                     )
                   ];
                 } else {

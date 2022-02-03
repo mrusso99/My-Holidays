@@ -14,10 +14,8 @@ import 'package:my_holidays/util/places.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
-
 class Payment extends StatefulWidget {
   const Payment({Key? key}) : super(key: key);
-
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
@@ -38,7 +36,7 @@ class _PaymentScreenState extends State<Payment> {
   Widget build(BuildContext context) {
     updateAllPrice();
     var _title =
-    Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -76,32 +74,32 @@ class _PaymentScreenState extends State<Payment> {
                 height: 280,
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                    color: Color(0xFFfae3e2).withOpacity(0.1),
+                    color: const Color(0xFFfae3e2).withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 1,
-                    offset: Offset(0, 1),
+                    offset: const Offset(0, 1),
                   ),
                 ]),
                 child: Card(
                   color: Colors.white,
                   elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.all(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
                       Radius.circular(5.0),
                     ),
                   ),
                   child: Container(
                     alignment: Alignment.center,
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         left: 25, right: 30, top: 10, bottom: 10),
                     child: Column(
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Hotel",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18,
                                   color: Color(0xFF3a3a3b),
                                   fontWeight: FontWeight.w400),
@@ -120,13 +118,13 @@ class _PaymentScreenState extends State<Payment> {
                             ]),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Date",
                               style: TextStyle(
                                   fontSize: 18,
@@ -145,9 +143,9 @@ class _PaymentScreenState extends State<Payment> {
                                   maxLines: 1,
                                   textAlign: TextAlign.center,
                                 ),
-                                Text(
+                                const Text(
                                   " - ",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 18,
                                   ),
@@ -167,15 +165,15 @@ class _PaymentScreenState extends State<Payment> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Person",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18,
                                   color: Color(0xFF3a3a3b),
                                   fontWeight: FontWeight.w400),
@@ -196,9 +194,9 @@ class _PaymentScreenState extends State<Payment> {
                                 size: 18,
                                 color: getThemeColor(context),
                               ),
-                              Text(
+                              const Text(
                                 " +  ",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 18,
                                 ),
@@ -222,15 +220,15 @@ class _PaymentScreenState extends State<Payment> {
                             ]),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Price",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18,
                                   color: Color(0xFF3a3a3b),
                                   fontWeight: FontWeight.w400),
@@ -246,9 +244,9 @@ class _PaymentScreenState extends State<Payment> {
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                               ),
-                              Text(
+                              const Text(
                                 "€",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 18,
                                 ),
@@ -258,13 +256,13 @@ class _PaymentScreenState extends State<Payment> {
                             ]),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Total FELX",
                               style: TextStyle(
                                   fontSize: 18,
@@ -285,16 +283,16 @@ class _PaymentScreenState extends State<Payment> {
                                         alignment: Alignment.center,
                                         child: Text(
                                           balance!,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 18,
-                                              color: Color(0xFF3a3a3b),
+                                              color: const Color(0xFF3a3a3b),
                                               fontWeight: FontWeight.w400),
                                         ),
                                       ),
                                     ];
                                   } else if (snapshot.hasError) {
                                     children = <Widget>[
-                                      Text(
+                                      const Text(
                                         'Error',
                                         style: TextStyle(
                                           fontSize: 10.0,
@@ -325,13 +323,13 @@ class _PaymentScreenState extends State<Payment> {
                             ]),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Felix to use",
                               style: TextStyle(
                                   fontSize: 18,
@@ -355,15 +353,15 @@ class _PaymentScreenState extends State<Payment> {
                                         alignment: Alignment.center,
                                         child: CustomNumberPicker(
                                           shape: RoundedRectangleBorder(
-                                            side: BorderSide(
+                                            side: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1),
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
-                                          valueTextStyle: TextStyle(
+                                          valueTextStyle: const TextStyle(
                                               fontSize: 18,
-                                              color: Color(0xFF3a3a3b),
+                                              color: const Color(0xFF3a3a3b),
                                               fontWeight: FontWeight.w400),
                                           initialValue: 0,
                                           maxValue: balanceConverted,
@@ -382,7 +380,7 @@ class _PaymentScreenState extends State<Payment> {
                                                     getThemeTextColor(context),
                                                 size: 15,
                                               ),
-                                              SizedBox(width: 8),
+                                              const SizedBox(width: 8),
                                             ],
                                           )),
                                           customAddButton: FittedBox(
@@ -392,7 +390,7 @@ class _PaymentScreenState extends State<Payment> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              SizedBox(width: 8),
+                                              const SizedBox(width: 8),
                                               Icon(
                                                 Icons.add,
                                                 color:
@@ -411,7 +409,7 @@ class _PaymentScreenState extends State<Payment> {
                                     ];
                                   } else if (balanceConverted < 12) {
                                     children = <Widget>[
-                                      Text(
+                                      const Text(
                                         'Non hai abbastanza felix da convertire',
                                         style: TextStyle(
                                           fontSize: 10.0,
@@ -425,13 +423,13 @@ class _PaymentScreenState extends State<Payment> {
                                         alignment: Alignment.center,
                                         child: CustomNumberPicker(
                                           shape: RoundedRectangleBorder(
-                                            side: BorderSide(
+                                            side: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1),
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
-                                          valueTextStyle: TextStyle(
+                                          valueTextStyle: const TextStyle(
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -452,7 +450,7 @@ class _PaymentScreenState extends State<Payment> {
                                                     getThemeTextColor(context),
                                                 size: 15,
                                               ),
-                                              SizedBox(width: 8),
+                                              const SizedBox(width: 8),
                                             ],
                                           )),
                                           customAddButton: FittedBox(
@@ -462,7 +460,7 @@ class _PaymentScreenState extends State<Payment> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              SizedBox(width: 8),
+                                              const SizedBox(width: 8),
                                               Icon(
                                                 Icons.add,
                                                 color:
@@ -481,7 +479,7 @@ class _PaymentScreenState extends State<Payment> {
                                   }
                                 } else if (snapshot.hasError) {
                                   children = <Widget>[
-                                    Text(
+                                    const Text(
                                       'Error',
                                       style: TextStyle(
                                         fontSize: 10.0,
@@ -510,13 +508,13 @@ class _PaymentScreenState extends State<Payment> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               "Total",
                               style: TextStyle(
                                   fontSize: 18,
@@ -535,9 +533,9 @@ class _PaymentScreenState extends State<Payment> {
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                               ),
-                              Text(
+                              const Text(
                                 "€",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.secondaryColor,
                                   fontSize: 18,
@@ -545,9 +543,9 @@ class _PaymentScreenState extends State<Payment> {
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                               ),
-                              Text(
+                              const Text(
                                 " +  ",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
                                   color: AppColors.secondaryColor,
@@ -565,9 +563,9 @@ class _PaymentScreenState extends State<Payment> {
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                               ),
-                              Text(
+                              const Text(
                                 "FELX",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
                                   color: AppColors.secondaryColor,
@@ -583,15 +581,14 @@ class _PaymentScreenState extends State<Payment> {
                   ),
                 ),
               ),
-              SizedBox(height: 5.0),
-              Container(
-                  child: Row(
+              const SizedBox(height: 5.0),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(340, 40),
+                      minimumSize: const Size(340, 40),
                       primary: getThemeButtonColor(context),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -605,12 +602,12 @@ class _PaymentScreenState extends State<Payment> {
                       }
                     },
                     child: Text(LanguageLocalizations.of(context).book,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.white,
                         )),
                   ),
                 ],
-              )),
+              ),
             ],
           ),
         ],
@@ -625,7 +622,7 @@ class _PaymentScreenState extends State<Payment> {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
-        itemCount: places == null ? 0 : 1,//places.length,
+        itemCount: places == null ? 0 : 1, //places.length,
         itemBuilder: (BuildContext context, int index) {
           Map place = places[index];
 
@@ -634,7 +631,7 @@ class _PaymentScreenState extends State<Payment> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(
-                "${place["img"]}",
+                "${place["img"][0]}",
                 height: 250.0,
                 width: MediaQuery.of(context).size.width - 40.0,
                 fit: BoxFit.cover,
@@ -730,7 +727,7 @@ class _PaymentScreenState extends State<Payment> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Transazione in corso'),
+            title: const Text('Transazione in corso'),
             content: Text(finalString),
             actions: <Widget>[
               TextButton(
@@ -738,7 +735,7 @@ class _PaymentScreenState extends State<Payment> {
                   _dismissDialog(context);
                   Navigator.pop(context);
                 },
-                child: Text(
+                child: const Text(
                   'Cancella',
                   style: TextStyle(
                     color: Colors.blueAccent,
@@ -754,19 +751,18 @@ class _PaymentScreenState extends State<Payment> {
                     _dismissDialog(context);
                     _showMaterialDialogPaymentError(context);
                   } else {
-                      // int hotelIndex = GlobalState.instance.get('hotelIndex');
-                      String transaction = await sendFELX(usedFelix, hotelIndex);
-                      if (transaction == 'ok') {
-                        _dismissDialog(context);
-                        _showMaterialDialogPayOk(context);
-                      } else {
-                        _dismissDialog(context);
-                        _showMaterialDialogPaymentError(context);
-                      }
+                    // int hotelIndex = GlobalState.instance.get('hotelIndex');
+                    String transaction = await sendFELX(usedFelix, hotelIndex);
+                    if (transaction == 'ok') {
+                      _dismissDialog(context);
+                      _showMaterialDialogPayOk(context);
+                    } else {
+                      _dismissDialog(context);
+                      _showMaterialDialogPaymentError(context);
                     }
-
+                  }
                 },
-                child: Text(
+                child: const Text(
                   'Ok',
                   style: TextStyle(
                     color: Colors.blueAccent,
@@ -874,7 +870,7 @@ class _PaymentScreenState extends State<Payment> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Transazione non effettuata'),
+            title: const Text('Transazione non effettuata'),
             content: Icon(
               Icons.sentiment_dissatisfied_outlined,
               size: 80,
@@ -886,7 +882,7 @@ class _PaymentScreenState extends State<Payment> {
                   _dismissDialog(context);
                   Navigator.pushNamed(context, '/');
                 },
-                child: Text(
+                child: const Text(
                   'Ok',
                   style: TextStyle(
                     color: Colors.blueAccent,
@@ -905,12 +901,12 @@ class _PaymentScreenState extends State<Payment> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Transazione effettuata'),
+            title: const Text('Transazione effettuata'),
             content: SizedBox(
               height: 110,
               child: Column(
                 children: <Widget>[
-                  Text('Prenotazione effettuata con successo \n'),
+                  const Text('Prenotazione effettuata con successo \n'),
                   Icon(
                     Icons.check,
                     size: 50,
@@ -948,9 +944,9 @@ class _PaymentScreenState extends State<Payment> {
                       .then((value) => print(value))
                       .catchError((error) => print(error));
                 },
-                child: Text(
+                child: const Text(
                   'Ok',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.blueAccent,
                     fontSize: 20,
                     height: 1,
@@ -978,7 +974,6 @@ class _PaymentScreenState extends State<Payment> {
       });
     });
 
-
     address.add('/');
     address.add(price.toString());
     address.add('/');
@@ -994,11 +989,9 @@ class _PaymentScreenState extends State<Payment> {
       });
     });
 
-
     String toParse = address.join();
 
     print(toParse);
-
 
     final response = await http.get(Uri.parse(toParse));
 
@@ -1014,10 +1007,10 @@ class _PaymentScreenState extends State<Payment> {
   }
 
   String newPrice(int used) {
-      double convertedPrice = int.parse(originalPrice) - (used / 12);
-      String updatedPrice = convertedPrice.toInt().toString();
-      price = updatedPrice.toString();
-      return price;
+    double convertedPrice = int.parse(originalPrice) - (used / 12);
+    String updatedPrice = convertedPrice.toInt().toString();
+    price = updatedPrice.toString();
+    return price;
   }
 
   void updatePrice(int used) {
@@ -1069,9 +1062,9 @@ class _PaymentScreenState extends State<Payment> {
                   _dismissDialog(context);
                   Navigator.pushNamed(context, '/');
                 },
-                child: Text(
+                child: const Text(
                   'Ok',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.blueAccent,
                     fontSize: 20,
                     height: 1,
@@ -1083,7 +1076,7 @@ class _PaymentScreenState extends State<Payment> {
         });
   }
 
-  updateAllPrice(){
+  updateAllPrice() {
     String z = places[hotelIndex]["rooms"][roomIndex]["price"];
     originalPrice = z;
     price = z;

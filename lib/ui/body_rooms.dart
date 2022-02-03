@@ -26,9 +26,8 @@ class _BodyState extends State<BodyRooms> {
               children: [
                 RoomsItem(
                     imagePath:
-                        "${widget.place["img"]}", //AppAssets.whaleWhatching,
-                    subtitle:
-                        "${widget.place["details"]}".substring(0, 50) + "...",
+                        "${widget.place["img"][0]}", //AppAssets.whaleWhatching,
+                    subtitle: ("${widget.place["details"]}"),
                     title: "${widget.place["name"]}",
                     hours: '4',
                     price: "${widget.place["price"]}",

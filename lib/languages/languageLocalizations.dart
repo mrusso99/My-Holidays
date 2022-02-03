@@ -48,6 +48,21 @@ class LanguageLocalizations {
       'showRooms': "Show Rooms",
       'nights': "Nights",
       'yourStay': "Your Stay",
+      'moreDetails': "more details",
+      'lessDetails': "less details",
+      'startingfrom': 'from',
+      'startPrice': "\$ var_price per person by night",
+      'maxBusy': " max people ",
+      'lights': "LIGHTS",
+      'smart_lock': "SMART LOCK",
+      'temperature': "TEMPERATURE",
+      'breakfast': "BREAKFAST",
+      'hour_breakfast': "What time do you \nwant to have \nbreakfast? :",
+      'selected_hour': "Select hour",
+      'drinks': "Drinks",
+      'special_request': "Special Requests",
+      'taxi': "TAXI",
+      'restaurant': "RESTAURANT",
     },
     'it': {
       'wallet': 'Portafoglio',
@@ -84,6 +99,21 @@ class LanguageLocalizations {
       'showRooms': "Seleziona Camere",
       'nights': "Notti",
       'yourStay': "Il tuo soggiorno",
+      'moreDetails': "più dettagli",
+      'lessDetails': "meno dettagli",
+      'startingfrom': 'da',
+      'startPrice': "var_price € per persona a notte",
+      'maxBusy': " massimo di persone ",
+      'lights': "LUCI",
+      'smart_lock': "SMART LOCK",
+      'temperature': "TEMPERATURA",
+      'breakfast': "COLAZIONE",
+      'hour_breakfast': "A che ora vuoi \nfare colazione? :",
+      'drinks': "Bevande",
+      'special:request': "Richieste Speciali",
+      'selected_hour': "Seleziona l'orario",
+      'taxi': "TAXI",
+      'restaurant': "RISTORANTE",
     },
   };
 
@@ -215,5 +245,66 @@ class LanguageLocalizations {
 
   String get yourStay {
     return _localizedValues[locale.languageCode]!['yourStay']!;
+  }
+
+  String get moreDetails {
+    return _localizedValues[locale.languageCode]!['moreDetails']!;
+  }
+
+  String get lessDetails {
+    return _localizedValues[locale.languageCode]!['lessDetails']!;
+  }
+
+  String get startPrice {
+    return _localizedValues[locale.languageCode]!['startPrice']!;
+  }
+
+  String get maxBusy {
+    return _localizedValues[locale.languageCode]!['maxBusy']!;
+  }
+
+  String get startingfrom {
+    return _localizedValues[locale.languageCode]!['startingfrom']!;
+  }
+
+  String get lights {
+    return _localizedValues[locale.languageCode]!['lights']!;
+  }
+
+  String get temperature {
+    return _localizedValues[locale.languageCode]!['temperature']!;
+  }
+
+  // ignore: non_constant_identifier_names
+  String get smart_lock {
+    return _localizedValues[locale.languageCode]!['smart_lock']!;
+  }
+
+  String get breakfast {
+    return _localizedValues[locale.languageCode]!['breakfast']!;
+  }
+
+  String get taxi {
+    return _localizedValues[locale.languageCode]!['taxi']!;
+  }
+
+  String get restaurant {
+    return _localizedValues[locale.languageCode]!['restaurant']!;
+  }
+
+  String get hour_breakfast {
+    return _localizedValues[locale.languageCode]!['hour_breakfast']!;
+  }
+
+  String get drinks {
+    return _localizedValues[locale.languageCode]!['drinks']!;
+  }
+
+  String get special_request {
+    return _localizedValues[locale.languageCode]!['special_request']!;
+  }
+
+  String get selected_hour {
+    return _localizedValues[locale.languageCode]!['selected_hour']!;
   }
 }

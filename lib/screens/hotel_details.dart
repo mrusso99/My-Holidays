@@ -25,7 +25,7 @@ class HotelDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     int hotelIndex = GlobalState.instance.get('hotelIndex');
     var _title =
-    Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -37,7 +37,7 @@ class HotelDetails extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 20.0),
-          buildSlider(),
+          buildSlider(hotelIndex),
           const SizedBox(height: 20),
           ListView(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -67,14 +67,14 @@ class HotelDetails extends StatelessWidget {
               ),
               Row(
                 children: <Widget>[
-                  Icon(Icons.location_on,
+                  const Icon(Icons.location_on,
                       size: 14, color: AppColors.secondaryColor),
                   const SizedBox(width: 3),
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "${places[hotelIndex]["location"]}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
                         color: AppColors.secondaryColor,
@@ -117,7 +117,8 @@ class HotelDetails extends StatelessWidget {
     );
   }
 
-  buildSlider() {
+  buildSlider(int index) {
+    final idx = index;
     return Container(
       padding: const EdgeInsets.only(left: 20),
       height: 250.0,
@@ -126,14 +127,14 @@ class HotelDetails extends StatelessWidget {
         primary: false,
         itemCount: places == null ? 0 : 1, //places.length,
         itemBuilder: (BuildContext context, int index) {
-          Map place = places[index];
+          Map place = places[idx];
 
           return Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(
-                "${place["img"]}",
+                "${place["img"][0]}",
                 height: 250.0,
                 width: MediaQuery.of(context).size.width - 40.0,
                 fit: BoxFit.cover,

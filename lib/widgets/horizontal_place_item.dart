@@ -22,7 +22,8 @@ class HorizontalPlaceItem extends StatelessWidget {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset("${place["img"]}",
+                child: Image.asset(
+                  "${place["img"][0]}",
                   height: 200,
                   width: 150,
                   fit: BoxFit.cover,
@@ -72,14 +73,12 @@ class HorizontalPlaceItem extends StatelessWidget {
     );
   }
 
-  int searchIndex(String hotelName){
-    for (int i = 0; i < places.length; i++){
-      if (places[i]['name'] == hotelName){
+  int searchIndex(String hotelName) {
+    for (int i = 0; i < places.length; i++) {
+      if (places[i]['name'] == hotelName) {
         return i;
       }
     }
     return -1;
   }
 }
-
-

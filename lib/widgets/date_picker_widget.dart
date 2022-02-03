@@ -6,49 +6,52 @@ import 'package:my_holidays/util/Global.dart';
 import 'button_widget.dart';
 
 class DateRangePickerWidget extends StatefulWidget {
+  const DateRangePickerWidget({Key? key}) : super(key: key);
+
   @override
   _DateRangePickerWidgetState createState() => _DateRangePickerWidgetState();
 }
 
 class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
-  DateTimeRange dateRange = DateTimeRange(start: DateTime.now().subtract(Duration(days: 0)), end: DateTime.now().add(Duration(hours: 24)));
+  DateTimeRange dateRange = DateTimeRange(
+      start: DateTime.now().subtract(const Duration(days: 0)),
+      end: DateTime.now().add(Duration(hours: 24)));
 
   String getFrom() {
+    // ignore: unnecessary_null_comparison
     if (dateRange == null) {
       return 'From';
     } else {
-      GlobalState.instance.set('dateFrom', DateFormat('dd/MM/yyyy').format(dateRange.start));
+      GlobalState.instance
+          .set('dateFrom', DateFormat('dd/MM/yyyy').format(dateRange.start));
       return DateFormat('dd/MM/yyyy').format(dateRange.start);
     }
   }
 
   String getUntil() {
+    // ignore: unnecessary_null_comparison
     if (dateRange == null) {
       return 'Until';
     } else {
-      GlobalState.instance.set('dateUntil', DateFormat('dd/MM/yyyy').format(dateRange.end));
+      GlobalState.instance
+          .set('dateUntil', DateFormat('dd/MM/yyyy').format(dateRange.end));
       return DateFormat('dd/MM/yyyy').format(dateRange.end);
     }
   }
 
-
   @override
   Widget build(BuildContext context) => HeaderWidget(
-    title: LanguageLocalizations.of(context).date_selector,
-    child: Row(
-      children: [
-        Expanded(
-          child: returnRangePickerFrom(context)
+        title: LanguageLocalizations.of(context).date_selector,
+        child: Row(
+          children: [
+            Expanded(child: returnRangePickerFrom(context)),
+            const SizedBox(width: 8),
+            Icon(Icons.arrow_forward, color: getThemeColor()),
+            const SizedBox(width: 8),
+            Expanded(child: returnRangePickerUntil(context)),
+          ],
         ),
-        const SizedBox(width: 8),
-        Icon(Icons.arrow_forward, color: getThemeColor()),
-        const SizedBox(width: 8),
-        Expanded(
-          child: returnRangePickerUntil(context)
-        ),
-      ],
-    ),
-  );
+      );
 
   Future pickDateRange(BuildContext context) async {
     final initialDateRange = DateTimeRange(
@@ -84,10 +87,10 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
     setState(() => dateRange = newDateRange);
   }
 
-  Color getThemeColor(){
+  Color getThemeColor() {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    if (isDarkMode){
+    if (isDarkMode) {
       return Colors.white;
     } else {
       return Colors.black;
@@ -96,11 +99,11 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
 
   Widget returnRangePickerFrom(BuildContext context) {
     return Builder(
-        builder: (context) => ButtonWidget(
-          text: getFrom(),
-          onClicked: () => pickDateRange(context),
-        ),
-      );
+      builder: (context) => ButtonWidget(
+        text: getFrom(),
+        onClicked: () => pickDateRange(context),
+      ),
+    );
   }
 
   Widget returnRangePickerUntil(BuildContext context) {
@@ -111,5 +114,4 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
       ),
     );
   }
-
 }
