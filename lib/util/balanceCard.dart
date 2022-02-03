@@ -139,7 +139,7 @@ class BalanceCard extends StatelessWidget {
 
   Future<String> getBalance() async {
     List<String> address = [];
-    String base = 'http://10.0.2.2:4455/address/';
+    String base = 'https://10.0.2.2:4455/address/';
     address.add(base);
     var userEmail;
     if (FirebaseAuth.instance.currentUser != null) {

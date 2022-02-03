@@ -298,7 +298,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   Future<String> createAccountEthereum() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:4455/newAccount'));
+        await http.get(Uri.parse('https://10.0.2.2:4455/newAccount'));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,

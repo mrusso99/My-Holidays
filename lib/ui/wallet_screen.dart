@@ -339,7 +339,7 @@ class _WalletScreenState extends State<WalletScreen> {
 
   void mint(int number) async {
     List<String> address = [];
-    String base = 'http://10.0.2.2:4455/mint/' + number.toString() + '/';
+    String base = 'https://10.0.2.2:4455/mint/' + number.toString() + '/';
     print(base);
     address.add(base);
 
@@ -362,7 +362,7 @@ class _WalletScreenState extends State<WalletScreen> {
     List<Transaction> l = [];
 
     List<String> address = [];
-    String base = 'http://10.0.2.2:4455/address/';
+    String base = 'https://10.0.2.2:4455/address/';
     address.add(base);
 
     var userEmail;
