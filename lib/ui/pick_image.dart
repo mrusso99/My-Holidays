@@ -1,41 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_holidays/ui/self_check_in.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/widgets/rounded_button.dart';
 
 class PickImage extends StatelessWidget {
+  const PickImage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-              padding: EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 40),
-              child: Text('Scegli da dove vuoi prendere l\'immagine',
-                  style: const TextStyle(
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold,
-                  ))),
-          Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: RoundedButton(
-                  color: Colors.blueAccent,
-                  text: "Galleria",
-                  customOnPressed: () async {
-                    pickimageFromGallery(context);
-                  })),
-          Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: RoundedButton(
-                  color: Colors.blueAccent,
-                  text: "Fotocamera",
-                  customOnPressed: () async {
-                    snapImage(context);
-                  })),
-        ],
-      ),
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Padding(
+            padding: EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 40),
+            child: Text('Scegli da dove vuoi prendere l\'immagine',
+                style: TextStyle(
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold,
+                ))),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: RoundedButton(
+                color: AppColors.primaryColor,
+                text: "Galleria",
+                customOnPressed: () async {
+                  pickimageFromGallery(context);
+                })),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: RoundedButton(
+                color: AppColors.primaryColor,
+                text: "Fotocamera",
+                customOnPressed: () async {
+                  snapImage(context);
+                })),
+      ],
     ));
   }
 

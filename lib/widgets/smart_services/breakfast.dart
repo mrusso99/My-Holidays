@@ -3,6 +3,10 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
+import 'package:my_holidays/util/app_colors.dart';
+
+import '../date_picker_widget.dart';
 
 class BreakFast extends StatefulWidget {
   const BreakFast({Key? key}) : super(key: key);
@@ -23,45 +27,32 @@ class _BreakFastState extends State<BreakFast> {
   double _totalPrice = 0.00;
 
   List ordine = [];
+  final TextEditingController _specials = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var _title =
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: Color.fromRGBO(13, 78, 161, 1),
-                  ),
-                ),
-                const RotatedBox(
-                  quarterTurns: 135,
-                  child: Icon(
-                    Icons.bar_chart_rounded,
-                    color: Color.fromRGBO(13, 78, 161, 1),
-                    size: 28,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text(
-                  'A che ora vuoi \nfare colazione? :',
-                  style: TextStyle(
-                      color: Color.fromRGBO(13, 78, 161, 1),
+                Text(
+                  LanguageLocalizations.of(context).hour_breakfast,
+                  style: const TextStyle(
+                      color: AppColors.primaryColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
@@ -76,16 +67,17 @@ class _BreakFastState extends State<BreakFast> {
                         padding: MaterialStateProperty.all(
                             const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
                         backgroundColor: MaterialStateProperty.all(
-                            Color.fromRGBO(13, 78, 161, 1)),
+                          AppColors.secondaryColor,
+                        ),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         )),
                       ),
-                      child: const Text(
-                        "Seleziona l'orario",
-                        style: TextStyle(
+                      child: Text(
+                        LanguageLocalizations.of(context).selected_hour,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -95,7 +87,8 @@ class _BreakFastState extends State<BreakFast> {
                     Text(
                       'Ore: ${_selectedTime.format(context)}',
                       style: const TextStyle(
-                        color: Color.fromRGBO(246, 135, 30, 1),
+                        fontSize: 14,
+                        color: AppColors.primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                     )
@@ -107,10 +100,10 @@ class _BreakFastState extends State<BreakFast> {
             const SizedBox(
               height: 20,
             ),
-            const Text(
-              'Bevande',
-              style: TextStyle(
-                  color: Color.fromRGBO(13, 78, 161, 1),
+            Text(
+              LanguageLocalizations.of(context).drinks,
+              style: const TextStyle(
+                  color: AppColors.primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
@@ -193,7 +186,7 @@ class _BreakFastState extends State<BreakFast> {
             const Text(
               'Food',
               style: TextStyle(
-                  color: Color.fromRGBO(13, 78, 161, 1),
+                  color: AppColors.primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
@@ -272,11 +265,11 @@ class _BreakFastState extends State<BreakFast> {
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              'Richieste speciali',
+            Text(
+              LanguageLocalizations.of(context).special_request,
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: Color.fromRGBO(13, 78, 161, 1),
+              style: const TextStyle(
+                  color: AppColors.primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
@@ -284,6 +277,7 @@ class _BreakFastState extends State<BreakFast> {
               height: 10,
             ),
             TextField(
+              controller: _specials,
               decoration: InputDecoration(
                 fillColor: Colors.grey.withOpacity(0.1),
                 filled: true,
@@ -295,7 +289,7 @@ class _BreakFastState extends State<BreakFast> {
                   borderRadius: BorderRadius.circular(20.0),
                   // width: 0.0 produces a thin "hairline" border
                   borderSide: const BorderSide(
-                      color: Color.fromRGBO(246, 135, 30, 75), width: 1),
+                      color: AppColors.secondaryColor, width: 1),
                 ),
               ),
             ),
@@ -323,16 +317,14 @@ class _BreakFastState extends State<BreakFast> {
                     onPressed: () {
                       _totalPrice != 0
                           ? _showMaterialDialog(size)
-                          : const AlertDialog(
-                              title: Text('Attenzione: '),
-                              content: Text('Aggiungi qualcosa all\'ordine'),
-                            );
+                          : showAlertDialog(context);
                     },
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
                           const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
                       backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(13, 78, 161, 1)),
+                        AppColors.primaryColor,
+                      ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -354,6 +346,37 @@ class _BreakFastState extends State<BreakFast> {
     );
   }
 
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+
+    Widget continueButton = TextButton(
+      child: const Text(
+        "Continue",
+        style: TextStyle(color: AppColors.primaryColor, fontSize: 18),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Attenzione:"),
+      content: const Text("Aggiungi qualcosa all'ordine!"),
+      actions: [
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   void _showMaterialDialog(Size size) {
     showDialog(
         context: context,
@@ -366,8 +389,8 @@ class _BreakFastState extends State<BreakFast> {
                   const Text(
                     'Riepilogo',
                     style: TextStyle(
-                        color: Color.fromRGBO(13, 78, 161, 1),
-                        fontSize: 20,
+                        color: AppColors.primaryColor,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
@@ -379,7 +402,10 @@ class _BreakFastState extends State<BreakFast> {
                     child: ListView.builder(
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(ordine[index]),
+                        child: Text(
+                          ordine[index],
+                          style: const TextStyle(fontSize: 18),
+                        ),
                       ),
                       itemCount: ordine.length,
                     ),
@@ -414,7 +440,8 @@ class _BreakFastState extends State<BreakFast> {
                       padding: MaterialStateProperty.all(
                           const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
                       backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(13, 78, 161, 1)),
+                        AppColors.primaryColor,
+                      ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),

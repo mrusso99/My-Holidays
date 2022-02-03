@@ -20,7 +20,7 @@ class VerticalRoomsItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.asset(
-                "${place["img"]}",
+                "${place["img"][0]}",
                 height: 80,
                 width: 80,
                 fit: BoxFit.cover,

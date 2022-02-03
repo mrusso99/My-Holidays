@@ -44,7 +44,7 @@ class Rooms extends StatelessWidget {
             child: Text(
               '${places[hotelIndex]["name"]}',
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 color: AppColors.primaryColor,
@@ -55,13 +55,13 @@ class Rooms extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10, top: 5),
               child: Row(
                 children: <Widget>[
-                  Icon(Icons.location_on,
+                  const Icon(Icons.location_on,
                       size: 14, color: AppColors.secondaryColor),
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "${places[hotelIndex]["location"]}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
                         color: AppColors.secondaryColor,
@@ -100,7 +100,7 @@ class Rooms extends StatelessWidget {
   buildVerticalList() {
     var hotIdx = GlobalState.instance.get('hotelIndex');
     return Padding(
-      padding: const EdgeInsets.only(left: 5),
+      padding: const EdgeInsets.only(left: 10),
       child: ListView.builder(
         primary: false,
         physics: const NeverScrollableScrollPhysics(),

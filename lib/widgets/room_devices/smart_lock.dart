@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/mqtt_client.dart';
 
 class SmartLock extends StatefulWidget {
@@ -44,76 +45,49 @@ class _SmartLockState extends State<SmartLock> {
 
   @override
   Widget build(BuildContext context) {
+    var _title =
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(
-              'https://www.spider-mac.com/wp-content/uploads/2020/01/hero-landing.jpeg',
-            ),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black, BlendMode.dstATop),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      appBar: AppBar(
+        elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RawMaterialButton(
+              fillColor: AppColors.primaryColor,
+              onPressed: () => _openDoor(),
+              elevation: 2.0,
+              child: Column(
                 children: [
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.blue.shade900,
-                    ),
+                  Icon(
+                    _isOpened ? Icons.lock_open_outlined : Icons.lock_outlined,
+                    size: 50.0,
+                    color: AppColors.secondaryColor,
                   ),
-                  RotatedBox(
-                    quarterTurns: 135,
-                    child: Icon(
-                      Icons.bar_chart_rounded,
-                      color: Colors.blue.shade900,
-                      size: 28,
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const Text(
+                    'APRI',
+                    style: TextStyle(
+                      color: AppColors.secondaryColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 100,
-              ),
-              RawMaterialButton(
-                fillColor: Colors.blue.shade900,
-                onPressed: () => _openDoor(),
-                elevation: 2.0,
-                child: Column(
-                  children: [
-                    Icon(
-                      _isOpened
-                          ? Icons.lock_open_outlined
-                          : Icons.lock_outlined,
-                      size: 50.0,
-                      color: Colors.orange,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      'APRI',
-                      style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                padding: EdgeInsets.all(40.0),
-                shape: CircleBorder(),
-              ),
-            ],
-          ),
+              padding: const EdgeInsets.all(40.0),
+              shape: const CircleBorder(),
+            ),
+          ],
         ),
       ),
     );

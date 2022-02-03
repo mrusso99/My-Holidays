@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/util/Global.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/widgets/smart_services/ristoranti.dart';
 import 'package:my_holidays/widgets/date_picker_widget.dart';
@@ -20,9 +21,15 @@ class RestaurantDetails extends StatelessWidget {
     int? numberAdult = 1;
     int? numberChild = 0;
     int hotelIndex = GlobalState.instance.get('hotelIndex');
+    var _title =
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
       ),
       body: ListView(
         children: <Widget>[
@@ -45,35 +52,39 @@ class RestaurantDetails extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
+                        color: AppColors.primaryColor,
                       ),
                       maxLines: 2,
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  IconButton(
+                  /*IconButton(
                     icon: const Icon(
                       Icons.bookmark,
                     ),
                     onPressed: () {},
-                  ),
+                  ),*/
                 ],
+              ),
+              const SizedBox(
+                height: 3,
               ),
               Row(
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     Icons.location_on,
                     size: 14,
-                    color: Colors.blueGrey[300],
+                    color: AppColors.secondaryColor,
                   ),
                   const SizedBox(width: 3),
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "${ristoranti[hotelIndex]["location"]}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
-                        color: Colors.blueGrey[300],
+                        color: AppColors.secondaryColor,
                       ),
                       maxLines: 1,
                       textAlign: TextAlign.left,
@@ -94,7 +105,7 @@ class RestaurantDetails extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               Container(
                 alignment: Alignment.centerLeft,
                 child: const Text(
@@ -146,8 +157,8 @@ class RestaurantDetails extends StatelessWidget {
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.fromLTRB(24.0, 0, 24.0, 0)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.blueAccent),
+                          backgroundColor: MaterialStateProperty.all(
+                              AppColors.secondaryColor),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -157,7 +168,7 @@ class RestaurantDetails extends StatelessWidget {
                         child: const Text(
                           "Seleziona l'orario",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: AppColors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
@@ -166,7 +177,7 @@ class RestaurantDetails extends StatelessWidget {
                       Text(
                         'Ore: ${_selectedTime.format(context)}',
                         style: const TextStyle(
-                          color: Color.fromRGBO(246, 135, 30, 75),
+                          color: AppColors.primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
                       )
@@ -174,7 +185,7 @@ class RestaurantDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Container(
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -184,10 +195,11 @@ class RestaurantDetails extends StatelessWidget {
                         size: 30,
                         color: getThemeColor(context),
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       CustomNumberPicker(
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.transparent, width: 1),
+                          side: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         initialValue: 1,
@@ -204,7 +216,7 @@ class RestaurantDetails extends StatelessWidget {
                               color: getThemeTextColor(context),
                               size: 15,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                           ],
                         )),
                         customAddButton: FittedBox(
@@ -212,7 +224,7 @@ class RestaurantDetails extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Icon(
                               Icons.add,
                               color: getThemeTextColor(context),
@@ -226,7 +238,7 @@ class RestaurantDetails extends StatelessWidget {
                       ),
                     ],
                   )),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Container(
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -236,10 +248,11 @@ class RestaurantDetails extends StatelessWidget {
                         size: 30,
                         color: getThemeColor(context),
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       CustomNumberPicker(
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.transparent, width: 1),
+                          side: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         initialValue: 0,
@@ -256,7 +269,7 @@ class RestaurantDetails extends StatelessWidget {
                               color: getThemeTextColor(context),
                               size: 15,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                           ],
                         )),
                         customAddButton: FittedBox(
@@ -264,7 +277,7 @@ class RestaurantDetails extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Icon(
                               Icons.add,
                               color: getThemeTextColor(context),
@@ -278,9 +291,8 @@ class RestaurantDetails extends StatelessWidget {
                       ),
                     ],
                   )),
-              SizedBox(height: 20.0),
-              Container(
-                  child: Row(
+              const SizedBox(height: 20.0),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -292,12 +304,15 @@ class RestaurantDetails extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {},
-                    child: Text(LanguageLocalizations.of(context).cancel,
-                        style: TextStyle(
-                          color: getThemeTextColor(context),
-                        )),
+                    child: Text(
+                      LanguageLocalizations.of(context).cancel,
+                      style: const TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  SizedBox(width: 80),
+                  const SizedBox(width: 80),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: getThemeButtonColor(context),
@@ -327,14 +342,17 @@ class RestaurantDetails extends StatelessWidget {
                                 print("Failed to add reservation: $error"));
                       }
                     },
-                    child: Text(LanguageLocalizations.of(context).book,
-                        style: TextStyle(
-                          color: getThemeTextColor(context),
-                        )),
+                    child: Text(
+                      LanguageLocalizations.of(context).book,
+                      style: const TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
-              )),
-              SizedBox(height: 20.0),
+              ),
+              const SizedBox(height: 20.0),
             ],
           ),
         ],
@@ -393,7 +411,7 @@ class RestaurantDetails extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(
-                "${place["img"]}",
+                "${place["img"][0]}",
                 height: 250.0,
                 width: MediaQuery.of(context).size.width - 40.0,
                 fit: BoxFit.cover,
@@ -419,7 +437,7 @@ class RestaurantDetails extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode) {
-      return Colors.white;
+      return AppColors.primaryColor;
     } else {
       return Colors.black;
     }
@@ -483,14 +501,14 @@ class RestaurantDetails extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Prenotazione Effettuata'),
+            title: const Text('Prenotazione Effettuata'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   _dismissDialog(context);
                   Navigator.pushNamed(context, '/');
                 },
-                child: Text(
+                child: const Text(
                   'Ok',
                   style: TextStyle(
                     color: Colors.blueAccent,

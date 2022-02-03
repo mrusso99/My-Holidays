@@ -125,7 +125,7 @@ class Details extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               rangePickerWidget,
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Container(
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -135,10 +135,11 @@ class Details extends StatelessWidget {
                         size: 30,
                         color: getThemeColor(context),
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       CustomNumberPicker(
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.transparent, width: 1),
+                          side: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         initialValue: 1,
@@ -155,7 +156,7 @@ class Details extends StatelessWidget {
                               color: getThemeTextColor(context),
                               size: 15,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                           ],
                         )),
                         customAddButton: FittedBox(
@@ -163,7 +164,7 @@ class Details extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Icon(
                               Icons.add,
                               color: getThemeTextColor(context),
@@ -177,7 +178,7 @@ class Details extends StatelessWidget {
                       ),
                     ],
                   )),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Container(
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -187,10 +188,11 @@ class Details extends StatelessWidget {
                         size: 30,
                         color: getThemeColor(context),
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       CustomNumberPicker(
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.transparent, width: 1),
+                          side: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         initialValue: 0,
@@ -207,7 +209,7 @@ class Details extends StatelessWidget {
                               color: getThemeTextColor(context),
                               size: 15,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                           ],
                         )),
                         customAddButton: FittedBox(
@@ -215,7 +217,7 @@ class Details extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Icon(
                               Icons.add,
                               color: getThemeTextColor(context),
@@ -229,7 +231,7 @@ class Details extends StatelessWidget {
                       ),
                     ],
                   )),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Container(
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -250,7 +252,7 @@ class Details extends StatelessWidget {
                           color: getThemeTextColor(context),
                         )),
                   ),
-                  SizedBox(width: 80),
+                  const SizedBox(width: 80),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: getThemeButtonColor(context),
@@ -277,7 +279,7 @@ class Details extends StatelessWidget {
                   ),
                 ],
               )),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
             ],
           ),
         ],
@@ -301,7 +303,7 @@ class Details extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(
-                "${place["img"]}",
+                "${place["img"][0]}",
                 height: 250.0,
                 width: MediaQuery.of(context).size.width - 40.0,
                 fit: BoxFit.cover,

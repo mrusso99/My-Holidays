@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/widgets/room_devices/bottom_nav_widget.dart';
 import 'package:my_holidays/widgets/room_devices/slider_widget.dart';
 import 'package:my_holidays/widgets/room_devices/utils.dart';
@@ -14,37 +15,17 @@ class AirConditioner extends StatefulWidget {
 class _AirConditionerState extends State<AirConditioner> {
   @override
   Widget build(BuildContext context) {
+    var _title =
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       //backgroundColor: kScaffoldBackgroundColor,
       //bottomNavigationBar: BottomNavBarWidget(),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.indigo,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(
-              left: 24,
-              right: 24,
-            ),
-            child: const RotatedBox(
-              quarterTurns: 135,
-              child: Icon(
-                Icons.bar_chart_rounded,
-                color: Colors.indigo,
-                size: 28,
-              ),
-            ),
-          )
-        ],
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
       ),
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 25),
@@ -52,15 +33,24 @@ class _AirConditionerState extends State<AirConditioner> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(
+              height: 10,
+            ),
             Column(
               children: const [
                 Text(
                   'Temperature',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 26),
+                  style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 26),
                 ),
                 Text(
                   'Room n° 1',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(
+                      color: AppColors.secondaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14),
                 ),
               ],
             ),
@@ -73,43 +63,45 @@ class _AirConditionerState extends State<AirConditioner> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       'Current humidity',
                       style: TextStyle(
-                        color: Colors.grey.withAlpha(150),
-                      ),
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
-                    const Text(
+                    Text(
                       '55%',
                       style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ),
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24),
                     ),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       'Current temp.',
                       style: TextStyle(
-                        color: Colors.grey.withAlpha(150),
-                      ),
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
-                    const Text(
+                    Text(
                       '25°',
                       style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ),
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24),
                     ),
                   ],
                 )

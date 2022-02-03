@@ -12,9 +12,17 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  var startingRoomPrice = 1000000.23;
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    for (var room in widget.place["rooms"]) {
+      double roomPrice = double.parse(room['price']);
+      if (roomPrice <= startingRoomPrice) {
+        startingRoomPrice = roomPrice;
+      }
+    }
     return SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.only(top: 0, left: 10, right: 10),
@@ -24,12 +32,12 @@ class _BodyState extends State<Body> {
               children: [
                 FavoriteItem(
                   imagePath:
-                      "${widget.place["img"]}", //AppAssets.whaleWhatching,
+                      "${widget.place["img"][0]}", //AppAssets.whaleWhatching,
                   subtitle: "${widget.place["name"]}",
-                  title: 'Whale Watching Tour',
-                  hours: '4',
-                  price: '89',
-                  details: "${widget.place["location"]}",
+                  title: "${widget.place["location"]}",
+                  category: widget.place["category"],
+                  price: "$startingRoomPrice",
+                  details: "${widget.place["details"]}",
                   reviews: 230,
                   rating: 4.0,
                   place: widget.place,

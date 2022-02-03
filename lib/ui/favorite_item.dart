@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/screens/hotel_details.dart';
 import 'package:my_holidays/util/Global.dart';
 import 'package:my_holidays/util/places.dart';
@@ -12,7 +12,7 @@ class FavoriteItem extends StatelessWidget {
       {Key? key,
       required this.subtitle,
       required this.title,
-      required this.hours,
+      required this.category,
       required this.reviews,
       required this.rating,
       required this.price,
@@ -24,7 +24,7 @@ class FavoriteItem extends StatelessWidget {
   final String subtitle;
   final String details;
   final String title;
-  final String hours;
+  final int category;
   final String price;
   final double rating;
   final int reviews;
@@ -34,12 +34,16 @@ class FavoriteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 10),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            height: getProportionateScreenHeight(250),
-            padding: EdgeInsets.only(bottom: 10),
+            height: getProportionateScreenHeight(290),
+            padding: const EdgeInsets.only(bottom: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -48,9 +52,9 @@ class FavoriteItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: getProportionateScreenHeight(140),
+                  height: getProportionateScreenHeight(160),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(10),
                           topLeft: Radius.circular(10)),
                       image: DecorationImage(
@@ -58,50 +62,87 @@ class FavoriteItem extends StatelessWidget {
                 ),
                 Padding(
                     padding: const EdgeInsets.only(top: 10, left: 10),
-                    child: Text(title.toUpperCase(), //
-                        style: TextStyles.regular4)),
+                    child: Text(title.toUpperCase(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: AppColors.secondaryColor) //
+                        )),
                 Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 10),
-                  child: Text(subtitle,
-                      style: TextStyles.heading.copyWith(fontSize: 14)),
-                ),
+                    padding: const EdgeInsets.only(top: 5, left: 10),
+                    child: Text(subtitle,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: AppColors.primaryColor))),
                 Padding(
                     padding: const EdgeInsets.only(top: 5, left: 10),
                     child: Row(
                       children: [
-                        Text("\$$price" " per person ",
+                        Text(
+                            LanguageLocalizations.of(context).startingfrom +
+                                " " +
+                                LanguageLocalizations.of(context)
+                                    .startPrice
+                                    .replaceAll('var_price', price),
                             style: TextStyles.regular3),
-                        Container(
-                          height: 3,
-                          width: 3,
-                          decoration: BoxDecoration(
-                              color: AppColors.black, shape: BoxShape.circle),
-                        ),
-                        Text(" $hours" " max people ",
-                            style: TextStyles.regular3),
-                        Container(
-                          height: 3,
-                          width: 3,
-                          decoration: BoxDecoration(
-                              color: AppColors.black, shape: BoxShape.circle),
-                        ),
-                        Text(" $details.",
-                            maxLines: 3, style: TextStyles.regular3),
                       ],
                     )),
-                Padding(
-                    padding: const EdgeInsets.only(top: 5, left: 10),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          size: 13,
-                          color: AppColors.primaryColor,
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  height: getProportionateScreenHeight(30),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    primary: false,
+                    itemCount: category, //places.lenght
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: const Icon(
+                            Icons.star,
+                            size: 14,
+                            color: AppColors.yellow,
+                          ),
                         ),
-                        Text(rating.toString(), style: TextStyles.semiBold),
-                        Text(" ($reviews)", style: TextStyles.light)
-                      ],
-                    ))
+                      );
+                    },
+                  ),
+                )
+                /*Padding(
+                        padding: const EdgeInsets.only(top: 5, left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.star,
+                              size: 13,
+                              color: AppColors.yellow,
+                            ),
+                            Icon(
+                              Icons.star,
+                              size: 13,
+                              color: AppColors.yellow,
+                            ),
+                            Icon(
+                              Icons.star,
+                              size: 13,
+                              color: AppColors.yellow,
+                            ),
+                            Icon(
+                              Icons.star,
+                              size: 13,
+                              color: AppColors.yellow,
+                            ),
+                            Icon(
+                              Icons.star,
+                              size: 13,
+                              color: AppColors.yellow,
+                            ),
+                            //Text(rating.toString(), style: TextStyles.semiBold),
+                            //Text(" ($reviews)", style: TextStyles.light)
+                          ],
+                        ))*/
               ],
             ),
           ),
@@ -118,7 +159,9 @@ class FavoriteItem extends StatelessWidget {
               ),
             );
           },
-        ));
+        ),
+      ),
+    );
   }
 
   int searchIndex(String hotelName) {

@@ -3,19 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/ui/body.dart';
-import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/colors.dart';
 import 'package:my_holidays/util/places.dart';
-import 'package:my_holidays/widgets/horizontal_place_item.dart';
-import 'package:my_holidays/widgets/search_bar.dart';
-import 'package:my_holidays/widgets/vertical_place_item.dart';
 
 class Travels extends StatelessWidget {
   const Travels({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // String image = "imgs/GoFelix.jpg";
     var _title =
         Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
@@ -27,16 +22,7 @@ class Travels extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          const SizedBox(height: 20),
-          //  Container(
-          //    height: 150,
-          //  decoration: BoxDecoration(
-          //  image: DecorationImage(
-          //   image: AssetImage(image),
-          //   fit: BoxFit.fitWidth,
-          // ),
-          //R ),
-          //  ),
+          //const SizedBox(height: 0),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
@@ -49,10 +35,10 @@ class Travels extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 5),
+          //const SizedBox(height: 5),
           //  buildHorizontalList(context),
           buildVerticalList(),
-          const SizedBox(height: 50),
+          //const SizedBox(height: 25),
         ],
       ),
     );

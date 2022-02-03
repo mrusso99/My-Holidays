@@ -12,72 +12,72 @@ class VerticalPlaceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        child: Container(
-          alignment: Alignment.centerLeft,
-          height: 100,
-          child: Row(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  "${place["img"]}",
-                  height: 80,
-                  width: 80,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Container(
-                alignment: Alignment.centerLeft,
+      child: Container(
+        alignment: Alignment.centerLeft,
+        height: 100,
+        child: Row(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                "${place["img"][0]}",
                 height: 80,
-                width: MediaQuery.of(context).size.width - 130,
-                child: ListView(
-                  primary: false,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "${place["name"]}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                        maxLines: 2,
-                        textAlign: TextAlign.left,
+                width: 80,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Container(
+              alignment: Alignment.centerLeft,
+              height: 80,
+              width: MediaQuery.of(context).size.width - 130,
+              child: ListView(
+                primary: false,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "${place["name"]}",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
+                      maxLines: 2,
+                      textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 5.0),
-                    Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.location_on,
-                          size: 15,
-                          color: Colors.blueGrey[300],
-                        ),
-                        const SizedBox(width: 5),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "${place["location"]}",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.blueGrey[300],
-                            ),
-                            maxLines: 1,
-                            textAlign: TextAlign.left,
+                  ),
+                  const SizedBox(height: 5.0),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.location_on,
+                        size: 15,
+                        color: Colors.blueGrey[300],
+                      ),
+                      const SizedBox(width: 5),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "${place["location"]}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.blueGrey[300],
                           ),
+                          maxLines: 1,
+                          textAlign: TextAlign.left,
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Text(
@@ -98,33 +98,32 @@ class VerticalPlaceItem extends StatelessWidget {
                               maxLines: 1,
                               textAlign: TextAlign.left,
                             ),
-                          ]
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                          ]),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        onTap: () {
-          int index = searchIndex("${place["name"]}");
-          GlobalState.instance.set('hotelIndex', index);
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) {
-                return const Details();
-              },
             ),
-          );
-        },
+          ],
+        ),
+      ),
+      onTap: () {
+        int index = searchIndex("${place["name"]}");
+        GlobalState.instance.set('hotelIndex', index);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return const Details();
+            },
+          ),
+        );
+      },
     );
   }
 
-  int searchIndex(String hotelName){
-    for (int i = 0; i < places.length; i++){
-      if (places[i]['name'] == hotelName){
+  int searchIndex(String hotelName) {
+    for (int i = 0; i < places.length; i++) {
+      if (places[i]['name'] == hotelName) {
         return i;
       }
     }

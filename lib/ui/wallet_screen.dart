@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/balanceCard.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
@@ -21,7 +22,7 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
-    StatelessWidget balanceCard = BalanceCard();
+    StatelessWidget balanceCard = const BalanceCard();
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
@@ -33,7 +34,14 @@ class _WalletScreenState extends State<WalletScreen> {
               const SizedBox(
                 height: 40,
               ),
-              const Text("My wallet"),
+              const Text(
+                "My Wallet",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: AppColors.primaryColor,
+                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -41,7 +49,14 @@ class _WalletScreenState extends State<WalletScreen> {
               const SizedBox(
                 height: 30,
               ),
-              const Text("Operations"),
+              const Text(
+                "Operations",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: AppColors.primaryColor,
+                ),
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -65,16 +80,16 @@ class _WalletScreenState extends State<WalletScreen> {
                         },
                       );
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.add,
-                      color: getThemeTextColor(context),
+                      color: AppColors.white,
                       size: 30,
                     ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      padding: EdgeInsets.all(25),
+                      padding: const EdgeInsets.all(25),
                       primary: getThemeButtonColor(context), // <-- Button color
                       onPrimary: Colors.black, // <-- Splash color
                     ),
@@ -89,16 +104,16 @@ class _WalletScreenState extends State<WalletScreen> {
                           MaterialPageRoute(
                               builder: (BuildContext context) => super.widget));
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.refresh,
-                      color: getThemeTextColor(context),
+                      color: AppColors.white,
                       size: 30,
                     ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      padding: EdgeInsets.all(25),
+                      padding: const EdgeInsets.all(25),
                       primary: getThemeButtonColor(context), // <-- Button color
                       onPrimary: Colors.black, // <-- Splash color
                     ),
@@ -108,164 +123,189 @@ class _WalletScreenState extends State<WalletScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const Text("Transactions"),
+              const Text(
+                "Transactions",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Column(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                          height: MediaQuery.of(context).size.height / 4,
-                          child: FutureBuilder<List<Transaction>>(
-                              future: getTransactionList(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<List<Transaction>> snapshot) {
-                                List<Widget> children;
-                                if (snapshot.hasData) {
-                                  if (snapshot.data!.isEmpty) {
-                                    children = <Widget>[
-                                      const Icon(
-                                        Icons.sentiment_dissatisfied_outlined,
-                                        color: Colors.red,
-                                        size: 60,
-                                      ),
-                                      Text('No transaction')
-                                    ];
-                                  } else {
-                                    children = <Widget>[
-                                      SizedBox(
-                                        width: 340,
-                                        height: 165,
-                                        child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: snapshot.data!.length,
-                                          itemBuilder: (ctx, i) {
-                                            return GestureDetector(
-                                              onTap: () => {},
-                                              child: Container(
-                                                width: 160,
-                                                margin: const EdgeInsets.symmetric(
-                                                    horizontal: 5.0),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                                  child: Stack(
-                                                    children: <Widget>[
-                                                      Positioned(
-                                                        bottom: 0,
-                                                        left: 0,
-                                                        right: 0,
-                                                        child: Container(
-                                                          height: 150,
-                                                          padding: EdgeInsets.symmetric(
-                                                              horizontal: 9.0,
-                                                              vertical: 5.0),
-                                                          decoration: BoxDecoration(
-                                                            color: getThemeButtonColor(
-                                                                context),
-                                                            borderRadius:
-                                                            BorderRadius.only(
-                                                              topRight:
-                                                              Radius.circular(20),
-                                                              topLeft:
-                                                              Radius.circular(20),
-                                                              bottomLeft:
-                                                              Radius.circular(20),
-                                                              bottomRight:
-                                                              Radius.circular(20),
-                                                            ),
-                                                          ),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                            children: <Widget>[
-                                                              Text(
-                                                                  "Address: ${snapshot.data![i].address}",
-                                                                  style: TextStyle(
-                                                                      fontSize: 12,
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                      color:
-                                                                      getThemeTextColor(
-                                                                          context))),
-                                                              Spacer(),
-                                                              Text(
-                                                                  "Block number: ${snapshot.data![i].block_number}",
-                                                                  style: TextStyle(
-                                                                      fontSize: 12,
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                      color:
-                                                                      getThemeTextColor(
-                                                                          context))),
-                                                              Spacer(),
-                                                              Text(
-                                                                  "Type: ${snapshot.data![i].type}",
-                                                                  style: TextStyle(
-                                                                      fontSize: 12,
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                      color:
-                                                                      getThemeTextColor(
-                                                                          context))),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ];
-                                  }
-                                } else if (snapshot.hasError) {
-                                  print(snapshot.error);
+                  Row(children: [
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height / 4,
+                        child: FutureBuilder<List<Transaction>>(
+                            future: getTransactionList(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<Transaction>> snapshot) {
+                              List<Widget> children;
+                              if (snapshot.hasData) {
+                                if (snapshot.data!.isEmpty) {
                                   children = <Widget>[
                                     const Icon(
-                                      Icons.error_outline,
-                                      color: Colors.red,
+                                      Icons.sentiment_dissatisfied_outlined,
+                                      color: AppColors.secondaryColor,
                                       size: 60,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 16),
-                                      child: Text('Non hai fatto la login'),
+                                    const Text(
+                                      'No transaction',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        color: AppColors.primaryColor,
+                                      ),
                                     )
                                   ];
                                 } else {
-                                  children = const <Widget>[
+                                  children = <Widget>[
                                     SizedBox(
-                                      width: 30,
-                                      height: 30,
-                                      child: CircularProgressIndicator(
-                                        color: Colors.blue,
+                                      width: 340,
+                                      height: 165,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: snapshot.data!.length,
+                                        itemBuilder: (ctx, i) {
+                                          return GestureDetector(
+                                            onTap: () => {},
+                                            child: Container(
+                                              width: 160,
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 5.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                                child: Stack(
+                                                  children: <Widget>[
+                                                    Positioned(
+                                                      bottom: 0,
+                                                      left: 0,
+                                                      right: 0,
+                                                      child: Container(
+                                                        height: 150,
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal: 9.0,
+                                                                vertical: 5.0),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              getThemeButtonColor(
+                                                                  context),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    20),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    20),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    20),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    20),
+                                                          ),
+                                                        ),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: <Widget>[
+                                                            Text(
+                                                                "Address: ${snapshot.data![i].address}",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: getThemeTextColor(
+                                                                        context))),
+                                                            const Spacer(),
+                                                            Text(
+                                                                "Block number: ${snapshot.data![i].block_number}",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: getThemeTextColor(
+                                                                        context))),
+                                                            const Spacer(),
+                                                            Text(
+                                                                "Type: ${snapshot.data![i].type}",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: getThemeTextColor(
+                                                                        context))),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 16),
-                                      child: Text('Awaiting result...'),
-                                    )
                                   ];
                                 }
-                                return Center(
-                                  child: Column(
-                                    children: children,
+                              } else if (snapshot.hasError) {
+                                // ignore: avoid_print
+                                print(snapshot.error);
+                                children = <Widget>[
+                                  const Icon(
+                                    Icons.error_outline,
+                                    color: Colors.red,
+                                    size: 60,
                                   ),
-                                );
-                              })),
-                    ]
-                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 16),
+                                    child: Text('Non hai fatto la login'),
+                                  )
+                                ];
+                              } else {
+                                children = const <Widget>[
+                                  SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.primaryColor,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 16),
+                                    child: Text('Awaiting result...'),
+                                  )
+                                ];
+                              }
+                              return Center(
+                                child: Column(
+                                  children: children,
+                                ),
+                              );
+                            })),
+                  ]),
                 ],
               ),
             ],
-          )
-      ),
+          )),
     )));
   }
 
@@ -291,7 +331,7 @@ class _WalletScreenState extends State<WalletScreen> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (!isDarkMode) {
-      return Colors.white;
+      return AppColors.primaryColor;
     } else {
       return Colors.black;
     }

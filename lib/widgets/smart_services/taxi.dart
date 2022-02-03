@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_holidays/util/app_colors.dart';
 
 class TaxiService extends StatefulWidget {
   const TaxiService({Key? key}) : super(key: key);
@@ -21,190 +22,208 @@ class _TaxiServiceState extends State<TaxiService> {
 
   @override
   Widget build(BuildContext context) {
+    var _title =
+        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: _title,
+          centerTitle: true,
+          automaticallyImplyLeading: true,
+          foregroundColor: AppColors.primaryColor,
+        ),
         body: SingleChildScrollView(
-      child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+              child: Column(
                 children: [
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Color.fromRGBO(13, 78, 161, 1),
-                    ),
+                  const SizedBox(
+                    height: 10,
                   ),
-                  const RotatedBox(
-                    quarterTurns: 135,
-                    child: Icon(
-                      Icons.bar_chart_rounded,
-                      color: Color.fromRGBO(13, 78, 161, 1),
-                      size: 28,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Dove vuoi andare?',
-                style: TextStyle(
-                    color: Color.fromRGBO(13, 78, 161, 1),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
                   const Text(
-                    'Partenza:',
+                    'Dove vuoi andare?',
                     style: TextStyle(
-                        color: Color.fromRGBO(13, 78, 161, 1),
-                        fontSize: 18,
+                        color: AppColors.primaryColor,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    width: size.width * 0.7,
-                    child: TextField(
-                      autofocus: true,
-                      controller: partenza,
-                      decoration: InputDecoration(
-                        fillColor: Colors.grey.withOpacity(0.1),
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintText: 'es. Via Vittorio Emanuele, 2',
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          // width: 0.0 produces a thin "hairline" border
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(246, 135, 30, 75),
-                              width: 1),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Arrivo:',
-                    style: TextStyle(
-                        color: Color.fromRGBO(13, 78, 161, 1),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
+                  const SizedBox(
+                    height: 20,
                   ),
-                  SizedBox(
-                    width: size.width * 0.7,
-                    child: TextField(
-                      autofocus: true,
-                      controller: arrivo,
-                      decoration: InputDecoration(
-                        fillColor: Colors.grey.withOpacity(0.1),
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintText: 'es. Piazza Garibaldi',
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          // width: 0.0 produces a thin "hairline" border
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(246, 135, 30, 75),
-                              width: 1),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Data e ora:',
-                    style: TextStyle(
-                        color: Color.fromRGBO(13, 78, 161, 1),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            _pickedDate();
-                          },
-                          child: Text('Seleziona la data')),
+                      const Text(
+                        'Partenza:',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.7,
+                        child: TextField(
+                          autofocus: true,
+                          controller: partenza,
+                          decoration: InputDecoration(
+                            fillColor: Colors.grey.withOpacity(0.1),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            hintText: 'es. Via Vittorio Emanuele, 2',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                              // width: 0.0 produces a thin "hairline" border
+                              borderSide: const BorderSide(
+                                  color: Color.fromRGBO(246, 135, 30, 75),
+                                  width: 1),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        _selectTime(context);
-                      },
-                      child: Text('Seleziona l\'ora')),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Arrivo:',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.7,
+                        child: TextField(
+                          autofocus: true,
+                          controller: arrivo,
+                          decoration: InputDecoration(
+                            fillColor: Colors.grey.withOpacity(0.1),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            hintText: 'es. Piazza Garibaldi',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                              // width: 0.0 produces a thin "hairline" border
+                              borderSide: const BorderSide(
+                                  color: Color.fromRGBO(246, 135, 30, 75),
+                                  width: 1),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Data e ora:',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _pickedDate();
+                        },
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.fromLTRB(18.0, 0, 18.0, 0)),
+                          backgroundColor: MaterialStateProperty.all(
+                            AppColors.secondaryColor,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          )),
+                        ),
+                        child: Text(
+                          'Seleziona la data',
+                          style: TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            _selectTime(context);
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.fromLTRB(18.0, 0, 18.0, 0)),
+                            backgroundColor: MaterialStateProperty.all(
+                              AppColors.secondaryColor,
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            )),
+                          ),
+                          child: Text(
+                            'Seleziona l\'ora',
+                            style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Text(
+                    'Scegli uno tra i seguenti servizi taxi: ',
+                    style: TextStyle(
+                        color: Color.fromRGBO(13, 78, 161, 1),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  RiderTaxi(
+                      'Mario', 'Rossi', 'Taxi&Co.', '€0,10/100metri', size),
+                  Divider(
+                    height: 10,
+                    thickness: 1,
+                    color: Color.fromRGBO(246, 135, 30, 75),
+                  ),
+                  RiderTaxi(
+                      'Giuseppe', 'Verdi', 'GoWithUs', '€0,25/100metri', size),
+                  Divider(
+                    height: 10,
+                    thickness: 1,
+                    color: Color.fromRGBO(246, 135, 30, 75),
+                  ),
+                  RiderTaxi(
+                      'Lucia', 'Bianchi', 'YellowTaxi', '€0,15/100metri', size),
+                  Divider(
+                    height: 10,
+                    thickness: 1,
+                    color: Color.fromRGBO(246, 135, 30, 75),
+                  ),
+                  RiderTaxi('Marco', 'Ferrari', 'TempestTaxi', '€0,18/100metri',
+                      size),
+                  Divider(
+                    height: 10,
+                    thickness: 1,
+                    color: Color.fromRGBO(246, 135, 30, 75),
+                  ),
+                  RiderTaxi(
+                      'Claudio', 'Gallo', 'GoTaxi', '€0,22/100metri', size),
                 ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Text(
-                'Scegli uno tra i seguenti servizi taxi: ',
-                style: TextStyle(
-                    color: Color.fromRGBO(13, 78, 161, 1),
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              RiderTaxi('Mario', 'Rossi', 'Taxi&Co.', '€0,10/100metri', size),
-              Divider(
-                height: 10,
-                thickness: 1,
-                color: Color.fromRGBO(246, 135, 30, 75),
-              ),
-              RiderTaxi(
-                  'Giuseppe', 'Verdi', 'GoWithUs', '€0,25/100metri', size),
-              Divider(
-                height: 10,
-                thickness: 1,
-                color: Color.fromRGBO(246, 135, 30, 75),
-              ),
-              RiderTaxi(
-                  'Lucia', 'Bianchi', 'YellowTaxi', '€0,15/100metri', size),
-              Divider(
-                height: 10,
-                thickness: 1,
-                color: Color.fromRGBO(246, 135, 30, 75),
-              ),
-              RiderTaxi(
-                  'Marco', 'Ferrari', 'TempestTaxi', '€0,18/100metri', size),
-              Divider(
-                height: 10,
-                thickness: 1,
-                color: Color.fromRGBO(246, 135, 30, 75),
-              ),
-              RiderTaxi('Claudio', 'Gallo', 'GoTaxi', '€0,22/100metri', size),
-            ],
-          )),
-    ));
+              )),
+        ));
   }
 
   _pickedDate() async {

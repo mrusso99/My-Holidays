@@ -30,14 +30,14 @@ class BookingDetailsScreen extends StatelessWidget {
                       left: 5,
                       top: 5,
                       child: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back,
                         ),
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(left: 20, top: 80),
+                      padding: const EdgeInsets.only(left: 20, top: 80),
                       height: 400.0,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -47,7 +47,7 @@ class BookingDetailsScreen extends StatelessWidget {
                           Map place = places[index];
 
                           return Padding(
-                            padding: EdgeInsets.only(right: 10.0),
+                            padding: const EdgeInsets.only(right: 10.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: Image.asset(
@@ -64,7 +64,7 @@ class BookingDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Expanded(
                   child: Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -73,7 +73,7 @@ class BookingDetailsScreen extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       reservation.hotelName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 25,
                       ),
                     ),
@@ -81,9 +81,9 @@ class BookingDetailsScreen extends StatelessWidget {
                       reservation.dateFrom.toString() +
                           " - " +
                           reservation.dateUntil.toString(),
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -92,11 +92,11 @@ class BookingDetailsScreen extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               reservation.roomName,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                             ),
                             Text(
                               reservation.price.toString() + "€",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 25,
                               ),
                             ),
@@ -105,17 +105,17 @@ class BookingDetailsScreen extends StatelessWidget {
                                       reservation.dateUntil) +
                                   " " +
                                   LanguageLocalizations.of(context).nights,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                               ),
                             ),
                           ],
                         ),
-                        Container(
+                        SizedBox(
                           height: 50,
                           width: 50,
                           child: Stack(
-                            children: <Widget>[
+                            children: const <Widget>[
                               Positioned.fill(
                                 child: CircularProgressIndicator(
                                   value: .25,
@@ -133,7 +133,7 @@ class BookingDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,7 +146,7 @@ class BookingDetailsScreen extends StatelessWidget {
                                 color: Colors.blueAccent,
                                 customOnPressed: () =>
                                     Navigator.pushNamed(context, 'SmartRoom'))),
-                        Padding(padding: EdgeInsets.all(15)),
+                        const Padding(padding: EdgeInsets.all(15)),
                         SizedBox(
                             width: 150,
                             child: RoundedButton(
@@ -157,7 +157,7 @@ class BookingDetailsScreen extends StatelessWidget {
                                     context, 'SmartServices'))),
                       ],
                     ),
-                    Padding(padding: EdgeInsets.all(15)),
+                    const Padding(padding: EdgeInsets.all(15)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -173,7 +173,7 @@ class BookingDetailsScreen extends StatelessWidget {
                                           arguments: ReservationNumber(
                                               reservation.reservationNumber))
                                     })),
-                        Padding(padding: EdgeInsets.all(15)),
+                        const Padding(padding: EdgeInsets.all(15)),
                         SizedBox(
                             width: 150,
                             child: RoundedButton(
