@@ -31,7 +31,7 @@ class Details extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 10.0),
-          buildSlider(),
+          buildSlider(hotelIndex),
           const SizedBox(height: 20),
           ListView(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -287,7 +287,8 @@ class Details extends StatelessWidget {
     );
   }
 
-  buildSlider() {
+  buildSlider(int index) {
+    final idx = index;
     return Container(
       padding: const EdgeInsets.only(left: 20),
       height: 250.0,
@@ -296,7 +297,7 @@ class Details extends StatelessWidget {
         primary: false,
         itemCount: places == null ? 0 : 1, //places.lenght
         itemBuilder: (BuildContext context, int index) {
-          Map place = places[index];
+          Map place = places[idx];
 
           return Padding(
             padding: const EdgeInsets.only(right: 10.0),

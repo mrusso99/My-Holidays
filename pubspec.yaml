@@ -66,6 +66,8 @@ dependencies:
   cloud_firestore_web: ^2.6.6
   firebase_storage_web: ^3.2.6
   image_picker_for_web: ^2.1.5
+  carousel_slider: ^4.0.0
+  smooth_page_indicator: ^1.0.0+2
   
 
 dev_dependencies:

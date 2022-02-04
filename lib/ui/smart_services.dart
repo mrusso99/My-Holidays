@@ -26,19 +26,19 @@ class _SmartServicesState extends State<SmartServices> {
         body: ListView(
           children: [
             buildBasicCard(
-                'https://static.stacker.com/s3fs-public/styles/sar_screen_maximum_large/s3/2020-07/croppedUntitleddesign20200717T040046THQ4345.png',
+                'assets/breakfast.png',
                 Icons.coffee_outlined,
                 LanguageLocalizations.of(context).breakfast,
                 '/breakfast',
                 size),
             buildBasicCard(
-                'https://nccadrianogiuriola.it/wp-content/uploads/2018/11/ncc-adriano-1.jpg',
+                'assets/taxi.jpeg',
                 Icons.local_taxi_outlined,
                 LanguageLocalizations.of(context).taxi,
                 '/taxi',
                 size),
             buildBasicCard(
-                'https://www.periodicodaily.com/wp-content/uploads/2021/03/Home-restaurant.jpg',
+                'assets/restaurant.jpeg',
                 Icons.restaurant_outlined,
                 LanguageLocalizations.of(context).restaurant,
                 '/restaurant',
@@ -64,7 +64,7 @@ class _SmartServicesState extends State<SmartServices> {
                 child: Ink.image(
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.color),
-                  image: NetworkImage(url),
+                  image: Image.asset(url).image,
                   height: 175,
                   fit: BoxFit.cover,
                   child: InkWell(

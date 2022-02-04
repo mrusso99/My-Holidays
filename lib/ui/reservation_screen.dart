@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_holidays/util/Global.dart';
 import 'package:my_holidays/util/balanceCard.dart';
+import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/util/reservationNumber.dart';
 
 import 'booking_details.dart';
@@ -68,8 +69,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                           decoration: BoxDecoration(
                               color: Colors.red,
                               image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+                                  image: Image.asset(
+                                      'assets/user-wallpaper.png').image,
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.all(Radius.circular(75.0)),
                               boxShadow: [
@@ -191,8 +192,15 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                                 child: Stack(
                                                   children: <Widget>[
                                                     Positioned.fill(
-                                                      child: Image.network(
-                                                        "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg",
+                                                      child: Image.asset(
+                                                        places.firstWhere(
+                                                                (element) =>
+                                                                    element[
+                                                                        'id'] ==
+                                                                    snapshot
+                                                                        .data![i]
+                                                                        .hotelId)[
+                                                            'img'][0],
                                                         fit: BoxFit.cover,
                                                       ),
                                                     ),

@@ -53,8 +53,8 @@ List places = [
     "name": "Hotel Ercole di Amalfi",
     "img": [
       "assets/ercole_di_amalfi.jpg",
-      "assets/ercole_di_amalfi.jpg",
-      "assets/ercole_di_amalfi.jpg",
+      "assets/ercole_di_amalfi2.jpeg",
+      "assets/ercole_di_amalfi3.jpeg",
     ],
     "location": "Amalfi, Campania",
     "category": 3,
@@ -64,7 +64,7 @@ List places = [
       {
         "id": "cam1",
         "name": "Camera marilena",
-        "img": "assets/ercole-room1.jpg",
+        "img": ["assets/ercole-room1.jpg"],
         "price": "80",
         "details": "Camera bellissima con letto matrimoniale",
         "quantità": 3
@@ -72,7 +72,7 @@ List places = [
       {
         "id": "cam2",
         "name": "Camera isabella",
-        "img": "assets/ercole-room2.jpg",
+        "img": ["assets/ercole-room2.jpg"],
         "price": "120",
         "details": "Camera bellissima con letto matrimoniale",
         "quantità": 2
@@ -80,7 +80,7 @@ List places = [
       {
         "id": "cam3",
         "name": "Camera luisa",
-        "img": "assets/ercole-room3.jpg",
+        "img": ["assets/ercole-room3.jpg"],
         "price": "160",
         "details": "Camera bellissima con letto matrimoniale",
         "quantità": 1
@@ -88,7 +88,7 @@ List places = [
       {
         "id": "cam4",
         "name": "Camera marilena",
-        "img": "assets/ercole-room4.jpg",
+        "img": ["assets/ercole-room4.jpg"],
         "price": "120",
         "details": "Camera bellissima con letto matrimoniale",
         "quantità": 3
@@ -96,7 +96,7 @@ List places = [
       {
         "id": "cam5",
         "name": "Camera isabella",
-        "img": "assets/ercole-room5.jpg",
+        "img": ["assets/ercole-room5.jpg"],
         "price": "100",
         "details": "Camera bellissima con letto matrimoniale",
         "quantità": 2
@@ -108,8 +108,7 @@ List places = [
     "name": "Icaro Sailing Charter",
     "img": [
       "assets/icaro.jpg",
-      "assets/icaro.jpg",
-      "assets/icaro.jpg",
+      "assets/icaro 2.jpg",
     ],
     "location": "Castellammare di Stabia, campania",
     "details": "Lagoon 40 year 2019 available per noleggio a Salerno",
@@ -118,7 +117,7 @@ List places = [
       {
         "id": "cam1",
         "name": "Cabina Ulisse",
-        "img": "assets/icaro-room1.jpeg",
+        "img": ["assets/icaro-room1.jpeg"],
         "price": "180",
         "details": "Cabina con letto matrimoniale e aria condizionata",
         "quantità": 3
@@ -126,7 +125,7 @@ List places = [
       {
         "id": "cam2",
         "name": "Cabina Circe",
-        "img": "assets/icaro-room2.jpeg",
+        "img": ["assets/icaro-room2.jpeg"],
         "price": "240",
         "details": "Cabina con letto matrimoniale e aria condizionata",
         "quantità": 2

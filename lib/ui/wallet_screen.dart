@@ -49,6 +49,7 @@ class _WalletScreenState extends State<WalletScreen> {
               const SizedBox(
                 height: 30,
               ),
+              /*
               const Text(
                 "Operations",
                 style: TextStyle(
@@ -119,7 +120,7 @@ class _WalletScreenState extends State<WalletScreen> {
                     ),
                   ),
                 ],
-              ),
+              ),*/
               const SizedBox(
                 height: 20,
               ),
@@ -323,7 +324,7 @@ class _WalletScreenState extends State<WalletScreen> {
     if (isDarkMode) {
       return Colors.white;
     } else {
-      return Colors.black;
+      return AppColors.white;
     }
   }
 
