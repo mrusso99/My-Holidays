@@ -13,8 +13,7 @@ class _SmartRoomState extends State<SmartRoom> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var _title =
-        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+    var _title = Image.asset('assets/logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
