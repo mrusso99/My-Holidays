@@ -13,8 +13,7 @@ class _SmartServicesState extends State<SmartServices> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var _title =
-        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+    var _title = Image.asset('assets/logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -31,12 +30,8 @@ class _SmartServicesState extends State<SmartServices> {
                 LanguageLocalizations.of(context).breakfast,
                 '/breakfast',
                 size),
-            buildBasicCard(
-                'assets/taxi.jpeg',
-                Icons.local_taxi_outlined,
-                LanguageLocalizations.of(context).taxi,
-                '/taxi',
-                size),
+            buildBasicCard('assets/taxi.jpeg', Icons.local_taxi_outlined,
+                LanguageLocalizations.of(context).taxi, '/taxi', size),
             buildBasicCard(
                 'assets/restaurant.jpeg',
                 Icons.restaurant_outlined,

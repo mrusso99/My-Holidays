@@ -22,8 +22,7 @@ class _TaxiServiceState extends State<TaxiService> {
 
   @override
   Widget build(BuildContext context) {
-    var _title =
-        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+    var _title = Image.asset('assets/logo_200x54.png', fit: BoxFit.cover);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(

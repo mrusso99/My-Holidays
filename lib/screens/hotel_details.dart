@@ -13,7 +13,6 @@ import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/colors.dart';
 import 'package:my_holidays/util/places.dart';
 import 'package:my_holidays/util/size_config.dart';
-import 'package:my_holidays/widgets/date_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_holidays/widgets/rounded_button.dart';
@@ -24,8 +23,7 @@ class HotelDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int hotelIndex = GlobalState.instance.get('hotelIndex');
-    var _title =
-        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+    var _title = Image.asset('assets/logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -126,7 +124,8 @@ class HotelDetails extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
-        itemCount: places == null ? 0 : places[index]['img'].length, //places.length,
+        itemCount:
+            places == null ? 0 : places[index]['img'].length, //places.length,
         itemBuilder: (BuildContext context, int index) {
           Map place = places[idx];
           return Padding(
