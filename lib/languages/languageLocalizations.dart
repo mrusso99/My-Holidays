@@ -63,6 +63,13 @@ class LanguageLocalizations {
       'special_request': "Special Requests",
       'taxi': "TAXI",
       'restaurant': "RESTAURANT",
+      'documents': "     Load\nDocuments",
+      'frontbacktitle': "Snap the front and back of your document",
+      'front': "Front",
+      'back': "Back",
+      'chooseimgtitle': "Choose your input method",
+      'gallery': "Gallery",
+      'photo': "Camera",
     },
     'it': {
       'wallet': 'Portafoglio',
@@ -114,6 +121,13 @@ class LanguageLocalizations {
       'selected_hour': "Seleziona l'orario",
       'taxi': "TAXI",
       'restaurant': "RISTORANTE",
+      'documents': "   Carica\nDocumenti",
+      'frontbacktitle': "Scatta il fronte ed il retro del tuo documento",
+      'front': "Fronte",
+      'back': "retro",
+      'chooseimgtitle': "Scegli da dove vuoi prendere l'immagine",
+      'gallery': "Galleria",
+      'photo': "Camera",
     },
   };
 
@@ -306,5 +320,33 @@ class LanguageLocalizations {
 
   String get selected_hour {
     return _localizedValues[locale.languageCode]!['selected_hour']!;
+  }
+
+  String get documents {
+    return _localizedValues[locale.languageCode]!['documents']!;
+  }
+
+  String get frontbacktitle {
+    return _localizedValues[locale.languageCode]!['frontbacktitle']!;
+  }
+
+  String get front {
+    return _localizedValues[locale.languageCode]!['front']!;
+  }
+
+  String get back {
+    return _localizedValues[locale.languageCode]!['back']!;
+  }
+
+  String get chooseimgtitle {
+    return _localizedValues[locale.languageCode]!['chooseimgtitle']!;
+  }
+
+  String get gallery {
+    return _localizedValues[locale.languageCode]!['gallery']!;
+  }
+
+  String get photo {
+    return _localizedValues[locale.languageCode]!['photo']!;
   }
 }

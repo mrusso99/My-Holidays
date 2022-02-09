@@ -220,11 +220,12 @@ def mint(sendAddress, token) -> dict:
     try:
         token_to_send = int(token)
         receiver = str(sendAddress)
+        #contract.functions.transfer(address, 20000000000000000000).transact({"from": <YOUR_ADDRESS>})
         tx_hash = contract.functions.mint(receiver, W3.toWei(token_to_send, 'ether')).transact({'from': minterAddress})
         tx_receipt = W3.eth.wait_for_transaction_receipt(tx_hash)
         return jsonify({"data": 'ok'}), 200
-    except ValueError:
-        return jsonify({"message": "Something went wrong. Please try again."}), 400
+    except ValueError as error:
+        return jsonify({"message": error.args[0]}), 400
 
 @APP.route("/selfcheckin/authenticate/<user>/<destination>/<assetURI>/<reservationNumber>", methods=["GET"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])

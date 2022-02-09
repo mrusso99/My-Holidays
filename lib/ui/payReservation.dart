@@ -35,8 +35,7 @@ class _PaymentScreenState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     updateAllPrice();
-    var _title =
-        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+    var _title = Image.asset('assets/logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -855,6 +854,10 @@ class _PaymentScreenState extends State<Payment> {
           billingAddressRequired: false,
         ),
         cardEnabled: true,
+        paypalRequest: BraintreePayPalRequest(
+          amount: '4.20',
+          displayName: 'Example company',
+        ),
       );
       final result = await BraintreeDropIn.start(request);
       print(result);

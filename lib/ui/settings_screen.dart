@@ -61,8 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var _title =
-        Image.asset('assets/includes_logo_200x54.png', fit: BoxFit.cover);
+    var _title = Image.asset('assets/logo_200x54.png', fit: BoxFit.cover);
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return Scaffold(

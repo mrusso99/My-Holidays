@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/ui/reservation_screen.dart';
+import 'package:my_holidays/util/app_colors.dart';
 import 'package:my_holidays/util/documents.dart';
 import 'package:my_holidays/util/reservationNumber.dart';
 import 'package:my_holidays/widgets/rounded_button.dart';
@@ -19,11 +20,18 @@ class SelfCheckInSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _title = Image.asset('assets/logo_200x54.png', fit: BoxFit.cover);
     final reservation =
         ModalRoute.of(context)!.settings.arguments as Reservation;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
+      ),
       body: Container(
           child: FutureBuilder<String>(
               future: getGuestNumber(reservation),
@@ -32,6 +40,7 @@ class SelfCheckInSummary extends StatelessWidget {
                 if (snapshot.hasData) {
                   if (snapshot.data!.isEmpty) {
                     children = <Widget>[
+                      const SizedBox(height: 10),
                       const Icon(
                         Icons.sentiment_dissatisfied_outlined,
                         color: Colors.red,
@@ -52,28 +61,34 @@ class SelfCheckInSummary extends StatelessWidget {
                       surnameController.add(TextEditingController());
                     }
                     children = <Widget>[
-                      const Padding(padding: EdgeInsets.only(top: 10)),
+                      const SizedBox(height: 20),
                       for (int i = 1; i <= guestNumber; i++)
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Flexible(
+                                flex: 1,
+                                fit: FlexFit.loose,
                                 child: TextField(
-                              decoration: InputDecoration(
-                                  fillColor: Colors.grey.withOpacity(0.1),
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide:
-                                          const BorderSide(color: Colors.grey)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: const BorderSide(
-                                          color: Colors.blueAccent)),
-                                  labelText:
-                                      LanguageLocalizations.of(context).name),
-                              controller: nameController.elementAt(i - 1),
-                            )),
+                                  decoration: InputDecoration(
+                                      fillColor: Colors.grey.withOpacity(0.1),
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: const BorderSide(
+                                              color: Colors.grey)),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: const BorderSide(
+                                              color: AppColors.secondaryColor)),
+                                      labelText:
+                                          LanguageLocalizations.of(context)
+                                              .name),
+                                  controller: nameController.elementAt(i - 1),
+                                )),
                             const Padding(padding: EdgeInsets.all(15)),
                             Flexible(
                                 child: TextField(
@@ -86,10 +101,11 @@ class SelfCheckInSummary extends StatelessWidget {
                                       .surname),
                               controller: surnameController.elementAt(i - 1),
                             )),
-                            const Padding(padding: EdgeInsets.all(15)),
+                            const Padding(padding: EdgeInsets.all(10)),
                             RoundedButton(
-                                color: Colors.blueAccent,
-                                text: "Carica",
+                                color: AppColors.secondaryColor,
+                                text:
+                                    LanguageLocalizations.of(context).documents,
                                 customOnPressed: () async {
                                   var result = await Navigator.pushNamed(
                                       context, "Checkin");
@@ -108,17 +124,18 @@ class SelfCheckInSummary extends StatelessWidget {
                                             .text));
                                   }
                                 }),
+                            const SizedBox(height: 100),
                             const Padding(padding: EdgeInsets.only(top: 10)),
                           ],
                         ),
-                      const Padding(padding: EdgeInsets.only(top: 10)),
+                      const Padding(padding: EdgeInsets.only(top: 20)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           RoundedButton(
-                              text: "Carica",
-                              color: Colors.blueAccent,
+                              text: LanguageLocalizations.of(context).send,
+                              color: AppColors.primaryColor,
                               customOnPressed: () {
                                 for (int i = 1; i <= guestNumber; i++) {
                                   uploadImageToFirebase(
@@ -315,9 +332,8 @@ class SelfCheckInSummary extends StatelessWidget {
           }
         }
       }
-        } on FirebaseException catch (e) {
-          print("Error");
+    } on FirebaseException catch (e) {
+      print("Error");
     }
-
   }
 }
