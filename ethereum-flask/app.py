@@ -1,5 +1,6 @@
 """
 Bootstrap flask application
+
 """
 
 import os
@@ -39,7 +40,7 @@ APP.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(APP, resources={r"/*": {"origins": "https://localhost:4200"}})
 
 contractAddress = config['Contract_Address']
-selfCheckInAddress= config['Self_Checkin_Address']
+selfCheckInAddress = config['Self_Checkin_Address']
 file_path = os.path.join(script_dir, 'abi/abiToken.json')
 standard_token_abi = json.load(open(file_path))
 selfcheckin_abi = json.load(open(os.path.join(script_dir, 'abi/selfcheckin_abi.json')))

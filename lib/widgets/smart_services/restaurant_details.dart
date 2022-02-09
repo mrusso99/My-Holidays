@@ -403,7 +403,7 @@ class RestaurantDetails extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
-        itemCount: ristoranti == null ? 0 : ristoranti.length,
+        itemCount: ristoranti == null ? 0 : 1,
         itemBuilder: (BuildContext context, int index) {
           Map place = ristoranti[idx];
 
@@ -412,7 +412,7 @@ class RestaurantDetails extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(
-                "${place["img"][0]}",
+                "${place["img"]}",
                 height: 250.0,
                 width: MediaQuery.of(context).size.width - 40.0,
                 fit: BoxFit.cover,
@@ -464,7 +464,7 @@ class RestaurantDetails extends StatelessWidget {
               TextButton(
                   onPressed: () {
                     _dismissDialog(context);
-                    Navigator.pushNamed(context, 'Explore');
+                    Navigator.pushNamed(context, 'Profile');
                   },
                   child: Text(
                     LanguageLocalizations.of(context).delete,

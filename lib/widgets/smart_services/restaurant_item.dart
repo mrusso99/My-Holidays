@@ -131,7 +131,7 @@ class RestaurantItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  "${place["img"][0]}",
+                  "${place["img"]}",
                   height: 150,
                   fit: BoxFit.fitWidth,
                 ),

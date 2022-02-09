@@ -51,7 +51,9 @@ class BookingDetailsScreen extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: Image.asset(
-                                "${place["img"][0]}",
+                                places.firstWhere((element) =>
+                                    element['id'] ==
+                                    reservation.hotelId)['img'][0],
                                 height: 250.0,
                                 width: MediaQuery.of(context).size.width - 40.0,
                                 fit: BoxFit.cover,

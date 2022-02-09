@@ -297,7 +297,7 @@ class _BreakFastState extends State<BreakFast> {
         ),
       ),
       bottomNavigationBar: SizedBox(
-          height: 100,
+          height: 90,
           child: Card(
               child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -418,15 +418,18 @@ class _BreakFastState extends State<BreakFast> {
                     height: 15,
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      FirebaseFirestore.instance.collection('breakfast').add({
+                    onPressed: () async {
+                      await FirebaseFirestore.instance
+                          .collection('breakfast')
+                          .add({
                         'full_name':
                             FirebaseAuth.instance.currentUser!.displayName,
                         'email': FirebaseAuth.instance.currentUser!.email,
                         'time': _selectedTime.format(context),
-                        'ordini': ordine.toString()
+                        'ordini': ordine,
+                        'request': _specials.text
                       });
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, 'Profile');
                     },
                     child: const Text(
                       'Conferma',
