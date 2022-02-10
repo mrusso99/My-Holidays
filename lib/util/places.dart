@@ -63,43 +63,42 @@ List places = [
     "rooms": [
       {
         "id": "cam1",
-        "name": "Camera marilena",
-        "img": ["assets/ercole-room1.jpg"],
+        "name": "Egle",
+        "img": [
+          "assets/amalfi-coast-room-egle-16.jpeg",
+          "assets/amalfi-coast-room-egle-11.jpg",
+          "assets/amalfi-coast-room-egle-3.jpg",
+          "assets/amalfi-coast-room-egle-2.jpg"
+        ],
         "price": "80",
-        "details": "Camera bellissima con letto matrimoniale",
+        "details":
+            "Egle è una Junior Suite che si affaccia sul lato ovest della baia di Amalfi e dispone di una terrazza privata nel giardino dei limoni.  La camera ha pareti imbiancate a calce e pavimenti in piastrelle fatte a mano con decoro “Stella Marocchina” di Cotto Rufoli De Martino. E' arredato con mobili antichi e contemporanei provenienti da Napoli e dalla Costiera Amalfitana.  Egle è una camera ampia e confortevole dotata di un'area soggiorno separata con smart TV a schermo piatto con accesso a Internet, wi fi gratuito, aria condizionata e minibar.  Il primo letto misura 180 x 200 cm (5 pollici in meno di un King size e 11 pollici in più di un Queen size). Ha un'antica testiera in ferro ed è avvolta in pregiate lenzuola italiane con runner da letto della Seta Reale di San Leucio. Il secondo letto è un divano letto con misure standard ed è una soluzione ideale per i bambini.  Il bagno è decorato con maioliche dipinte a mano.  Tutte le stanze sono dotate di zanzariere alle finestre, smart TV a schermo piatto con accesso a Internet, wi-fi, aria condizionata/riscaldamento, frigobar, asciugacapelli.",
         "quantità": 3
       },
       {
         "id": "cam2",
-        "name": "Camera isabella",
-        "img": ["assets/ercole-room2.jpg"],
+        "name": "Erizia",
+        "img": [
+          "assets/amalfi-coast-room-erizia-3.jpg",
+          "assets/amalfi-coast-room-erizia-2.jpg",
+          "assets/amalfi-coast-room-erizia-1.jpg"
+        ],
         "price": "120",
-        "details": "Camera bellissima con letto matrimoniale",
+        "details":
+            "Erizia è una camera superior che si affaccia sul lato ovest della baia di Amalfi e dispone di un terrazzo privato nel giardino dei limoni.  La camera ha pareti imbiancate a calce e pavimenti in piastrelle fatte a mano con decoro “Palumbo” di Cotto Rufoli De Martino.  Erizia è arredata con mobili antichi e contemporanei provenienti da Napoli e dalla costiera amalfitana, dispone di smart TV a schermo piatto con accesso a Internet, wi fi gratuito, aria condizionata e minibar.  Il letto, avvolto in pregiate lenzuola italiane, misura 180 x 200 cm (5 pollici in meno di un King size e 11 pollici in più di un Queen size) con una testiera in gesso scolpita a mano.  Il bagno è decorato con maioliche dipinte a mano.  Tutte le stanze sono dotate di zanzariere alle finestre, smart TV a schermo piatto con accesso a Internet, wi-fi, aria condizionata/riscaldamento, frigobar, asciugacapelli.",
         "quantità": 2
       },
       {
         "id": "cam3",
-        "name": "Camera luisa",
-        "img": ["assets/ercole-room3.jpg"],
+        "name": "Espera",
+        "img": [
+          "assets/amalfi-coast-espera-room-1.jpg",
+          "assets/amalfi-coast-espera-room-2.jpg"
+        ],
         "price": "160",
-        "details": "Camera bellissima con letto matrimoniale",
-        "quantità": 1
-      },
-      {
-        "id": "cam4",
-        "name": "Camera marilena",
-        "img": ["assets/ercole-room4.jpg"],
-        "price": "120",
-        "details": "Camera bellissima con letto matrimoniale",
-        "quantità": 3
-      },
-      {
-        "id": "cam5",
-        "name": "Camera isabella",
-        "img": ["assets/ercole-room5.jpg"],
-        "price": "100",
-        "details": "Camera bellissima con letto matrimoniale",
-        "quantità": 2
+        "details":
+            "Espera is a standard room that looks out over the west side of the Amalfi’s bay and has a private terrace in the lemon garden.  The room has white-washed walls and hand-made tiles on the floor with “Niside” decoration made by Cotto Rufoli De Martino.  Espera is decorated with antique and contemporary furniture coming from Naples and Amalfitan coast.  The bed, swathed in fine Italian sheets, measures 180 x 200 cm in size (5 inches less than a King size and 11 inches larger than a Queen size) with an Iron Headboard with Copper hand forged by a local artisan.  The bathroom is decorated with hand painted majolica.  All the rooms are equipped with mosquito nets at the windows, flat screen smart TV with Internet access, wi-fi, air conditioning/heating, minibar, hairdryer.",
+        "quantità": 1,
       }
     ]
   },

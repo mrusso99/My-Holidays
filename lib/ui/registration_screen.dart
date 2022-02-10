@@ -34,7 +34,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String image = 'assets/includes_logo.png';
+    String image = 'assets/logo_200x54.png';
     bool _isDark = Theme.of(context).brightness == Brightness.dark;
     Color box;
     if (_isDark) {

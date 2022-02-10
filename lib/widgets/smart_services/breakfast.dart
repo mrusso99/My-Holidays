@@ -421,14 +421,17 @@ class _BreakFastState extends State<BreakFast> {
                       await FirebaseFirestore.instance
                           .collection('breakfast')
                           .add({
-                        'full_name':
-                            FirebaseAuth.instance.currentUser!.displayName,
-                        'email': FirebaseAuth.instance.currentUser!.email,
-                        'time': _selectedTime.format(context),
-                        'ordini': ordine,
-                        'request': _specials.text
-                      });
-                      Navigator.pushNamed(context, 'Profile');
+                            'full_name':
+                                FirebaseAuth.instance.currentUser!.displayName,
+                            'email': FirebaseAuth.instance.currentUser!.email,
+                            'time': _selectedTime.format(context),
+                            'ordini': ordine,
+                            'request': _specials.text
+                          })
+                          .then((value) =>
+                              _showMaterialDialogReservation(context))
+                          .catchError((error) =>
+                              print("Failed to add reservation: $error"));
                     },
                     child: const Text(
                       'Conferma',
@@ -478,5 +481,35 @@ class _BreakFastState extends State<BreakFast> {
         _selectedTime = timeOfDay;
       });
     }
+  }
+
+  _dismissDialog(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  void _showMaterialDialogReservation(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Smart Service added'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  _dismissDialog(context);
+                  Navigator.pushNamed(context, '/');
+                },
+                child: const Text(
+                  'Ok',
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 20,
+                    height: 1,
+                  ),
+                ),
+              )
+            ],
+          );
+        });
   }
 }

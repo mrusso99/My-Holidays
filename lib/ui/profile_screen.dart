@@ -5,6 +5,7 @@ import 'package:my_holidays/languages/languageLocalizations.dart';
 import 'package:my_holidays/ui/self_check_in_summary.dart';
 import 'package:my_holidays/util/reservationNumber.dart';
 
+import '../util/app_colors.dart';
 import 'profile_page.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -18,10 +19,14 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    var _title = Image.asset('assets/logo_200x54.png', fit: BoxFit.cover);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Impostazioni'),
+      appBar:AppBar(
         elevation: 0,
+        title: _title,
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        foregroundColor: AppColors.primaryColor,
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -33,17 +38,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
+            leading: const Icon(Icons.self_improvement),
             title: const Text('Self Check-in'),
             onTap: () {
               Navigator.pushNamed(context, 'Checkin');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.bed_outlined),
-            title: Text(LanguageLocalizations.of(context).explore),
-            onTap: () {
-              Navigator.pushNamed(context, 'Explore');
             },
           ),
           ListTile(
@@ -58,14 +56,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             title: const Text('Smart Services'),
             onTap: () {
               Navigator.pushNamed(context, 'SmartServices');
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.room_service),
-            title: const Text('Summary'),
-            onTap: () {
-              Navigator.pushNamed(context, SelfCheckInSummary.routeName,
-                  arguments: ReservationNumber("ok"));
             },
           ),
         ]),

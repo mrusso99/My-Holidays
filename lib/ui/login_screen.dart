@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String image = 'assets/includes_logo.png';
+    String image = 'assets/logo_200x54.png';
     Size size = MediaQuery.of(context).size;
     bool _isDark = Theme.of(context).brightness == Brightness.dark;
     Color box;

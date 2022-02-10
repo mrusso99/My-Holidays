@@ -501,7 +501,7 @@ class RestaurantDetails extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Prenotazione Effettuata'),
+            title: const Text('Reservation added'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {

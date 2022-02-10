@@ -415,17 +415,22 @@ class _TaxiServiceState extends State<TaxiService> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      FirebaseFirestore.instance.collection('taxi').add({
-                        'taxi_driver_name': '$name $surname',
-                        'full_name':
-                            FirebaseAuth.instance.currentUser!.displayName,
-                        'email': FirebaseAuth.instance.currentUser!.email,
-                        'time': _selectedTime.format(context),
-                        'date': pickedTime,
-                        'partenza': partenza.text,
-                        'arrivo': arrivo.text
-                      });
-                      Navigator.pop(context);
+                      FirebaseFirestore.instance
+                          .collection('taxi')
+                          .add({
+                            'taxi_driver_name': '$name $surname',
+                            'full_name':
+                                FirebaseAuth.instance.currentUser!.displayName,
+                            'email': FirebaseAuth.instance.currentUser!.email,
+                            'time': _selectedTime.format(context),
+                            'date': pickedTime,
+                            'partenza': partenza.text,
+                            'arrivo': arrivo.text
+                          })
+                          .then((value) =>
+                              _showMaterialDialogReservation(context))
+                          .catchError((error) =>
+                              print("Failed to add reservation: $error"));
                     },
                     child: const Text(
                       'Conferma',
@@ -450,6 +455,36 @@ class _TaxiServiceState extends State<TaxiService> {
               )
             ]),
           ));
+        });
+  }
+
+  _dismissDialog(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  void _showMaterialDialogReservation(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Smart Service added'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  _dismissDialog(context);
+                  Navigator.pushNamed(context, '/');
+                },
+                child: const Text(
+                  'Ok',
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 20,
+                    height: 1,
+                  ),
+                ),
+              )
+            ],
+          );
         });
   }
 }
