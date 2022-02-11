@@ -25,6 +25,12 @@ class _SmartRoomState extends State<SmartRoom> {
         body: ListView(
           children: [
             buildBasicCard(
+                'https://www.spider-mac.com/wp-content/uploads/2020/01/hero-landing.jpeg',
+                Icons.lock_outline,
+                LanguageLocalizations.of(context).smart_lock,
+                '/smart_lock',
+                size),
+            buildBasicCard(
                 'https://images.unsplash.com/photo-1552862750-746b8f6f7f25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bGlnaHRidWxifGVufDB8fDB8fA%3D%3D&w=1000&q=80',
                 Icons.lightbulb_outline,
                 LanguageLocalizations.of(context).lights,
@@ -35,12 +41,6 @@ class _SmartRoomState extends State<SmartRoom> {
                 Icons.device_thermostat_outlined,
                 LanguageLocalizations.of(context).temperature,
                 '/thermostat',
-                size),
-            buildBasicCard(
-                'https://www.spider-mac.com/wp-content/uploads/2020/01/hero-landing.jpeg',
-                Icons.lock_outline,
-                LanguageLocalizations.of(context).smart_lock,
-                '/smart_lock',
                 size),
           ],
         ));
