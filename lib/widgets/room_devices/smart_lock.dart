@@ -29,12 +29,16 @@ class _SmartLockState extends State<SmartLock> {
 
   bool _isOpened = false;
 
-  void _openDoor() {
+  Future<void> _openDoor() async {
     setState(() {
-      _isOpened = true;
+      if (_isOpened == true) {
+        _isOpened = false;
+      } else {
+        _isOpened = true;
+      }
     });
 
-    connect().then((value) => client = value);
+    await connect().then((value) => client = value);
 
     if (_isOpened == true) {
       _publish('Open');

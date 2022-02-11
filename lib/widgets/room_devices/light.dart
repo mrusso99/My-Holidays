@@ -32,11 +32,11 @@ class _LightDeviceState extends State<LightDevice> {
   bool val2 = false;
   bool val3 = false;
 
-  onChangeFuntion1(bool newValue) {
+  onChangeFuntion1(bool newValue) async {
     setState(() {
       val1 = newValue;
     });
-    connect().then((value) => client = value);
+    await connect().then((value) => client = value);
 
     if (val1 == true) {
       _publish('on');
@@ -45,11 +45,11 @@ class _LightDeviceState extends State<LightDevice> {
     }
   }
 
-  onChangeFuntion2(bool newValue) {
+  onChangeFuntion2(bool newValue) async {
     setState(() {
       val1 = newValue;
     });
-    connect().then((value) => client = value);
+    await connect().then((value) => client = value);
 
     if (val1 == true) {
       _publish('on');
