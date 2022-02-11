@@ -8,7 +8,7 @@ List places = [
       "assets/limatola3.jpg",
     ],
     "location": "Limatola, Campania",
-    "category": 5,
+    "category": 4,
     "details":
         "Soggiorno a 4* tra le mura di un maniero medievale nella valle del Volturno, con late check-out e voucher per la cena - offerta rimborsabile, prenota in sicurezza.",
     "rooms": [
@@ -72,7 +72,7 @@ List places = [
         ],
         "price": "80",
         "details":
-            "Egle è una Junior Suite che si affaccia sul lato ovest della baia di Amalfi e dispone di una terrazza privata nel giardino dei limoni.  La camera ha pareti imbiancate a calce e pavimenti in piastrelle fatte a mano con decoro “Stella Marocchina” di Cotto Rufoli De Martino. E' arredato con mobili antichi e contemporanei provenienti da Napoli e dalla Costiera Amalfitana.  Egle è una camera ampia e confortevole dotata di un'area soggiorno separata con smart TV a schermo piatto con accesso a Internet, wi fi gratuito, aria condizionata e minibar.  Il primo letto misura 180 x 200 cm (5 pollici in meno di un King size e 11 pollici in più di un Queen size). Ha un'antica testiera in ferro ed è avvolta in pregiate lenzuola italiane con runner da letto della Seta Reale di San Leucio. Il secondo letto è un divano letto con misure standard ed è una soluzione ideale per i bambini.  Il bagno è decorato con maioliche dipinte a mano.  Tutte le stanze sono dotate di zanzariere alle finestre, smart TV a schermo piatto con accesso a Internet, wi-fi, aria condizionata/riscaldamento, frigobar, asciugacapelli.",
+            "Egle è una Junior Suite che si affaccia sul lato ovest della baia di Amalfi e dispone di una terrazza privata nel giardino dei limoni.",
         "quantità": 3
       },
       {
